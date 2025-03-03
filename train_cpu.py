@@ -5,9 +5,9 @@ import torch.optim as optim
 from collections import deque
 import random
 import math
-import csv
+import time
 
-
+start_time = time.time()
 print(f"CUDA is available: {torch.cuda.is_available()}")
 if torch.cuda.is_available():
     print(f"Current device: {torch.cuda.current_device()}")
@@ -96,7 +96,7 @@ class QNetwork(nn.Module):
     def forward(self, x):
         # 第一层前向传播
         x = self.fc1(x)
-        x = torch.relu(x)  # 使用ELU激活函数
+        x = torch.relu(x) 
         # x = self.bn1(x)
         x = self.dropout1(x)
         
@@ -161,84 +161,44 @@ class DQNAgent:
         loss.backward()
         self.optimizer.step()
 
-
+# ====================== 4. 训练过程 ======================
 env = StrategyOptimizationEnv()
 agent = DQNAgent(env.state_dim, env.action_dim)
 
-agent.q_net.load_state_dict(torch.load(f'model_saved.pth'))
+epsilon = 1.0
+epsilon_decay = 0.9998
+batch_size = 128
+
+for episode in range(5000):
+    state = env.reset()
+    action = agent.choose_action(state, epsilon)
+    next_state, reward, done, _ = env.step(action)
+    agent.replay_buffer.append((state, action, reward, next_state, done))
+    
+    if len(agent.replay_buffer) >= batch_size:
+        agent.update(batch_size)
+    
+    epsilon = max(0.01, epsilon * epsilon_decay)
+    
+    # if episode % 100 == 0:
+    print(f"Episode {episode}, Epsilon: {epsilon:.3f}")
+
+    torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
+
+# ====================== 5. 测试模型 ======================
+
+agent.q_net.load_state_dict(torch.load(f'model_saved_3.pth'))
 agent.target_net.load_state_dict(agent.q_net.state_dict())
 
-
-
-file_path = 'generated_data_section_3.csv'
-
-def convert_value(value_str):
-    """ 将字符串转换为适当的数值类型 """
-    try:
-
-        return int(value_str)
-    except ValueError:
-        try:
-   
-            return float(value_str)
-        except ValueError:
-
-            return value_str
-
-
-with open(file_path, newline='', encoding='utf-8') as csvfile:
-    csv_reader = csv.reader(csvfile)
-    
-    header_row = next(csv_reader)
-
-    data_rows = []
-
-    for row in csv_reader:
-        row = [convert_value(cell) for cell in row]
-        data_rows.append(row)
-
-
-new_column_title0 = 'loss0'
-new_column_title1 = 'loss1'
-new_column_title2 = 'loss2'
-new_column_title3 = 'action'
-
-
-for row in data_rows:
-
-    state = row
-    print(state)
+state = env.reset()
+print(state)
      
-    loss0 = (2*0.2*math.tan((math.pi/2)*(state[0]/5000)))+(0.002*0.2*state[1])+(0.002*((0.1*state[2])+(0.1*state[3])))+(0.02*0.2*state[4])+2*0.2*math.tan((math.pi/2)*(state[5]/5000)) # 策略A
-    loss1 = (2*(1/3)*math.tan((math.pi/2)*(state[6]/5000)))+(0.0015*(1/3)*state[7])+2*0.2*math.tan((math.pi/2)*(state[8]/5000))  # 策略B
-    loss2 = (2*0.2*math.tan((math.pi/2)*((state[9]+state[10])/5000)))+(0.002*((0.2*state[11])+(0.2*state[12])))+(0.002*0.2*state[13])+2*0.2*math.tan((math.pi/2)*(state[14]/5000))
-    action = agent.choose_action(state, epsilon=0)  # 关闭探索
-    # print(loss0,loss1,loss2)
-    print(f"最优策略: {action}")
-
-
-    current_row_dict = {header: value for header, value in zip(header_row, row)}
-
-    current_row_dict[new_column_title3] = action
-    current_row_dict[new_column_title0] = loss0
-    current_row_dict[new_column_title1] = loss1
-    current_row_dict[new_column_title2] = loss2
-    
-
-    modified_row = [current_row_dict[header] for header in header_row + [new_column_title0]+ [new_column_title1]+ [new_column_title2]+ [new_column_title3]]
-    data_rows[data_rows.index(row)] = modified_row
-
-
-
-output_file_path = 'result_3.csv'
-
-with open(output_file_path, 'w', newline='', encoding='utf-8') as csvfile:
-
-    csv_writer = csv.writer(csvfile)
-
-    csv_writer.writerow(header_row+ [new_column_title0]+ [new_column_title1]+ [new_column_title2]+ [new_column_title3])
-
-    for row in data_rows:
-        csv_writer.writerow(row)
-    print("推理已经完成，result_x.csv表格已生成")
-
+loss1 = (2*0.2*math.tan((math.pi/2)*(state[0]/5000)))+(0.002*0.2*state[1])+(0.002*((0.1*state[2])+(0.1*state[3])))+(0.02*0.2*state[4])+2*0.2*math.tan((math.pi/2)*(state[5]/5000)) # 策略A
+loss2 = (2*(1/3)*math.tan((math.pi/2)*(state[6]/5000)))+(0.0015*(1/3)*state[7])+2*0.2*math.tan((math.pi/2)*(state[8]/5000))  # 策略B
+loss3 = (2*0.2*math.tan((math.pi/2)*((state[9]+state[10])/5000)))+(0.002*((0.2*state[11])+(0.2*state[12])))+(0.002*0.2*state[13])+2*0.2*math.tan((math.pi/2)*(state[14]/5000))
+action = agent.choose_action(state, epsilon=0)  # 关闭探索
+print(loss1,loss2,loss3)
+print(f"最优策略: {action}")
+end_time = time.time()
+total_time = end_time - start_time
+print(total_time)
