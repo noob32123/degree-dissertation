@@ -1,1 +1,8 @@
 THIS IS NOOB32123'S DEGREE-DISSERTATION ON 2025/2.
+train.py 是神经网络的训练脚本。
+test_single是单次测试脚本。
+test_cycle是对大量数据进行测试的脚本，输出了result_x.csv文件。
+dataset_create_x.py是测试集的生产脚本。
+generated_data_section_x.csv是产生自dataset_create_x.py的原始测试集。
+result_x.csv是测试集的推理结果。
+model_saved_x.pth是保存好的预训练模型。
