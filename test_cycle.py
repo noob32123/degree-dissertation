@@ -165,12 +165,12 @@ class DQNAgent:
 env = StrategyOptimizationEnv()
 agent = DQNAgent(env.state_dim, env.action_dim)
 
-agent.q_net.load_state_dict(torch.load(f'model_saved.pth'))
+agent.q_net.load_state_dict(torch.load(f'model_saved_3.pth'))
 agent.target_net.load_state_dict(agent.q_net.state_dict())
 
 
 
-file_path = 'generated_data_section_3.csv'
+file_path = 'generated_data_section_1.csv'
 
 def convert_value(value_str):
     """ 将字符串转换为适当的数值类型 """
@@ -230,7 +230,7 @@ for row in data_rows:
 
 
 
-output_file_path = 'result_3.csv'
+output_file_path = 'result_1.csv'
 
 with open(output_file_path, 'w', newline='', encoding='utf-8') as csvfile:
 

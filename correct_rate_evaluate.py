@@ -66,6 +66,8 @@ with open(output_file_path, 'w', newline='', encoding='utf-8') as csvfile:
     for row in data_rows:
         csv_writer.writerow(row)
     print("批量判断正确与否已经完成，正确率分析表格1已生成")
+    print(f"1中有{yes_count}个yes")
+    yes_count_1=yes_count
 
 
 
@@ -119,9 +121,9 @@ for row in data_rows:
 
     modified_row = [current_row_dict[header] for header in header_row + [new_column_title]]
     data_rows[data_rows.index(row)] = modified_row
+    
 
-
-
+yes_count_2=yes_count-yes_count_1
 output_file_path_2 = 'correctness_evaluate_2.csv'
 
 with open(output_file_path_2, 'w', newline='', encoding='utf-8') as csvfile:
@@ -134,6 +136,7 @@ with open(output_file_path_2, 'w', newline='', encoding='utf-8') as csvfile:
         csv_writer.writerow(row)
     print("批量判断正确与否已经完成，正确率分析表格2已生成")
 
+    print(f"2中有{yes_count_2}个yes")
 
 
 
@@ -191,6 +194,7 @@ for row in data_rows:
 
 
 output_file_path_3 = 'correctness_evaluate_3.csv'
+yes_count_3=yes_count-yes_count_1-yes_count_2
 
 with open(output_file_path_3, 'w', newline='', encoding='utf-8') as csvfile:
 
@@ -201,6 +205,6 @@ with open(output_file_path_3, 'w', newline='', encoding='utf-8') as csvfile:
     for row in data_rows:
         csv_writer.writerow(row)
     print("批量判断正确与否已经完成，正确率分析表格3已生成")
-
+    print(f"3中有{yes_count_3}个yes")
 
 print(f"共有{yes_count}个正确判断的用例")

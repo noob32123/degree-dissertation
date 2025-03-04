@@ -6,3 +6,9 @@ dataset_create_x.py是测试集的生产脚本。
 generated_data_section_x.csv是产生自dataset_create_x.py的原始测试集。
 result_x.csv是测试集的推理结果。
 model_saved_x.pth是保存好的预训练模型。
+
+
+//////
+model_saved.pth 共有23802个正确判断的用例
+model_saved_2.pth 共有20218个正确判断的用例
+model_saved_3.pth 共有26560个正确判断的用例

@@ -190,7 +190,7 @@ agent.target_net.to(device)
 
 
 
-for episode in range(5000):
+for episode in range(150000):
     state = env.reset()
     state_tensor = torch.FloatTensor(state).unsqueeze(0)
     state_tensor=state_tensor.to(device)
