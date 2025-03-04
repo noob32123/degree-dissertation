@@ -11,4 +11,7 @@ model_saved_x.pth是保存好的预训练模型。
 //////
 model_saved.pth 共有23802个正确判断的用例
 model_saved_2.pth 共有20218个正确判断的用例
-model_saved_3.pth 共有26560个正确判断的用例
+model_saved_3.pth 共有26607个正确判断的用例
+model_saved_4.pth 共有27151个正确判断的用例
+model_saved_5.pth 共有27944个正确判断的用例
+model_saved_6.pth 共有27740个正确判断的用例
