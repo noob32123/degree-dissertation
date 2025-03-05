@@ -13,5 +13,12 @@ model_saved.pth 共有23802个正确判断的用例
 model_saved_2.pth 共有20218个正确判断的用例
 model_saved_3.pth 共有26607个正确判断的用例
 model_saved_4.pth 共有27151个正确判断的用例
-model_saved_5.pth 共有27944个正确判断的用例
-model_saved_6.pth 共有27740个正确判断的用例
+model_saved_5.pth 共有27944个正确判断的用例 //170000episode
+model_saved_6.pth 共有27740个正确判断的用例 //190000episode
+///以上均为epsilon_decay = 0.9998,lr=1e-4,gamma=0.9的情况
+
+model_saved_7.pth 共有27616个正确判断的用例     
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=200000     
+
+model_saved_8.pth 共有28065个正确判断的用例     
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=300000     

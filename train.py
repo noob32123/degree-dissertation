@@ -182,7 +182,7 @@ env = StrategyOptimizationEnv()
 agent = DQNAgent(env.state_dim, env.action_dim)
 
 epsilon = 1.0
-epsilon_decay = 0.9998
+epsilon_decay = 0.99993
 batch_size = 256
 
 agent.q_net.to(device) 
@@ -190,7 +190,7 @@ agent.target_net.to(device)
 
 
 
-for episode in range(170000):
+for episode in range(500000):
     state = env.reset()
     state_tensor = torch.FloatTensor(state).unsqueeze(0)
     state_tensor=state_tensor.to(device)
@@ -207,13 +207,13 @@ for episode in range(170000):
     print(f"Episode {episode}, Epsilon: {epsilon:.3f}")
 
     # torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
-torch.save(agent.q_net.state_dict(), f'model_saved_6.pth')
+torch.save(agent.q_net.state_dict(), f'model_saved_9.pth')
 end_time = time.time()
 total_time = start_time-end_time
 print(total_time)
 # ====================== 5. 测试模型 ======================
 
-agent.q_net.load_state_dict(torch.load(f'model_saved_6.pth'))
+agent.q_net.load_state_dict(torch.load(f'model_saved_7.pth'))
 agent.target_net.load_state_dict(agent.q_net.state_dict())
 
 state = env.reset()
