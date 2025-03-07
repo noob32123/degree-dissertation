@@ -22,3 +22,8 @@ epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=200000
 
 model_saved_8.pth 共有28065个正确判断的用例     
 epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=300000     
+
+model_saved_9.pth 共有16000个正确判断的用例     
+epsilon_decay = 0.99993,lr=1e-4,gamma=0.9,episode=500000  
+
+26225
