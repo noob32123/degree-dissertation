@@ -139,7 +139,7 @@ class DQNAgent:
                 q_values = self.q_net(state_tensor)
             return q_values.argmax().item()
     
-    def update(self, batch_size,tag):
+    def update(self, batch_size):
         if len(self.replay_buffer) < batch_size:
             return
         
@@ -173,16 +173,9 @@ class DQNAgent:
         # 计算损失并更新
         loss = nn.MSELoss()(current_q.squeeze(), target_q)
         print(loss)
-        if((loss<0.5)&(tag==1)):
-            self.optimizer.zero_grad()
-            loss.backward()
-            self.optimizer.step()
-        elif(tag==0):
-            self.optimizer.zero_grad()
-            loss.backward()
-            self.optimizer.step()
-        else:
-            print("no update")
+        self.optimizer.zero_grad()
+        loss.backward()
+        self.optimizer.step()
 
 # ====================== 4. 训练过程 ======================
 env = StrategyOptimizationEnv()
@@ -191,7 +184,7 @@ agent = DQNAgent(env.state_dim, env.action_dim)
 epsilon = 1.0
 epsilon_decay = 0.9999
 batch_size = 256
-tag = 0
+
 
 agent.q_net.to(device) 
 agent.target_net.to(device) 
@@ -199,7 +192,7 @@ agent.target_net.to(device)
 # print(agent.q_net.state_dict()['fc1.weight'])
 # print(agent.target_net.state_dict()['fc1.weight'])
 
-for episode in range(320000):
+for episode in range(400000):
     state = env.reset()
     state_tensor = torch.FloatTensor(state).unsqueeze(0)
     state_tensor=state_tensor.to(device)
@@ -207,12 +200,12 @@ for episode in range(320000):
     next_state, reward, done, _ = env.step(action)
     agent.replay_buffer.append((state_tensor, action, reward, next_state, done))
     
-    if(episode==150000):
-        epsilon=1.0
-        tag=1
+    # if(episode==140000):
+    #     epsilon=1.0
+    #     tag=1
 
     if len(agent.replay_buffer) >= batch_size:
-        agent.update(batch_size,tag) #加入重训练机制的update
+        agent.update(batch_size) 
     
     epsilon = max(0.01, epsilon * epsilon_decay)
     
@@ -223,7 +216,7 @@ for episode in range(320000):
         agent.target_net.load_state_dict(agent.q_net.state_dict())
 
     # torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
-torch.save(agent.q_net.state_dict(), f'model_saved_20.pth')
+torch.save(agent.q_net.state_dict(), f'model_saved_1.pth')
 print(agent.q_net.state_dict()['fc1.weight'])
 print(agent.target_net.state_dict()['fc1.weight'])
 

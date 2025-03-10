@@ -4,7 +4,7 @@ import random
 
 
 
-num_records = 10000
+num_records = 5000
 
 data = []
 
