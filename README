@@ -8,15 +8,16 @@ result_x.csv是测试集的推理结果。
 model_saved_x.pth是保存好的预训练模型。
 
 
+best_perf.pth epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=400000,reset point=80000,loss>=15 no update,new DQN STRUC
 //////
-model_saved_1.pth
+
 model_saved_3.pth 共有25586个正确判断的用例//150000
 model_saved_4.pth 共有26323个正确判断的用例//160000
 
 model_saved_6.pth 共有26688个正确判断的用例 //190000episode
 ///以上均为epsilon_decay = 0.9998,lr=1e-4,gamma=0.9的情况
 
-model_saved_1.pth 
+model_saved_1.pth 共有27726个正确判断的用例 
 epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=400000 
 
 model_saved_7.pth 共有26906个正确判断的用例     
@@ -29,7 +30,8 @@ model_saved_9.pth 共有13013个正确判断的用例
 epsilon_decay = 0.99993,lr=1e-4,gamma=0.9,episode=500000  
 
 model_saved_10.pth 共有27109个正确判断的用例
-epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=200000  
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=200000  /////waste
+
 
 
 
@@ -55,8 +57,26 @@ epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=300000,reset point=200000
 model_saved_16.pth 共有26684个正确判断的用例     new DQN STRUC
 epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=300000,reset point=160000
 
-在训:
-400000 episode  base .1
+model_saved_18.pth 共有26655个正确判断的用例     new DQN STRUC
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=300000,reset point=160000
 
-350000 episode 150000 reset point .18
-280000 episode 150000 reset point .19
+model_saved_19.pth 共有26294个正确判断的用例     new DQN STRUC
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=300000,reset point=160000
+
+model_saved_20.pth 共有26892个正确判断的用例     new DQN STRUC              以上均为loss>=0.5 no update
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=300000,reset point=160000
+
+
+
+
+model_saved_21.pth 共有27705个正确判断的用例     new DQN STRUC
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=400000,reset point=80000  loss>=15 no update
+
+在训:
+
+
+
+
+350000 episode reset point 100000 .22 loss>=15 no update
+380000 episode reset point 100000 .23 loss>=15 no update
+400000 episode reset point 100000 .24 loss>=15 no update

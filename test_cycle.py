@@ -165,7 +165,7 @@ class DQNAgent:
 env = StrategyOptimizationEnv()
 agent = DQNAgent(env.state_dim, env.action_dim)
 
-agent.q_net.load_state_dict(torch.load(f'model_saved_17.pth'))#############model_set
+agent.q_net.load_state_dict(torch.load(f'best_perf.pth'))#############model_set
 agent.target_net.load_state_dict(agent.q_net.state_dict())
 
 agent.q_net.eval()

@@ -13,7 +13,7 @@ if torch.cuda.is_available():
     print(f"Current device: {torch.cuda.current_device()}")
     print(f"Device name: {torch.cuda.get_device_name(0)}")
 
-device = torch.device("cuda:0")
+device = torch.device("cuda:1")
  
 class StrategyOptimizationEnv:
     def __init__(self):
@@ -173,7 +173,7 @@ class DQNAgent:
         # 计算损失并更新
         loss = nn.MSELoss()(current_q.squeeze(), target_q)
         print(loss)
-        if((loss<0.5)&(tag==1)):
+        if((loss<15)&(tag==1)):
             self.optimizer.zero_grad()
             loss.backward()
             self.optimizer.step()
@@ -199,7 +199,7 @@ agent.target_net.to(device)
 # print(agent.q_net.state_dict()['fc1.weight'])
 # print(agent.target_net.state_dict()['fc1.weight'])
 
-for episode in range(320000):
+for episode in range(400000):
     state = env.reset()
     state_tensor = torch.FloatTensor(state).unsqueeze(0)
     state_tensor=state_tensor.to(device)
@@ -207,7 +207,7 @@ for episode in range(320000):
     next_state, reward, done, _ = env.step(action)
     agent.replay_buffer.append((state_tensor, action, reward, next_state, done))
     
-    if(episode==150000):
+    if(episode==100000):
         epsilon=1.0
         tag=1
 
@@ -223,7 +223,7 @@ for episode in range(320000):
         agent.target_net.load_state_dict(agent.q_net.state_dict())
 
     # torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
-torch.save(agent.q_net.state_dict(), f'model_saved_20.pth')
+torch.save(agent.q_net.state_dict(), f'model_saved_24.1.pth')
 print(agent.q_net.state_dict()['fc1.weight'])
 print(agent.target_net.state_dict()['fc1.weight'])
 
