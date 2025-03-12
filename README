@@ -72,11 +72,33 @@ epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=300000,reset point=160000
 model_saved_21.pth 共有27705个正确判断的用例     new DQN STRUC
 epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=400000,reset point=80000  loss>=15 no update
 
+model_saved_22.pth 共有26702个正确判断的用例     new DQN STRUC
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=350000,reset point=100000  loss>=15 no update
+
+model_saved_23.pth 共有27099个正确判断的用例     new DQN STRUC
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=380000,reset point=100000  loss>=15 no update
+
+model_saved_24.pth 共有27475个正确判断的用例     new DQN STRUC
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=400000,reset point=100000  loss>=15 no update
+
+model_saved_25.pth 共有27811个正确判断的用例     new DQN STRUC
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=450000,reset point=100000  loss>=15 no update
+
+model_saved_26.pth 共有27825个正确判断的用例     new DQN STRUC
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=500000,reset point=100000  loss>=15 no update
+
+model_saved_27.pth 共有28268个正确判断的用例     new DQN STRUC
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=600000,reset point=100000  loss>=15 no update
+
+model_with_flush_1.pth 共有28579个正确判断的用例     new DQN STRUC with flush point at 200000
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=500000,reset point=100000  loss>=15 no update
+
+model_with_flush_2.pth 共有28431个正确判断的用例     new DQN STRUC with flush point at 200000
+epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=450000,reset point=100000  loss>=15 no update
+
+
 在训:
 
 
 
 
-350000 episode reset point 100000 .22 loss>=15 no update
-380000 episode reset point 100000 .23 loss>=15 no update
-400000 episode reset point 100000 .24 loss>=15 no update

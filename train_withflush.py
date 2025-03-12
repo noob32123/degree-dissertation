@@ -13,7 +13,7 @@ if torch.cuda.is_available():
     print(f"Current device: {torch.cuda.current_device()}")
     print(f"Device name: {torch.cuda.get_device_name(0)}")
 
-device = torch.device("cuda:2")
+device = torch.device("cuda:0")
  
 class StrategyOptimizationEnv:
     def __init__(self):
@@ -199,7 +199,7 @@ agent.target_net.to(device)
 # print(agent.q_net.state_dict()['fc1.weight'])
 # print(agent.target_net.state_dict()['fc1.weight'])
 
-for episode in range(500000):
+for episode in range(450000):
     state = env.reset()
     state_tensor = torch.FloatTensor(state).unsqueeze(0)
     state_tensor=state_tensor.to(device)
@@ -211,6 +211,11 @@ for episode in range(500000):
         epsilon=1.0
         tag=1
 
+    if(episode==200000):
+
+        agent.replay_buffer.clear()#flush
+
+    
     if len(agent.replay_buffer) >= batch_size:
         agent.update(batch_size,tag) #加入重训练机制的update
     
@@ -223,7 +228,7 @@ for episode in range(500000):
         agent.target_net.load_state_dict(agent.q_net.state_dict())
 
     # torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
-torch.save(agent.q_net.state_dict(), f'model_saved_26.1.pth')
+torch.save(agent.q_net.state_dict(), f'model_with_flush_2.pth')
 print(agent.q_net.state_dict()['fc1.weight'])
 print(agent.target_net.state_dict()['fc1.weight'])
 
