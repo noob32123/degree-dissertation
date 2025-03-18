@@ -199,7 +199,7 @@ agent.target_net.to(device)
 # print(agent.q_net.state_dict()['fc1.weight'])
 # print(agent.target_net.state_dict()['fc1.weight'])
 
-for episode in range(350000):
+for episode in range(300000):
     state = env.reset()
     state_tensor = torch.FloatTensor(state).unsqueeze(0)
     state_tensor=state_tensor.to(device)
@@ -228,7 +228,7 @@ for episode in range(350000):
         agent.target_net.load_state_dict(agent.q_net.state_dict())
 
     # torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
-torch.save(agent.q_net.state_dict(), f'model_with_flush_5.1.pth')
+torch.save(agent.q_net.state_dict(), f'model_with_flush_.pth')
 print(agent.q_net.state_dict()['fc1.weight'])
 print(agent.target_net.state_dict()['fc1.weight'])
 
