@@ -169,7 +169,8 @@ class DQNAgent:
         next_q = self.target_net(next_states1).max(1)[0].detach()
 
         target_q = rewards + (1 - dones) * self.gamma * next_q
-        
+        # target_q = rewards + self.gamma * next_q
+
         # 计算损失并更新
         loss = nn.MSELoss()(current_q.squeeze(), target_q)
         print(loss)
@@ -191,7 +192,9 @@ agent = DQNAgent(env.state_dim, env.action_dim)
 epsilon = 1.0
 epsilon_decay = 0.9999
 batch_size = 256
-tag = 0
+losstag = 0
+targettag = 0
+
 
 agent.q_net.to(device) 
 agent.target_net.to(device) 
@@ -199,7 +202,7 @@ agent.target_net.to(device)
 # print(agent.q_net.state_dict()['fc1.weight'])
 # print(agent.target_net.state_dict()['fc1.weight'])
 
-for episode in range(300000):
+for episode in range(400000):
     state = env.reset()
     state_tensor = torch.FloatTensor(state).unsqueeze(0)
     state_tensor=state_tensor.to(device)
@@ -209,15 +212,15 @@ for episode in range(300000):
     
     if(episode==100000):
         epsilon=1.0
-        tag=1
+        losstag=1
 
     if(episode==200000):
 
         agent.replay_buffer.clear()#flush
-
+        targettag=1 #利用target_net加快网络精度提升
     
     if len(agent.replay_buffer) >= batch_size:
-        agent.update(batch_size,tag) #加入重训练机制的update
+        agent.update(batch_size,losstag) #加入重训练机制的update
     
     epsilon = max(0.01, epsilon * epsilon_decay)
     

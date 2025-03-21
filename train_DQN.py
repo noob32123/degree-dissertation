@@ -13,6 +13,8 @@ if torch.cuda.is_available():
     print(f"Current device: {torch.cuda.current_device()}")
     print(f"Device name: {torch.cuda.get_device_name(0)}")
 
+device = torch.device("cuda:1")
+ 
 class StrategyOptimizationEnv:
     def __init__(self):
         self.state_dim = 15 
@@ -127,11 +129,12 @@ class DQNAgent:
         self.gamma = gamma
         self.replay_buffer = deque(maxlen=1000000)
     
-    def choose_action(self, state, epsilon):
+    def choose_action(self, state_tensor, epsilon):
         if random.random() < epsilon:
             return random.randint(0, 2)  # 随机探索
         else:
-            state_tensor = torch.FloatTensor(state).unsqueeze(0)
+            # state_tensor = torch.FloatTensor(state).unsqueeze(0)
+            
             with torch.no_grad():
                 q_values = self.q_net(state_tensor)
             return q_values.argmax().item()
@@ -142,17 +145,31 @@ class DQNAgent:
         
         batch = random.sample(self.replay_buffer, batch_size)
         states, actions, rewards, next_states, dones = zip(*batch)
-        
-        states = torch.FloatTensor(np.array(states))
-        next_states = torch.FloatTensor(np.array(next_states))
+    
+        # states = torch.FloatTensor(np.array(states))
+        # next_states = torch.FloatTensor(np.array(next_states))
+        states1 = torch.stack(states)
+        states1 = states1.to(device)
+        next_states = [torch.tensor(row) for row in next_states]
+        next_states1 = torch.stack(next_states)
+        next_states1 = next_states1.to(device)
         actions = torch.LongTensor(actions)
         rewards = torch.FloatTensor(rewards)
         dones = torch.FloatTensor(dones)
-        
+        actions = actions.to(device)
+        rewards = rewards.to(device)
+        dones = dones.to(device)
         # 计算Q值
-        current_q = self.q_net(states).gather(1, actions.unsqueeze(1))
-        next_q = self.target_net(next_states).max(1)[0].detach()
-        target_q = rewards + (1 - dones) * self.gamma * next_q
+        # print(actions.unsqueeze(1).shape)
+        # print(states1.shape)
+        # print(next_states1.shape)
+        # print(self.q_net(states1).shape)
+        states1 = states1.squeeze(1)
+        current_q = self.q_net(states1).gather(1, actions.unsqueeze(1))
+        next_q = self.target_net(next_states1).max(1)[0].detach()
+
+        #target_q = rewards + (1 - dones) * self.gamma * next_q
+        target_q = rewards + self.gamma * next_q
         
         # 计算损失并更新
         loss = nn.MSELoss()(current_q.squeeze(), target_q)
@@ -166,39 +183,58 @@ env = StrategyOptimizationEnv()
 agent = DQNAgent(env.state_dim, env.action_dim)
 
 epsilon = 1.0
-epsilon_decay = 0.9998
-batch_size = 128
+epsilon_decay = 0.9999
+batch_size = 256
 
-for episode in range(5000):
+
+agent.q_net.to(device) 
+agent.target_net.to(device) 
+
+# print(agent.q_net.state_dict()['fc1.weight'])
+# print(agent.target_net.state_dict()['fc1.weight'])
+
+for episode in range(300000):
     state = env.reset()
-    action = agent.choose_action(state, epsilon)
+    state_tensor = torch.FloatTensor(state).unsqueeze(0)
+    state_tensor=state_tensor.to(device)
+    action = agent.choose_action(state_tensor, epsilon)
     next_state, reward, done, _ = env.step(action)
-    agent.replay_buffer.append((state, action, reward, next_state, done))
+    agent.replay_buffer.append((state_tensor, action, reward, next_state, done))
     
+    # if(episode==140000):
+    #     epsilon=1.0
+    #     tag=1
+
     if len(agent.replay_buffer) >= batch_size:
-        agent.update(batch_size)
+        agent.update(batch_size) 
     
     epsilon = max(0.01, epsilon * epsilon_decay)
     
-    # if episode % 100 == 0:
+    
     print(f"Episode {episode}, Epsilon: {epsilon:.3f}")
 
-    torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
+    if (episode % 500 == 0):
+        agent.target_net.load_state_dict(agent.q_net.state_dict())
 
+    # torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
+torch.save(agent.q_net.state_dict(), f'test_copy.pth')
+print(agent.q_net.state_dict()['fc1.weight'])
+print(agent.target_net.state_dict()['fc1.weight'])
+
+end_time = time.time()
+total_time = start_time-end_time
+print(total_time)
 # ====================== 5. 测试模型 ======================
 
-agent.q_net.load_state_dict(torch.load(f'model_saved_3.pth'))
+agent.q_net.load_state_dict(torch.load(f'model_saved_7.pth'))
 agent.target_net.load_state_dict(agent.q_net.state_dict())
 
 state = env.reset()
-print(state)
-     
+state_tensor = torch.FloatTensor(state).unsqueeze(0)
+state_tensor=state_tensor.to(device)
 loss1 = (2*0.2*math.tan((math.pi/2)*(state[0]/5000)))+(0.002*0.2*state[1])+(0.002*((0.1*state[2])+(0.1*state[3])))+(0.02*0.2*state[4])+2*0.2*math.tan((math.pi/2)*(state[5]/5000)) # 策略A
 loss2 = (2*(1/3)*math.tan((math.pi/2)*(state[6]/5000)))+(0.0015*(1/3)*state[7])+2*0.2*math.tan((math.pi/2)*(state[8]/5000))  # 策略B
 loss3 = (2*0.2*math.tan((math.pi/2)*((state[9]+state[10])/5000)))+(0.002*((0.2*state[11])+(0.2*state[12])))+(0.002*0.2*state[13])+2*0.2*math.tan((math.pi/2)*(state[14]/5000))
-action = agent.choose_action(state, epsilon=0)  # 关闭探索
+action = agent.choose_action(state_tensor, epsilon=0)  # 关闭探索
 print(loss1,loss2,loss3)
 print(f"最优策略: {action}")
-end_time = time.time()
-total_time = end_time - start_time
-print(total_time)
