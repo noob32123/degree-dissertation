@@ -165,7 +165,7 @@ class DQNAgent:
 env = StrategyOptimizationEnv()
 agent = DQNAgent(env.state_dim, env.action_dim)
 
-agent.q_net.load_state_dict(torch.load(f'model_saved_7.pth'))#############model_set
+agent.q_net.load_state_dict(torch.load(f'baseline_dqn/model_temp2.pth'))#############model_set
 agent.target_net.load_state_dict(agent.q_net.state_dict())
 
 agent.q_net.eval()
@@ -401,76 +401,76 @@ with open(output_file_path, 'w', newline='', encoding='utf-8') as csvfile:
 
 
 
-##########################################################full range
+# ##########################################################full range
 
-file_path = 'generated_data_fullrange.csv'
+# file_path = 'generated_data_fullrange.csv'
 
-def convert_value(value_str):
-    """ 将字符串转换为适当的数值类型 """
-    try:
+# def convert_value(value_str):
+#     """ 将字符串转换为适当的数值类型 """
+#     try:
 
-        return int(value_str)
-    except ValueError:
-        try:
+#         return int(value_str)
+#     except ValueError:
+#         try:
    
-            return float(value_str)
-        except ValueError:
+#             return float(value_str)
+#         except ValueError:
 
-            return value_str
+#             return value_str
 
 
-with open(file_path, newline='', encoding='utf-8') as csvfile:
-    csv_reader = csv.reader(csvfile)
+# with open(file_path, newline='', encoding='utf-8') as csvfile:
+#     csv_reader = csv.reader(csvfile)
     
-    header_row = next(csv_reader)
+#     header_row = next(csv_reader)
 
-    data_rows = []
+#     data_rows = []
 
-    for row in csv_reader:
-        row = [convert_value(cell) for cell in row]
-        data_rows.append(row)
-
-
-new_column_title0 = 'loss0'
-new_column_title1 = 'loss1'
-new_column_title2 = 'loss2'
-new_column_title3 = 'action'
+#     for row in csv_reader:
+#         row = [convert_value(cell) for cell in row]
+#         data_rows.append(row)
 
 
-for row in data_rows:
+# new_column_title0 = 'loss0'
+# new_column_title1 = 'loss1'
+# new_column_title2 = 'loss2'
+# new_column_title3 = 'action'
 
-    state = row
-    print(state)
+
+# for row in data_rows:
+
+#     state = row
+#     print(state)
      
-    loss0 = (2*0.2*math.tan((math.pi/2)*(state[0]/5000)))+(0.002*0.2*state[1])+(0.002*((0.1*state[2])+(0.1*state[3])))+(0.02*0.2*state[4])+2*0.2*math.tan((math.pi/2)*(state[5]/5000)) # 策略A
-    loss1 = (2*(1/3)*math.tan((math.pi/2)*(state[6]/5000)))+(0.0015*(1/3)*state[7])+2*0.2*math.tan((math.pi/2)*(state[8]/5000))  # 策略B
-    loss2 = (2*0.2*math.tan((math.pi/2)*((state[9]+state[10])/5000)))+(0.002*((0.2*state[11])+(0.2*state[12])))+(0.002*0.2*state[13])+2*0.2*math.tan((math.pi/2)*(state[14]/5000))
-    action = agent.choose_action(state, epsilon=0)  # 关闭探索
-    # print(loss0,loss1,loss2)
-    print(f"最优策略: {action}")
+#     loss0 = (2*0.2*math.tan((math.pi/2)*(state[0]/5000)))+(0.002*0.2*state[1])+(0.002*((0.1*state[2])+(0.1*state[3])))+(0.02*0.2*state[4])+2*0.2*math.tan((math.pi/2)*(state[5]/5000)) # 策略A
+#     loss1 = (2*(1/3)*math.tan((math.pi/2)*(state[6]/5000)))+(0.0015*(1/3)*state[7])+2*0.2*math.tan((math.pi/2)*(state[8]/5000))  # 策略B
+#     loss2 = (2*0.2*math.tan((math.pi/2)*((state[9]+state[10])/5000)))+(0.002*((0.2*state[11])+(0.2*state[12])))+(0.002*0.2*state[13])+2*0.2*math.tan((math.pi/2)*(state[14]/5000))
+#     action = agent.choose_action(state, epsilon=0)  # 关闭探索
+#     # print(loss0,loss1,loss2)
+#     print(f"最优策略: {action}")
 
 
-    current_row_dict = {header: value for header, value in zip(header_row, row)}
+#     current_row_dict = {header: value for header, value in zip(header_row, row)}
 
-    current_row_dict[new_column_title3] = action
-    current_row_dict[new_column_title0] = loss0
-    current_row_dict[new_column_title1] = loss1
-    current_row_dict[new_column_title2] = loss2
+#     current_row_dict[new_column_title3] = action
+#     current_row_dict[new_column_title0] = loss0
+#     current_row_dict[new_column_title1] = loss1
+#     current_row_dict[new_column_title2] = loss2
     
 
-    modified_row = [current_row_dict[header] for header in header_row + [new_column_title0]+ [new_column_title1]+ [new_column_title2]+ [new_column_title3]]
-    data_rows[data_rows.index(row)] = modified_row
+#     modified_row = [current_row_dict[header] for header in header_row + [new_column_title0]+ [new_column_title1]+ [new_column_title2]+ [new_column_title3]]
+#     data_rows[data_rows.index(row)] = modified_row
 
 
 
-output_file_path = 'result_fullrange.csv'
+# output_file_path = 'result_fullrange.csv'
 
-with open(output_file_path, 'w', newline='', encoding='utf-8') as csvfile:
+# with open(output_file_path, 'w', newline='', encoding='utf-8') as csvfile:
 
-    csv_writer = csv.writer(csvfile)
+#     csv_writer = csv.writer(csvfile)
 
-    csv_writer.writerow(header_row+ [new_column_title0]+ [new_column_title1]+ [new_column_title2]+ [new_column_title3])
+#     csv_writer.writerow(header_row+ [new_column_title0]+ [new_column_title1]+ [new_column_title2]+ [new_column_title3])
 
-    for row in data_rows:
-        csv_writer.writerow(row)
-    print("推理已经完成，result_fullrange.csv表格已生成")
+#     for row in data_rows:
+#         csv_writer.writerow(row)
+#     print("推理已经完成，result_fullrange.csv表格已生成")

@@ -16,7 +16,7 @@ model_saved_4.pth 共有26323个正确判断的用例//160000
 model_saved_6.pth 共有26688个正确判断的用例 //190000episode
 ///以上均为epsilon_decay = 0.9998,lr=1e-4,gamma=0.9的情况
 
-model_saved_1.pth 共有27726个正确判断的用例 
+model_saved_1.pth 共有27726个正确判断的用例                           fullrange中有46346个yes
 epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=400000 
 
 model_saved_7.pth 共有26906个正确判断的用例     
@@ -89,7 +89,7 @@ epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=600000,reset point=100000  loss
 
 
 
-model_with_flush_1.pth 共有28579个正确判断的用例     new DQN STRUC with flush point at 200000
+model_with_flush_1.pth 共有28579个正确判断的用例     new DQN STRUC with flush point at 200000              fullrange中有47860个yes
 epsilon_decay = 0.9999,lr=1e-4,gamma=0.9,episode=500000,reset point=100000  loss>=15 no update
 
 model_with_flush_2.pth 共有28431个正确判断的用例     new DQN STRUC with flush point at 200000
