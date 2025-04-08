@@ -13,7 +13,7 @@ if torch.cuda.is_available():
     print(f"Current device: {torch.cuda.current_device()}")
     print(f"Device name: {torch.cuda.get_device_name(0)}")
 
-device = torch.device("cuda:0")
+device = torch.device("cuda:1")
  
 class StrategyOptimizationEnv:
     def __init__(self):
@@ -231,7 +231,7 @@ for episode in range(400000):
         agent.target_net.load_state_dict(agent.q_net.state_dict())
 
     # torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
-torch.save(agent.q_net.state_dict(), f'model_with_flush_.pth')
+torch.save(agent.q_net.state_dict(), f'model_with_flush_best_3.pth')
 print(agent.q_net.state_dict()['fc1.weight'])
 print(agent.target_net.state_dict()['fc1.weight'])
 

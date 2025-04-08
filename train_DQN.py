@@ -182,7 +182,7 @@ class DQNAgent:
 env = StrategyOptimizationEnv()
 agent = DQNAgent(env.state_dim, env.action_dim)
 
-epsilon = 0.25
+epsilon = 1.0
 epsilon_decay = 0.9999
 batch_size = 256
 
@@ -193,7 +193,7 @@ agent.target_net.to(device)
 # print(agent.q_net.state_dict()['fc1.weight'])
 # print(agent.target_net.state_dict()['fc1.weight'])
 
-for episode in range(100000):
+for episode in range(550000):
     state = env.reset()
     state_tensor = torch.FloatTensor(state).unsqueeze(0)
     state_tensor=state_tensor.to(device)
@@ -217,7 +217,7 @@ for episode in range(100000):
         agent.target_net.load_state_dict(agent.q_net.state_dict())
 
     # torch.save(agent.q_net.state_dict(), f'model_saved_3.pth')
-torch.save(agent.q_net.state_dict(), f'baseline_dqn/model_temp2.pth')
+torch.save(agent.q_net.state_dict(), f'baseline_dqn/model_temp4.pth')
 print(agent.q_net.state_dict()['fc1.weight'])
 print(agent.target_net.state_dict()['fc1.weight'])
 
