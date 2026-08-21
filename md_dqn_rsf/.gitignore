@@ -1,0 +1,10 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+*.log
+*.err.log
+*.partial.csv
+outputs_smoke/
+outputs_archive_smoke/
+outputs_rsf_smoke/
+outputs_rsf_smoke_resume/
