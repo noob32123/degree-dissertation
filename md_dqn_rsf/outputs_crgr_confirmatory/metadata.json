@@ -1,0 +1,17 @@
+{
+  "device": "cuda:0",
+  "torch": "2.8.0+cu129",
+  "numpy": "2.4.1",
+  "pandas": "3.0.3",
+  "episodes": 600,
+  "horizon": 64,
+  "calibration_model_seeds": 4,
+  "confirmatory_model_seeds": 5,
+  "test_traces_per_seed": 20,
+  "algorithm_invariants": {
+    "bellman_target": "standard DQN target-network max; not Double DQN",
+    "network": "original QNetwork",
+    "replay": "uniform one-step replay",
+    "exploration": "original epsilon-greedy schedule"
+  }
+}

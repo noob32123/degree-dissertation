@@ -138,7 +138,8 @@ class SatelliteSchedulingEnv:
         )
         return np.array([onboard, ground, hybrid], dtype=np.float32)
 
-    def step(self, action: int) -> Tuple[np.ndarray, float, bool, Dict[str, float]]:
+    def _transition(self, action: int) -> tuple[np.ndarray, Dict[str, float]]:
+        """Compute one action's resource transition without mutating state."""
         if action not in (0, 1, 2):
             raise ValueError(f"invalid action {action}")
         x = self.tasks[self.t]
@@ -185,12 +186,6 @@ class SatelliteSchedulingEnv:
         )
         total_cost = immediate + penalty
 
-        self.resources = np.array(
-            [next_h, next_e, next_q, next_u, next_b, next_tau], dtype=np.float32
-        )
-        self.t += 1
-        done = self.t >= self.config.horizon
-        next_state = np.zeros(self.state_dim, dtype=np.float32) if done else self._state()
         info = {
             "immediate_cost": immediate,
             "penalty": float(penalty),
@@ -203,5 +198,29 @@ class SatelliteSchedulingEnv:
             "energy": float(next_e),
             "queue": float(next_q),
         }
-        return next_state, -float(total_cost), done, info
+        next_resources = np.array(
+            [next_h, next_e, next_q, next_u, next_b, next_tau], dtype=np.float32
+        )
+        return next_resources, info
 
+    def preview_all_actions(self) -> tuple[np.ndarray, np.ndarray]:
+        """Preview one-step costs and resources for all actions without side effects.
+
+        The helper neither advances time nor consumes randomness.  It is meant
+        for training-only auxiliary supervision and exposes no later task.
+        """
+        costs = np.empty(self.action_dim, dtype=np.float32)
+        resources = np.empty((self.action_dim, self.resource_dim), dtype=np.float32)
+        for action in range(self.action_dim):
+            next_resources, info = self._transition(action)
+            costs[action] = info["total_cost"]
+            resources[action] = next_resources
+        return costs, resources
+
+    def step(self, action: int) -> Tuple[np.ndarray, float, bool, Dict[str, float]]:
+        next_resources, info = self._transition(action)
+        self.resources = next_resources
+        self.t += 1
+        done = self.t >= self.config.horizon
+        next_state = np.zeros(self.state_dim, dtype=np.float32) if done else self._state()
+        return next_state, -info["total_cost"], done, info

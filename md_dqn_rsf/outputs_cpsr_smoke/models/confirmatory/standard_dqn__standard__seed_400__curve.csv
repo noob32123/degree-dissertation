@@ -1,0 +1,4 @@
+variant,configuration,model_seed,episode,cost,rolling_cost,epsilon,loss,td_loss,ranking_loss,gate_mean,gate_active_fraction
+standard_dqn,standard,400,0,102.15673065185547,102.15673065185547,0.9848,,,,,
+standard_dqn,standard,400,10,81.8559625029564,121.2206276779825,0.8328,7.152982592582703,7.152982592582703,0.0,0.0,0.0
+standard_dqn,standard,400,11,84.6701732158661,118.17475647280612,0.8176,7.1978442668914795,7.1978442668914795,0.0,0.0,0.0

@@ -1,0 +1,53 @@
+{
+  "models_directory": "H:\\degree-dissertation\\md_dqn_rsf\\outputs_standard_dqn_ep400\\models",
+  "manifest": "H:\\degree-dissertation\\md_dqn_rsf\\outputs_standard_dqn_ep400\\models\\model_manifest.csv",
+  "n_models": 5,
+  "status": "passed",
+  "checks": [
+    {
+      "file": "standard_dqn_seed_000.pth",
+      "sha256": "385a0f2eb58155cedf1732ca19faea52c94c1fc1c1bf4c9fb5c53f790dd2b71a",
+      "bytes": 458799,
+      "state_dim": 21,
+      "action_dim": 3,
+      "training_steps": 25600,
+      "load_and_forward": "passed"
+    },
+    {
+      "file": "standard_dqn_seed_001.pth",
+      "sha256": "33160ad929a68bcc7fd4fec188f566f254015493438ecbd32f8467b6ed9d6a3a",
+      "bytes": 458799,
+      "state_dim": 21,
+      "action_dim": 3,
+      "training_steps": 25600,
+      "load_and_forward": "passed"
+    },
+    {
+      "file": "standard_dqn_seed_002.pth",
+      "sha256": "f3e139fb19ff2a548cba8ab3b17c87f2b23bc4b0ed46c453cc1d244ec637eb12",
+      "bytes": 458799,
+      "state_dim": 21,
+      "action_dim": 3,
+      "training_steps": 25600,
+      "load_and_forward": "passed"
+    },
+    {
+      "file": "standard_dqn_seed_003.pth",
+      "sha256": "44d25d154549ef8bd4a30179228c092190149a2246a75ea332febc6f0dc787fa",
+      "bytes": 458799,
+      "state_dim": 21,
+      "action_dim": 3,
+      "training_steps": 25600,
+      "load_and_forward": "passed"
+    },
+    {
+      "file": "standard_dqn_seed_004.pth",
+      "sha256": "e6bb5573526aaadf199e652e82a1fdde07eedd3ffc9f1e553d4fee49ba097110",
+      "bytes": 458799,
+      "state_dim": 21,
+      "action_dim": 3,
+      "training_steps": 25600,
+      "load_and_forward": "passed"
+    }
+  ]
+}

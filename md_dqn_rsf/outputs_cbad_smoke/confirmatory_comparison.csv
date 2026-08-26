@@ -1,0 +1,6 @@
+scenario,n_pairs,mean_difference,ci95_low,ci95_high,relative_improvement_percent,passed
+nominal,1,0.0,0.0,0.0,-0.0,False
+burst,1,0.0,0.0,0.0,-0.0,False
+link_limited,1,0.0,0.0,0.0,-0.0,False
+energy_limited,1,0.0,0.0,0.0,-0.0,False
+thermal_stress,1,0.0,0.0,0.0,-0.0,False

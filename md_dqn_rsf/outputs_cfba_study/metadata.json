@@ -1,0 +1,22 @@
+{
+  "method": "full-action counterfactual Bellman augmentation",
+  "device": "cuda:0",
+  "episodes": 600,
+  "horizon": 64,
+  "calibration_model_seeds": [
+    500,
+    501,
+    502,
+    503
+  ],
+  "confirmatory_model_seeds": [
+    600,
+    601,
+    602,
+    603,
+    604
+  ],
+  "target": "standard DQN target-network max for factual and auxiliary targets; not DDQN",
+  "network": "original QNetwork",
+  "replay": "uniform one-step"
+}

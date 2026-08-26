@@ -1,0 +1,16 @@
+scenario,coupling,variant,configuration,total_cost_mean,immediate_cost_mean,penalty_mean,thermal_violation_mean,energy_violation_mean,queue_violation_mean,contact_violation_mean,total_cost_sd,immediate_cost_sd,penalty_sd,thermal_violation_sd,energy_violation_sd,queue_violation_sd,contact_violation_sd,n_model_seeds
+burst,1.0,md_cpsr_dqn,lambda_1__rho_0p05,80.93648314476013,80.93648314476013,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+burst,1.0,standard_dqn,standard,80.93648314476013,80.93648314476013,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+burst,1.0,ungated_ranking_dqn,ungated__lambda_1,79.79977877934773,79.68160613377889,0.11817264556884766,0.3333333333333333,0.0,0.0,0.0,,,,,,,,1
+energy_limited,1.0,md_cpsr_dqn,lambda_1__rho_0p05,75.25553059577942,75.20284581184387,0.05268476903438568,0.0,0.3333333333333333,0.0,0.0,,,,,,,,1
+energy_limited,1.0,standard_dqn,standard,75.25553059577942,75.20284581184387,0.05268476903438568,0.0,0.3333333333333333,0.0,0.0,,,,,,,,1
+energy_limited,1.0,ungated_ranking_dqn,ungated__lambda_1,75.25553059577942,75.20284581184387,0.05268476903438568,0.0,0.3333333333333333,0.0,0.0,,,,,,,,1
+link_limited,1.0,md_cpsr_dqn,lambda_1__rho_0p05,74.70364553729694,74.70364553729694,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+link_limited,1.0,standard_dqn,standard,74.70364553729694,74.70364553729694,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+link_limited,1.0,ungated_ranking_dqn,ungated__lambda_1,74.70364553729694,74.70364553729694,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+nominal,1.0,md_cpsr_dqn,lambda_1__rho_0p05,74.70364553729694,74.70364553729694,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+nominal,1.0,standard_dqn,standard,74.70364553729694,74.70364553729694,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+nominal,1.0,ungated_ranking_dqn,ungated__lambda_1,74.70364553729694,74.70364553729694,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+thermal_stress,1.0,md_cpsr_dqn,lambda_1__rho_0p05,81.48484353224437,81.38473467032115,0.10010886192321777,0.3333333333333333,0.0,0.0,0.0,,,,,,,,1
+thermal_stress,1.0,standard_dqn,standard,81.48484353224437,81.38473467032115,0.10010886192321777,0.3333333333333333,0.0,0.0,0.0,,,,,,,,1
+thermal_stress,1.0,ungated_ranking_dqn,ungated__lambda_1,80.56098330020905,80.1368401447932,0.42414307594299316,0.6666666666666666,0.0,0.0,0.0,,,,,,,,1

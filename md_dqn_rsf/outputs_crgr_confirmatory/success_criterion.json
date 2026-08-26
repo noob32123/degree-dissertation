@@ -1,0 +1,68 @@
+{
+  "criterion": "mean_difference < 0 and paired percentile-bootstrap ci95_high < 0 for all five prespecified full-coupling scenarios",
+  "passed": false,
+  "scenario_results": [
+    {
+      "scenario": "nominal",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 5,
+      "mean_difference": -1.6367334852385511,
+      "sd_difference": 1.2257181043082046,
+      "ci95_low": -2.648011804319174,
+      "ci95_high": -0.7096165791549197,
+      "relative_improvement_percent": 0.5013681189736006,
+      "passed": true
+    },
+    {
+      "scenario": "burst",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 5,
+      "mean_difference": -1.931146777114384,
+      "sd_difference": 1.1333992337801189,
+      "ci95_low": -2.7791189544860115,
+      "ci95_high": -1.083174599742756,
+      "relative_improvement_percent": 0.5516783761319918,
+      "passed": true
+    },
+    {
+      "scenario": "link_limited",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 5,
+      "mean_difference": 2.8727855293647506,
+      "sd_difference": 5.14764316572918,
+      "ci95_low": -1.4781491134005136,
+      "ci95_high": 6.661943880695617,
+      "relative_improvement_percent": -0.6536934249717858,
+      "passed": false
+    },
+    {
+      "scenario": "energy_limited",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 5,
+      "mean_difference": -1.9822863219444458,
+      "sd_difference": 0.9130853885829903,
+      "ci95_low": -2.702145802428788,
+      "ci95_high": -1.2624268414601034,
+      "relative_improvement_percent": 0.5496940598379996,
+      "passed": true
+    },
+    {
+      "scenario": "thermal_stress",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 5,
+      "mean_difference": -1.7691985407555535,
+      "sd_difference": 1.1648673692477023,
+      "ci95_low": -2.6685405787368723,
+      "ci95_high": -0.8141338217225439,
+      "relative_improvement_percent": 0.5049386108009034,
+      "passed": true
+    }
+  ],
+  "bootstrap_seed": 20260825,
+  "bootstrap_resamples": 10000
+}

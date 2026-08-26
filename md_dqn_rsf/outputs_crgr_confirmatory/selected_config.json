@@ -1,0 +1,71 @@
+{
+  "selection_endpoint": "maximize worst scenario seed-level paired relative improvement vs standard_dqn; all five scenario means must improve",
+  "selected": {
+    "name": "lambda_1__tau_0p08",
+    "ranking_lambda": 1.0,
+    "gate_tau": 0.08
+  },
+  "candidate_grid": [
+    {
+      "name": "lambda_0p1__tau_0p04",
+      "ranking_lambda": 0.1,
+      "gate_tau": 0.04
+    },
+    {
+      "name": "lambda_0p1__tau_0p06",
+      "ranking_lambda": 0.1,
+      "gate_tau": 0.06
+    },
+    {
+      "name": "lambda_0p1__tau_0p08",
+      "ranking_lambda": 0.1,
+      "gate_tau": 0.08
+    },
+    {
+      "name": "lambda_0p3__tau_0p04",
+      "ranking_lambda": 0.3,
+      "gate_tau": 0.04
+    },
+    {
+      "name": "lambda_0p3__tau_0p06",
+      "ranking_lambda": 0.3,
+      "gate_tau": 0.06
+    },
+    {
+      "name": "lambda_0p3__tau_0p08",
+      "ranking_lambda": 0.3,
+      "gate_tau": 0.08
+    },
+    {
+      "name": "lambda_1__tau_0p04",
+      "ranking_lambda": 1.0,
+      "gate_tau": 0.04
+    },
+    {
+      "name": "lambda_1__tau_0p06",
+      "ranking_lambda": 1.0,
+      "gate_tau": 0.06
+    },
+    {
+      "name": "lambda_1__tau_0p08",
+      "ranking_lambda": 1.0,
+      "gate_tau": 0.08
+    }
+  ],
+  "calibration_model_seeds": [
+    100,
+    101,
+    102,
+    103
+  ],
+  "calibration_trace_namespace": "1100000 + seed_index*1000 + trace_index",
+  "confirmatory_model_seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "confirmatory_trace_namespace": "500000 + model_seed*1000 + trace_index",
+  "lock_sha256": "55b6d577cc67c9dc6b07394f0553be20fb0d994bad2795dc5a55e82a251b1330"
+}

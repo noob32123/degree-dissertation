@@ -1,0 +1,10 @@
+{
+  "device": "cuda:0",
+  "torch": "2.8.0+cu129",
+  "policy": "standard_dqn",
+  "episodes": 400,
+  "horizon": 64,
+  "model_seeds": 5,
+  "test_traces_per_seed": 20,
+  "evaluation_settings": 7
+}

@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "scenario": "nominal",
+      "n_pairs": 5,
+      "mean_difference": -5.18106473306234,
+      "ci95_low": -10.063235411974949,
+      "ci95_high": -2.3890144620221805,
+      "relative_improvement_percent": 1.5737648482294673,
+      "passed": true
+    },
+    {
+      "scenario": "burst",
+      "n_pairs": 5,
+      "mean_difference": -5.303363998878626,
+      "ci95_low": -10.39246668594219,
+      "ci95_high": -2.5128449774015458,
+      "relative_improvement_percent": 1.5135309234972476,
+      "passed": true
+    },
+    {
+      "scenario": "link_limited",
+      "n_pairs": 5,
+      "mean_difference": -13.116005339603486,
+      "ci95_low": -22.91839924283611,
+      "ci95_high": -3.263299442964569,
+      "relative_improvement_percent": 2.951516002254922,
+      "passed": true
+    },
+    {
+      "scenario": "energy_limited",
+      "n_pairs": 5,
+      "mean_difference": -5.394872219436456,
+      "ci95_low": -9.691554416997258,
+      "ci95_high": -2.46821309636083,
+      "relative_improvement_percent": 1.482043292802755,
+      "passed": true
+    },
+    {
+      "scenario": "thermal_stress",
+      "n_pairs": 5,
+      "mean_difference": -5.558223172977057,
+      "ci95_low": -10.733558317883432,
+      "ci95_high": -2.53247353395966,
+      "relative_improvement_percent": 1.5833991807261092,
+      "passed": true
+    }
+  ]
+}

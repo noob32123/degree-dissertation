@@ -1,0 +1,6 @@
+configuration,scenario,coupling,mean_difference,improvement_percent,all_five_better,worst_improvement_percent
+lambda_0p3,burst,1.0,0.0,0.0,False,0.0
+lambda_0p3,energy_limited,1.0,0.0,0.0,False,0.0
+lambda_0p3,link_limited,1.0,0.0,0.0,False,0.0
+lambda_0p3,nominal,1.0,0.0,0.0,False,0.0
+lambda_0p3,thermal_stress,1.0,0.0,0.0,False,0.0

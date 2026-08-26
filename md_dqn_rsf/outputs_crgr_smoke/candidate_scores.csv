@@ -1,0 +1,6 @@
+configuration,scenario,coupling,mean_paired_difference,sd_paired_difference,relative_improvement_percent,n_model_seeds,worst_relative_improvement_percent,nominal_relative_improvement_percent,all_scenarios_mean_better
+lambda_0p3__tau_0p06,burst,1.0,0.0,,0.0,1,0.0,0.0,False
+lambda_0p3__tau_0p06,energy_limited,1.0,0.0,,0.0,1,0.0,0.0,False
+lambda_0p3__tau_0p06,link_limited,1.0,0.0,,0.0,1,0.0,0.0,False
+lambda_0p3__tau_0p06,nominal,1.0,0.0,,0.0,1,0.0,0.0,False
+lambda_0p3__tau_0p06,thermal_stress,1.0,0.0,,0.0,1,0.0,0.0,False

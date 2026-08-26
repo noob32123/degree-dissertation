@@ -1,0 +1,16 @@
+scenario,coupling,comparison,n_pairs,mean_difference,sd_difference,ci95_low,ci95_high,relative_improvement_percent
+nominal,1.0,ungated_ranking_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0
+nominal,1.0,md_crgr_dqn - ungated_ranking_dqn,1,0.0,,0.0,0.0,-0.0
+nominal,1.0,md_crgr_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0
+burst,1.0,ungated_ranking_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0
+burst,1.0,md_crgr_dqn - ungated_ranking_dqn,1,0.0,,0.0,0.0,-0.0
+burst,1.0,md_crgr_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0
+link_limited,1.0,ungated_ranking_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0
+link_limited,1.0,md_crgr_dqn - ungated_ranking_dqn,1,0.0,,0.0,0.0,-0.0
+link_limited,1.0,md_crgr_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0
+energy_limited,1.0,ungated_ranking_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0
+energy_limited,1.0,md_crgr_dqn - ungated_ranking_dqn,1,0.0,,0.0,0.0,-0.0
+energy_limited,1.0,md_crgr_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0
+thermal_stress,1.0,ungated_ranking_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0
+thermal_stress,1.0,md_crgr_dqn - ungated_ranking_dqn,1,0.0,,0.0,0.0,-0.0
+thermal_stress,1.0,md_crgr_dqn - standard_dqn,1,0.0,,0.0,0.0,-0.0

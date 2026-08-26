@@ -1,0 +1,47 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "folder": "outputs_standard_dqn_ep400",
+      "policy": "standard_dqn",
+      "episodes": 400,
+      "training_steps_per_seed": 25600,
+      "evaluation_rows": 700,
+      "summary_rows": 7,
+      "checkpoints": 5,
+      "trace_seed_min": 500000,
+      "trace_seed_max": 504019,
+      "nominal_total_cost_mean": 333.5821797717358,
+      "nominal_total_cost_sd": 9.558269278428169,
+      "status": "passed"
+    },
+    {
+      "folder": "outputs_dqn_r_ep470",
+      "policy": "dqn_r",
+      "episodes": 470,
+      "training_steps_per_seed": 30080,
+      "evaluation_rows": 700,
+      "summary_rows": 7,
+      "checkpoints": 5,
+      "trace_seed_min": 500000,
+      "trace_seed_max": 504019,
+      "nominal_total_cost_mean": 330.88563975090534,
+      "nominal_total_cost_sd": 3.4797655994968757,
+      "status": "passed"
+    },
+    {
+      "folder": "outputs_dqn_rs_ep540",
+      "policy": "dqn_rs",
+      "episodes": 540,
+      "training_steps_per_seed": 34560,
+      "evaluation_rows": 700,
+      "summary_rows": 7,
+      "checkpoints": 5,
+      "trace_seed_min": 500000,
+      "trace_seed_max": 504019,
+      "nominal_total_cost_mean": 332.19758986457987,
+      "nominal_total_cost_sd": 6.88569826890267,
+      "status": "passed"
+    }
+  ]
+}

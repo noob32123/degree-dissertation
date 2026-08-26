@@ -1,0 +1,8 @@
+scenario,coupling,policy,total_cost_mean,immediate_cost_mean,penalty_mean,thermal_violation_mean,energy_violation_mean,queue_violation_mean,contact_violation_mean,total_cost_sd,immediate_cost_sd,penalty_sd,thermal_violation_sd,energy_violation_sd,queue_violation_sd,contact_violation_sd,n
+burst,1.0,standard_dqn,126.79223535557588,126.65372745196025,0.13850790361563373,0.0,0.0,0.0,0.6666666666666666,,,,,,,,1
+energy_limited,1.0,standard_dqn,127.35001666148503,125.4224956035614,1.9275210181872051,0.0,2.0,0.0,0.6666666666666666,,,,,,,,1
+link_limited,1.0,standard_dqn,223.93456277207534,222.2017002304395,1.7328625416358312,0.0,1.3333333333333333,1.6666666666666667,0.6666666666666666,,,,,,,,1
+nominal,0.0,standard_dqn,115.01393322149913,115.01393322149913,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+nominal,0.5,standard_dqn,119.97626807292302,119.97626807292302,0.0,0.0,0.0,0.0,0.0,,,,,,,,1
+nominal,1.0,standard_dqn,125.56100350717703,125.4224956035614,0.13850790361563373,0.0,0.0,0.0,0.6666666666666666,,,,,,,,1
+thermal_stress,1.0,standard_dqn,127.02635526756445,126.88784736394882,0.13850790361563373,0.0,0.0,0.0,0.6666666666666666,,,,,,,,1

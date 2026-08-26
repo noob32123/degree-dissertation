@@ -1,0 +1,6 @@
+configuration,scenario,coupling,mean_paired_difference,relative_improvement_percent,n_model_seeds,worst_relative_improvement_percent,all_scenarios_mean_better
+lambda_1__rho_0p05,burst,1.0,-8.824972927570343,8.266069276817696,1,7.577644496621419,True
+lambda_1__rho_0p05,energy_limited,1.0,-9.08268912633261,7.577644496621419,1,7.577644496621419,True
+lambda_1__rho_0p05,link_limited,1.0,-17.55077358086902,11.853287275551567,1,7.577644496621419,True
+lambda_1__rho_0p05,nominal,1.0,-15.44793315728505,13.413172483371353,1,7.577644496621419,True
+lambda_1__rho_0p05,thermal_stress,1.0,-9.545535862445831,8.834209221415922,1,7.577644496621419,True

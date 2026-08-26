@@ -1,0 +1,21 @@
+{
+  "status": "passed",
+  "scientific_success_criterion_passed": false,
+  "checkpoints": 5,
+  "calibration_rows": 30,
+  "confirmatory_rows": 63,
+  "selected_configuration": {
+    "name": "lambda_0p3__tau_0p06",
+    "ranking_lambda": 0.3,
+    "gate_tau": 0.06
+  },
+  "lock_sha256": "5d2f5dc461d5085f00d588a8493abf28bb9944e5ba864a87285b6ae62ae1f296",
+  "reference_standard_models_matched": 0,
+  "verified_invariants": [
+    "original QNetwork",
+    "standard target-network max Bellman target",
+    "uniform one-step replay",
+    "no Double DQN, dueling, PER, n-step, noisy, or distributional mechanism",
+    "ungated and CRGR confirmatory configs differ only by use_gate"
+  ]
+}

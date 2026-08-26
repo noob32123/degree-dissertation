@@ -1,0 +1,56 @@
+{
+  "passed": false,
+  "criterion": "negative mean and negative 95% paired-bootstrap upper bound in all five scenarios",
+  "results": [
+    {
+      "scenario": "nominal",
+      "comparison": "md_cpsr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "burst",
+      "comparison": "md_cpsr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "link_limited",
+      "comparison": "md_cpsr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "energy_limited",
+      "comparison": "md_cpsr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "thermal_stress",
+      "comparison": "md_cpsr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    }
+  ]
+}

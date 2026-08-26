@@ -1,0 +1,68 @@
+{
+  "criterion": "mean_difference < 0 and paired percentile-bootstrap ci95_high < 0 for all five prespecified full-coupling scenarios",
+  "passed": false,
+  "scenario_results": [
+    {
+      "scenario": "nominal",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "sd_difference": NaN,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "burst",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "sd_difference": NaN,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "link_limited",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "sd_difference": NaN,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "energy_limited",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "sd_difference": NaN,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "thermal_stress",
+      "coupling": 1.0,
+      "comparison": "md_crgr_dqn - standard_dqn",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "sd_difference": NaN,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    }
+  ],
+  "bootstrap_seed": 20260825,
+  "bootstrap_resamples": 10000
+}

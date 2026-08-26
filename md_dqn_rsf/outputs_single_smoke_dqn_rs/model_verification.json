@@ -1,0 +1,17 @@
+{
+  "models_directory": "H:\\degree-dissertation\\md_dqn_rsf\\outputs_single_smoke_dqn_rs\\models",
+  "manifest": "H:\\degree-dissertation\\md_dqn_rsf\\outputs_single_smoke_dqn_rs\\models\\model_manifest.csv",
+  "n_models": 1,
+  "status": "passed",
+  "checks": [
+    {
+      "file": "dqn_rs_seed_000.pth",
+      "sha256": "857da5a5cdc522960e0157f1637a0935c0832e7d56b417c7d756b82723c73bf1",
+      "bytes": 458523,
+      "state_dim": 21,
+      "action_dim": 3,
+      "training_steps": 192,
+      "load_and_forward": "passed"
+    }
+  ]
+}

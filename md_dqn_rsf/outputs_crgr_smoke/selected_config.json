@@ -1,0 +1,24 @@
+{
+  "selection_endpoint": "maximize worst scenario seed-level paired relative improvement vs standard_dqn; all five scenario means must improve",
+  "selected": {
+    "name": "lambda_0p3__tau_0p06",
+    "ranking_lambda": 0.3,
+    "gate_tau": 0.06
+  },
+  "candidate_grid": [
+    {
+      "name": "lambda_0p3__tau_0p06",
+      "ranking_lambda": 0.3,
+      "gate_tau": 0.06
+    }
+  ],
+  "calibration_model_seeds": [
+    100
+  ],
+  "calibration_trace_namespace": "1100000 + seed_index*1000 + trace_index",
+  "confirmatory_model_seeds": [
+    0
+  ],
+  "confirmatory_trace_namespace": "500000 + model_seed*1000 + trace_index",
+  "lock_sha256": "5d2f5dc461d5085f00d588a8493abf28bb9944e5ba864a87285b6ae62ae1f296"
+}

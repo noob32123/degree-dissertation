@@ -1,0 +1,11 @@
+scenario,coupling,variant,configuration,total_cost_mean,immediate_cost_mean,penalty_mean,thermal_violation_mean,energy_violation_mean,queue_violation_mean,contact_violation_mean,total_cost_sd,immediate_cost_sd,penalty_sd,thermal_violation_sd,energy_violation_sd,queue_violation_sd,contact_violation_sd,n_model_seeds
+burst,1.0,md_cbad_dqn,lambda_0p3,125.09434415300689,124.72486311197281,0.3694810410340628,0.0,0.0,0.0,1.0,,,,,,,,1
+burst,1.0,standard_dqn,standard,125.09434415300689,124.72486311197281,0.3694810410340628,0.0,0.0,0.0,1.0,,,,,,,,1
+energy_limited,1.0,md_cbad_dqn,lambda_0p3,125.11347361207008,123.45184723536174,1.661625760793686,0.0,2.0,0.0,1.0,,,,,,,,1
+energy_limited,1.0,standard_dqn,standard,125.11347361207008,123.45184723536174,1.661625760793686,0.0,2.0,0.0,1.0,,,,,,,,1
+link_limited,1.0,md_cbad_dqn,lambda_0p3,245.97045786555609,244.27016840378442,1.700289461771647,0.0,1.0,1.0,1.0,,,,,,,,1
+link_limited,1.0,standard_dqn,standard,245.97045786555609,244.27016840378442,1.700289461771647,0.0,1.0,1.0,1.0,,,,,,,,1
+nominal,1.0,md_cbad_dqn,lambda_0p3,123.82132827639582,123.45184723536174,0.3694810410340628,0.0,0.0,0.0,1.0,,,,,,,,1
+nominal,1.0,standard_dqn,standard,123.82132827639582,123.45184723536174,0.3694810410340628,0.0,0.0,0.0,1.0,,,,,,,,1
+thermal_stress,1.0,md_cbad_dqn,lambda_0p3,125.43390843669575,124.95898407697678,0.47492428024609895,0.3333333333333333,0.0,0.0,1.0,,,,,,,,1
+thermal_stress,1.0,standard_dqn,standard,125.43390843669575,124.95898407697678,0.47492428024609895,0.3333333333333333,0.0,0.0,1.0,,,,,,,,1

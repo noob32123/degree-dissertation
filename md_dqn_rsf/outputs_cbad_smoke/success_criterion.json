@@ -1,0 +1,50 @@
+{
+  "passed": false,
+  "results": [
+    {
+      "scenario": "nominal",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "burst",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "link_limited",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "energy_limited",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    },
+    {
+      "scenario": "thermal_stress",
+      "n_pairs": 1,
+      "mean_difference": 0.0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0,
+      "relative_improvement_percent": -0.0,
+      "passed": false
+    }
+  ]
+}

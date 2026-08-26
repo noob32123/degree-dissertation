@@ -1,0 +1,37 @@
+{
+  "policy": "standard_dqn",
+  "episodes": 400,
+  "horizon": 64,
+  "model_seeds": 5,
+  "test_traces_per_seed": 20,
+  "stress_cases": [
+    [
+      "static",
+      0.0
+    ],
+    [
+      "nominal",
+      0.5
+    ],
+    [
+      "nominal",
+      1.0
+    ],
+    [
+      "burst",
+      1.0
+    ],
+    [
+      "link_limited",
+      1.0
+    ],
+    [
+      "energy_limited",
+      1.0
+    ],
+    [
+      "thermal_stress",
+      1.0
+    ]
+  ]
+}

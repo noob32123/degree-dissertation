@@ -1,0 +1,16 @@
+scenario,comparison,n_pairs,mean_difference,ci95_low,ci95_high,relative_improvement_percent
+nominal,ungated_ranking_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0
+nominal,md_cpsr_dqn - ungated_ranking_dqn,1,0.0,0.0,0.0,-0.0
+nominal,md_cpsr_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0
+burst,ungated_ranking_dqn - standard_dqn,1,-1.136704365412399,-1.136704365412399,-1.136704365412399,1.404440026606209
+burst,md_cpsr_dqn - ungated_ranking_dqn,1,1.136704365412399,1.136704365412399,1.136704365412399,-1.4244455094988049
+burst,md_cpsr_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0
+link_limited,ungated_ranking_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0
+link_limited,md_cpsr_dqn - ungated_ranking_dqn,1,0.0,0.0,0.0,-0.0
+link_limited,md_cpsr_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0
+energy_limited,ungated_ranking_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0
+energy_limited,md_cpsr_dqn - ungated_ranking_dqn,1,0.0,0.0,0.0,-0.0
+energy_limited,md_cpsr_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0
+thermal_stress,ungated_ranking_dqn - standard_dqn,1,-0.9238602320353237,-0.9238602320353237,-0.9238602320353237,1.1337816850194269
+thermal_stress,md_cpsr_dqn - ungated_ranking_dqn,1,0.9238602320353237,0.9238602320353237,0.9238602320353237,-1.1467837086751727
+thermal_stress,md_cpsr_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0

@@ -1,0 +1,11 @@
+{
+  "method": "counterfactual Bellman advantage distillation",
+  "episodes": 12,
+  "horizon": 16,
+  "device": "cuda:0",
+  "calibration_seed_start": 700,
+  "confirmatory_seed_start": 800,
+  "target": "standard target-network max; not Double DQN",
+  "network": "original QNetwork",
+  "replay": "uniform one-step"
+}
