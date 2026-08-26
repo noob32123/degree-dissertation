@@ -1,0 +1,17 @@
+weight,model_seed,path
+0.1,700,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_0p1__seed_700.pth
+0.1,701,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_0p1__seed_701.pth
+0.1,702,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_0p1__seed_702.pth
+0.1,703,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_0p1__seed_703.pth
+0.3,700,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_0p3__seed_700.pth
+0.3,701,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_0p3__seed_701.pth
+0.3,702,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_0p3__seed_702.pth
+0.3,703,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_0p3__seed_703.pth
+1.0,700,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_1p0__seed_700.pth
+1.0,701,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_1p0__seed_701.pth
+1.0,702,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_1p0__seed_702.pth
+1.0,703,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_1p0__seed_703.pth
+3.0,700,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_3p0__seed_700.pth
+3.0,701,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_3p0__seed_701.pth
+3.0,702,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_3p0__seed_702.pth
+3.0,703,H:/degree-dissertation/md_cbad_dqn/results/models/calibration/md_cbad_dqn__lambda_3p0__seed_703.pth

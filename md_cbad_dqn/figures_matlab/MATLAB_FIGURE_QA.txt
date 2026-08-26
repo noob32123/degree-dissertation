@@ -1,0 +1,9 @@
+Backend: MATLAB R2026a
+Summary source: H:\degree-dissertation\md_cbad_dqn\results\seven_scenarios_summary.csv
+Bootstrap source: H:\degree-dissertation\md_cbad_dqn\results\seven_scenarios_paired_bootstrap.csv
+Summary rows: 56; scenarios: 7; policies: 8.
+Primary error bars: SD across five model seeds.
+Ablation intervals: fixed-seed 95% paired bootstrap intervals.
+Action fractions: mean deployment fractions; each scenario sums to one.
+Exports: vector PDF/SVG and 600-dpi TIFF.
+No observations, scenarios, policies, or requested comparisons were excluded.

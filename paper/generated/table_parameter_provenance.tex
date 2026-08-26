@@ -1,0 +1,16 @@
+\begin{tabular}{lll}
+\toprule
+Quantity & Implemented range & Basis \\
+\midrule
+Raw task data & 8--64 Mbit & Engineering envelope; sensitivity $\pm20\%$ \\
+Arithmetic workload & 0.25--4.0 GFLOP & Engineering envelope; correlated with data size \\
+Result / raw-data ratio & 1--5\% & Bounded compression assumption \\
+Feature / raw-data ratio & 8--30\% & Bounded collaborative-processing assumption \\
+Preprocessing fraction & 20--45\% & Deterministic function of workload quantile \\
+Onboard / ground rate & 4 / 80 GFLOP s$^{-1}$ & Fixed simulator hardware envelope \\
+Compute power & 4--20 W & Bracketed by NASA SmallSat avionics examples \\
+Effective RF return rate & 2.2--220 Mbit s$^{-1}$ & NASA SmallSat ground-system examples \\
+Transmit power & 6 W & Fixed simulator assumption \\
+Burst multiplier & $1.45\times$ & Contiguous prespecified stressor \\
+\bottomrule
+\end{tabular}

@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99e (TeX Live 2026)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: source_tgrs_final.aux
+The style file: ieeetr.bst
+Database file #1: ref.bib
+Warning--empty year in RN8
+Warning--empty year in RN20
+You've used 20 entries,
+            1876 wiz_defined-function locations,
+            600 strings with 7614 characters,
+and the built_in function-call counts, 6233 in all, are:
+= -- 567
+> -- 316
+< -- 0
++ -- 113
+- -- 93
+* -- 481
+:= -- 914
+add.period$ -- 20
+call.type$ -- 20
+change.case$ -- 20
+chr.to.int$ -- 0
+cite$ -- 22
+duplicate$ -- 308
+empty$ -- 548
+format.name$ -- 93
+if$ -- 1512
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 20
+newline$ -- 63
+num.names$ -- 20
+pop$ -- 57
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 214
+stack$ -- 0
+substring$ -- 397
+swap$ -- 136
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 2
+while$ -- 56
+width$ -- 22
+write$ -- 198
+(There were 2 warnings)

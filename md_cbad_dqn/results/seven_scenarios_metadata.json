@@ -1,0 +1,18 @@
+{
+  "episodes": 600,
+  "horizon": 64,
+  "real_steps_per_model": 38400,
+  "model_seeds": [
+    800,
+    801,
+    802,
+    803,
+    804
+  ],
+  "test_traces_per_seed": 20,
+  "bootstrap_resamples": 10000,
+  "bootstrap_seed": 20260829,
+  "auxiliary_lambda": 0.3,
+  "bellman_target": "standard target-network max; not Double DQN",
+  "replay": "uniform one-step"
+}

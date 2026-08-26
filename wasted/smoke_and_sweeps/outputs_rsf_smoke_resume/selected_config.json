@@ -1,0 +1,65 @@
+{
+  "selection_endpoint": "mean seed-level paired total-cost difference vs standard DQN",
+  "selected": {
+    "name": "c3_mid_moderate",
+    "reset_fraction": 0.45,
+    "reset_epsilon": 0.5,
+    "selective_factor": 2.5,
+    "flush_fraction": 0.85
+  },
+  "candidate_set": [
+    {
+      "name": "c0_original",
+      "reset_fraction": 0.45,
+      "reset_epsilon": 0.65,
+      "selective_factor": 1.8,
+      "flush_fraction": 0.72
+    },
+    {
+      "name": "c1_late_gentle",
+      "reset_fraction": 0.55,
+      "reset_epsilon": 0.35,
+      "selective_factor": 3.0,
+      "flush_fraction": 0.9
+    },
+    {
+      "name": "c2_late_moderate",
+      "reset_fraction": 0.55,
+      "reset_epsilon": 0.5,
+      "selective_factor": 2.5,
+      "flush_fraction": 0.85
+    },
+    {
+      "name": "c3_mid_moderate",
+      "reset_fraction": 0.45,
+      "reset_epsilon": 0.5,
+      "selective_factor": 2.5,
+      "flush_fraction": 0.85
+    },
+    {
+      "name": "c4_early_moderate",
+      "reset_fraction": 0.35,
+      "reset_epsilon": 0.5,
+      "selective_factor": 2.5,
+      "flush_fraction": 0.85
+    },
+    {
+      "name": "c5_early_explore",
+      "reset_fraction": 0.35,
+      "reset_epsilon": 0.65,
+      "selective_factor": 2.5,
+      "flush_fraction": 0.85
+    }
+  ],
+  "calibration_model_seeds": [
+    100,
+    101
+  ],
+  "calibration_trace_namespace": "700000 + seed_index*1000 + trace_index",
+  "confirmatory_model_seeds": [
+    200,
+    201
+  ],
+  "confirmatory_trace_namespace": "900000 + seed_index*1000 + trace_index",
+  "note": "All confirmatory results must be reported; no seed-wise exclusions are permitted."
+}

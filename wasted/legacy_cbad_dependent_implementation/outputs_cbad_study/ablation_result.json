@@ -1,0 +1,198 @@
+{
+  "design": {
+    "model_seeds": [
+      800,
+      801,
+      802,
+      803,
+      804
+    ],
+    "test_traces_per_seed": 20,
+    "real_steps_per_model": 38400,
+    "shared_counterfactual_weight": 0.3,
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260829
+  },
+  "results": [
+    {
+      "scenario": "nominal",
+      "comparison": "md_cfba_dqn - standard_dqn",
+      "interpretation": "counterfactual absolute target contribution",
+      "n_pairs": 5,
+      "mean_difference": -4.498354012274092,
+      "ci95_low": -8.622121174271888,
+      "ci95_high": -1.9751944836186452,
+      "relative_improvement_percent": 1.3663893010702846,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "nominal",
+      "comparison": "md_cbad_dqn - md_cfba_dqn",
+      "interpretation": "within-state centering contribution",
+      "n_pairs": 5,
+      "mean_difference": -0.6827107207882477,
+      "ci95_low": -1.7196824742027388,
+      "ci95_high": 0.35426103262624337,
+      "relative_improvement_percent": 0.2102483582317369,
+      "mean_better": true,
+      "significant": false
+    },
+    {
+      "scenario": "nominal",
+      "comparison": "md_cbad_dqn - standard_dqn",
+      "interpretation": "complete CBAD contribution",
+      "n_pairs": 5,
+      "mean_difference": -5.18106473306234,
+      "ci95_low": -10.104055046497512,
+      "ci95_high": -2.3890144620221805,
+      "relative_improvement_percent": 1.5737648482294673,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "burst",
+      "comparison": "md_cfba_dqn - standard_dqn",
+      "interpretation": "counterfactual absolute target contribution",
+      "n_pairs": 5,
+      "mean_difference": -4.574764404621192,
+      "ci95_low": -9.536760424938723,
+      "ci95_high": -1.1724537190929822,
+      "relative_improvement_percent": 1.3055953533592468,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "burst",
+      "comparison": "md_cbad_dqn - md_cfba_dqn",
+      "interpretation": "within-state centering contribution",
+      "n_pairs": 5,
+      "mean_difference": -0.7285995942574459,
+      "ci95_low": -1.5234337638770625,
+      "ci95_high": 0.16340679062018354,
+      "relative_improvement_percent": 0.21068628042540352,
+      "mean_better": true,
+      "significant": false
+    },
+    {
+      "scenario": "burst",
+      "comparison": "md_cbad_dqn - standard_dqn",
+      "interpretation": "complete CBAD contribution",
+      "n_pairs": 5,
+      "mean_difference": -5.303363998878638,
+      "ci95_low": -10.39246668594219,
+      "ci95_high": -2.4801139948256945,
+      "relative_improvement_percent": 1.513530923497251,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "link_limited",
+      "comparison": "md_cfba_dqn - standard_dqn",
+      "interpretation": "counterfactual absolute target contribution",
+      "n_pairs": 5,
+      "mean_difference": -9.783400325874016,
+      "ci95_low": -17.318103056594385,
+      "ci95_high": -2.2857067613960793,
+      "relative_improvement_percent": 2.201574478709089,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "link_limited",
+      "comparison": "md_cbad_dqn - md_cfba_dqn",
+      "interpretation": "within-state centering contribution",
+      "n_pairs": 5,
+      "mean_difference": -3.3326050137294714,
+      "ci95_low": -6.202968780570063,
+      "ci95_high": -0.4622412468888797,
+      "relative_improvement_percent": 0.7668237188364235,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "link_limited",
+      "comparison": "md_cbad_dqn - standard_dqn",
+      "interpretation": "complete CBAD contribution",
+      "n_pairs": 5,
+      "mean_difference": -13.116005339603486,
+      "ci95_low": -22.91839924283611,
+      "ci95_high": -3.263299442964569,
+      "relative_improvement_percent": 2.951516002254922,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "energy_limited",
+      "comparison": "md_cfba_dqn - standard_dqn",
+      "interpretation": "counterfactual absolute target contribution",
+      "n_pairs": 5,
+      "mean_difference": -4.966847574291398,
+      "ci95_low": -8.807052890368618,
+      "ci95_high": -2.67787624542309,
+      "relative_improvement_percent": 1.3644592187618358,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "energy_limited",
+      "comparison": "md_cbad_dqn - md_cfba_dqn",
+      "interpretation": "within-state centering contribution",
+      "n_pairs": 5,
+      "mean_difference": -0.4280246451450466,
+      "ci95_low": -1.4671350962766383,
+      "ci95_high": 0.6110858059865449,
+      "relative_improvement_percent": 0.11921065481022014,
+      "mean_better": true,
+      "significant": false
+    },
+    {
+      "scenario": "energy_limited",
+      "comparison": "md_cbad_dqn - standard_dqn",
+      "interpretation": "complete CBAD contribution",
+      "n_pairs": 5,
+      "mean_difference": -5.394872219436445,
+      "ci95_low": -9.810812260793318,
+      "ci95_high": -2.468213096360819,
+      "relative_improvement_percent": 1.4820432928027518,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "thermal_stress",
+      "comparison": "md_cfba_dqn - standard_dqn",
+      "interpretation": "counterfactual absolute target contribution",
+      "n_pairs": 5,
+      "mean_difference": -4.758803952871278,
+      "ci95_low": -9.827534024710587,
+      "ci95_high": -1.24572980084331,
+      "relative_improvement_percent": 1.355664579437292,
+      "mean_better": true,
+      "significant": true
+    },
+    {
+      "scenario": "thermal_stress",
+      "comparison": "md_cbad_dqn - md_cfba_dqn",
+      "interpretation": "within-state centering contribution",
+      "n_pairs": 5,
+      "mean_difference": -0.7994192201057786,
+      "ci95_low": -1.7571796843286507,
+      "ci95_high": 0.19807185303877758,
+      "relative_improvement_percent": 0.23086434747407228,
+      "mean_better": true,
+      "significant": false
+    },
+    {
+      "scenario": "thermal_stress",
+      "comparison": "md_cbad_dqn - standard_dqn",
+      "interpretation": "complete CBAD contribution",
+      "n_pairs": 5,
+      "mean_difference": -5.558223172977057,
+      "ci95_low": -10.733558317883432,
+      "ci95_high": -2.53247353395966,
+      "relative_improvement_percent": 1.5833991807261092,
+      "mean_better": true,
+      "significant": true
+    }
+  ]
+}

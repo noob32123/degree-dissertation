@@ -1,0 +1,6 @@
+file,sha256,bytes,policy,model_seed,episodes,horizon,training_steps
+contextual_bandit_seed_000.pth,4cebf56fc1d5a72bbd9a79319ebbcd0dc8cd9826d5d6e538e4e1e03cac395e51,459157,contextual_bandit,0,12,16,192
+dqn_r_seed_000.pth,f4041d139131afdc7d6fd1017c9f526601f8bb8f1e3528cefc00315ed34ad7ff,458477,dqn_r,0,12,16,192
+dqn_rs_seed_000.pth,857da5a5cdc522960e0157f1637a0935c0832e7d56b417c7d756b82723c73bf1,458523,dqn_rs,0,12,16,192
+md_dqn_rsf_seed_000.pth,24058caaf7c623d5a96487951cdeff1a0ecfd4e81b795f9c1441985d89d64f95,458707,md_dqn_rsf,0,12,16,192
+standard_dqn_seed_000.pth,74a4670c696402939c5ef33664ec69e17ca7164411facfbdc44d4ae478096647,458799,standard_dqn,0,12,16,192

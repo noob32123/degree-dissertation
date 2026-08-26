@@ -1,0 +1,113 @@
+\begin{thebibliography}{10}
+
+\bibitem{9925218}
+Y.~Pang, Y.~Zhang, Y.~Wang, X.~Wei, and B.~Chen, ``Socnet: A lightweight and
+  fine-grained object recognition network for satellite on-orbit computing,''
+  {\em IEEE Transactions on Geoscience and Remote Sensing}, vol.~60, pp.~1--13,
+  2022.
+
+\bibitem{10423050}
+Y.~Zhang, M.~Ye, G.~Zhu, Y.~Liu, P.~Guo, and J.~Yan, ``Ffca-yolo for small
+  object detection in remote sensing images,'' {\em IEEE Transactions on
+  Geoscience and Remote Sensing}, vol.~62, pp.~1--15, 2024.
+
+\bibitem{10107454}
+Y.~Pang, Y.~Zhang, Q.~Kong, Y.~Wang, B.~Chen, and X.~Cao, ``Socdet: A
+  lightweight and accurate oriented object detection network for satellite
+  on-orbit computing,'' {\em IEEE Transactions on Geoscience and Remote
+  Sensing}, vol.~61, pp.~1--15, 2023.
+
+\bibitem{10378728}
+Y.~Pang, Y.~Zhang, Y.~Wang, X.~Wei, and B.~Chen, ``Exploring model compression
+  limits and laws: A pyramid knowledge distillation framework for
+  satellite-on-orbit object recognition,'' {\em IEEE Transactions on Geoscience
+  and Remote Sensing}, vol.~62, pp.~1--13, 2024.
+
+\bibitem{10440355}
+Y.~Pang, L.~Yao, Y.~Luo, C.~Dong, Q.~Kong, and B.~Chen, ``Repsvit: An efficient
+  vision transformer based on spiking neural networks for object recognition in
+  satellite on-orbit remote sensing images,'' {\em IEEE Transactions on
+  Geoscience and Remote Sensing}, vol.~62, pp.~1--16, 2024.
+
+\bibitem{RN8}
+E.~Casalicchio and D.~Magliarisi, ``Decentralized task scheduling in satellite
+  edge computing,'' in {\em 2024 9th International Conference on Fog and Mobile
+  Edge Computing (FMEC)}, pp.~154--161, IEEE.
+
+\bibitem{RN9}
+P.~Molchanov, S.~Tyree, T.~Karras, T.~Aila, and J.~Kautz, ``Pruning
+  convolutional neural networks for resource efficient inference,'' {\em arXiv
+  preprint arXiv:1611.06440}, 2016.
+
+\bibitem{RN10}
+J.~Kim, J.~Ahn, H.-L. Choi, and D.-H. Cho, ``Task scheduling of agile
+  satellites with transition time and stereoscopic imaging constraints,'' {\em
+  Journal of Aerospace Information Systems}, vol.~17, no.~6, pp.~285--293,
+  2020.
+
+\bibitem{RN27}
+X.~Shen, Z.~Lu, L.~Li, Y.~Chen, X.~Li, J.~Wang, and W.~Yao, ``Multi-strip
+  stitching imaging mission planning method for sar satellites regional mapping
+  considering on-board energy consumption,'' {\em IEEE Transactions on
+  Geoscience and Remote Sensing}, 2024.
+
+\bibitem{RN28}
+W.~Yao, X.~Shen, G.~Zhang, Z.~Lu, J.~Wang, Y.~Song, and Z.~Li, ``A spiking
+  neural network based proximal policy optimization method for multi-point
+  imaging mission scheduling of earth observation satellite,'' {\em Swarm and
+  Evolutionary Computation}, vol.~94, p.~101867, 2025.
+
+\bibitem{RN20}
+W.~Liu, Z.~Lai, Q.~Wu, H.~Li, Q.~Zhang, Z.~Li, Y.~Li, and J.~Liu, ``In-orbit
+  processing or not? sunlight-aware task scheduling for energy-efficient space
+  edge computing networks,'' in {\em IEEE INFOCOM 2024-IEEE Conference on
+  Computer Communications}, pp.~881--890, IEEE.
+
+\bibitem{RN22}
+Q.~Jiang, H.~Wang, Q.~Kong, Y.~Zhang, and B.~Chen, ``On-orbit remote sensing
+  image processing complex task scheduling model based on heterogeneous
+  multiprocessor,'' {\em IEEE Transactions on Geoscience and Remote Sensing},
+  vol.~61, pp.~1--18, 2023.
+
+\bibitem{RN23}
+Q.~Jiang, L.~Zheng, Y.~Zhou, H.~Liu, Q.~Kong, Y.~Zhang, and B.~Chen,
+  ``Efficient on-orbit remote sensing imagery processing via satellite edge
+  computing resource scheduling optimization,'' {\em IEEE Transactions on
+  Geoscience and Remote Sensing}, 2025.
+
+\bibitem{abdulkarim2025multi}
+A.~Abdulkarim, B.~Maham, and R.~C. Kizilirmak, ``Multi-leo satellite networks
+  for integrated access and backhaul: Delay analysis,'' in {\em 2025
+  International Wireless Communications and Mobile Computing (IWCMC)},
+  pp.~1300--1305, IEEE, 2025.
+
+\bibitem{karkadakattil2025ai}
+A.~Karkadakattil, ``Ai-tuned hybrid thermal control of cubesats using phase
+  change material: a matlab-based simulation study: Independent researcher,
+  india,'' {\em Aerospace Systems}, pp.~1--10, 2025.
+
+\bibitem{zhang2024dynamic}
+H.~Zhang, H.~Zhao, R.~Liu, X.~Gao, and S.~Xu, ``Dynamic user association and
+  computation offloading in satellite edge computing networks via deep
+  reinforcement learning,'' {\em IEEE Transactions on Green Communications and
+  Networking}, vol.~8, no.~4, pp.~1888--1901, 2024.
+
+\bibitem{10589437}
+X.~Zhang, J.~Liu, Z.~Xiong, Y.~Huang, R.~Zhang, S.~Mao, and Z.~Han,
+  ``Cost-effective hybrid computation offloading in satellite-terrestrial
+  integrated networks,'' {\em IEEE Internet of Things Journal}, vol.~11,
+  no.~22, pp.~36786--36800, 2024.
+
+\bibitem{RN34}
+R.~Bellman, ``Dynamic programming,'' {\em science}, vol.~153, no.~3731,
+  pp.~34--37, 1966.
+
+\bibitem{RN35}
+G.~Tesauro, ``Temporal difference learning and td-gammon,'' {\em Communications
+  of the ACM}, vol.~38, no.~3, pp.~58--68, 1995.
+
+\bibitem{RN36}
+C.~J. Watkins and P.~Dayan, ``Q-learning,'' {\em Machine learning}, vol.~8,
+  pp.~279--292, 1992.
+
+\end{thebibliography}

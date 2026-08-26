@@ -1,0 +1,52 @@
+{
+  "training_environment": {
+    "horizon": 16,
+    "coupling": 1.0,
+    "scenario": "nominal",
+    "generator": "physics_correlated",
+    "compute_scale": 1.0,
+    "data_scale": 1.0,
+    "energy_scale": 1.0,
+    "heat_scale": 1.0,
+    "link_scale": 1.0
+  },
+  "episodes": 12,
+  "horizon": 16,
+  "real_steps_per_model": 192,
+  "model_seeds": [
+    800
+  ],
+  "test_traces_per_seed": 3,
+  "planner": {
+    "horizon": 4,
+    "gamma": 0.97
+  },
+  "planner_forecast": "perfect next-four-task and link-state forecast",
+  "sensitivity_profiles": {
+    "reference": {},
+    "compute_minus20": {
+      "compute_scale": 0.8
+    },
+    "compute_plus20": {
+      "compute_scale": 1.2
+    },
+    "data_minus20": {
+      "data_scale": 0.8
+    },
+    "data_plus20": {
+      "data_scale": 1.2
+    },
+    "energy_plus20": {
+      "energy_scale": 1.2
+    },
+    "heat_plus20": {
+      "heat_scale": 1.2
+    },
+    "link_minus20": {
+      "link_scale": 0.8
+    }
+  },
+  "bootstrap_seed": 20260829,
+  "bootstrap_resamples": 10000,
+  "backbone": "standard DQN; no DDQN, dueling, PER, n-step, noisy, or distributional components"
+}

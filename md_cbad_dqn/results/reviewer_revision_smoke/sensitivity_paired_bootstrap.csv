@@ -1,0 +1,17 @@
+profile,comparison,n_pairs,mean_difference,ci95_low,ci95_high,relative_improvement_percent,mean_better,supported
+compute_minus20,md_cbad_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0,False,False
+compute_minus20,md_cbad_dqn - mpc_h4,1,0.5472478345036507,0.5472478345036507,0.5472478345036507,-8.827092746636877,False,False
+compute_plus20,md_cbad_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0,False,False
+compute_plus20,md_cbad_dqn - mpc_h4,1,2.1419772595167164,2.1419772595167164,2.1419772595167164,-31.033945886230697,False,False
+data_minus20,md_cbad_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0,False,False
+data_minus20,md_cbad_dqn - mpc_h4,1,1.9961827615896865,1.9961827615896865,1.9961827615896865,-36.53310063343572,False,False
+data_plus20,md_cbad_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0,False,False
+data_plus20,md_cbad_dqn - mpc_h4,1,0.7224377214908602,0.7224377214908602,0.7224377214908602,-9.514093582356857,False,False
+energy_plus20,md_cbad_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0,False,False
+energy_plus20,md_cbad_dqn - mpc_h4,1,1.2380968526005747,1.2380968526005747,1.2380968526005747,-18.621709243229002,False,False
+heat_plus20,md_cbad_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0,False,False
+heat_plus20,md_cbad_dqn - mpc_h4,1,1.2482569858431818,1.2482569858431818,1.2482569858431818,-18.77069640318339,False,False
+link_minus20,md_cbad_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0,False,False
+link_minus20,md_cbad_dqn - mpc_h4,1,0.9822801719109222,0.9822801719109222,0.9822801719109222,-13.96537548360565,False,False
+reference,md_cbad_dqn - standard_dqn,1,0.0,0.0,0.0,-0.0,False,False
+reference,md_cbad_dqn - mpc_h4,1,1.2380968526005747,1.2380968526005747,1.2380968526005747,-18.621709243229002,False,False

@@ -1,0 +1,11 @@
+{
+  "device": "cuda:0",
+  "torch": "2.8.0+cu129",
+  "numpy": "2.4.1",
+  "pandas": "3.0.3",
+  "episodes": 12,
+  "horizon": 16,
+  "calibration_model_seeds": 2,
+  "confirmatory_model_seeds": 2,
+  "test_traces_per_seed": 3
+}

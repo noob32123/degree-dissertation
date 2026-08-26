@@ -1,0 +1,16 @@
+scenario,comparison,interpretation,n_pairs,mean_difference,ci95_low,ci95_high,relative_improvement_percent,mean_better,significant
+nominal,md_cfba_dqn - standard_dqn,counterfactual absolute target contribution,5,-4.498354012274092,-8.622121174271888,-1.9751944836186452,1.3663893010702846,True,True
+nominal,md_cbad_dqn - md_cfba_dqn,within-state centering contribution,5,-0.6827107207882477,-1.7196824742027388,0.35426103262624337,0.2102483582317369,True,False
+nominal,md_cbad_dqn - standard_dqn,complete CBAD contribution,5,-5.18106473306234,-10.104055046497512,-2.3890144620221805,1.5737648482294673,True,True
+burst,md_cfba_dqn - standard_dqn,counterfactual absolute target contribution,5,-4.574764404621192,-9.536760424938723,-1.1724537190929822,1.3055953533592468,True,True
+burst,md_cbad_dqn - md_cfba_dqn,within-state centering contribution,5,-0.7285995942574459,-1.5234337638770625,0.16340679062018354,0.21068628042540352,True,False
+burst,md_cbad_dqn - standard_dqn,complete CBAD contribution,5,-5.303363998878638,-10.39246668594219,-2.4801139948256945,1.513530923497251,True,True
+link_limited,md_cfba_dqn - standard_dqn,counterfactual absolute target contribution,5,-9.783400325874016,-17.318103056594385,-2.2857067613960793,2.201574478709089,True,True
+link_limited,md_cbad_dqn - md_cfba_dqn,within-state centering contribution,5,-3.3326050137294714,-6.202968780570063,-0.4622412468888797,0.7668237188364235,True,True
+link_limited,md_cbad_dqn - standard_dqn,complete CBAD contribution,5,-13.116005339603486,-22.91839924283611,-3.263299442964569,2.951516002254922,True,True
+energy_limited,md_cfba_dqn - standard_dqn,counterfactual absolute target contribution,5,-4.966847574291398,-8.807052890368618,-2.67787624542309,1.3644592187618358,True,True
+energy_limited,md_cbad_dqn - md_cfba_dqn,within-state centering contribution,5,-0.4280246451450466,-1.4671350962766383,0.6110858059865449,0.11921065481022014,True,False
+energy_limited,md_cbad_dqn - standard_dqn,complete CBAD contribution,5,-5.394872219436445,-9.810812260793318,-2.468213096360819,1.4820432928027518,True,True
+thermal_stress,md_cfba_dqn - standard_dqn,counterfactual absolute target contribution,5,-4.758803952871278,-9.827534024710587,-1.24572980084331,1.355664579437292,True,True
+thermal_stress,md_cbad_dqn - md_cfba_dqn,within-state centering contribution,5,-0.7994192201057786,-1.7571796843286507,0.19807185303877758,0.23086434747407228,True,False
+thermal_stress,md_cbad_dqn - standard_dqn,complete CBAD contribution,5,-5.558223172977057,-10.733558317883432,-2.53247353395966,1.5833991807261092,True,True

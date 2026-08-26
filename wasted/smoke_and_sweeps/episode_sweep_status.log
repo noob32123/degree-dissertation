@@ -1,0 +1,8 @@
+[2026-08-25T16:04:55.5348573+08:00] sweep started
+[2026-08-25T16:04:55.5493789+08:00] starting standard_dqn episodes=400
+[2026-08-25T16:10:02.5001383+08:00] completed standard_dqn episodes=400
+[2026-08-25T16:10:02.5031430+08:00] starting dqn_r episodes=470
+[2026-08-25T16:15:47.8024074+08:00] completed dqn_r episodes=470
+[2026-08-25T16:15:47.8044019+08:00] starting dqn_rs episodes=540
+[2026-08-25T16:22:14.2402173+08:00] completed dqn_rs episodes=540
+[2026-08-25T16:22:14.2412217+08:00] sweep completed successfully
