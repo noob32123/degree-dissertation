@@ -10,6 +10,7 @@ import shutil
 
 import pandas as pd
 
+from .dqn_mpc_family_inference import compute_family_inference, write_latex_tables
 from .reviewer_experiments import DEFAULT_RESULTS
 
 
@@ -278,6 +279,7 @@ def _augment_validation(results: Path, output: Path) -> None:
     payload = json.loads(validation_path.read_text(encoding="utf-8"))
     result_patterns = (
         "extended_ablation_*.csv",
+        "dqn_vs_mpc_*.csv",
         "planner_depth_*.csv",
         "primary_unpaired_seed_bootstrap.csv",
         "extended_revision_metadata.json",
@@ -294,6 +296,8 @@ def _augment_validation(results: Path, output: Path) -> None:
         ROOT / "reviewer_reporting.py",
         ROOT / "extended_revision.py",
         ROOT / "extended_reporting.py",
+        ROOT / "dqn_mpc_family_inference.py",
+        ROOT.parent / "paper" / "figures" / "plot_dqn_family_summary.py",
         ROOT.parent / "paper" / "source.tex",
     )
     table_files = sorted(output.glob("*.tex"))
@@ -333,6 +337,11 @@ def main() -> None:
     _write_unpaired(args.results, args.tables)
     _write_training_accounting(args.results, args.tables)
     _write_macros(args.results, args.tables)
+    cells, maxima, seeds = compute_family_inference(args.results)
+    cells.to_csv(args.results / "dqn_vs_mpc_inference.csv", index=False)
+    maxima.to_csv(args.results / "dqn_vs_mpc_family_inference.csv", index=False)
+    seeds.to_csv(args.results / "dqn_vs_mpc_seed_differences.csv", index=False)
+    write_latex_tables(cells, maxima, args.tables)
     generated = args.paper / "generated"
     generated.mkdir(parents=True, exist_ok=True)
     for name in (
@@ -341,6 +350,8 @@ def main() -> None:
         "table_planner_depth.tex",
         "table_unpaired_inference.tex",
         "table_training_accounting.tex",
+        "table_dqn_vs_mpc_family_inference.tex",
+        "dqn_vs_mpc_macros.tex",
         "extended_macros.tex",
     ):
         shutil.copy2(args.tables / name, generated / name)

@@ -54,17 +54,23 @@
     "preview_mismatch_summary.csv": "e178f3173b21a8ab9e335b793c6616a060203e81f76f7d7e1ba6eb106aa5a960",
     "preview_mismatch_inference.csv": "8c2bc75cc0ac7a6e4b0d48ebc584ff8f1fee92cfb5a3a5eb086ef9dc30bc3b31",
     "preview_mismatch_seed_differences.csv": "c3a530429c963c517bb0b285df488ece344a46137a7f4a4c975019a8eb294777",
-    "preview_mismatch_model_manifest.csv": "2ec55d19c515ece2f63a0468d2d9a0916e275d0a45e3c464a155501007d0b66c"
+    "preview_mismatch_model_manifest.csv": "2ec55d19c515ece2f63a0468d2d9a0916e275d0a45e3c464a155501007d0b66c",
+    "dqn_vs_mpc_inference.csv": "cff484075aadf1d53554d6a7ec5ea42ed2e842d9804cd536fe21da10890c6fb8",
+    "dqn_vs_mpc_family_inference.csv": "c7eb204e0dd3bbfe677d9f5ed71e3e23e3d30d12c72d86df637a156ebef675bd",
+    "dqn_vs_mpc_seed_differences.csv": "05f948ba8b55b1549e8aa09882ec96e2144a4fa40a45f22fff740da66c66d896"
   },
   "source_sha256": {
     "md_cbad_dqn/agent.py": "3215518c3ce5f02d3b6d68ef1b2c29c98e9b395d0d2c507c381197f9cd8cfd1d",
     "md_cbad_dqn/environment.py": "6436c9df1124da2be54d9a44c182a9bc7431772e4f4530c429bbaf98d4139b9c",
     "md_cbad_dqn/experiment.py": "d90516984b8be6f0e832c1290acc913f80ca46655fcf4022496e20d2a30397de",
     "md_cbad_dqn/planner.py": "47c7aeadec521dd35e881bf52517821e9ad5be433d836d03249b551c3a6a0fa1",
-    "md_cbad_dqn/reviewer_experiments.py": "bcdc509fa6d23d1dfcc050257ee60cb96a45e647d2cbc708152c7e6b5e988f23",
-    "md_cbad_dqn/reviewer_reporting.py": "482880b534c8264c785448eed87dc7942737525609174c2a30e1534dbd9ee444",
+    "md_cbad_dqn/reviewer_experiments.py": "13d0baed8b96001e8db8a16d402e4799551dd74ef5f5d796dec0e8018cb6fa15",
+    "md_cbad_dqn/reviewer_reporting.py": "a15c78409c42ea96865f4d277b0e37ef444a426d5517dc8ed6d8c482c4349e97",
+    "md_cbad_dqn/dqn_mpc_family_inference.py": "41514557feefa21167dadb9568aba7b62cc728eed253905eb41e38557841e260",
+    "md_cbad_dqn/extended_reporting.py": "84f8a4eabd573b17e81fd118fb36042202378d767bdf857d752bcf4bbb74fc81",
     "md_cbad_dqn/plot_reviewer_results_matlab.m": "83759dc5447fa1a0db01dac2f1fff7bad1900b6ec2b282db8e0b46b5423c067f",
     "md_cbad_dqn/requirements.txt": "502d5ea0ebc921a98ee77c071db197236f695d15348b34b463789f4c4d730741",
-    "paper/source.tex": "075064db26b0022c590eb62dc194edfa02292d3483f6dd9f6389f893841a35e7"
+    "paper/figures/plot_dqn_family_summary.py": "e9343888aaccb6fb36c2044357c4ab601073635f81b9293affa768d84ea38047",
+    "paper/source.tex": "c5de98fbb22efa96b38b81f7ce031a95a2e1539055080b20e870ac09c17b8124"
   }
 }

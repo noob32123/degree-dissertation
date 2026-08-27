@@ -487,6 +487,9 @@
     }
   ],
   "artifacts_sha256": {
+    "dqn_vs_mpc_family_inference.csv": "c7eb204e0dd3bbfe677d9f5ed71e3e23e3d30d12c72d86df637a156ebef675bd",
+    "dqn_vs_mpc_inference.csv": "cff484075aadf1d53554d6a7ec5ea42ed2e842d9804cd536fe21da10890c6fb8",
+    "dqn_vs_mpc_seed_differences.csv": "05f948ba8b55b1549e8aa09882ec96e2144a4fa40a45f22fff740da66c66d896",
     "extended_ablation_inference.csv": "ba1473c06df6fb558a4a9229060705d53c4aa0cf7647b70c11f0a72fd31c02de",
     "extended_ablation_raw.csv": "ba693566903e93ea7942da77dc0dce70425a0f7048609c5999073f8302a3b99a",
     "extended_ablation_seed_differences.csv": "958fc83f053106a2faae96c270f1e8068d78448f142de7a3af2e9bd9993e8770",
@@ -502,17 +505,21 @@
     "md_cbad_dqn/agent.py": "3215518c3ce5f02d3b6d68ef1b2c29c98e9b395d0d2c507c381197f9cd8cfd1d",
     "md_cbad_dqn/environment.py": "6436c9df1124da2be54d9a44c182a9bc7431772e4f4530c429bbaf98d4139b9c",
     "md_cbad_dqn/experiment.py": "d90516984b8be6f0e832c1290acc913f80ca46655fcf4022496e20d2a30397de",
-    "md_cbad_dqn/reviewer_experiments.py": "bcdc509fa6d23d1dfcc050257ee60cb96a45e647d2cbc708152c7e6b5e988f23",
-    "md_cbad_dqn/reviewer_reporting.py": "2e4ffd5a684229a8111a775f1eae91ca8099912258c0aee4d907e2cf3020cbea",
+    "md_cbad_dqn/reviewer_experiments.py": "13d0baed8b96001e8db8a16d402e4799551dd74ef5f5d796dec0e8018cb6fa15",
+    "md_cbad_dqn/reviewer_reporting.py": "a15c78409c42ea96865f4d277b0e37ef444a426d5517dc8ed6d8c482c4349e97",
     "md_cbad_dqn/extended_revision.py": "f75c47e4e21e948812cd0d9ec0d8e1e52c8a15522dc143ccaaa8e5ad40f427d9",
-    "md_cbad_dqn/extended_reporting.py": "dc17d7375b226cbf5baa6428e3011cbe7a1f0fd35d910ccd002ef6845d9bfd61",
-    "paper/source.tex": "799d624bde5662c2ae1191a71a1255bba1bf86e4472dac04b1c3c76a76fd0f75"
+    "md_cbad_dqn/extended_reporting.py": "84f8a4eabd573b17e81fd118fb36042202378d767bdf857d752bcf4bbb74fc81",
+    "md_cbad_dqn/dqn_mpc_family_inference.py": "41514557feefa21167dadb9568aba7b62cc728eed253905eb41e38557841e260",
+    "paper/figures/plot_dqn_family_summary.py": "e9343888aaccb6fb36c2044357c4ab601073635f81b9293affa768d84ea38047",
+    "paper/source.tex": "c5de98fbb22efa96b38b81f7ce031a95a2e1539055080b20e870ac09c17b8124"
   },
   "generated_tables_sha256": {
+    "dqn_vs_mpc_macros.tex": "7f994b416a5a52789a46f7bb2f72d574a9ef42a93161f71343d5d8029e25c7d2",
     "extended_macros.tex": "46016878e92e779df22cfc72892cece90ebd9b2c6c3b3449d7a4c70b28fe7f2b",
     "reviewer_macros.tex": "729ec3e2ab77f6f8a4dc35f7da837f6ba9b839f8dc5278f7c2bdfe52153e3ded",
     "table_dqn_family_performance.tex": "78d071d58ac76a4fde6b1a615a97728cf5723b3c53c56250614dd584990aaec3",
-    "table_engineering_outcomes.tex": "a1d267984e731dc03ff7710cb3e29125e69067617e561f668f759f7900748512",
+    "table_dqn_vs_mpc_family_inference.tex": "3aa16cb60dbd41cfcfa42f85fc5fe32163032df1ce5ea51d9f2ac43660f48f47",
+    "table_engineering_outcomes.tex": "6876d2e73d612d20cf70a6b14994a6fd24a8789c4a8d3e0240bfeafba38fe674",
     "table_extended_ablation.tex": "d9ee629c02024ae2f91e493806d56bf4eaf16ed6242891cb272b9478418ea8fd",
     "table_parameter_provenance.tex": "727e5bd4fb40dadd9436d619b5d41835ab3359bf662298192ea34dcc968df2b1",
     "table_planner_depth.tex": "9ec4374f0dcbf5e7ce32fbb4a5fb52d77dbe7b038ddd0223e48c0610caa751e5",

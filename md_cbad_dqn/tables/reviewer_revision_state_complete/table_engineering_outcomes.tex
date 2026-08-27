@@ -2,22 +2,22 @@
 \toprule
 Regime & $\Delta$ immediate & $\Delta$ penalty & $\Delta$ energy & $\Delta$ latency (s) & $\Delta$ data (Mbit) \\
 \midrule
-Nominal & -0.24 & -0.43 & -0.003 & -0.06 & 32.2 \\
-Burst & -0.25 & -0.22 & -0.003 & -0.06 & 38.0 \\
-Link-limited & -0.22 & -0.24 & -0.004 & -0.09 & 5.2 \\
-Energy-limited & -0.33 & -0.35 & -0.005 & -0.10 & 25.4 \\
-Thermal-stress & -0.26 & -0.19 & -0.003 & -0.06 & 39.9 \\
+Nominal & 0.76 & -13.26 & -0.104 & -1.04 & -543.9 \\
+Burst & 0.42 & -11.40 & -0.098 & -0.92 & -489.8 \\
+Link-limited & -0.57 & -12.91 & -0.130 & -1.46 & -388.1 \\
+Energy-limited & 1.36 & -7.68 & -0.102 & -0.93 & -601.5 \\
+Thermal-stress & 0.32 & -11.97 & -0.100 & -0.97 & -482.5 \\
 \bottomrule
 \end{tabular}
 \par\medskip
 \begin{tabular}{lrrr}
 \toprule
-Regime & Low-energy steps DQN/CFA & Min. energy DQN/CFA & Max. heat DQN/CFA \\
+Regime & Low-energy steps DQN/MPC-4 & Min. energy DQN/MPC-4 & Max. heat DQN/MPC-4 \\
 \midrule
-Nominal & 23.6/23.5 & 0.00/0.00 & 0.192/0.192 \\
-Burst & 28.8/28.7 & 0.00/0.00 & 0.192/0.192 \\
-Link-limited & 30.2/30.1 & 0.00/0.00 & 0.193/0.193 \\
-Energy-limited & 38.8/38.7 & 0.00/0.00 & 0.193/0.193 \\
-Thermal-stress & 28.8/28.7 & 0.00/0.00 & 0.364/0.364 \\
+Nominal & 23.6/28.5 & 0.00/0.00 & 0.192/0.190 \\
+Burst & 28.8/32.3 & 0.00/0.00 & 0.192/0.190 \\
+Link-limited & 30.2/35.0 & 0.00/0.00 & 0.193/0.191 \\
+Energy-limited & 38.8/41.8 & 0.00/0.00 & 0.193/0.190 \\
+Thermal-stress & 28.8/32.4 & 0.00/0.00 & 0.364/0.362 \\
 \bottomrule
 \end{tabular}

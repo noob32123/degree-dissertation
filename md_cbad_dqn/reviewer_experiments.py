@@ -883,6 +883,13 @@ def write_revision_validation(
                 "preview_mismatch_model_manifest.csv",
             ]
         )
+    for name in (
+        "dqn_vs_mpc_inference.csv",
+        "dqn_vs_mpc_family_inference.csv",
+        "dqn_vs_mpc_seed_differences.csv",
+    ):
+        if (results / name).exists():
+            names.append(name)
     for name in names:
         path = results / name
         artifacts[name] = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -893,8 +900,11 @@ def write_revision_validation(
         ROOT / "planner.py",
         ROOT / "reviewer_experiments.py",
         ROOT / "reviewer_reporting.py",
+        ROOT / "dqn_mpc_family_inference.py",
+        ROOT / "extended_reporting.py",
         ROOT / "plot_reviewer_results_matlab.m",
         ROOT / "requirements.txt",
+        ROOT.parent / "paper" / "figures" / "plot_dqn_family_summary.py",
         ROOT.parent / "paper" / "source.tex",
     )
     source_hashes = {

@@ -206,20 +206,20 @@ def _write_engineering_outcomes(summary: pd.DataFrame, output: Path) -> None:
     exposure_lines = [
         r"\begin{tabular}{lrrr}",
         r"\toprule",
-        r"Regime & Low-energy steps DQN/CFA & Min. energy DQN/CFA & Max. heat DQN/CFA \\",
+        r"Regime & Low-energy steps DQN/MPC-4 & Min. energy DQN/MPC-4 & Max. heat DQN/MPC-4 \\",
         r"\midrule",
     ]
     for scenario in scenarios:
         def delta(column: str) -> float:
-            return _metric(summary, scenario, "md_cbad_dqn", column) - _metric(
-                summary, scenario, "standard_dqn", column
+            return _metric(summary, scenario, "standard_dqn", column) - _metric(
+                summary, scenario, "mpc_h4", column
             )
         energy_dqn = _metric(summary, scenario, "standard_dqn", "energy_violation_mean")
-        energy_cbad = _metric(summary, scenario, "md_cbad_dqn", "energy_violation_mean")
+        energy_mpc = _metric(summary, scenario, "mpc_h4", "energy_violation_mean")
         minimum_energy_dqn = _metric(summary, scenario, "standard_dqn", "minimum_energy_mean")
-        minimum_energy_cbad = _metric(summary, scenario, "md_cbad_dqn", "minimum_energy_mean")
+        minimum_energy_mpc = _metric(summary, scenario, "mpc_h4", "minimum_energy_mean")
         heat_dqn = _metric(summary, scenario, "standard_dqn", "maximum_heat_mean")
-        heat_cbad = _metric(summary, scenario, "md_cbad_dqn", "maximum_heat_mean")
+        heat_mpc = _metric(summary, scenario, "mpc_h4", "maximum_heat_mean")
         delta_lines.append(
             f"{SCENARIO_LABELS[scenario]} & {delta('immediate_cost_mean'):.2f} & "
             f"{delta('penalty_mean'):.2f} & {delta('energy_use_mean'):.3f} & "
@@ -227,9 +227,9 @@ def _write_engineering_outcomes(summary: pd.DataFrame, output: Path) -> None:
             f"{delta('transmitted_mbit_mean'):.1f} \\\\"
         )
         exposure_lines.append(
-            f"{SCENARIO_LABELS[scenario]} & {energy_dqn:.1f}/{energy_cbad:.1f} & "
-            f"{minimum_energy_dqn:.2f}/{minimum_energy_cbad:.2f} & "
-            f"{heat_dqn:.3f}/{heat_cbad:.3f} \\\\"
+            f"{SCENARIO_LABELS[scenario]} & {energy_dqn:.1f}/{energy_mpc:.1f} & "
+            f"{minimum_energy_dqn:.2f}/{minimum_energy_mpc:.2f} & "
+            f"{heat_dqn:.3f}/{heat_mpc:.3f} \\\\"
         )
     delta_lines.extend((r"\bottomrule", r"\end{tabular}"))
     exposure_lines.extend((r"\bottomrule", r"\end{tabular}"))
