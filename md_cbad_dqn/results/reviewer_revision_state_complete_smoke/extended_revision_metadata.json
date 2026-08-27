@@ -1,0 +1,36 @@
+{
+  "variants": [
+    "standard_dqn",
+    "md_fullq_dqn",
+    "md_immediate_advantage_dqn",
+    "md_cbad_dqn",
+    "double_dqn",
+    "double_cbad_dqn"
+  ],
+  "new_variants": [
+    "md_fullq_dqn",
+    "md_immediate_advantage_dqn",
+    "double_dqn",
+    "double_cbad_dqn"
+  ],
+  "model_seeds": [
+    800
+  ],
+  "episodes": 12,
+  "horizon": 16,
+  "test_traces_per_seed_namespace": 3,
+  "common_random_numbers": {
+    "network_initialization": true,
+    "training_environment_episode_seeds": true,
+    "epsilon_exploration_stream": true,
+    "replay_index_stream": true,
+    "held_out_trace_seeds": true
+  },
+  "planner_horizons": [
+    1,
+    2,
+    4,
+    6
+  ],
+  "auxiliary_lambda": 0.3
+}

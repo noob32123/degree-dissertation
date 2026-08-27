@@ -1,0 +1,28 @@
+TY  - CONF
+AU  - van Hasselt, Hado
+AU  - Guez, Arthur
+AU  - Silver, David
+TI  - Deep Reinforcement Learning with Double Q-Learning
+T2  - Proceedings of the AAAI Conference on Artificial Intelligence
+VL  - 30
+IS  - 1
+SP  - 2094
+EP  - 2100
+PY  - 2016
+DO  - 10.1609/aaai.v30i1.10295
+UR  - https://doi.org/10.1609/aaai.v30i1.10295
+ER  -
+
+TY  - CONF
+AU  - Gu, Shixiang
+AU  - Lillicrap, Timothy
+AU  - Sutskever, Ilya
+AU  - Levine, Sergey
+TI  - Continuous Deep Q-Learning with Model-Based Acceleration
+T2  - Proceedings of the 33rd International Conference on Machine Learning
+VL  - 48
+SP  - 2829
+EP  - 2838
+PY  - 2016
+UR  - https://proceedings.mlr.press/v48/gu16.html
+ER  -

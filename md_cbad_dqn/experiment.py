@@ -14,6 +14,7 @@ import hashlib
 import json
 from pathlib import Path
 import random
+import time
 from typing import Iterable
 
 import numpy as np
@@ -97,13 +98,13 @@ def save_checkpoint(path: Path, agent: DQNAgent, seed: int, episodes: int,
                     horizon: int) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = {
-        "format_version": 2,
+        "format_version": 3,
         "algorithm": "pure_standard_dqn_backbone",
         "variant": agent.variant,
         "model_seed": seed,
         "episodes": episodes,
         "horizon": horizon,
-        "state_dim": 21,
+        "state_dim": SatelliteSchedulingEnv.state_dim,
         "action_dim": 3,
         "agent_config": asdict(agent.config),
         "bellman_target": (
@@ -112,13 +113,14 @@ def save_checkpoint(path: Path, agent: DQNAgent, seed: int, episodes: int,
             else "target_network_max_not_double_dqn"
         ),
         "replay": "uniform_one_step",
-        "network": "21-128-128-64-3",
+        "network": f"{SatelliteSchedulingEnv.state_dim}-128-128-64-3",
         "online_state_dict": agent.online.state_dict(),
         "target_state_dict": agent.target.state_dict(),
         "optimizer_state_dict": agent.optimizer.state_dict(),
         "training_steps": agent.steps,
         "epsilon": agent.epsilon,
         "torch_version": torch.__version__,
+        "training_accounting": getattr(agent, "training_accounting", None),
     }
     torch.save(payload, path)
 
@@ -153,14 +155,21 @@ def load_checkpoint(path: Path, variant: str, seed: int, device: torch.device,
         raise ValueError(f"checkpoint episode mismatch: {path}")
     if int(payload.get("horizon", horizon)) != horizon:
         raise ValueError(f"checkpoint horizon mismatch: {path}")
+    if int(payload.get("state_dim", -1)) != SatelliteSchedulingEnv.state_dim:
+        raise ValueError(
+            f"checkpoint state dimension mismatch: {path}; retraining is required"
+        )
     _validate_legacy_config(payload, config, variant)
-    agent = DQNAgent(variant, config, device, seed)
+    agent = DQNAgent(
+        variant, config, device, seed, state_dim=SatelliteSchedulingEnv.state_dim
+    )
     agent.online.load_state_dict(payload["online_state_dict"])
     agent.target.load_state_dict(payload["target_state_dict"])
     if "optimizer_state_dict" in payload:
         agent.optimizer.load_state_dict(payload["optimizer_state_dict"])
     agent.steps = int(payload.get("training_steps", episodes * horizon))
     agent.epsilon = float(payload.get("epsilon", config.epsilon_end))
+    agent.training_accounting = payload.get("training_accounting")
     return agent
 
 
@@ -170,8 +179,8 @@ def train_model(variant: str, seed: int, episodes: int, horizon: int,
                 preview_transition_scale: float = 1.0,
                 ) -> tuple[DQNAgent, list[dict]]:
     set_deterministic(seed)
+    started = time.perf_counter()
     config = config_for(variant, episodes, horizon, auxiliary_lambda)
-    agent = DQNAgent(variant, config, device, seed)
     env = SatelliteSchedulingEnv(
         environment_config
         if environment_config is not None
@@ -179,6 +188,13 @@ def train_model(variant: str, seed: int, episodes: int, horizon: int,
     )
     if env.config.horizon != horizon:
         raise ValueError("training environment horizon does not match budget horizon")
+    agent = DQNAgent(
+        variant, config, device, seed, state_dim=env.state_dim,
+        action_dim=env.action_dim,
+    )
+    preview_calls = 0
+    preview_action_evaluations = 0
+    optimizer_updates = 0
     curve: list[dict] = []
     recent: list[float] = []
     for episode in range(episodes):
@@ -196,6 +212,8 @@ def train_model(variant: str, seed: int, episodes: int, horizon: int,
         while not done:
             if agent.uses_counterfactuals:
                 preview_costs, preview_resources = env.preview_all_actions()
+                preview_calls += 1
+                preview_action_evaluations += env.action_dim
                 if preview_transition_scale != 1.0:
                     preview_costs = preview_costs * preview_transition_scale
                     current_resources = state[-env.resource_dim:]
@@ -217,6 +235,7 @@ def train_model(variant: str, seed: int, episodes: int, horizon: int,
                 update = agent.update()
                 if update is not None:
                     updates.append(update)
+                    optimizer_updates += 1
             total_cost += info["total_cost"]
             for key in episode_metrics:
                 episode_metrics[key] += info[key]
@@ -242,6 +261,13 @@ def train_model(variant: str, seed: int, episodes: int, horizon: int,
         )
     if agent.steps != episodes * horizon:
         raise AssertionError("training interaction budget changed")
+    agent.training_accounting = {
+        "wall_time_s": time.perf_counter() - started,
+        "real_interactions": agent.steps,
+        "optimizer_updates": optimizer_updates,
+        "preview_calls": preview_calls,
+        "preview_action_evaluations": preview_action_evaluations,
+    }
     return agent, curve
 
 

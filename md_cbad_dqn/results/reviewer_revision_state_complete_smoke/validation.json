@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "model_seeds": [
+    800
+  ],
+  "n_independent_model_seeds": 1,
+  "test_traces_per_seed": 3,
+  "seven_regimes_rows": 168,
+  "seven_regimes_policy_seed_cells": 56,
+  "sensitivity_rows": 96,
+  "checkpoints": 3,
+  "expected_real_steps_per_checkpoint": 192,
+  "seven_regimes_all_numeric_finite": true,
+  "sensitivity_all_numeric_finite": true,
+  "preview_mismatch_rows": 60,
+  "preview_mismatch_checkpoints": 2,
+  "preview_mismatch_all_numeric_finite": true,
+  "nominal_reference_rows_identical_across_analyses": true,
+  "artifacts_sha256": {
+    "seven_regimes_raw.csv": "d4eae91e00054c01213d861ed18ccef7281d72225e6e44cd8b3cbcdc43b2d6c9",
+    "seven_regimes_seed_level.csv": "bccc97578f99d0b3340016c17bbc472326d1c02d7a8b02726938d08a0a21644e",
+    "seven_regimes_summary.csv": "3d9a90d74032deae47604f232294b13b19df6ede319653c5226a49460cce6805",
+    "seven_regimes_paired_bootstrap.csv": "02171021ca61804c6f68d8ba93151606fdaf5666f3cf36dfffa3575a549d8703",
+    "seven_regimes_paired_seed_differences.csv": "d90ce4e92468502efce23fd4aa44f4b69f85eee36c489354c69067e240927639",
+    "sensitivity_raw.csv": "9eb556ff170052d82f473d5edb46f6890de4cd66aecc8173cfd69f4c3870c517",
+    "sensitivity_seed_level.csv": "eca0e97d99c21fd060129bb9840d5f2c8f568409ee13060da48a1ae57c692170",
+    "sensitivity_summary.csv": "577a2d3ef8de15ce3bd2d57782937d2193bc838931bb409a9bc20636b07d004e",
+    "sensitivity_paired_bootstrap.csv": "3493d55d5b80b14ebf410eeb0136d76c9b4e34909fa88ee922dbe8eca0d4cd7d",
+    "sensitivity_paired_seed_differences.csv": "ce9a6379514923a98627bf2c65b1236b42966301aba291ee95fd7ac37d21f19f",
+    "model_manifest.csv": "884e42bf1d7d08548c6add6fbc846ab76ebaa80a47f97fa18a09931b3f1b6cc1",
+    "metadata.json": "a7961eee3c43261285bcd1e9b0249efec8f2e4d43a1c808b3f6553257c967410",
+    "preview_mismatch_raw.csv": "45312d5182e9a823e45d89f7060607d73c6bbef7dcc0b08be776f30c7546c757",
+    "preview_mismatch_seed_level.csv": "975b90b06f92a3e3b8313864e0a0434ac6705991f392860e58321f12e97ce82a",
+    "preview_mismatch_summary.csv": "8ecd465fdd3e5f13fc38d57427e051ab1d294f4b35e397ce3d578fdf17b45aa9",
+    "preview_mismatch_inference.csv": "b49d7b983cc16cb84344a2c2a95d4766e3ae936957bd518bf63ac86f26e40035",
+    "preview_mismatch_seed_differences.csv": "52e33d68ffebe073d2cbec216fba043d233ef5b0b16429440feac57014d09af9",
+    "preview_mismatch_model_manifest.csv": "3ad99f3c4acc9feb9b8ede43c987468f52be251c10c549cb3737f038c6f428b9"
+  },
+  "source_sha256": {
+    "md_cbad_dqn/agent.py": "3215518c3ce5f02d3b6d68ef1b2c29c98e9b395d0d2c507c381197f9cd8cfd1d",
+    "md_cbad_dqn/environment.py": "6436c9df1124da2be54d9a44c182a9bc7431772e4f4530c429bbaf98d4139b9c",
+    "md_cbad_dqn/experiment.py": "d90516984b8be6f0e832c1290acc913f80ca46655fcf4022496e20d2a30397de",
+    "md_cbad_dqn/planner.py": "47c7aeadec521dd35e881bf52517821e9ad5be433d836d03249b551c3a6a0fa1",
+    "md_cbad_dqn/reviewer_experiments.py": "4f95505e1b96ae100c1273aacae953eb7e72f00ad2b82035c9c6c3a6ca541c1d",
+    "md_cbad_dqn/reviewer_reporting.py": "66a44b1b62a9fc30854fc05ce21ac1cbc7f37fab9081dc5d85bd998d633f0cdc",
+    "md_cbad_dqn/plot_reviewer_results_matlab.m": "5e54ae1fdc1000dfdb5bd8827ed023a3829e0a1a11c9902fdbd69d712cda84ac",
+    "md_cbad_dqn/requirements.txt": "502d5ea0ebc921a98ee77c071db197236f695d15348b34b463789f4c4d730741",
+    "paper/source.tex": "0f396829d8757bc589a8f342a73f207842b32d56c185191394b24fb014e6b095"
+  }
+}

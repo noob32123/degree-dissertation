@@ -1,0 +1,12 @@
+\begin{tabular}{lrrr}
+\toprule
+Training objective & Mean cost $\pm$ SD & Matched reference & Paired difference [95\% interval] \\
+\midrule
+Standard DQN & 78.80 $\pm$ 2.46 & -- & -- \\
+Full-action Q auxiliary & 77.51 $\pm$ 1.74 & Standard DQN & -1.29 [-1.98, -0.73] \\
+Immediate advantage auxiliary & 78.03 $\pm$ 1.75 & Standard DQN & -0.77 [-1.44, -0.18] \\
+CBAD & 77.45 $\pm$ 1.86 & Standard DQN & -1.36 [-1.98, -0.81] \\
+Double DQN & 78.50 $\pm$ 2.51 & -- & -- \\
+Double-CBAD & 77.46 $\pm$ 1.78 & Double DQN & -1.04 [-1.90, -0.38] \\
+\bottomrule
+\end{tabular}

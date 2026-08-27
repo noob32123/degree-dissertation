@@ -1,0 +1,48 @@
+{
+  "pdf": "H:\\degree-dissertation\\md_cbad_dqn\\figures_matlab\\reviewer_revision_state_complete\\fig_training_diagnostics.pdf",
+  "auditable": true,
+  "verdict": "REVIEW REQUIRED",
+  "page_count": 1,
+  "visible_text_box_count": 74,
+  "text_trace_count": 74,
+  "stroke_path_count": 78,
+  "filled_region_count": 73,
+  "image_region_count": 0,
+  "summary": {
+    "fail": 0,
+    "warn": 1,
+    "contained_fill_overlays": 6,
+    "contained_image_overlays": 0
+  },
+  "thresholds": {
+    "text_inset_pt": 0.6,
+    "min_overlap_ratio": 0.05,
+    "clipping_tolerance_pt": 0.5
+  },
+  "findings": [
+    {
+      "severity": "WARN",
+      "kind": "text-fill-edge",
+      "page": 1,
+      "message": "Text partially overlaps the edge of 1 filled region(s)",
+      "text": "Standard DQN",
+      "text_bbox": [
+        161.32749938964844,
+        21.09612464904785,
+        206.70213317871094,
+        27.84612464904785
+      ],
+      "other_text": null,
+      "other_bbox": [
+        27.077503204345703,
+        26.255212783813477,
+        234.82749938964844,
+        27.005212783813477
+      ],
+      "object_count": 1,
+      "object_indexes": [
+        20
+      ]
+    }
+  ]
+}

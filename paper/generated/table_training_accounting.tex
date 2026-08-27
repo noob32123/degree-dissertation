@@ -1,0 +1,12 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Training objective & Wall time per model (s) & Real interactions & Updates & Modeled action outcomes & Models \\
+\midrule
+Standard DQN & 37.4 $\pm$ 10.4 & 38,400 & 9,569 & 0 & 20 \\
+Full-action Q auxiliary & 46.0 $\pm$ 1.4 & 38,400 & 9,569 & 115,200 & 20 \\
+Immediate advantage auxiliary & 42.9 $\pm$ 1.1 & 38,400 & 9,569 & 115,200 & 20 \\
+Centered full-action & 49.0 $\pm$ 3.1 & 38,400 & 9,569 & 115,200 & 20 \\
+Double DQN & 36.0 $\pm$ 1.6 & 38,400 & 9,569 & 0 & 20 \\
+Double + centered full-action & 53.2 $\pm$ 3.9 & 38,400 & 9,569 & 115,200 & 20 \\
+\bottomrule
+\end{tabular}

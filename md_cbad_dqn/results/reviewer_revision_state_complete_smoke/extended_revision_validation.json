@@ -1,0 +1,69 @@
+{
+  "status": "passed",
+  "expected_rows": 90,
+  "observed_rows": 90,
+  "all_numeric_finite": true,
+  "checkpoint_count": 6,
+  "checkpoint_sha256": [
+    {
+      "file": "standard_dqn__standard__seed_800.pth",
+      "sha256": "7fafa5cd26783a3012a635a6698635fcb365ce7ed9e3911d3ca6eeb73da37fdc"
+    },
+    {
+      "file": "md_fullq_dqn__lambda_0p3_uncentered__seed_800.pth",
+      "sha256": "d092181c73d423f03b36329f95d1e01b6e53b9a5fd1de566815dd24bf160ea50"
+    },
+    {
+      "file": "md_immediate_advantage_dqn__lambda_0p3_immediate__seed_800.pth",
+      "sha256": "f9992afa47eebca3aa63af59be9681fb81410474ec9b9700f23e825bb99b52ae"
+    },
+    {
+      "file": "md_cbad_dqn__lambda_0p3__seed_800.pth",
+      "sha256": "0f00bd78d41b0fa327f7b0d33e242351bf73f5da5e5880cc229d2a575374e4a6"
+    },
+    {
+      "file": "double_dqn__double__seed_800.pth",
+      "sha256": "7bb43f937009ca79b7f68b953de8fd4520c71bbc618b90125c0c8baff29484d0"
+    },
+    {
+      "file": "double_cbad_dqn__double_lambda_0p3__seed_800.pth",
+      "sha256": "bf273675c14841032a02de0bcb88bac56255dc09163458bf51e1dd9e2b72e037"
+    }
+  ],
+  "artifacts_sha256": {
+    "extended_ablation_inference.csv": "b3a00af58431f1d783d561311ac1dc3727c80bab8c751d57316a5f5edeb57bed",
+    "extended_ablation_raw.csv": "bca606f807b6de2043aa28d8de25574c5b1daea715ac74e82244abacb7dfd3ae",
+    "extended_ablation_seed_differences.csv": "0011662af0d41b84a98974f8133d60e9164fb4b4838a7c69d6b0314b145bdf83",
+    "extended_ablation_seed_level.csv": "c968cebdef87c5440863d9faae3b98a06bd9b2b3cfbc1ef9d76a5dc1889269ee",
+    "extended_ablation_summary.csv": "07e9fa8a84b3526b1a50204315ef8d0324a85dc4aca608c2f297a425f9e4a9bb",
+    "extended_revision_metadata.json": "83fd7a8b7cd1ab8711bc6337db3113b0b749cdaca9c501f499ef4dfa1a63b38c",
+    "model_manifest.csv": "f323068f3ec42a93de925e4069b28dcd0c471d487e5159ad8317a5ac7060e7cb",
+    "planner_depth_raw.csv": "2943cb713c368585b5816375fea955698ee7676dd45f8e8e8209df981a736e15",
+    "planner_depth_summary.csv": "0c0f7a62dbe7f8074fa00ff9843441689ae3ad5c98b6b4ab0a404e99ed50f1bd",
+    "primary_unpaired_seed_bootstrap.csv": "dfbe34d2c31299a76e05b8db7f253be57f9b80309ff31d1aaa2d91b34bec95f9"
+  },
+  "source_sha256": {
+    "md_cbad_dqn/agent.py": "3215518c3ce5f02d3b6d68ef1b2c29c98e9b395d0d2c507c381197f9cd8cfd1d",
+    "md_cbad_dqn/environment.py": "6436c9df1124da2be54d9a44c182a9bc7431772e4f4530c429bbaf98d4139b9c",
+    "md_cbad_dqn/experiment.py": "d90516984b8be6f0e832c1290acc913f80ca46655fcf4022496e20d2a30397de",
+    "md_cbad_dqn/reviewer_experiments.py": "4f95505e1b96ae100c1273aacae953eb7e72f00ad2b82035c9c6c3a6ca541c1d",
+    "md_cbad_dqn/reviewer_reporting.py": "d193d0a96a52ebc4cf01b3fb718ce398f0f8ac41b31c27d36495dc9bc3972680",
+    "md_cbad_dqn/extended_revision.py": "51dbbb974b2d03d4b4e2cba65e61e647d37fbe9eace7ac04d1d1296bf2a8e4e7",
+    "md_cbad_dqn/extended_reporting.py": "1420599b9e98a9f17e4c2f0ca355e8af3cdbe3a3ba667c08640111fed3d60421",
+    "paper/source.tex": "0f396829d8757bc589a8f342a73f207842b32d56c185191394b24fb014e6b095"
+  },
+  "generated_tables_sha256": {
+    "reviewer_macros.tex": "20f1273a6b5e7b845009962c7b83c914345537b11e44e246146ec8f8546d5652",
+    "table_engineering_outcomes.tex": "2f88cbcbbbe8781f3420cb6e7815748219aef57a3f386073a27c65ce800b7404",
+    "table_extended_ablation.tex": "1806b7e323fc776cf4cd2ae280bc6cc75e9e68d1e70a7bca6fb5e3abe390aebc",
+    "table_parameter_provenance.tex": "727e5bd4fb40dadd9436d619b5d41835ab3359bf662298192ea34dcc968df2b1",
+    "table_planner_depth.tex": "467fbf0126d00585c330b4a491556ef63d279da0446bbc7ad5bf0b25516443b9",
+    "table_preview_mismatch.tex": "865bf7159fd837520138e4ae96e0bd3fc68b123db38457f6b7cf0dd6cb1ecc5e",
+    "table_primary_inference.tex": "0dbea26155a7576cd2edde097b02a06365186e28d7f338753d1009ac1fd2049e",
+    "table_reviewer_main.tex": "58e1391aeb4c45f56ef0909801beda411806e933e54f880c15cc375b2700ece5",
+    "table_sensitivity.tex": "1ecc5cce13ea6070694c768d151860cb345a5aaada8130cc2ae466ff92d5d3ef",
+    "table_state_dictionary.tex": "47ca00195c6e2b939179977f35cfe1f9e0b8abba8e672f289f8aa5921bc823c1",
+    "table_training_accounting.tex": "9c3906711635dc13909b894ccf8e76c46b67587e54a3a491d089152a7cdf641c",
+    "table_unpaired_inference.tex": "0ff79760a4f0acab690b6b642d2f35b28e14356d088c5a5b60494044b9ac688d"
+  }
+}

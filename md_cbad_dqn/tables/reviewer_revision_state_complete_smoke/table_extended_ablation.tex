@@ -1,0 +1,12 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Training objective & Mean cost $\pm$ SD & Matched reference & Paired difference [95\% interval] & Holm $p$ & Supported \\
+\midrule
+Standard DQN & 15.16 $\pm$ nan & -- & -- & -- & -- \\
+Full-action Q auxiliary & 15.16 $\pm$ nan & Standard DQN & 0.00 [0.00, 0.00] & 1 & No \\
+Immediate advantage auxiliary & 10.23 $\pm$ nan & Standard DQN & -4.93 [-4.93, -4.93] & 1 & No \\
+CBAD & 10.23 $\pm$ nan & Standard DQN & -4.93 [-4.93, -4.93] & 1 & No \\
+Double DQN & 15.16 $\pm$ nan & -- & -- & -- & -- \\
+Double-CBAD & 10.23 $\pm$ nan & Double DQN & -4.93 [-4.93, -4.93] & 1 & No \\
+\bottomrule
+\end{tabular}

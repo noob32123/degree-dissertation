@@ -24,8 +24,9 @@ class EnvConfig:
 
 class SatelliteSchedulingEnv:
     task_dim = 15
+    context_dim = 3
     resource_dim = 6
-    state_dim = 21
+    state_dim = task_dim + context_dim + resource_dim
     action_dim = 3
     physics_task_names = (
         "onboard_heat_j",
@@ -57,6 +58,7 @@ class SatelliteSchedulingEnv:
         self.link_trace = np.empty((0, 2), dtype=np.float32)
         self.task_primitives = np.empty((0, 9), dtype=np.float32)
         self.resources = np.zeros(self.resource_dim, dtype=np.float32)
+        self.link_phase = 0.0
         self.t = 0
 
     def reset(self, seed: int | None = None) -> np.ndarray:
@@ -201,7 +203,8 @@ class SatelliteSchedulingEnv:
 
     def _generate_link_trace(self, n: int) -> np.ndarray:
         r = self.rng
-        phase = r.uniform(0, 2 * np.pi)
+        self.link_phase = float(r.uniform(0, 2 * np.pi))
+        phase = self.link_phase
         index = np.arange(n)
         bandwidth = 0.62 + 0.23 * np.sin(2 * np.pi * index / 24 + phase)
         bandwidth += r.normal(0, 0.06, n)
@@ -232,7 +235,12 @@ class SatelliteSchedulingEnv:
 
     def _state(self) -> np.ndarray:
         task = self._normalize_task(self.tasks[min(self.t, len(self.tasks) - 1)])
-        return np.concatenate((task, self.resources)).astype(np.float32)
+        time_fraction = self.t / max(1, self.config.horizon - 1)
+        context = np.array(
+            [time_fraction, math.sin(self.link_phase), math.cos(self.link_phase)],
+            dtype=np.float32,
+        )
+        return np.concatenate((task, context, self.resources)).astype(np.float32)
 
     def _immediate_costs_from(self, t: int, resources: np.ndarray) -> np.ndarray:
         x = self.tasks[t]
@@ -441,6 +449,7 @@ class SatelliteSchedulingEnv:
             "resources": self.resources.copy(),
             "tasks": self.tasks.copy(),
             "link_trace": self.link_trace.copy(),
+            "link_phase": self.link_phase,
             "task_primitives": self.task_primitives.copy(),
             "rng": self.rng.bit_generator.state,
         }

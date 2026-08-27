@@ -1,6 +1,6 @@
-"""Reviewer-driven physical-consistency, planning, sensitivity, and convergence study.
+"""Reviewer-driven internally consistent simulation and convergence study.
 
-This module writes to ``results/reviewer_revision`` and never overwrites the
+This module writes to ``results/reviewer_revision_state_complete`` and never overwrites the
 locked confirmation artifacts used by the preceding manuscript version.
 """
 
@@ -40,7 +40,7 @@ from .planner import PlannerConfig, RecedingHorizonPlanner
 
 
 ROOT = Path(__file__).resolve().parent
-DEFAULT_RESULTS = ROOT / "results" / "reviewer_revision"
+DEFAULT_RESULTS = ROOT / "results" / "reviewer_revision_state_complete"
 TRACE_BASE = 3_300_000
 CONFIRMATION_SEEDS = tuple(range(800, 820))
 LEARNED = ("contextual_bandit", "standard_dqn", "md_cbad_dqn")
@@ -169,8 +169,21 @@ def write_model_manifest(results: Path) -> pd.DataFrame:
                 "episodes": payload["episodes"],
                 "horizon": payload["horizon"],
                 "training_steps": payload["training_steps"],
+                "state_dim": payload["state_dim"],
                 "bellman_target": payload["bellman_target"],
                 "replay": payload["replay"],
+                "training_wall_time_s": (
+                    payload.get("training_accounting") or {}
+                ).get("wall_time_s"),
+                "optimizer_updates": (
+                    payload.get("training_accounting") or {}
+                ).get("optimizer_updates"),
+                "preview_calls": (
+                    payload.get("training_accounting") or {}
+                ).get("preview_calls"),
+                "preview_action_evaluations": (
+                    payload.get("training_accounting") or {}
+                ).get("preview_action_evaluations"),
             }
         )
     manifest = pd.DataFrame(rows)
@@ -683,6 +696,12 @@ def write_metadata(
         "episodes": episodes,
         "horizon": horizon,
         "real_steps_per_model": episodes * horizon,
+        "state_definition": {
+            "dimension": SatelliteSchedulingEnv.state_dim,
+            "task_descriptors": SatelliteSchedulingEnv.task_dim,
+            "context": ["normalized_time", "sin_link_phase", "cos_link_phase"],
+            "resource_coordinates": SatelliteSchedulingEnv.resource_dim,
+        },
         "model_seeds": list(seeds),
         "test_traces_per_seed": test_traces,
         "planner": asdict(PlannerConfig(horizon=4, gamma=0.97)),
@@ -761,6 +780,7 @@ def write_revision_validation(
     expected_steps = int(metadata["real_steps_per_model"])
     expected_main = len(SCENARIOS) * len(POLICIES) * len(seeds) * test_traces
     expected_sensitivity = len(SENSITIVITY_PROFILES) * 4 * len(seeds) * test_traces
+    primary_manifest = manifest[manifest.variant.isin(LEARNED)].copy()
     cells = raw.groupby(["scenario", "policy", "model_seed"]).size()
     if len(raw) != expected_main or len(sensitivity) != expected_sensitivity:
         raise AssertionError("reviewer-revision row count mismatch")
@@ -768,10 +788,15 @@ def write_revision_validation(
         raise AssertionError("reviewer-revision cell count mismatch")
     if not (cells == test_traces).all():
         raise AssertionError("unequal test-trace count in reviewer revision")
-    if len(manifest) != len(LEARNED) * len(seeds):
-        raise AssertionError("checkpoint manifest count mismatch")
-    if set(manifest.model_seed.astype(int)) != set(seeds):
-        raise AssertionError("checkpoint manifest seed mismatch")
+    if len(primary_manifest) != len(LEARNED) * len(seeds):
+        raise AssertionError("required primary checkpoint manifest count mismatch")
+    required_cells = primary_manifest.groupby(["variant", "model_seed"]).size()
+    if len(required_cells) != len(LEARNED) * len(seeds) or not (
+        required_cells == 1
+    ).all():
+        raise AssertionError("required primary checkpoint cells mismatch")
+    if set(primary_manifest.model_seed.astype(int)) != set(seeds):
+        raise AssertionError("required primary checkpoint seed mismatch")
     if not (manifest.training_steps.astype(int) == expected_steps).all():
         raise AssertionError("checkpoint training-budget mismatch")
     main_finite = bool(np.isfinite(raw.select_dtypes(include=[np.number])).all().all())
@@ -780,6 +805,19 @@ def write_revision_validation(
     )
     if not main_finite or not sensitivity_finite:
         raise AssertionError("non-finite reviewer-revision evaluation value")
+    primary_nominal = raw[
+        raw.scenario.eq("nominal")
+        & raw.policy.isin(("standard_dqn", "md_cbad_dqn"))
+    ].sort_values(["policy", "model_seed", "trace_seed"])
+    sensitivity_reference = sensitivity[
+        sensitivity.profile.eq("reference")
+        & sensitivity.policy.isin(("standard_dqn", "md_cbad_dqn"))
+    ].sort_values(["policy", "model_seed", "trace_seed"])
+    if not np.array_equal(
+        primary_nominal.total_cost.to_numpy(),
+        sensitivity_reference.total_cost.to_numpy(),
+    ):
+        raise AssertionError("reference sensitivity does not reuse primary nominal traces")
     artifacts = {}
     names = [
         "seven_regimes_raw.csv",
@@ -818,6 +856,21 @@ def write_revision_validation(
         )
         if not mismatch_finite:
             raise AssertionError("non-finite preview-mismatch evaluation value")
+        mismatch_exact = mismatch[
+            mismatch.scenario.eq("nominal")
+            & mismatch.policy.isin(("standard_dqn", "md_cbad_dqn_exact"))
+        ].copy()
+        mismatch_exact["policy"] = mismatch_exact.policy.replace(
+            {"md_cbad_dqn_exact": "md_cbad_dqn"}
+        )
+        mismatch_exact = mismatch_exact.sort_values(
+            ["policy", "model_seed", "trace_seed"]
+        )
+        if not np.array_equal(
+            primary_nominal.total_cost.to_numpy(),
+            mismatch_exact.total_cost.to_numpy(),
+        ):
+            raise AssertionError("exact-preview table does not reuse primary nominal traces")
         mismatch_rows = len(mismatch)
         mismatch_checkpoints = len(mismatch_manifest)
         names.extend(
@@ -856,13 +909,15 @@ def write_revision_validation(
         "seven_regimes_rows": len(raw),
         "seven_regimes_policy_seed_cells": len(cells),
         "sensitivity_rows": len(sensitivity),
-        "checkpoints": len(manifest),
+        "required_primary_checkpoints": len(primary_manifest),
+        "all_manifest_checkpoints": len(manifest),
         "expected_real_steps_per_checkpoint": expected_steps,
         "seven_regimes_all_numeric_finite": main_finite,
         "sensitivity_all_numeric_finite": sensitivity_finite,
         "preview_mismatch_rows": mismatch_rows,
         "preview_mismatch_checkpoints": mismatch_checkpoints,
         "preview_mismatch_all_numeric_finite": mismatch_finite,
+        "nominal_reference_rows_identical_across_analyses": True,
         "artifacts_sha256": artifacts,
         "source_sha256": source_hashes,
     }
@@ -878,7 +933,7 @@ def main() -> None:
         args.episodes, args.horizon, args.test_traces = 12, 16, 3
         seeds = (CONFIRMATION_SEEDS[0],)
         if args.results == DEFAULT_RESULTS:
-            args.results = ROOT / "results" / "reviewer_revision_smoke"
+            args.results = ROOT / "results" / "reviewer_revision_state_complete_smoke"
     args.results.mkdir(parents=True, exist_ok=True)
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     print(f"stage={args.stage} device={device} results={args.results}", flush=True)

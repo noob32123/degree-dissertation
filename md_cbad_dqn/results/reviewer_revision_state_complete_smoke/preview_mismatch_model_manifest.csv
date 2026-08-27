@@ -1,0 +1,3 @@
+file,sha256,model_seed,training_steps,preview_transition_scale
+md_cbad_dqn__preview_scale_0p85__seed_800.pth,cd28ae712abef5c65206a068f4974bb25a05e3c1ff1215940cb646045f9360a9,800,192,0.85
+md_cbad_dqn__preview_scale_1p15__seed_800.pth,11fb04c1412b5db02f618a817d41d36cd764787f00ec48c8909fc48ebf5c3935,800,192,1.15

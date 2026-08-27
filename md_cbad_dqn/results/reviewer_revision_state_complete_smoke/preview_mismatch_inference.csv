@@ -1,0 +1,16 @@
+scenario,comparison,n_pairs,mean_difference,ci95_low,ci95_high,relative_improvement_percent,exact_sign_p,negative_seed_pairs,positive_seed_pairs,loo_mean_min,loo_mean_max,holm_adjusted_p,in_prespecified_family,mean_better,supported
+burst,md_cbad_dqn_exact - standard_dqn,1,3.033543395147742,3.033543395147742,3.033543395147742,-18.41719103778024,1.0,0,1,,,1.0,True,False,False
+burst,md_cbad_dqn_preview_0p85 - standard_dqn,1,-1.6656969557097483,-1.6656969557097483,-1.6656969557097483,10.112747717215802,1.0,1,0,,,1.0,True,True,False
+burst,md_cbad_dqn_preview_1p15 - standard_dqn,1,3.6005218383431234,3.6005218383431234,3.6005218383431234,-21.85941979222468,1.0,0,1,,,1.0,True,False,False
+energy_limited,md_cbad_dqn_exact - standard_dqn,1,-4.540028601884842,-4.540028601884842,-4.540028601884842,28.991168854061165,1.0,1,0,,,1.0,True,True,False
+energy_limited,md_cbad_dqn_preview_0p85 - standard_dqn,1,-3.017082929611206,-3.017082929611206,-3.017082929611206,19.266125465101787,1.0,1,0,,,1.0,True,True,False
+energy_limited,md_cbad_dqn_preview_1p15 - standard_dqn,1,-1.4572458840273672,-1.4572458840273672,-1.4572458840273672,9.305505579454637,1.0,1,0,,,1.0,True,True,False
+link_limited,md_cbad_dqn_exact - standard_dqn,1,4.974488960797251,4.974488960797251,4.974488960797251,-32.64845401335877,1.0,0,1,,,1.0,True,False,False
+link_limited,md_cbad_dqn_preview_0p85 - standard_dqn,1,-2.0566914180914555,-2.0566914180914555,-2.0566914180914555,13.498430836293764,1.0,1,0,,,1.0,True,True,False
+link_limited,md_cbad_dqn_preview_1p15 - standard_dqn,1,29.968150810614915,29.968150810614915,29.968150810614915,-196.68629306777137,1.0,0,1,,,1.0,True,False,False
+nominal,md_cbad_dqn_exact - standard_dqn,1,-4.9278241743644084,-4.9278241743644084,-4.9278241743644084,32.50363540748504,1.0,1,0,,,1.0,True,True,False
+nominal,md_cbad_dqn_preview_0p85 - standard_dqn,1,-3.3844377150138225,-3.3844377150138225,-3.3844377150138225,22.32355004069107,1.0,1,0,,,1.0,True,True,False
+nominal,md_cbad_dqn_preview_1p15 - standard_dqn,1,-3.4666249460103575,-3.4666249460103575,-3.4666249460103575,22.865652132190043,1.0,1,0,,,1.0,True,True,False
+thermal_stress,md_cbad_dqn_exact - standard_dqn,1,2.7366419604877805,2.7366419604877805,2.7366419604877805,-16.1678013460691,1.0,0,1,,,1.0,True,False,False
+thermal_stress,md_cbad_dqn_preview_0p85 - standard_dqn,1,-1.4700861245285406,-1.4700861245285406,-1.4700861245285406,8.68511875727931,1.0,1,0,,,1.0,True,True,False
+thermal_stress,md_cbad_dqn_preview_1p15 - standard_dqn,1,3.199850127772468,3.199850127772468,3.199850127772468,-18.90438791408354,1.0,0,1,,,1.0,True,False,False

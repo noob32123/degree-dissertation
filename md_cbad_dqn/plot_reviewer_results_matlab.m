@@ -1,9 +1,10 @@
 function plot_reviewer_results_matlab(projectRoot)
 %PLOT_REVIEWER_RESULTS_MATLAB Draw reviewer-revision quantitative figures.
 %
-% Conclusion: physically coupled tasks retain the CBAD-versus-DQN effect
-% across prespecified parameter envelopes; learning curves report cost,
-% energy, latency, and delayed penalties; MPC-4 bounds the planning claim.
+% Conclusion: in the internally consistent synthetic scheduler, long-horizon
+% DQN variants are compared with myopic, heuristic and finite-horizon
+% alternatives, while matched objectives expose smaller within-family
+% differences. Learning curves and planning depth bound the interpretation.
 % Inference uses twenty independently trained model seeds. No Python plotting
 % code is used.
 
@@ -11,8 +12,10 @@ if nargin < 1 || strlength(string(projectRoot)) == 0
     projectRoot = fileparts(fileparts(mfilename('fullpath')));
 end
 projectRoot = char(projectRoot);
-resultsDir = fullfile(projectRoot, 'md_cbad_dqn', 'results', 'reviewer_revision');
-outputDir = fullfile(projectRoot, 'md_cbad_dqn', 'figures_matlab', 'reviewer_revision');
+resultsDir = fullfile(projectRoot, 'md_cbad_dqn', 'results', ...
+    'reviewer_revision_state_complete');
+outputDir = fullfile(projectRoot, 'md_cbad_dqn', 'figures_matlab', ...
+    'reviewer_revision_state_complete');
 paperDir = fullfile(projectRoot, 'paper', 'figures');
 if ~isfolder(outputDir), mkdir(outputDir); end
 if ~isfolder(paperDir), mkdir(paperDir); end
@@ -29,11 +32,14 @@ seedEffects = readtable(fullfile(resultsDir, 'seven_regimes_paired_seed_differen
     'TextType', 'string', 'VariableNamingRule', 'preserve');
 mainInference = readtable(fullfile(resultsDir, 'seven_regimes_paired_bootstrap.csv'), ...
     'TextType', 'string', 'VariableNamingRule', 'preserve');
+extendedSummary = readtable(fullfile(resultsDir, 'extended_ablation_summary.csv'), ...
+    'TextType', 'string', 'VariableNamingRule', 'preserve');
 
-validateData(summary, curves, sensitivity, sample, seedEffects);
+validateData(summary, curves, sensitivity, sample, seedEffects, extendedSummary);
 plotPhysicalGenerator(sample, outputDir, paperDir);
 plotTrainingDiagnostics(curves, outputDir, paperDir);
 plotPrimaryResults(summary, outputDir, paperDir);
+plotDqnFamily(extendedSummary, outputDir, paperDir);
 plotSensitivityPlanning(summary, sensitivity, outputDir, paperDir);
 plotActionDistribution(summary, outputDir, paperDir);
 plotSeedEffects(seedEffects, mainInference, outputDir, paperDir);
@@ -42,13 +48,15 @@ fprintf('Reviewer-revision MATLAB figures written to %s\n', outputDir);
 end
 
 
-function validateData(summary, curves, sensitivity, sample, seedEffects)
+function validateData(summary, curves, sensitivity, sample, seedEffects, extendedSummary)
 assert(height(summary) == 56, 'Expected 7 x 8 = 56 summary rows.');
 assert(height(curves) == 36000, 'Expected 3 x 20 x 600 = 36,000 curve rows.');
 assert(height(sensitivity) == 16, 'Expected 8 profiles x 2 comparisons.');
 assert(height(sample) == 20000, 'Expected 20,000 generator-audit tasks.');
 assert(height(seedEffects) == 420, ...
     'Expected 7 scenarios x 3 comparisons x 20 seed differences.');
+assert(height(extendedSummary) == 30, ...
+    'Expected 5 coupled scenarios x 6 DQN-family variants.');
 assert(all(isfinite(summary.total_cost_mean)), 'Non-finite main result.');
 assert(all(isfinite(sample.raw_mbit)) && all(isfinite(sample.workload_gflop)), ...
     'Non-finite physical primitive.');
@@ -65,9 +73,9 @@ fig = newFigure(18.3, 8.7);
 layout = tiledlayout(fig, 1, 2, 'TileSpacing', 'compact', 'Padding', 'compact');
 
 ax1 = nexttile(layout, 1);
-idx = 1:10:height(sample);
-scatter(ax1, sample.raw_mbit(idx), sample.workload_gflop(idx), 11, ...
-    sample.onboard_heat_j(idx), 'filled', 'MarkerFaceAlpha', 0.58);
+idx = 1:height(sample);
+scatter(ax1, sample.raw_mbit(idx), sample.workload_gflop(idx), 6, ...
+    sample.onboard_heat_j(idx), 'filled', 'MarkerFaceAlpha', 0.28);
 styleAxes(ax1);
 xlabel(ax1, 'Raw task data (Mbit)');
 ylabel(ax1, 'Arithmetic workload (GFLOP)');
@@ -84,14 +92,12 @@ matrix = [sample.raw_mbit, sample.workload_gflop, sample.result_mbit, ...
 correlations = corrcoef(matrix);
 imagesc(ax2, correlations, [-1, 1]);
 colormap(ax2, divergingMap(256));
-labels = {'Raw data', 'Workload', 'Result data', 'Feature data', ...
-    'Onboard heat', 'Tx heat'};
+labels = {'Raw', 'Work', 'Result', 'Feature', 'Heat-on', 'Heat-tx'};
 ax2.XTick = 1:6; ax2.YTick = 1:6;
 ax2.XTickLabel = labels; ax2.YTickLabel = labels;
-xtickangle(ax2, 38);
+xtickangle(ax2, 28);
 styleAxes(ax2);
-ax2.Box = 'on';
-title(ax2, '(b) Empirical parameter correlation', 'FontWeight', 'normal');
+title(ax2, '(b) Synthetic correlation', 'FontWeight', 'normal');
 for row = 1:6
     for col = 1:6
         if abs(correlations(row, col)) > 0.55
@@ -112,7 +118,7 @@ function plotTrainingDiagnostics(curves, outputDir, paperDir)
 fig = newFigure(18.3, 13.2);
 layout = tiledlayout(fig, 2, 2, 'TileSpacing', 'compact', 'Padding', 'compact');
 variants = ["standard_dqn", "md_cbad_dqn"];
-variantLabels = {'Standard DQN', 'MD-CBAD-DQN'};
+variantLabels = {'Standard DQN', 'Centered full-action'};
 colors = [hexrgb('#2874A6'); hexrgb('#C0392B')];
 metrics = {'cost', 'energy_use', 'latency_ms', 'penalty'};
 ylabels = {'Episode total cost', 'Episode energy use (normalized)', ...
@@ -164,6 +170,45 @@ end
 end
 
 
+function plotDqnFamily(summary, outputDir, paperDir)
+scenarios = ["nominal", "burst", "link_limited", "energy_limited", "thermal_stress"];
+scenarioLabels = {'Nominal', 'Burst', 'Link-limited', 'Energy-limited', 'Thermal-stress'};
+policies = ["standard_dqn", "md_immediate_advantage_dqn", "md_fullq_dqn", ...
+    "md_cbad_dqn", "double_dqn", "double_cbad_dqn"];
+policyLabels = {'Standard DQN', 'Immediate advantage', 'Full-action Q', ...
+    'Centered full-action', 'Double DQN', 'Double + centered full-action'};
+colors = [hexrgb('#2874A6'); hexrgb('#7F8C8D'); hexrgb('#D68910'); ...
+    hexrgb('#C0392B'); hexrgb('#6C3483'); hexrgb('#17A589')];
+
+fig = newFigure(18.3, 10.0);
+ax = axes(fig);
+hold(ax, 'on');
+x = 1:numel(scenarios);
+offsets = linspace(-0.30, 0.30, numel(policies));
+handles = gobjects(numel(policies), 1);
+for p = 1:numel(policies)
+    mu = getSeries(summary, scenarios, policies(p), 'total_cost_mean');
+    sd = getSeries(summary, scenarios, policies(p), 'total_cost_sd');
+    errorbar(ax, x + offsets(p), mu, sd, 'o', ...
+        'Color', colors(p, :), 'MarkerFaceColor', colors(p, :), ...
+        'MarkerEdgeColor', 'white', 'MarkerSize', 4.2, ...
+        'LineWidth', 0.9, 'CapSize', 3.0);
+    handles(p) = plot(ax, nan, nan, 'o', 'Color', colors(p, :), ...
+        'MarkerFaceColor', colors(p, :), 'MarkerEdgeColor', 'white', ...
+        'MarkerSize', 4.2);
+end
+styleAxes(ax); grid(ax, 'on'); ax.XGrid = 'off';
+ax.XTick = x; ax.XTickLabel = scenarioLabels;
+ylabel(ax, 'Episode total cost');
+title(ax, 'DQN-family performance across coupled regimes', ...
+    'FontWeight', 'normal');
+legend(ax, handles, policyLabels, 'Location', 'northoutside', ...
+    'Orientation', 'horizontal', 'NumColumns', 3, 'Box', 'off', ...
+    'FontSize', 6.8);
+exportFigure(fig, outputDir, paperDir, 'fig_dqn_family');
+end
+
+
 function plotSeedEffects(seedEffects, inference, outputDir, paperDir)
 scenarios = ["nominal", "burst", "link_limited", "energy_limited", "thermal_stress"];
 labels = {'Nominal', 'Burst', 'Link-limited', 'Energy-limited', 'Thermal-stress'};
@@ -191,8 +236,8 @@ end
 yline(ax, 0, 'k-', 'LineWidth', 0.8);
 styleAxes(ax); grid(ax, 'on'); ax.XGrid = 'off';
 ax.XTick = 1:numel(scenarios); ax.XTickLabel = labels;
-ylabel(ax, 'Paired CBAD - DQN total cost');
-title(ax, 'Independent model-seed effects in fully coupled regimes', ...
+ylabel(ax, 'Paired centered full-action - standard DQN cost');
+title(ax, 'One within-family contrast across coupled regimes', ...
     'FontWeight', 'normal');
 legend(ax, [seedHandle, intervalHandle, meanHandle], ...
     {'Individual model seed', '95% paired bootstrap interval', 'Mean effect'}, ...
@@ -209,7 +254,7 @@ labels = {'Static', 'Reduced', 'Nominal', 'Burst', 'Link-limited', ...
     'Energy-limited', 'Thermal-stress'};
 policies = ["immediate_argmin", "mpc_h4", "contextual_bandit", ...
     "threshold", "standard_dqn", "md_cbad_dqn"];
-policyLabels = {'Argmin', 'MPC-4', 'Bandit', 'Threshold', 'DQN', 'CBAD'};
+policyLabels = {'Argmin', 'MPC-4', 'Bandit', 'Threshold', 'DQN', 'Centered FA'};
 colors = [hexrgb('#7F8C8D'); hexrgb('#34495E'); hexrgb('#9B59B6'); ...
     hexrgb('#D68910'); hexrgb('#2874A6'); hexrgb('#C0392B')];
 
@@ -231,10 +276,13 @@ for panel = 1:2
     for p = 1:numel(policies)
         mu = getSeries(summary, scenarios(selected), policies(p), 'total_cost_mean');
         sd = getSeries(summary, scenarios(selected), policies(p), 'total_cost_sd');
-        handles(p) = errorbar(ax, x + offsets(p), mu, sd, 'o', ...
+        errorbar(ax, x + offsets(p), mu, sd, 'o', ...
             'Color', colors(p, :), 'MarkerFaceColor', colors(p, :), ...
             'MarkerEdgeColor', 'white', 'MarkerSize', 4.0, ...
             'LineWidth', 0.9, 'CapSize', 3.0);
+        handles(p) = plot(ax, nan, nan, 'o', 'Color', colors(p, :), ...
+            'MarkerFaceColor', colors(p, :), 'MarkerEdgeColor', 'white', ...
+            'MarkerSize', 4.0);
     end
     styleAxes(ax);
     grid(ax, 'on'); ax.XGrid = 'off';
@@ -276,13 +324,13 @@ xline(ax1, 0, 'k-', 'LineWidth', 0.8);
 styleAxes(ax1); grid(ax1, 'on'); ax1.YGrid = 'off';
 ax1.YTick = 1:8; ax1.YTickLabel = labels; ax1.YDir = 'reverse';
 ylim(ax1, [0.5, 8.5]);
-xlabel(ax1, 'CBAD - DQN total cost');
+xlabel(ax1, 'Centered full-action - standard DQN cost');
 title(ax1, '(a) Prespecified parameter envelopes', 'FontWeight', 'normal');
 
 ax2 = nexttile(layout, 2);
 scenarios = ["static", "reduced_coupling", "nominal", "burst", ...
     "link_limited", "energy_limited", "thermal_stress"];
-labels2 = {'Static', 'Reduced', 'Nominal', 'Burst', 'Link', 'Energy', 'Thermal'};
+labels2 = {'Stat.', 'Red.', 'Nom.', 'Burst', 'Link', 'Energy', 'Thermal'};
 mpc = getSeries(summary, scenarios, "mpc_h4", 'total_cost_mean');
 cbad = getSeries(summary, scenarios, "md_cbad_dqn", 'total_cost_mean');
 argmin = getSeries(summary, scenarios, "immediate_argmin", 'total_cost_mean');
@@ -295,7 +343,7 @@ styleAxes(ax2); grid(ax2, 'on'); ax2.XGrid = 'off';
 ax2.XTick = 1:7; ax2.XTickLabel = labels2; xtickangle(ax2, 32);
 ylabel(ax2, 'Episode total cost');
 title(ax2, '(b) Four-step planning comparator', 'FontWeight', 'normal');
-legend(ax2, bars, {'Argmin', 'MPC-4', 'CBAD'}, 'Location', 'northwest', ...
+legend(ax2, bars, {'Argmin', 'MPC-4', 'Centered FA'}, 'Location', 'northwest', ...
     'Box', 'off', 'FontSize', 7.2);
 exportFigure(fig, outputDir, paperDir, 'fig_sensitivity_planning');
 end
@@ -319,7 +367,8 @@ bars(3).FaceColor = hexrgb('#D68910');
 styleAxes(ax);
 ax.XTick = 1:7; ax.XTickLabel = labels; xtickangle(ax, 18);
 ylim(ax, [0, 1]); ylabel(ax, 'Action fraction');
-title(ax, 'MD-CBAD-DQN deployment action distribution', 'FontWeight', 'normal');
+title(ax, 'Centered full-action DQN deployment action distribution', ...
+    'FontWeight', 'normal');
 legend(ax, bars, {'Onboard', 'Ground', 'Collaborative'}, ...
     'Location', 'northoutside', 'Orientation', 'horizontal', ...
     'Box', 'off', 'FontSize', 7.2);
@@ -403,11 +452,15 @@ cleanup = onCleanup(@() fclose(fid));
 fprintf(fid, 'Backend: MATLAB R%s\n', version('-release'));
 fprintf(fid, 'Data source: %s\n', resultsDir);
 fprintf(fid, 'Primary summary: 56 rows = 7 scenarios x 8 policies.\n');
+fprintf(fid, 'DQN-family summary: 30 rows = 5 coupled scenarios x 6 learned objectives.\n');
 fprintf(fid, 'Training curves: 36,000 rows = 3 methods x 20 seeds x 600 episodes.\n');
 fprintf(fid, 'Curve bands: mean +/- SD across twenty seeds after a causal 25-episode mean.\n');
 fprintf(fid, 'Sensitivity intervals: paired 95%% bootstrap across 20 independent model seeds, 10,000 resamples.\n');
 fprintf(fid, 'Multiplicity: exact paired sign tests with Holm adjustment; individual seed effects are plotted.\n');
-fprintf(fid, 'Physical scatter: every tenth row shown for legibility; all 20,000 rows used for correlations and checks.\n');
+fprintf(fid, 'Generator scatter and correlations use all 20,000 rows; no observations are filtered or sampled.\n');
+fprintf(fid, 'Primary uncertainty: mean +/- one SD across 20 model-seed blocks after within-seed averaging of 20 held-out traces.\n');
+fprintf(fid, 'Deterministic-policy uncertainty: mean +/- one SD across 20 disjoint trace namespaces; this is not training variability.\n');
+fprintf(fid, 'Seed-effect intervals: paired 95%% bootstrap across 20 model-seed blocks; exact paired sign tests use Holm adjustment over five fully coupled regimes.\n');
 fprintf(fid, 'Exports: vector PDF/SVG, 600-dpi TIFF, and 220-dpi PNG QA copies; all figure fonts forced to Arial.\n');
 clear cleanup;
 end

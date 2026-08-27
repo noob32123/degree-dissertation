@@ -1,0 +1,23 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Regime & $\Delta$ immediate & $\Delta$ penalty & $\Delta$ energy & $\Delta$ latency (s) & $\Delta$ data (Mbit) \\
+\midrule
+Nominal & -4.93 & 0.00 & 0.050 & -1.27 & 336.8 \\
+Burst & -5.59 & 8.62 & 0.108 & -1.09 & 414.1 \\
+Link-limited & -3.46 & 8.43 & 0.249 & 1.28 & 303.5 \\
+Energy-limited & -4.86 & 0.32 & 0.038 & -1.30 & 307.0 \\
+Thermal-stress & -5.89 & 8.62 & 0.108 & -1.09 & 414.1 \\
+\bottomrule
+\end{tabular}
+\par\medskip
+\begin{tabular}{lrrr}
+\toprule
+Regime & Low-energy steps DQN/CBAD & Min. energy DQN/CBAD & Max. heat DQN/CBAD \\
+\midrule
+Nominal & 0.0/0.0 & 0.49/0.44 & 0.200/0.191 \\
+Burst & 0.0/0.7 & 0.46/0.35 & 0.200/0.191 \\
+Link-limited & 0.0/0.7 & 0.49/0.24 & 0.200/0.191 \\
+Energy-limited & 0.0/0.7 & 0.23/0.19 & 0.200/0.191 \\
+Thermal-stress & 0.0/0.7 & 0.46/0.35 & 0.372/0.363 \\
+\bottomrule
+\end{tabular}

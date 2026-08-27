@@ -1,0 +1,16 @@
+scenario,comparison,model_seed,difference
+burst,md_cbad_dqn_exact - standard_dqn,800,3.033543395147742
+burst,md_cbad_dqn_preview_0p85 - standard_dqn,800,-1.6656969557097483
+burst,md_cbad_dqn_preview_1p15 - standard_dqn,800,3.6005218383431234
+energy_limited,md_cbad_dqn_exact - standard_dqn,800,-4.540028601884842
+energy_limited,md_cbad_dqn_preview_0p85 - standard_dqn,800,-3.017082929611206
+energy_limited,md_cbad_dqn_preview_1p15 - standard_dqn,800,-1.4572458840273672
+link_limited,md_cbad_dqn_exact - standard_dqn,800,4.974488960797251
+link_limited,md_cbad_dqn_preview_0p85 - standard_dqn,800,-2.0566914180914555
+link_limited,md_cbad_dqn_preview_1p15 - standard_dqn,800,29.968150810614915
+nominal,md_cbad_dqn_exact - standard_dqn,800,-4.9278241743644084
+nominal,md_cbad_dqn_preview_0p85 - standard_dqn,800,-3.3844377150138225
+nominal,md_cbad_dqn_preview_1p15 - standard_dqn,800,-3.4666249460103575
+thermal_stress,md_cbad_dqn_exact - standard_dqn,800,2.7366419604877805
+thermal_stress,md_cbad_dqn_preview_0p85 - standard_dqn,800,-1.4700861245285406
+thermal_stress,md_cbad_dqn_preview_1p15 - standard_dqn,800,3.199850127772468

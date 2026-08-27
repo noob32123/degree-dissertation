@@ -29,9 +29,9 @@ VARIANTS = (
 
 
 class QNetwork(nn.Module):
-    """The fixed 21-128-128-64-3 network used by every learned policy."""
+    """The fixed 24-128-128-64-3 network used by every learned policy."""
 
-    def __init__(self, state_dim: int = 21, action_dim: int = 3):
+    def __init__(self, state_dim: int = 24, action_dim: int = 3):
         super().__init__()
         self.net = nn.Sequential(
             nn.Linear(state_dim, 128),
@@ -86,7 +86,7 @@ class DQNAgent:
         config: AgentConfig,
         device: torch.device,
         seed: int,
-        state_dim: int = 21,
+        state_dim: int = 24,
         action_dim: int = 3,
     ):
         if variant not in VARIANTS:
@@ -187,8 +187,8 @@ class DQNAgent:
         # endogenous resource coordinates are replaced by the action preview.
         counterfactual_next[:, :, -6:] = preview_resources
         with torch.no_grad():
-            # Deliberately not Double DQN: target-network max both selects and
-            # evaluates the next action.
+            # Standard variants use target-network maximization. Double
+            # variants use online selection and target-network evaluation.
             flat_next = counterfactual_next.reshape(-1, state_dim)
             if self.uses_double_target:
                 selected = self.online(flat_next).argmax(dim=1, keepdim=True)

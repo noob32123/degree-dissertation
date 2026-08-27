@@ -25,6 +25,7 @@ class EnvironmentPreviewTests(unittest.TestCase):
         env.preview_all_actions()
         after = env.snapshot()
         self.assertEqual(before["t"], after["t"])
+        self.assertEqual(before["link_phase"], after["link_phase"])
         np.testing.assert_array_equal(before["resources"], after["resources"])
         np.testing.assert_array_equal(before["tasks"], after["tasks"])
         np.testing.assert_array_equal(before["link_trace"], after["link_trace"])
@@ -59,14 +60,61 @@ class EnvironmentPreviewTests(unittest.TestCase):
             costs, resources = env.preview_all_actions()
             after = env.snapshot()
             self.assertEqual(before["rng"], after["rng"])
+            self.assertEqual(before["link_phase"], after["link_phase"])
             np.testing.assert_array_equal(before["resources"], after["resources"])
             np.testing.assert_array_equal(before["tasks"], after["tasks"])
             _, _, _, info = env.step(action)
             np.testing.assert_allclose(resources[action], env.resources, rtol=0, atol=0)
             self.assertAlmostEqual(float(costs[action]), info["total_cost"], places=5)
 
+    def test_physics_preview_matches_at_clipping_boundaries_and_terminal_step(self) -> None:
+        lower = np.array([0.0, 0.0, 0.0, 0.0, 0.08, 0.05], dtype=np.float32)
+        upper = np.array([1.3, 1.0, 1.3, 1.2, 1.0, 1.0], dtype=np.float32)
+        for boundary in (lower, upper):
+            for action in range(3):
+                env = SatelliteSchedulingEnv(
+                    EnvConfig(horizon=4, generator="physics_correlated")
+                )
+                env.reset(seed=19_009)
+                env.t = env.config.horizon - 1
+                env.resources = boundary.copy()
+                costs, resources = env.preview_all_actions()
+                next_state, _, done, info = env.step(action)
+                self.assertTrue(done)
+                np.testing.assert_array_equal(next_state, np.zeros(env.state_dim))
+                np.testing.assert_allclose(resources[action], env.resources, rtol=0, atol=0)
+                self.assertAlmostEqual(float(costs[action]), info["total_cost"], places=5)
+
 
 class PhysicsGeneratorTests(unittest.TestCase):
+    def test_state_exposes_time_and_link_phase(self) -> None:
+        env = SatelliteSchedulingEnv(
+            EnvConfig(horizon=16, generator="physics_correlated")
+        )
+        state = env.reset(seed=19010)
+        self.assertEqual(state.shape, (24,))
+        self.assertAlmostEqual(float(state[15]), 0.0, places=7)
+        self.assertAlmostEqual(float(state[16]), np.sin(env.link_phase), places=7)
+        self.assertAlmostEqual(float(state[17]), np.cos(env.link_phase), places=7)
+        next_state, *_ = env.step(0)
+        self.assertAlmostEqual(float(next_state[15]), 1.0 / 15.0, places=7)
+        np.testing.assert_array_equal(next_state[-6:], env.resources)
+
+    def test_link_phase_makes_trace_mean_conditionally_reconstructable(self) -> None:
+        env = SatelliteSchedulingEnv(
+            EnvConfig(horizon=16, generator="physics_correlated")
+        )
+        env.reset(seed=19011)
+        index = np.arange(env.config.horizon + 1)
+        expected_bandwidth_mean = 0.62 + 0.23 * np.sin(
+            2 * np.pi * index / 24 + env.link_phase
+        )
+        expected_contact_mean = 0.55 + 0.35 * np.sin(
+            2 * np.pi * index / 31 + env.link_phase / 2
+        )
+        self.assertEqual(len(expected_bandwidth_mean), len(env.link_trace))
+        self.assertEqual(len(expected_contact_mean), len(env.link_trace))
+
     def test_reported_physics_cost_equations_match_code(self) -> None:
         env = SatelliteSchedulingEnv(
             EnvConfig(horizon=16, generator="physics_correlated")
@@ -209,8 +257,8 @@ class PureDQNTests(unittest.TestCase):
     def _fill(self, agent: DQNAgent, preview_value: float) -> None:
         rng = np.random.default_rng(9)
         for index in range(agent.config.batch_size):
-            state = rng.normal(size=21).astype(np.float32)
-            next_state = rng.normal(size=21).astype(np.float32)
+            state = rng.normal(size=24).astype(np.float32)
+            next_state = rng.normal(size=24).astype(np.float32)
             agent.observe(
                 state,
                 index % 3,
@@ -241,7 +289,14 @@ class PureDQNTests(unittest.TestCase):
 
     def test_all_variants_share_network_shape(self) -> None:
         reference = [p.shape for p in QNetwork().parameters()]
-        for variant in ("standard_dqn", "md_cbad_dqn"):
+        for variant in (
+            "standard_dqn",
+            "md_cbad_dqn",
+            "md_fullq_dqn",
+            "md_immediate_advantage_dqn",
+            "double_dqn",
+            "double_cbad_dqn",
+        ):
             agent = DQNAgent(
                 variant, AgentConfig(), torch.device("cpu"), seed=1
             )
@@ -264,6 +319,39 @@ class PureDQNTests(unittest.TestCase):
             ) * agent.target(next_t).max(1).values
             expected = torch.nn.functional.smooth_l1_loss(
                 agent.online(states_t).gather(1, actions_t[:, None]).squeeze(1),
+                expected_target,
+            )
+        torch.testing.assert_close(losses["td_loss"], expected)
+
+    def test_uncentered_and_centered_auxiliary_targets_are_distinct(self) -> None:
+        config = AgentConfig(batch_size=16)
+        centered = DQNAgent("md_cbad_dqn", config, torch.device("cpu"), seed=21)
+        full_q = DQNAgent("md_fullq_dqn", config, torch.device("cpu"), seed=21)
+        self._fill(centered, 0.4)
+        batch = centered.buffer.sample(16, random.Random(8))
+        centered_loss = centered.compute_losses(batch)["auxiliary_loss"]
+        full_q_loss = full_q.compute_losses(batch)["auxiliary_loss"]
+        self.assertNotAlmostEqual(centered_loss.item(), full_q_loss.item(), places=6)
+
+    def test_double_target_uses_online_selection(self) -> None:
+        agent = DQNAgent(
+            "double_dqn", AgentConfig(batch_size=2), torch.device("cpu"), seed=31
+        )
+        self._fill(agent, 0.0)
+        batch = agent.buffer.sample(2, random.Random(5))
+        states, actions, rewards, next_states, dones, *_ = batch
+        losses = agent.compute_losses(batch)
+        with torch.no_grad():
+            next_t = torch.as_tensor(next_states)
+            selected = agent.online(next_t).argmax(1, keepdim=True)
+            next_value = agent.target(next_t).gather(1, selected).squeeze(1)
+            expected_target = torch.as_tensor(rewards, dtype=torch.float32) + agent.config.gamma * (
+                1 - torch.as_tensor(dones, dtype=torch.float32)
+            ) * next_value
+            expected = torch.nn.functional.smooth_l1_loss(
+                agent.online(torch.as_tensor(states)).gather(
+                    1, torch.as_tensor(actions).long()[:, None]
+                ).squeeze(1),
                 expected_target,
             )
         torch.testing.assert_close(losses["td_loss"], expected)

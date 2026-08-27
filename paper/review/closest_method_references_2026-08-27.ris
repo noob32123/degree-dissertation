@@ -1,0 +1,67 @@
+TY  - CONF
+AU  - Kaya, Ege Can
+AU  - Ghasemi, Mahsa
+AU  - Hashemi, Abolfazl
+TI  - Joint MDPs and Reinforcement Learning in Coupled-Dynamics Environments
+T2  - Proceedings of the 42nd Conference on Uncertainty in Artificial Intelligence
+T3  - Proceedings of Machine Learning Research
+VL  - 337
+SP  - 2877
+EP  - 2893
+PY  - 2026
+UR  - https://proceedings.mlr.press/v337/kaya26b.html
+ER  -
+
+TY  - CONF
+AU  - Armengol Urpí, Núria
+AU  - Bagatella, Marco
+AU  - Vlastelica, Marin
+AU  - Martius, Georg
+TI  - Causal Action Influence Aware Counterfactual Data Augmentation
+T2  - Proceedings of the 41st International Conference on Machine Learning
+T3  - Proceedings of Machine Learning Research
+VL  - 235
+SP  - 1709
+EP  - 1729
+PY  - 2024
+UR  - https://proceedings.mlr.press/v235/armengol-urpi-24a.html
+ER  -
+
+TY  - CONF
+AU  - Mesnard, Thomas
+AU  - Weber, Theophane
+AU  - Viola, Fabio
+AU  - Thakoor, Shantanu
+AU  - Saade, Alaa
+AU  - Harutyunyan, Anna
+AU  - Dabney, Will
+AU  - Stepleton, Thomas S
+AU  - Heess, Nicolas
+AU  - Guez, Arthur
+AU  - Moulines, Eric
+AU  - Hutter, Marcus
+AU  - Buesing, Lars
+AU  - Munos, Remi
+TI  - Counterfactual Credit Assignment in Model-Free Reinforcement Learning
+T2  - Proceedings of the 38th International Conference on Machine Learning
+T3  - Proceedings of Machine Learning Research
+VL  - 139
+SP  - 7654
+EP  - 7664
+PY  - 2021
+UR  - https://proceedings.mlr.press/v139/mesnard21a.html
+ER  -
+
+TY  - CONF
+AU  - Forney, Andrew
+AU  - Pearl, Judea
+AU  - Bareinboim, Elias
+TI  - Counterfactual Data-Fusion for Online Reinforcement Learners
+T2  - Proceedings of the 34th International Conference on Machine Learning
+T3  - Proceedings of Machine Learning Research
+VL  - 70
+SP  - 1156
+EP  - 1164
+PY  - 2017
+UR  - https://proceedings.mlr.press/v70/forney17a.html
+ER  -

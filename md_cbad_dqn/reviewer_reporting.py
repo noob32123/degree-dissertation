@@ -10,11 +10,10 @@ import argparse
 from pathlib import Path
 import shutil
 
-import numpy as np
 import pandas as pd
 
 from .experiment import FULL_COUPLING, SCENARIOS
-from .reviewer_experiments import paired_bootstrap
+from .reviewer_experiments import DEFAULT_RESULTS, paired_bootstrap
 
 
 ROOT = Path(__file__).resolve().parent
@@ -32,7 +31,7 @@ POLICY_LABELS = {
     "contextual_bandit": "Bandit",
     "threshold": "Threshold",
     "standard_dqn": "DQN",
-    "md_cbad_dqn": "CBAD",
+    "md_cbad_dqn": "Centered FA",
 }
 SCENARIO_LABELS = {
     "static": "Static ($c=0$)",
@@ -66,27 +65,30 @@ def _write_main(summary: pd.DataFrame, output: Path) -> None:
     lines = [
         r"\begin{tabular}{lrrrrrr}",
         r"\toprule",
-        r"Regime & Argmin & MPC-4 & Bandit & Threshold & DQN & CBAD \\",
+        r"Regime & Argmin & MPC-4 & Bandit & Threshold & DQN & Centered FA \\",
         r"\midrule",
     ]
     for scenario, _, _ in SCENARIOS:
         values = {p: _metric(summary, scenario, p, "total_cost_mean") for p in POLICIES}
-        best = min(values.values())
         cells = []
         for policy in POLICIES:
             mean = values[policy]
             sd = _metric(summary, scenario, policy, "total_cost_sd")
             cell = f"{mean:.2f} $\\pm$ {sd:.2f}"
-            if np.isclose(mean, best):
-                cell = rf"\textbf{{{cell}}}"
             cells.append(cell)
         lines.append(SCENARIO_LABELS[scenario] + " & " + " & ".join(cells) + r" \\")
     lines.extend((r"\bottomrule", r"\end{tabular}"))
     (output / "table_reviewer_main.tex").write_text("\n".join(lines), encoding="utf-8")
 
 
-def _write_sensitivity(sensitivity: pd.DataFrame, output: Path) -> None:
+def _write_sensitivity(
+    sensitivity: pd.DataFrame, primary: pd.DataFrame, output: Path
+) -> None:
     selected = sensitivity[sensitivity.comparison == "md_cbad_dqn - standard_dqn"]
+    primary_nominal = primary[
+        primary.comparison.eq("md_cbad_dqn - standard_dqn")
+        & primary.scenario.eq("nominal")
+    ].iloc[0]
     lines = [
         r"\begin{tabular}{lrrrr}",
         r"\toprule",
@@ -95,9 +97,11 @@ def _write_sensitivity(sensitivity: pd.DataFrame, output: Path) -> None:
     ]
     for profile in PROFILE_LABELS:
         row = selected[selected.profile == profile].iloc[0]
+        ci_low = primary_nominal.ci95_low if profile == "reference" else row.ci95_low
+        ci_high = primary_nominal.ci95_high if profile == "reference" else row.ci95_high
         lines.append(
             f"{PROFILE_LABELS[profile]} & {row.mean_difference:.2f} & "
-            f"[{row.ci95_low:.2f}, {row.ci95_high:.2f}] & "
+            f"[{ci_low:.2f}, {ci_high:.2f}] & "
             f"{row.relative_improvement_percent:.2f}\\% & "
             f"{row.holm_adjusted_p:.4g} \\\\"
         )
@@ -190,7 +194,9 @@ def _write_primary_inference(comparison: pd.DataFrame, output: Path) -> None:
 
 
 def _write_engineering_outcomes(summary: pd.DataFrame, output: Path) -> None:
-    scenarios = ("nominal", "link_limited", "energy_limited", "thermal_stress")
+    scenarios = (
+        "nominal", "burst", "link_limited", "energy_limited", "thermal_stress"
+    )
     delta_lines = [
         r"\begin{tabular}{lrrrrr}",
         r"\toprule",
@@ -200,7 +206,7 @@ def _write_engineering_outcomes(summary: pd.DataFrame, output: Path) -> None:
     exposure_lines = [
         r"\begin{tabular}{lrrr}",
         r"\toprule",
-        r"Regime & Low-energy steps DQN/CBAD & Min. energy DQN/CBAD & Max. heat DQN/CBAD \\",
+        r"Regime & Low-energy steps DQN/CFA & Min. energy DQN/CFA & Max. heat DQN/CFA \\",
         r"\midrule",
     ]
     for scenario in scenarios:
@@ -233,7 +239,9 @@ def _write_engineering_outcomes(summary: pd.DataFrame, output: Path) -> None:
     )
 
 
-def _write_preview_mismatch(inference: pd.DataFrame, output: Path) -> None:
+def _write_preview_mismatch(
+    inference: pd.DataFrame, primary: pd.DataFrame, output: Path
+) -> None:
     labels = {
         "md_cbad_dqn_exact - standard_dqn": "Simulator-exact preview",
         "md_cbad_dqn_preview_0p85 - standard_dqn": "Consequences scaled to 0.85",
@@ -241,13 +249,18 @@ def _write_preview_mismatch(inference: pd.DataFrame, output: Path) -> None:
     }
     scenarios = [row[0] for row in FULL_COUPLING]
     lines = [
-        r"\begin{tabular}{llrrrr}",
+        r"\begin{tabular}{llrrrrr}",
         r"\toprule",
-        r"Training preview & Regime & Mean difference & 95\% interval & Negative seeds & Holm $p$ \\",
+        r"Training preview & Regime & Mean difference & 95\% interval & Negative seeds & Holm $p$ & Supported \\",
         r"\midrule",
     ]
     for comparison, label in labels.items():
-        subset = inference[inference.comparison == comparison].set_index("scenario")
+        if comparison == "md_cbad_dqn_exact - standard_dqn":
+            subset = primary[
+                primary.comparison.eq("md_cbad_dqn - standard_dqn")
+            ].set_index("scenario")
+        else:
+            subset = inference[inference.comparison == comparison].set_index("scenario")
         for index, scenario in enumerate(scenarios):
             row = subset.loc[scenario]
             first = label if index == 0 else ""
@@ -255,7 +268,8 @@ def _write_preview_mismatch(inference: pd.DataFrame, output: Path) -> None:
                 f"{first} & {SCENARIO_LABELS[scenario]} & {row.mean_difference:.2f} & "
                 f"[{row.ci95_low:.2f}, {row.ci95_high:.2f}] & "
                 f"{int(row.negative_seed_pairs)}/{int(row.n_pairs)} & "
-                f"{row.holm_adjusted_p:.4g} \\\\"
+                f"{row.holm_adjusted_p:.4g} & "
+                f"{'Yes' if bool(row.supported) else 'No'} \\\\"
             )
         if comparison != list(labels)[-1]:
             lines.append(r"\addlinespace")
@@ -272,6 +286,7 @@ def _write_macros(
     training: pd.DataFrame,
     mismatch: pd.DataFrame | None,
     validity: dict,
+    planner_depth: pd.DataFrame | None,
     output: Path,
 ) -> None:
     full_names = [row[0] for row in FULL_COUPLING]
@@ -280,12 +295,20 @@ def _write_macros(
         & comparison.scenario.isin(full_names)
     ]
     sens = sensitivity[sensitivity.comparison == "md_cbad_dqn - standard_dqn"]
-    planning_per_step = _metric(
-        summary, "nominal", "mpc_h4", "planning_time_ms_mean"
-    ) / 64.0
+    if planner_depth is not None:
+        planning_per_step = float(
+            planner_depth.loc[
+                planner_depth.planner_horizon.eq(4), "planning_ms_mean"
+            ].iloc[0]
+        )
+    else:
+        planning_per_step = _metric(
+            summary, "nominal", "mpc_h4", "planning_time_ms_mean"
+        ) / 64.0
+    late_start = max(0, int(training.episode.max()) - 99)
     late = training[
         training.variant.isin(("standard_dqn", "md_cbad_dqn"))
-        & (training.episode >= 500)
+        & (training.episode >= late_start)
     ]
     late_means = late.groupby("variant")[["cost", "energy_use", "latency_ms", "penalty"]].mean()
     dqn_late = late_means.loc["standard_dqn"]
@@ -303,6 +326,9 @@ def _write_macros(
         "PhysicalAuditTasks": f"{int(validity['n_tasks']):,}",
         "IndependentModelSeeds": f"{int(summary.n_model_seeds.max())}",
         "PrimaryHolmPMax": f"{cbad_dqn.holm_adjusted_p.max():.4g}",
+        "PrimarySupportedCount": f"{int(cbad_dqn.supported.sum())}",
+        "PrimaryNegativeSeedsMin": f"{int(cbad_dqn.negative_seed_pairs.min())}",
+        "PrimaryNegativeSeedsMax": f"{int(cbad_dqn.negative_seed_pairs.max())}",
         "LateCBADCost": f"{cbad_late.cost:.2f}",
         "LateDQNCost": f"{dqn_late.cost:.2f}",
         "LateCBADEnergy": f"{cbad_late.energy_use:.2f}",
@@ -322,14 +348,27 @@ def _write_macros(
             )
         ]
         macros["MismatchHolmPMax"] = f"{misspecified.holm_adjusted_p.max():.4g}"
+        for scale, comparison_name in (
+            ("Low", "md_cbad_dqn_preview_0p85 - standard_dqn"),
+            ("High", "md_cbad_dqn_preview_1p15 - standard_dqn"),
+        ):
+            subset = mismatch[mismatch.comparison.eq(comparison_name)]
+            macros[f"Mismatch{scale}HolmPMax"] = (
+                f"{subset.holm_adjusted_p.max():.4g}"
+            )
+            macros[f"Mismatch{scale}SupportedCount"] = (
+                f"{int(subset.supported.sum())}"
+            )
     lines = [f"\\newcommand{{\\{key}}}{{{value}\\xspace}}" for key, value in macros.items()]
     (output / "reviewer_macros.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--results", type=Path, default=ROOT / "results" / "reviewer_revision")
-    parser.add_argument("--tables", type=Path, default=ROOT / "tables" / "reviewer_revision")
+    parser.add_argument("--results", type=Path, default=DEFAULT_RESULTS)
+    parser.add_argument(
+        "--tables", type=Path, default=ROOT / "tables" / "reviewer_revision_state_complete"
+    )
     parser.add_argument("--paper", type=Path, default=ROOT.parent / "paper")
     args = parser.parse_args()
     args.tables.mkdir(parents=True, exist_ok=True)
@@ -351,17 +390,20 @@ def main() -> None:
     validity = pd.read_json(args.results / "parameter_validity.json", typ="series").to_dict()
 
     _write_main(summary, args.tables)
-    _write_sensitivity(sensitivity, args.tables)
+    _write_sensitivity(sensitivity, comparison, args.tables)
     _write_parameters(args.tables)
     _write_state_dictionary(args.tables)
     _write_primary_inference(comparison, args.tables)
     _write_engineering_outcomes(summary, args.tables)
     mismatch_path = args.results / "preview_mismatch_inference.csv"
     mismatch = pd.read_csv(mismatch_path) if mismatch_path.exists() else None
+    planner_path = args.results / "planner_depth_summary.csv"
+    planner_depth = pd.read_csv(planner_path) if planner_path.exists() else None
     if mismatch_path.exists():
-        _write_preview_mismatch(mismatch, args.tables)
+        _write_preview_mismatch(mismatch, comparison, args.tables)
     _write_macros(
-        summary, comparison, sensitivity, training, mismatch, validity, args.tables
+        summary, comparison, sensitivity, training, mismatch, validity,
+        planner_depth, args.tables
     )
 
     generated = args.paper / "generated"

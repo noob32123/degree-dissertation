@@ -1,0 +1,154 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand*\HyPL@Entry[1]{}
+\citation{9925218,10107454,10378728,10440355,10423050}
+\citation{RN8,RN10,RN20,RN22,RN23,RN27,RN28}
+\HyPL@Entry{0<</S/D>>}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Graphical overview of MD-CBAD-DQN\xspace  . Simulator-exact analytical previews expose the immediate cost and six post-action resources for all three scheduling actions. Centering the resulting Bellman targets isolates action-relative supervision. The factual standard-DQN target and loss term are retained, and the auxiliary loss contributes an additional gradient during training. The illustration is conceptual and encodes no quantitative results.\relax }}{2}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:graphical}{{1}{2}{Graphical overview of \method . Simulator-exact analytical previews expose the immediate cost and six post-action resources for all three scheduling actions. Centering the resulting Bellman targets isolates action-relative supervision. The factual standard-DQN target and loss term are retained, and the auxiliary loss contributes an additional gradient during training. The illustration is conceptual and encodes no quantitative results.\relax }{figure.caption.1}{}}
+\citation{mnih2015human,watkins1992q}
+\citation{RN8,RN10,RN20,RN22,RN23,RN27,RN28}
+\citation{sutton1991dyna}
+\citation{gu2016continuous}
+\citation{forney2017counterfactual,armengol2024caiac}
+\citation{mesnard2021counterfactual}
+\citation{kaya2026joint}
+\citation{bellemare2016gap}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work and Novelty Positioning}{3}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Satellite-ground scheduling}{3}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Model use and counterfactual learning}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}System Model and Immediate-Cost Quantification}{4}{section.3}\protected@file@percent }
+\newlabel{sec:system}{{3}{4}{System Model and Immediate-Cost Quantification}{section.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three satellite-ground processing pathways. Each arriving task is executed onboard, transferred for ground execution, or preprocessed collaboratively before ground completion. The analytical transition model returns the immediate cost and the post-action heat, energy, queue occupancy, compute utilization, bandwidth, and remaining contact.\relax }}{4}{figure.caption.2}\protected@file@percent }
+\newlabel{fig:system}{{2}{4}{Three satellite-ground processing pathways. Each arriving task is executed onboard, transferred for ground execution, or preprocessed collaboratively before ground completion. The analytical transition model returns the immediate cost and the post-action heat, energy, queue occupancy, compute utilization, bandwidth, and remaining contact.\relax }{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Implemented immediate-cost model}{4}{subsection.3.1}\protected@file@percent }
+\newlabel{eq:latencies}{{3}{4}{Implemented immediate-cost model}{equation.3.3}{}}
+\newlabel{eq:implemented_costs}{{4}{5}{Implemented immediate-cost model}{equation.3.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Implemented 15-dimensional task descriptor dictionary. The six appended resource coordinates are $h$, $e$, $q$, compute utilization $u$, bandwidth $b$, and contact duration $\tau $.\relax }}{5}{table.caption.3}\protected@file@percent }
+\newlabel{tab:state_dictionary}{{1}{5}{Implemented 15-dimensional task descriptor dictionary. The six appended resource coordinates are $h$, $e$, $q$, compute utilization $u$, bandwidth $b$, and contact duration $\tau $.\relax }{table.caption.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Physically coupled task and communication generator}{5}{subsection.3.2}\protected@file@percent }
+\citation{nasa2026avionics,nasa2026ground}
+\citation{ccsds122}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Physical primitives and provenance of the revised simulator. Values define a transparent engineering envelope; they are not presented as a fitted flight distribution.\relax }}{6}{table.caption.4}\protected@file@percent }
+\newlabel{tab:parameters}{{2}{6}{Physical primitives and provenance of the revised simulator. Values define a transparent engineering envelope; they are not presented as a fitted flight distribution.\relax }{table.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Physical-consistency audit of the revised generator. (a) A legibility sample of 2,000 of 20,000 tasks; color encodes heat derived from compute energy. (b) Correlations computed from all 20,000 tasks. No fitted flight distribution is implied.\relax }}{7}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:physical}{{3}{7}{Physical-consistency audit of the revised generator. (a) A legibility sample of 2,000 of 20,000 tasks; color encodes heat derived from compute energy. (b) Correlations computed from all 20,000 tasks. No fitted flight distribution is implied.\relax }{figure.caption.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Complete stochastic generator and action-load specification}{7}{subsection.3.3}\protected@file@percent }
+\newlabel{sec:complete_simulator}{{3.3}{7}{Complete stochastic generator and action-load specification}{subsection.3.3}{}}
+\newlabel{eq:primitive_generator}{{7}{7}{Complete stochastic generator and action-load specification}{equation.3.7}{}}
+\newlabel{eq:primitive_ratios}{{8}{7}{Complete stochastic generator and action-load specification}{equation.3.8}{}}
+\newlabel{eq:link_trace}{{9}{7}{Complete stochastic generator and action-load specification}{equation.3.9}{}}
+\newlabel{eq:action_loads}{{10}{8}{Complete stochastic generator and action-load specification}{equation.3.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Sequential Scheduling Formulation}{8}{section.4}\protected@file@percent }
+\newlabel{sec:mdp}{{4}{8}{Sequential Scheduling Formulation}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}State and transition}{8}{subsection.4.1}\protected@file@percent }
+\newlabel{eq:transition}{{12}{8}{State and transition}{equation.4.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Reward and standard DQN backbone}{9}{subsection.4.2}\protected@file@percent }
+\newlabel{eq:reward}{{13}{9}{Reward and standard DQN backbone}{equation.4.13}{}}
+\newlabel{eq:factual}{{14}{9}{Reward and standard DQN backbone}{equation.4.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Model-Driven Counterfactual Bellman Advantage Distillation}{9}{section.5}\protected@file@percent }
+\newlabel{sec:method}{{5}{9}{Model-Driven Counterfactual Bellman Advantage Distillation}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Side-effect-free full-action preview}{9}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}All-action counterfactual Bellman targets}{9}{subsection.5.2}\protected@file@percent }
+\newlabel{eq:cf_target}{{18}{9}{All-action counterfactual Bellman targets}{equation.5.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Centered advantage distillation}{10}{subsection.5.3}\protected@file@percent }
+\newlabel{eq:center}{{19}{10}{Centered advantage distillation}{equation.5.19}{}}
+\newlabel{eq:cbad}{{20}{10}{Centered advantage distillation}{equation.5.20}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Training-only CBAD mechanism. The upper path retains the factual standard-DQN target and Huber loss. The lower path previews all three actions, constructs three Bellman targets, centers them within state, and distills their relative advantages. Both losses update the online Q-network; the target network is synchronized only at the shared fixed interval. Preview outputs are unavailable during evaluation and deployment.\relax }}{10}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:mechanism}{{4}{10}{Training-only CBAD mechanism. The upper path retains the factual standard-DQN target and Huber loss. The lower path previews all three actions, constructs three Bellman targets, centers them within state, and distills their relative advantages. Both losses update the online Q-network; the target network is synchronized only at the shared fixed interval. Preview outputs are unavailable during evaluation and deployment.\relax }{figure.caption.6}{}}
+\citation{vanhasselt2016double}
+\newlabel{alg:cbad}{{\caption@xref {alg:cbad}{ on input line 339}}{11}{Centered advantage distillation}{Item.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Experimental Design and Settings}{11}{section.6}\protected@file@percent }
+\newlabel{sec:experiments}{{6}{11}{Experimental Design and Settings}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Design principles}{11}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Training configuration}{11}{subsection.6.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Prespecification and confirmation protocol. A preceding-simulator calibration with four seeds selected $\lambda =0.3$ before the physical-consistency experiment. Twenty disjoint confirmation seeds, 800--819, are each evaluated on 20 shared held-out traces in seven regimes, with no physical-generator tuning or seed exclusion.\relax }}{12}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:protocol}{{5}{12}{Prespecification and confirmation protocol. A preceding-simulator calibration with four seeds selected $\lambda =0.3$ before the physical-consistency experiment. Twenty disjoint confirmation seeds, 800--819, are each evaluated on 20 shared held-out traces in seven regimes, with no physical-generator tuning or seed exclusion.\relax }{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Seven evaluation regimes}{12}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Planning comparator, outcomes, and inference}{13}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Prespecified sensitivity and training diagnostics}{13}{subsection.6.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Preview-model misspecification test}{14}{subsection.6.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Reproducible result entry point}{14}{subsection.6.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Results}{14}{section.7}\protected@file@percent }
+\newlabel{sec:results}{{7}{14}{Results}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Physical consistency preserves the CBAD--DQN effect}{14}{subsection.7.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Episode total cost for deployment comparators under the physically coupled generator. All learned policies were trained only at nominal $c=1$; static and reduced-coupling rows are transfers without retraining. MPC-4 is exact only for its stated four-step perfect-forecast objective. Lower is better; bold marks the lowest mean.\relax }}{14}{table.caption.9}\protected@file@percent }
+\newlabel{tab:main}{{3}{14}{Episode total cost for deployment comparators under the physically coupled generator. All learned policies were trained only at nominal $c=1$; static and reduced-coupling rows are transfers without retraining. MPC-4 is exact only for its stated four-step perfect-forecast objective. Lower is better; bold marks the lowest mean.\relax }{table.caption.9}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Seven-regime performance under physically coupled task generation. Error bars are SD across 20 model-seed blocks after within-seed trace averaging. All learned models were trained at nominal $c=1$; control rows are transfers without retraining. The ordinate changes between panels and panel heights should not be compared directly.\relax }}{15}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:seven}{{6}{15}{Seven-regime performance under physically coupled task generation. Error bars are SD across 20 model-seed blocks after within-seed trace averaging. All learned models were trained at nominal $c=1$; control rows are transfers without retraining. The ordinate changes between panels and panel heights should not be compared directly.\relax }{figure.caption.10}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Seed-level primary inference for CBAD minus standard DQN in the five fully coupled regimes. Negative differences favor CBAD. The Holm family contains these five prespecified comparisons. LOO denotes the range of leave-one-seed-out mean differences.\relax }}{15}{table.caption.11}\protected@file@percent }
+\newlabel{tab:primary_inference}{{4}{15}{Seed-level primary inference for CBAD minus standard DQN in the five fully coupled regimes. Negative differences favor CBAD. The Holm family contains these five prespecified comparisons. LOO denotes the range of leave-one-seed-out mean differences.\relax }{table.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Paired total-cost differences for all 20 independent model seeds. Blue points show individual seed-level effects after averaging 20 shared traces. Red diamonds and vertical lines show mean differences and paired 95\% bootstrap intervals.\relax }}{16}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:seed_effects}{{7}{16}{Paired total-cost differences for all 20 independent model seeds. Blue points show individual seed-level effects after averaging 20 shared traces. Red diamonds and vertical lines show mean differences and paired 95\% bootstrap intervals.\relax }{figure.caption.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Sensitivity of the primary CBAD--DQN comparison to ignoring the prespecified model-seed matching. The two groups of 20 seed means are resampled independently. These intervals quantify the loss of precision when the common-random-number blocks are discarded and are not the primary analysis.\relax }}{16}{table.caption.13}\protected@file@percent }
+\newlabel{tab:unpaired}{{5}{16}{Sensitivity of the primary CBAD--DQN comparison to ignoring the prespecified model-seed matching. The two groups of 20 seed means are resampled independently. These intervals quantify the loss of precision when the common-random-number blocks are discarded and are not the primary analysis.\relax }{table.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Component controls identify Bellman bootstrapping, but not centering, as the supported distinction}{17}{subsection.7.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Nominal component and backbone controls. All models use 20 prespecified model-seed blocks, identical real-interaction budgets, and the same held-out traces. Full-action Q applies uncentered Bellman targets; immediate advantage centers analytical immediate costs without bootstrapping. Paired differences are relative to the matched reference named in the third column.\relax }}{17}{table.caption.14}\protected@file@percent }
+\newlabel{tab:extended_ablation}{{6}{17}{Nominal component and backbone controls. All models use 20 prespecified model-seed blocks, identical real-interaction budgets, and the same held-out traces. Full-action Q applies uncentered Bellman targets; immediate advantage centers analytical immediate costs without bootstrapping. Paired differences are relative to the matched reference named in the third column.\relax }{table.caption.14}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Planning depth improves cost at a rapidly increasing computational price}{17}{subsection.7.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Nominal receding-horizon planning over 400 unique held-out traces. Each planner has perfect knowledge of the next $H$ tasks and exogenous link states and exactly enumerates $3^H$ sequences before every action. Runtime was measured on the same workstation and includes only action selection after environment construction.\relax }}{17}{table.caption.15}\protected@file@percent }
+\newlabel{tab:planner_depth}{{7}{17}{Nominal receding-horizon planning over 400 unique held-out traces. Each planner has perfect knowledge of the next $H$ tasks and exogenous link states and exactly enumerates $3^H$ sequences before every action. Runtime was measured on the same workstation and includes only action selection after environment construction.\relax }{table.caption.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Engineering outcome decomposition for CBAD relative to standard DQN. Delta columns report CBAD minus DQN. Negative values denote lower use or cost. Low-energy steps count decisions with remaining energy below 0.18; they are soft-threshold exposures, not certified safety violations.\relax }}{18}{table.caption.16}\protected@file@percent }
+\newlabel{tab:engineering}{{8}{18}{Engineering outcome decomposition for CBAD relative to standard DQN. Delta columns report CBAD minus DQN. Negative values denote lower use or cost. Low-energy steps count decisions with remaining energy below 0.18; they are soft-threshold exposures, not certified safety violations.\relax }{table.caption.16}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Training diagnostics show stabilization of cost, energy, and latency}{19}{subsection.7.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Training diagnostics for standard DQN and MD-CBAD-DQN\xspace  . Lines are means across 20 model seeds after a causal 25-episode moving average; shaded regions are $\pm $1 SD. Curves describe the training distribution and are not used as independent test observations.\relax }}{19}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:training}{{8}{19}{Training diagnostics for standard DQN and \method . Lines are means across 20 model seeds after a causal 25-episode moving average; shaded regions are $\pm $1 SD. Curves describe the training distribution and are not used as independent test observations.\relax }{figure.caption.17}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}The result is robust within the tested parameter envelope}{20}{subsection.7.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Prespecified parameter sensitivity for CBAD minus standard DQN. Negative differences favor CBAD; $n=20$ independent paired model seeds in each profile. Holm adjustment covers the eight displayed profiles.\relax }}{20}{table.caption.18}\protected@file@percent }
+\newlabel{tab:sensitivity}{{9}{20}{Prespecified parameter sensitivity for CBAD minus standard DQN. Negative differences favor CBAD; $n=20$ independent paired model seeds in each profile. Holm adjustment covers the eight displayed profiles.\relax }{table.caption.18}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Parameter robustness and planning boundary. (a) Mean paired CBAD--DQN differences with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.\relax }}{20}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:sensitivity}{{9}{20}{Parameter robustness and planning boundary. (a) Mean paired CBAD--DQN differences with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.\relax }{figure.caption.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.6}Moderate preview error preserves a bounded benefit}{21}{subsection.7.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Effect of training-time preview misspecification. Differences are relative to the same standard-DQN models evaluated in the factual simulator. Scaling applies only to CBAD's training-only preview cost and action-induced resource changes.\relax }}{21}{table.caption.20}\protected@file@percent }
+\newlabel{tab:preview_mismatch}{{10}{21}{Effect of training-time preview misspecification. Differences are relative to the same standard-DQN models evaluated in the factual simulator. Scaling applies only to CBAD's training-only preview cost and action-induced resource changes.\relax }{table.caption.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.7}The learned policy adapts its action mix}{21}{subsection.7.7}\protected@file@percent }
+\citation{nasa2026soa}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Mean deployment action fractions for MD-CBAD-DQN\xspace  under the physically coupled generator.\relax }}{22}{figure.caption.21}\protected@file@percent }
+\newlabel{fig:actions}{{10}{22}{Mean deployment action fractions for \method under the physically coupled generator.\relax }{figure.caption.21}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Discussion and Limitations}{22}{section.8}\protected@file@percent }
+\bibstyle{unsrt}
+\bibdata{ref}
+\bibcite{9925218}{1}
+\bibcite{10107454}{2}
+\bibcite{10378728}{3}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{23}{section.9}\protected@file@percent }
+\bibcite{10440355}{4}
+\bibcite{10423050}{5}
+\bibcite{RN8}{6}
+\bibcite{RN10}{7}
+\bibcite{RN20}{8}
+\bibcite{RN22}{9}
+\bibcite{RN23}{10}
+\bibcite{RN27}{11}
+\bibcite{RN28}{12}
+\bibcite{mnih2015human}{13}
+\bibcite{watkins1992q}{14}
+\bibcite{sutton1991dyna}{15}
+\bibcite{gu2016continuous}{16}
+\bibcite{forney2017counterfactual}{17}
+\bibcite{armengol2024caiac}{18}
+\bibcite{mesnard2021counterfactual}{19}
+\bibcite{kaya2026joint}{20}
+\bibcite{bellemare2016gap}{21}
+\bibcite{nasa2026avionics}{22}
+\bibcite{nasa2026ground}{23}
+\bibcite{ccsds122}{24}
+\bibcite{vanhasselt2016double}{25}
+\bibcite{nasa2026soa}{26}
+\gdef \@abspage@last{25}

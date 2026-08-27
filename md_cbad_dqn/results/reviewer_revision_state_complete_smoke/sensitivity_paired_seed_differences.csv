@@ -1,0 +1,17 @@
+profile,comparison,model_seed,difference
+compute_minus20,md_cbad_dqn - standard_dqn,800,-3.01422156393528
+compute_minus20,md_cbad_dqn - mpc_h4,800,3.6866008808215467
+compute_plus20,md_cbad_dqn - standard_dqn,800,-6.411599662899972
+compute_plus20,md_cbad_dqn - mpc_h4,800,3.404542569319405
+data_minus20,md_cbad_dqn - standard_dqn,800,-5.251683205366135
+data_minus20,md_cbad_dqn - mpc_h4,800,3.6974956780672077
+data_plus20,md_cbad_dqn - standard_dqn,800,3.9663038149120453
+data_plus20,md_cbad_dqn - mpc_h4,800,11.512695132160388
+energy_plus20,md_cbad_dqn - standard_dqn,800,-4.745802183945974
+energy_plus20,md_cbad_dqn - mpc_h4,800,3.541602491339048
+heat_plus20,md_cbad_dqn - standard_dqn,800,-4.963513324658075
+heat_plus20,md_cbad_dqn - mpc_h4,800,3.2815150111913685
+link_minus20,md_cbad_dqn - standard_dqn,800,-3.0876574473066096
+link_minus20,md_cbad_dqn - mpc_h4,800,4.683649662486418
+reference,md_cbad_dqn - standard_dqn,800,-4.9278241743644084
+reference,md_cbad_dqn - mpc_h4,800,3.2740194439887995
