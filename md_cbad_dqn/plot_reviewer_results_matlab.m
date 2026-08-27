@@ -4,7 +4,8 @@ function plot_reviewer_results_matlab(projectRoot)
 % Conclusion: physically coupled tasks retain the CBAD-versus-DQN effect
 % across prespecified parameter envelopes; learning curves report cost,
 % energy, latency, and delayed penalties; MPC-4 bounds the planning claim.
-% Inference uses five model seeds. No Python plotting code is used.
+% Inference uses twenty independently trained model seeds. No Python plotting
+% code is used.
 
 if nargin < 1 || strlength(string(projectRoot)) == 0
     projectRoot = fileparts(fileparts(mfilename('fullpath')));
@@ -24,23 +25,30 @@ sensitivity = readtable(fullfile(resultsDir, 'sensitivity_paired_bootstrap.csv')
     'TextType', 'string', 'VariableNamingRule', 'preserve');
 sample = readtable(fullfile(resultsDir, 'parameter_audit_sample.csv'), ...
     'TextType', 'string', 'VariableNamingRule', 'preserve');
+seedEffects = readtable(fullfile(resultsDir, 'seven_regimes_paired_seed_differences.csv'), ...
+    'TextType', 'string', 'VariableNamingRule', 'preserve');
+mainInference = readtable(fullfile(resultsDir, 'seven_regimes_paired_bootstrap.csv'), ...
+    'TextType', 'string', 'VariableNamingRule', 'preserve');
 
-validateData(summary, curves, sensitivity, sample);
+validateData(summary, curves, sensitivity, sample, seedEffects);
 plotPhysicalGenerator(sample, outputDir, paperDir);
 plotTrainingDiagnostics(curves, outputDir, paperDir);
 plotPrimaryResults(summary, outputDir, paperDir);
 plotSensitivityPlanning(summary, sensitivity, outputDir, paperDir);
 plotActionDistribution(summary, outputDir, paperDir);
+plotSeedEffects(seedEffects, mainInference, outputDir, paperDir);
 writeQa(outputDir, resultsDir);
 fprintf('Reviewer-revision MATLAB figures written to %s\n', outputDir);
 end
 
 
-function validateData(summary, curves, sensitivity, sample)
-assert(height(summary) == 63, 'Expected 7 x 9 = 63 summary rows.');
-assert(height(curves) == 12000, 'Expected 4 x 5 x 600 = 12000 curve rows.');
+function validateData(summary, curves, sensitivity, sample, seedEffects)
+assert(height(summary) == 56, 'Expected 7 x 8 = 56 summary rows.');
+assert(height(curves) == 36000, 'Expected 3 x 20 x 600 = 36,000 curve rows.');
 assert(height(sensitivity) == 16, 'Expected 8 profiles x 2 comparisons.');
 assert(height(sample) == 20000, 'Expected 20,000 generator-audit tasks.');
+assert(height(seedEffects) == 420, ...
+    'Expected 7 scenarios x 3 comparisons x 20 seed differences.');
 assert(all(isfinite(summary.total_cost_mean)), 'Non-finite main result.');
 assert(all(isfinite(sample.raw_mbit)) && all(isfinite(sample.workload_gflop)), ...
     'Non-finite physical primitive.');
@@ -48,7 +56,7 @@ assert(all(sample.result_mbit <= sample.feature_mbit), ...
     'Result data exceed collaborative feature data.');
 assert(all(sample.feature_mbit <= sample.raw_mbit), ...
     'Feature data exceed raw input data.');
-assert(numel(unique(curves.model_seed)) == 5, 'Expected five training seeds.');
+assert(numel(unique(curves.model_seed)) == 20, 'Expected twenty training seeds.');
 end
 
 
@@ -144,15 +152,53 @@ end
 function [episode, values] = seedMatrix(curves, variant, metric)
 subset = curves(string(curves.variant) == variant, :);
 seeds = sort(unique(subset.model_seed));
-assert(numel(seeds) == 5, 'Expected five seeds for %s.', variant);
+assert(numel(seeds) == 20, 'Expected twenty seeds for %s.', variant);
 episode = (1:600)';
-values = nan(600, 5);
-for k = 1:5
+values = nan(600, numel(seeds));
+for k = 1:numel(seeds)
     one = subset(subset.model_seed == seeds(k), :);
     one = sortrows(one, 'episode');
     assert(height(one) == 600, 'Expected 600 episodes for %s seed %d.', variant, seeds(k));
     values(:, k) = one.(metric);
 end
+end
+
+
+function plotSeedEffects(seedEffects, inference, outputDir, paperDir)
+scenarios = ["nominal", "burst", "link_limited", "energy_limited", "thermal_stress"];
+labels = {'Nominal', 'Burst', 'Link-limited', 'Energy-limited', 'Thermal-stress'};
+comparison = "md_cbad_dqn - standard_dqn";
+colors = [hexrgb('#2874A6'); hexrgb('#C0392B')];
+fig = newFigure(18.3, 8.8);
+ax = axes(fig);
+hold(ax, 'on');
+for k = 1:numel(scenarios)
+    values = seedEffects.difference( ...
+        string(seedEffects.scenario) == scenarios(k) & ...
+        string(seedEffects.comparison) == comparison);
+    assert(numel(values) == 20, 'Expected 20 paired seed effects for %s.', scenarios(k));
+    offsets = linspace(-0.13, 0.13, numel(values))';
+    seedHandle = scatter(ax, k + offsets, values, 21, colors(1, :), 'filled', ...
+        'MarkerFaceAlpha', 0.68, 'MarkerEdgeColor', 'white', 'LineWidth', 0.4);
+    row = inference(string(inference.scenario) == scenarios(k) & ...
+        string(inference.comparison) == comparison, :);
+    assert(height(row) == 1, 'Missing inference row for %s.', scenarios(k));
+    intervalHandle = line(ax, [k, k], [row.ci95_low, row.ci95_high], ...
+        'Color', colors(2, :), 'LineWidth', 2.0);
+    meanHandle = plot(ax, k, row.mean_difference, 'd', 'Color', colors(2, :), ...
+        'MarkerFaceColor', colors(2, :), 'MarkerSize', 5.5);
+end
+yline(ax, 0, 'k-', 'LineWidth', 0.8);
+styleAxes(ax); grid(ax, 'on'); ax.XGrid = 'off';
+ax.XTick = 1:numel(scenarios); ax.XTickLabel = labels;
+ylabel(ax, 'Paired CBAD - DQN total cost');
+title(ax, 'Independent model-seed effects in fully coupled regimes', ...
+    'FontWeight', 'normal');
+legend(ax, [seedHandle, intervalHandle, meanHandle], ...
+    {'Individual model seed', '95% paired bootstrap interval', 'Mean effect'}, ...
+    'Location', 'northoutside', 'Orientation', 'horizontal', 'Box', 'off', ...
+    'FontSize', 7.2);
+exportFigure(fig, outputDir, paperDir, 'fig_seed_effects');
 end
 
 
@@ -162,10 +208,10 @@ scenarios = ["static", "reduced_coupling", "nominal", "burst", ...
 labels = {'Static', 'Reduced', 'Nominal', 'Burst', 'Link-limited', ...
     'Energy-limited', 'Thermal-stress'};
 policies = ["immediate_argmin", "mpc_h4", "contextual_bandit", ...
-    "threshold", "standard_dqn", "md_cfba_dqn", "md_cbad_dqn"];
-policyLabels = {'Argmin', 'MPC-4', 'Bandit', 'Threshold', 'DQN', 'CFBA', 'CBAD'};
+    "threshold", "standard_dqn", "md_cbad_dqn"];
+policyLabels = {'Argmin', 'MPC-4', 'Bandit', 'Threshold', 'DQN', 'CBAD'};
 colors = [hexrgb('#7F8C8D'); hexrgb('#34495E'); hexrgb('#9B59B6'); ...
-    hexrgb('#D68910'); hexrgb('#2874A6'); hexrgb('#17A589'); hexrgb('#C0392B')];
+    hexrgb('#D68910'); hexrgb('#2874A6'); hexrgb('#C0392B')];
 
 fig = newFigure(18.3, 13.1);
 layout = tiledlayout(fig, 2, 1, 'TileSpacing', 'compact', 'Padding', 'compact');
@@ -197,7 +243,7 @@ for panel = 1:2
     title(ax, panelTitle, 'FontWeight', 'normal');
     if panel == 1
         legend(ax, handles, policyLabels, 'Location', 'northoutside', ...
-            'Orientation', 'horizontal', 'NumColumns', 7, 'Box', 'off', ...
+            'Orientation', 'horizontal', 'NumColumns', 6, 'Box', 'off', ...
             'FontSize', 6.8);
     end
 end
@@ -312,9 +358,11 @@ drawnow;
 pdfPath = fullfile(outputDir, stem + ".pdf");
 svgPath = fullfile(outputDir, stem + ".svg");
 tiffPath = fullfile(outputDir, stem + ".tiff");
+pngPath = fullfile(outputDir, stem + ".png");
 exportgraphics(fig, pdfPath, 'ContentType', 'vector', 'BackgroundColor', 'white');
 exportgraphics(fig, svgPath, 'ContentType', 'vector', 'BackgroundColor', 'white');
 exportgraphics(fig, tiffPath, 'Resolution', 600, 'BackgroundColor', 'white');
+exportgraphics(fig, pngPath, 'Resolution', 220, 'BackgroundColor', 'white');
 forceSvgArial(svgPath);
 copyfile(pdfPath, fullfile(paperDir, stem + ".pdf"), 'f');
 copyfile(svgPath, fullfile(paperDir, stem + ".svg"), 'f');
@@ -354,11 +402,12 @@ assert(fid ~= -1, 'Could not write QA notes.');
 cleanup = onCleanup(@() fclose(fid));
 fprintf(fid, 'Backend: MATLAB R%s\n', version('-release'));
 fprintf(fid, 'Data source: %s\n', resultsDir);
-fprintf(fid, 'Primary summary: 63 rows = 7 scenarios x 9 policies.\n');
-fprintf(fid, 'Training curves: 12,000 rows = 4 methods x 5 seeds x 600 episodes.\n');
-fprintf(fid, 'Curve bands: mean +/- SD across five seeds after a causal 25-episode mean.\n');
-fprintf(fid, 'Sensitivity intervals: fixed-seed paired 95%% bootstrap, 10,000 resamples.\n');
+fprintf(fid, 'Primary summary: 56 rows = 7 scenarios x 8 policies.\n');
+fprintf(fid, 'Training curves: 36,000 rows = 3 methods x 20 seeds x 600 episodes.\n');
+fprintf(fid, 'Curve bands: mean +/- SD across twenty seeds after a causal 25-episode mean.\n');
+fprintf(fid, 'Sensitivity intervals: paired 95%% bootstrap across 20 independent model seeds, 10,000 resamples.\n');
+fprintf(fid, 'Multiplicity: exact paired sign tests with Holm adjustment; individual seed effects are plotted.\n');
 fprintf(fid, 'Physical scatter: every tenth row shown for legibility; all 20,000 rows used for correlations and checks.\n');
-fprintf(fid, 'Exports: vector PDF/SVG and 600-dpi TIFF; all figure fonts forced to Arial.\n');
+fprintf(fid, 'Exports: vector PDF/SVG, 600-dpi TIFF, and 220-dpi PNG QA copies; all figure fonts forced to Arial.\n');
 clear cleanup;
 end

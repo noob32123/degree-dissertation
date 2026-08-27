@@ -18,7 +18,22 @@
     801,
     802,
     803,
-    804
+    804,
+    805,
+    806,
+    807,
+    808,
+    809,
+    810,
+    811,
+    812,
+    813,
+    814,
+    815,
+    816,
+    817,
+    818,
+    819
   ],
   "test_traces_per_seed": 20,
   "planner": {
@@ -50,7 +65,30 @@
       "link_scale": 0.8
     }
   },
+  "preview_mismatch_transition_scales": [
+    0.85,
+    1.15
+  ],
   "bootstrap_seed": 20260829,
   "bootstrap_resamples": 10000,
-  "backbone": "standard DQN; no DDQN, dueling, PER, n-step, noisy, or distributional components"
+  "independent_unit": "independently trained model seed",
+  "primary_inference_family": [
+    "nominal",
+    "burst",
+    "link_limited",
+    "energy_limited",
+    "thermal_stress"
+  ],
+  "multiplicity": "Holm adjustment of exact two-sided paired sign tests",
+  "backbone": "standard DQN; no DDQN, dueling, PER, n-step, noisy, or distributional components",
+  "runtime": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.4.1",
+    "pandas": "3.0.3",
+    "torch": "2.8.0+cu129",
+    "cuda_runtime": "12.9",
+    "cuda_available": true,
+    "device_name": "NVIDIA GeForce RTX 5070 Ti"
+  }
 }

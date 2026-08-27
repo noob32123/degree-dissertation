@@ -1,0 +1,43 @@
+scenario,comparison,interpretation,n_pairs,mean_difference,ci95_low,ci95_high,relative_improvement_percent,mean_better,significant
+nominal,md_cfba_dqn - standard_dqn,absolute counterfactual targets,5,-4.498354012274092,-8.622121174271888,-1.9751944836186452,1.3663893010702846,True,True
+nominal,md_cbad_dqn - md_cfba_dqn,within-state centering,5,-0.6827107207882477,-1.7196824742027388,0.35426103262624337,0.2102483582317369,True,False
+nominal,md_cbad_dqn - standard_dqn,complete CBAD,5,-5.18106473306234,-10.104055046497512,-2.3890144620221805,1.5737648482294673,True,True
+burst,md_cfba_dqn - standard_dqn,absolute counterfactual targets,5,-4.574764404621192,-9.536760424938723,-1.1724537190929822,1.3055953533592468,True,True
+burst,md_cbad_dqn - md_cfba_dqn,within-state centering,5,-0.7285995942574459,-1.5234337638770625,0.16340679062018354,0.21068628042540352,True,False
+burst,md_cbad_dqn - standard_dqn,complete CBAD,5,-5.303363998878638,-10.39246668594219,-2.4801139948256945,1.513530923497251,True,True
+link_limited,md_cfba_dqn - standard_dqn,absolute counterfactual targets,5,-9.783400325874016,-17.318103056594385,-2.2857067613960793,2.201574478709089,True,True
+link_limited,md_cbad_dqn - md_cfba_dqn,within-state centering,5,-3.3326050137294714,-6.202968780570063,-0.4622412468888797,0.7668237188364235,True,True
+link_limited,md_cbad_dqn - standard_dqn,complete CBAD,5,-13.116005339603486,-22.91839924283611,-3.263299442964569,2.951516002254922,True,True
+energy_limited,md_cfba_dqn - standard_dqn,absolute counterfactual targets,5,-4.966847574291398,-8.807052890368618,-2.67787624542309,1.3644592187618358,True,True
+energy_limited,md_cbad_dqn - md_cfba_dqn,within-state centering,5,-0.4280246451450466,-1.4671350962766383,0.6110858059865449,0.11921065481022014,True,False
+energy_limited,md_cbad_dqn - standard_dqn,complete CBAD,5,-5.394872219436445,-9.810812260793318,-2.468213096360819,1.4820432928027518,True,True
+thermal_stress,md_cfba_dqn - standard_dqn,absolute counterfactual targets,5,-4.758803952871278,-9.827534024710587,-1.24572980084331,1.355664579437292,True,True
+thermal_stress,md_cbad_dqn - md_cfba_dqn,within-state centering,5,-0.7994192201057786,-1.7571796843286507,0.19807185303877758,0.23086434747407228,True,False
+thermal_stress,md_cbad_dqn - standard_dqn,complete CBAD,5,-5.558223172977057,-10.733558317883432,-2.53247353395966,1.5833991807261092,True,True
+static,md_cfba_dqn - standard_dqn,absolute counterfactual targets,5,-3.5976081645488707,-6.470725576579565,-1.4035921424627247,1.675424667790409,True,True
+static,md_cbad_dqn - md_cfba_dqn,within-state centering,5,-2.6358766768872726,-4.146668299287546,-1.476424826979644,1.2484583352051255,True,True
+static,md_cbad_dqn - standard_dqn,complete CBAD,5,-6.233484841436143,-9.441916844099756,-3.5276639094948736,2.9029660240804223,True,True
+reduced_coupling,md_cfba_dqn - standard_dqn,absolute counterfactual targets,5,-3.641983473896977,-5.542878326714037,-2.5238649949431364,1.5914090612042269,True,True
+reduced_coupling,md_cbad_dqn - md_cfba_dqn,within-state centering,5,-2.5931374607533257,-5.636441460862767,-0.0955336678028118,1.1514269266581822,True,True
+reduced_coupling,md_cbad_dqn - standard_dqn,complete CBAD,5,-6.235120934650302,-9.564075965732338,-2.906165903568268,2.7245120754184255,True,True
+nominal,md_cbad_dqn - immediate_argmin,long-term learned scheduling,5,-71.08516232880069,-75.2648414053785,-64.35298554343903,17.990834243110744,True,True
+nominal,md_cbad_dqn - contextual_bandit,long-term Bellman term,5,-67.77811493273786,-71.94767789428172,-62.0106204870065,17.298644130089066,True,True
+nominal,md_cbad_dqn - threshold,learned versus threshold,5,-389.9721118132532,-401.3076262925642,-375.97307709617263,54.617505592801145,True,True
+burst,md_cbad_dqn - immediate_argmin,long-term learned scheduling,5,-101.06662306471688,-104.55773365305235,-97.6682922870344,22.65254808775361,True,True
+burst,md_cbad_dqn - contextual_bandit,long-term Bellman term,5,-97.07149332103575,-100.69749706989778,-94.57858371049053,21.95368419843501,True,True
+burst,md_cbad_dqn - threshold,learned versus threshold,5,-380.69446996297347,-391.8348730240201,-367.579422450786,52.45257797809897,True,True
+link_limited,md_cbad_dqn - immediate_argmin,long-term learned scheduling,5,-92.41391729092152,-108.34123772454919,-83.14094198621117,17.647024103950496,True,True
+link_limited,md_cbad_dqn - contextual_bandit,long-term Bellman term,5,-82.86360627057233,-96.37188882619157,-73.39570442972429,16.11726087337796,True,True
+link_limited,md_cbad_dqn - threshold,learned versus threshold,5,-662.1458161246348,-683.9494097038184,-640.3422225454512,60.55777154442198,True,True
+energy_limited,md_cbad_dqn - immediate_argmin,long-term learned scheduling,5,-63.94239683435673,-68.11374325246126,-57.38096547594635,15.132025971658345,True,True
+energy_limited,md_cbad_dqn - contextual_bandit,long-term Bellman term,5,-59.79451558227578,-64.38590436325083,-53.00382675263128,14.290703651384732,True,True
+energy_limited,md_cbad_dqn - threshold,learned versus threshold,5,-460.09617678013973,-474.5955738656121,-441.3175256949506,56.197208579768535,True,True
+thermal_stress,md_cbad_dqn - immediate_argmin,long-term learned scheduling,5,-101.11035968713804,-104.6184821464019,-97.69543844662013,22.64087788689252,True,True
+thermal_stress,md_cbad_dqn - contextual_bandit,long-term Bellman term,5,-97.37209984839618,-100.91925591335726,-94.69482184592444,21.98785362194552,True,True
+thermal_stress,md_cbad_dqn - threshold,learned versus threshold,5,-380.84131231405956,-391.8082218977046,-367.55369269722195,52.434790738467335,True,True
+static,md_cbad_dqn - immediate_argmin,long-term learned scheduling,5,28.81245157837868,25.799393523037434,32.37518101572992,-16.035228639673836,False,False
+static,md_cbad_dqn - contextual_bandit,long-term Bellman term,5,28.587756879031662,25.641464863561094,32.159533125460165,-15.890306451609481,False,False
+static,md_cbad_dqn - threshold,learned versus threshold,5,28.26819573372603,25.0647575134039,31.789831789731988,-15.684820309705563,False,False
+reduced_coupling,md_cbad_dqn - immediate_argmin,long-term learned scheduling,5,20.541947161306133,18.613854598553175,23.013277292463282,-10.16547191514119,False,False
+reduced_coupling,md_cbad_dqn - contextual_bandit,long-term Bellman term,5,20.661964013112037,18.700122038336026,23.2158360994787,-10.230940307973057,False,False
+reduced_coupling,md_cbad_dqn - threshold,learned versus threshold,5,4.1124515624891895,-2.7086441305508457,10.933547255529225,-1.8820842244863945,False,False

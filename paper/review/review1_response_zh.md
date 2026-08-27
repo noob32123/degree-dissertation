@@ -46,9 +46,9 @@
 
 > 缺少未经优化的 DQN 对照及机制消融。
 
-**回复：**修订实验直接比较标准 DQN、未居中的 CFBA 和居中的 CBAD。三者网络、标准 DQN target、uniform 单步回放、探索策略、更新频率和训练预算完全相同，未使用 Double DQN、Dueling、PER、n-step、Noisy 或 Distributional DQN。物理生成器下，CFBA 与 CBAD 在五个完全耦合场景中均优于标准 DQN；但五个 CBAD–CFBA 区间均跨零，因此论文不再宣称居中机制具有独立显著贡献。epsilon 重置和 replay flushing 已不是当前方法组件，故不做虚假的相关消融。
+**回复：**修订实验直接比较完整 MD-CBAD-DQN 目标和未经修改的标准 DQN。二者网络、标准 DQN target、uniform 单步回放、探索策略、更新频率和训练预算完全相同，未使用 Double DQN、Dueling、PER、n-step、Noisy 或 Distributional DQN。物理生成器下，MD-CBAD-DQN 在五个完全耦合场景中均优于标准 DQN，且全部配对区间低于零。epsilon 重置和 replay flushing 已不是当前方法组件，故不做无关消融。
 
-**修改位置：**表 3、第 406–415 行。
+**修改位置：**严格匹配的方法设置及七场景主结果。
 
 ## 意见 7
 
@@ -68,4 +68,3 @@
 
 - 已解决：意见 1、3、4、5、6、7、8。
 - 部分解决：意见 2。物理一致性与工程范围依据已补充，但尚未用真实飞行遥测拟合联合分布。
-

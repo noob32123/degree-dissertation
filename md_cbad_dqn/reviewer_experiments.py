@@ -10,7 +10,10 @@ import argparse
 from dataclasses import asdict, replace
 import hashlib
 import json
+import math
 from pathlib import Path
+import platform
+import sys
 import time
 
 import numpy as np
@@ -24,8 +27,8 @@ from .experiment import (
     BOOTSTRAP_RESAMPLES,
     BOOTSTRAP_SEED,
     EPISODES,
+    FULL_COUPLING,
     HORIZON,
-    MODEL_SEEDS,
     SCENARIOS,
     curve_path,
     load_checkpoint,
@@ -39,20 +42,20 @@ from .planner import PlannerConfig, RecedingHorizonPlanner
 ROOT = Path(__file__).resolve().parent
 DEFAULT_RESULTS = ROOT / "results" / "reviewer_revision"
 TRACE_BASE = 3_300_000
-LEARNED = ("contextual_bandit", "standard_dqn", "md_cfba_dqn", "md_cbad_dqn")
+CONFIRMATION_SEEDS = tuple(range(800, 820))
+LEARNED = ("contextual_bandit", "standard_dqn", "md_cbad_dqn")
 POLICIES = (
     "immediate_argmin",
     "mpc_h4",
     "contextual_bandit",
     "threshold",
     "standard_dqn",
-    "md_cfba_dqn",
     "md_cbad_dqn",
     "fixed_onboard",
     "fixed_ground",
 )
 MAIN_POLICIES = POLICIES[:7]
-METRICS = (
+ADDITIVE_METRICS = (
     "total_cost",
     "immediate_cost",
     "penalty",
@@ -64,6 +67,11 @@ METRICS = (
     "queue_violation",
     "contact_violation",
     "planning_time_ms",
+)
+METRICS = ADDITIVE_METRICS + (
+    "maximum_heat",
+    "minimum_energy",
+    "threshold_free_episode",
     "onboard_fraction",
     "ground_fraction",
     "hybrid_fraction",
@@ -78,6 +86,7 @@ SENSITIVITY_PROFILES = {
     "heat_plus20": {"heat_scale": 1.2},
     "link_minus20": {"link_scale": 0.8},
 }
+PREVIEW_MISMATCH_SCALES = (0.85, 1.15)
 
 
 def revision_env(horizon: int, scenario: str = "nominal", coupling: float = 1.0,
@@ -95,10 +104,18 @@ def revision_model_path(results: Path, variant: str, seed: int) -> Path:
     tag = {
         "contextual_bandit": "gamma_0",
         "standard_dqn": "standard",
-        "md_cfba_dqn": "lambda_0p3_uncentered",
         "md_cbad_dqn": "lambda_0p3",
+        "md_fullq_dqn": "lambda_0p3_uncentered",
+        "md_immediate_advantage_dqn": "lambda_0p3_immediate",
+        "double_dqn": "double",
+        "double_cbad_dqn": "double_lambda_0p3",
     }[variant]
     return results / "models" / f"{variant}__{tag}__seed_{seed}.pth"
+
+
+def mismatch_model_path(results: Path, scale: float, seed: int) -> Path:
+    tag = str(scale).replace(".", "p")
+    return results / "mismatch_models" / f"md_cbad_dqn__preview_scale_{tag}__seed_{seed}.pth"
 
 
 def train_or_load_revision(
@@ -178,7 +195,9 @@ def evaluate_policy(
     for trace_seed in trace_seeds:
         env = SatelliteSchedulingEnv(config)
         state = env.reset(seed=trace_seed)
-        totals = {key: 0.0 for key in METRICS[:11]}
+        totals = {key: 0.0 for key in ADDITIVE_METRICS}
+        maximum_heat = float("-inf")
+        minimum_energy = float("inf")
         actions = np.zeros(3, dtype=int)
         done = False
         while not done:
@@ -202,9 +221,22 @@ def evaluate_policy(
                 action = agent.act(state, explore=False)
             state, _, done, info = env.step(action)
             actions[action] += 1
-            for key in METRICS[:10]:
+            for key in ADDITIVE_METRICS:
+                if key == "planning_time_ms":
+                    continue
                 totals[key] += info[key]
             totals["planning_time_ms"] += planning_ms
+            maximum_heat = max(maximum_heat, float(info["heat"]))
+            minimum_energy = min(minimum_energy, float(info["energy"]))
+        threshold_exposures = sum(
+            totals[key]
+            for key in (
+                "thermal_violation",
+                "energy_violation",
+                "queue_violation",
+                "contact_violation",
+            )
+        )
         rows.append(
             {
                 "policy": policy,
@@ -220,6 +252,9 @@ def evaluate_policy(
                 "heat_scale": config.heat_scale,
                 "link_scale": config.link_scale,
                 **totals,
+                "maximum_heat": maximum_heat,
+                "minimum_energy": minimum_energy,
+                "threshold_free_episode": float(threshold_exposures == 0),
                 "onboard_fraction": actions[0] / config.horizon,
                 "ground_fraction": actions[1] / config.horizon,
                 "hybrid_fraction": actions[2] / config.horizon,
@@ -248,10 +283,34 @@ def summarize(raw: pd.DataFrame, group: str = "scenario") -> pd.DataFrame:
     return result
 
 
+def _exact_two_sided_sign_p(difference: np.ndarray) -> float:
+    nonzero = difference[np.abs(difference) > np.finfo(float).eps]
+    n = len(nonzero)
+    if n == 0:
+        return 1.0
+    negative = int((nonzero < 0).sum())
+    positive = n - negative
+    tail = min(negative, positive)
+    probability = 2.0 * sum(math.comb(n, k) for k in range(tail + 1)) / (2**n)
+    return float(min(1.0, probability))
+
+
+def _holm_adjust(p_values: np.ndarray) -> np.ndarray:
+    order = np.argsort(p_values)
+    adjusted = np.empty(len(p_values), dtype=float)
+    running = 0.0
+    count = len(p_values)
+    for rank, index in enumerate(order):
+        running = max(running, (count - rank) * float(p_values[index]))
+        adjusted[index] = min(1.0, running)
+    return adjusted
+
+
 def paired_bootstrap(
     raw: pd.DataFrame,
     comparisons: tuple[tuple[str, str], ...],
     group: str = "scenario",
+    inference_family: tuple[str, ...] | None = None,
 ) -> pd.DataFrame:
     by_seed = seed_level(raw, group)
     rng = np.random.default_rng(BOOTSTRAP_SEED)
@@ -268,6 +327,9 @@ def paired_bootstrap(
                 replace=True,
             ).mean(axis=1)
             reference_mean = float(pivot[reference].mean())
+            leave_one_out = np.array(
+                [np.delete(difference, index).mean() for index in range(len(difference))]
+            )
             rows.append(
                 {
                     group: label,
@@ -279,12 +341,56 @@ def paired_bootstrap(
                     "relative_improvement_percent": float(
                         -100.0 * difference.mean() / reference_mean
                     ),
+                    "exact_sign_p": _exact_two_sided_sign_p(difference),
+                    "negative_seed_pairs": int((difference < 0).sum()),
+                    "positive_seed_pairs": int((difference > 0).sum()),
+                    "loo_mean_min": float(leave_one_out.min()),
+                    "loo_mean_max": float(leave_one_out.max()),
                 }
             )
     result = pd.DataFrame(rows)
+    result["holm_adjusted_p"] = np.nan
+    family = set(inference_family or ())
+    for comparison in result.comparison.unique():
+        mask = result.comparison.eq(comparison)
+        if family:
+            mask &= result[group].isin(family)
+        if mask.any():
+            result.loc[mask, "holm_adjusted_p"] = _holm_adjust(
+                result.loc[mask, "exact_sign_p"].to_numpy()
+            )
+    result["in_prespecified_family"] = result[group].isin(family) if family else True
     result["mean_better"] = result.mean_difference < 0
-    result["supported"] = result.ci95_high < 0
+    result["supported"] = (
+        result.mean_better
+        & (result.ci95_high < 0)
+        & (result.holm_adjusted_p < 0.05)
+    )
     return result
+
+
+def paired_seed_differences(
+    raw: pd.DataFrame,
+    comparisons: tuple[tuple[str, str], ...],
+    group: str = "scenario",
+) -> pd.DataFrame:
+    by_seed = seed_level(raw, group)
+    rows: list[dict] = []
+    for label in dict.fromkeys(by_seed[group].tolist()):
+        pivot = by_seed[by_seed[group] == label].pivot(
+            index="model_seed", columns="policy", values="total_cost"
+        )
+        for treatment, reference in comparisons:
+            for model_seed, value in (pivot[treatment] - pivot[reference]).dropna().items():
+                rows.append(
+                    {
+                        group: label,
+                        "comparison": f"{treatment} - {reference}",
+                        "model_seed": int(model_seed),
+                        "difference": float(value),
+                    }
+                )
+    return pd.DataFrame(rows)
 
 
 def train_revision_models(
@@ -329,6 +435,107 @@ def load_revision_models(
     }
 
 
+def train_or_load_mismatch_model(
+    results: Path,
+    scale: float,
+    seed: int,
+    episodes: int,
+    horizon: int,
+    device: torch.device,
+    resume: bool,
+) -> DQNAgent:
+    path = mismatch_model_path(results, scale, seed)
+    if resume and path.exists():
+        return load_checkpoint(
+            path, "md_cbad_dqn", seed, device, episodes, horizon, AUXILIARY_LAMBDA
+        )
+    agent, curve = train_model(
+        "md_cbad_dqn",
+        seed,
+        episodes,
+        horizon,
+        device,
+        AUXILIARY_LAMBDA,
+        environment_config=revision_env(horizon),
+        preview_transition_scale=scale,
+    )
+    save_checkpoint(path, agent, seed, episodes, horizon)
+    curve_frame = pd.DataFrame(curve)
+    curve_frame["preview_transition_scale"] = scale
+    path.parent.mkdir(parents=True, exist_ok=True)
+    curve_frame.to_csv(curve_path(path), index=False)
+    return agent
+
+
+def write_mismatch_model_manifest(results: Path) -> pd.DataFrame:
+    rows = []
+    for path in sorted((results / "mismatch_models").glob("*.pth")):
+        payload = torch.load(path, map_location="cpu", weights_only=False)
+        rows.append(
+            {
+                "file": path.name,
+                "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+                "model_seed": payload["model_seed"],
+                "training_steps": payload["training_steps"],
+                "preview_transition_scale": 0.85 if "0p85" in path.name else 1.15,
+            }
+        )
+    manifest = pd.DataFrame(rows)
+    manifest.to_csv(results / "preview_mismatch_model_manifest.csv", index=False)
+    return manifest
+
+
+def run_model_mismatch(
+    results: Path,
+    agents: dict[tuple[str, int], DQNAgent],
+    seeds: tuple[int, ...],
+    episodes: int,
+    horizon: int,
+    test_traces: int,
+    device: torch.device,
+    resume: bool,
+) -> pd.DataFrame:
+    mismatch_agents: dict[tuple[float, int], DQNAgent] = {}
+    for seed in seeds:
+        for scale in PREVIEW_MISMATCH_SCALES:
+            print(f"training/loading CBAD preview scale={scale} seed={seed}", flush=True)
+            mismatch_agents[(scale, seed)] = train_or_load_mismatch_model(
+                results, scale, seed, episodes, horizon, device, resume
+            )
+    write_mismatch_model_manifest(results)
+    rows: list[dict] = []
+    for seed_index, seed in enumerate(seeds):
+        traces = [TRACE_BASE + seed_index * 1000 + i for i in range(test_traces)]
+        for label, scenario, coupling in FULL_COUPLING:
+            config = revision_env(horizon, scenario=scenario, coupling=coupling)
+            policies = (
+                ("standard_dqn", agents[("standard_dqn", seed)]),
+                ("md_cbad_dqn_exact", agents[("md_cbad_dqn", seed)]),
+                ("md_cbad_dqn_preview_0p85", mismatch_agents[(0.85, seed)]),
+                ("md_cbad_dqn_preview_1p15", mismatch_agents[(1.15, seed)]),
+            )
+            for policy, agent in policies:
+                rows.extend(evaluate_policy(policy, agent, seed, traces, config, label))
+    raw = pd.DataFrame(rows)
+    raw.to_csv(results / "preview_mismatch_raw.csv", index=False)
+    seed_level(raw).to_csv(results / "preview_mismatch_seed_level.csv", index=False)
+    summarize(raw).to_csv(results / "preview_mismatch_summary.csv", index=False)
+    comparisons = (
+        ("md_cbad_dqn_exact", "standard_dqn"),
+        ("md_cbad_dqn_preview_0p85", "standard_dqn"),
+        ("md_cbad_dqn_preview_1p15", "standard_dqn"),
+    )
+    paired_bootstrap(
+        raw,
+        comparisons,
+        inference_family=tuple(item[0] for item in FULL_COUPLING),
+    ).to_csv(results / "preview_mismatch_inference.csv", index=False)
+    paired_seed_differences(raw, comparisons).to_csv(
+        results / "preview_mismatch_seed_differences.csv", index=False
+    )
+    return raw
+
+
 def run_seven_regimes(
     results: Path,
     agents: dict[tuple[str, int], DQNAgent],
@@ -351,15 +558,19 @@ def run_seven_regimes(
     raw.to_csv(results / "seven_regimes_raw.csv", index=False)
     seed_level(raw).to_csv(results / "seven_regimes_seed_level.csv", index=False)
     summarize(raw).to_csv(results / "seven_regimes_summary.csv", index=False)
+    comparisons = (
+        ("md_cbad_dqn", "standard_dqn"),
+        ("md_cbad_dqn", "mpc_h4"),
+        ("mpc_h4", "immediate_argmin"),
+    )
     paired_bootstrap(
         raw,
-        (
-            ("md_cbad_dqn", "standard_dqn"),
-            ("md_cbad_dqn", "md_cfba_dqn"),
-            ("md_cbad_dqn", "mpc_h4"),
-            ("mpc_h4", "immediate_argmin"),
-        ),
+        comparisons,
+        inference_family=tuple(item[0] for item in FULL_COUPLING),
     ).to_csv(results / "seven_regimes_paired_bootstrap.csv", index=False)
+    paired_seed_differences(raw, comparisons).to_csv(
+        results / "seven_regimes_paired_seed_differences.csv", index=False
+    )
     return raw
 
 
@@ -373,7 +584,7 @@ def run_sensitivity(
     rows: list[dict] = []
     policies = ("immediate_argmin", "mpc_h4", "standard_dqn", "md_cbad_dqn")
     for seed_index, seed in enumerate(seeds):
-        traces = [TRACE_BASE + 100_000 + seed_index * 1000 + i for i in range(test_traces)]
+        traces = [TRACE_BASE + seed_index * 1000 + i for i in range(test_traces)]
         for profile, overrides in SENSITIVITY_PROFILES.items():
             config = revision_env(horizon, **overrides)
             for policy in policies:
@@ -389,11 +600,16 @@ def run_sensitivity(
         results / "sensitivity_seed_level.csv", index=False
     )
     summarize(raw, "profile").to_csv(results / "sensitivity_summary.csv", index=False)
+    comparisons = (("md_cbad_dqn", "standard_dqn"), ("md_cbad_dqn", "mpc_h4"))
     paired_bootstrap(
         raw,
-        (("md_cbad_dqn", "standard_dqn"), ("md_cbad_dqn", "mpc_h4")),
+        comparisons,
         "profile",
+        inference_family=tuple(SENSITIVITY_PROFILES),
     ).to_csv(results / "sensitivity_paired_bootstrap.csv", index=False)
+    paired_seed_differences(raw, comparisons, "profile").to_csv(
+        results / "sensitivity_paired_seed_differences.csv", index=False
+    )
     return raw
 
 
@@ -472,9 +688,23 @@ def write_metadata(
         "planner": asdict(PlannerConfig(horizon=4, gamma=0.97)),
         "planner_forecast": "perfect next-four-task and link-state forecast",
         "sensitivity_profiles": SENSITIVITY_PROFILES,
+        "preview_mismatch_transition_scales": list(PREVIEW_MISMATCH_SCALES),
         "bootstrap_seed": BOOTSTRAP_SEED,
         "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+        "independent_unit": "independently trained model seed",
+        "primary_inference_family": [item[0] for item in FULL_COUPLING],
+        "multiplicity": "Holm adjustment of exact two-sided paired sign tests",
         "backbone": "standard DQN; no DDQN, dueling, PER, n-step, noisy, or distributional components",
+        "runtime": {
+            "python": sys.version,
+            "platform": platform.platform(),
+            "numpy": np.__version__,
+            "pandas": pd.__version__,
+            "torch": torch.__version__,
+            "cuda_runtime": torch.version.cuda,
+            "cuda_available": torch.cuda.is_available(),
+            "device_name": torch.cuda.get_device_name(0) if torch.cuda.is_available() else "cpu",
+        },
     }
     (results / "metadata.json").write_text(
         json.dumps(metadata, indent=2), encoding="utf-8"
@@ -484,7 +714,9 @@ def write_metadata(
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "stage", choices=("train", "evaluate", "sensitivity", "audit", "all")
+        "stage", choices=(
+            "train", "evaluate", "sensitivity", "model-mismatch", "audit", "validate", "all"
+        )
     )
     parser.add_argument("--results", type=Path, default=DEFAULT_RESULTS)
     parser.add_argument("--episodes", type=int, default=EPISODES)
@@ -492,15 +724,159 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--test-traces", type=int, default=20)
     parser.add_argument("--resume", action="store_true")
     parser.add_argument("--smoke", action="store_true")
+    parser.add_argument(
+        "--seeds",
+        type=str,
+        help="Optional comma-separated seeds or inclusive range, for example 800-819.",
+    )
     return parser.parse_args()
+
+
+def parse_seeds(value: str | None) -> tuple[int, ...]:
+    if value is None:
+        return CONFIRMATION_SEEDS
+    seeds: list[int] = []
+    for part in value.split(","):
+        token = part.strip()
+        if "-" in token:
+            left, right = token.split("-", 1)
+            seeds.extend(range(int(left), int(right) + 1))
+        else:
+            seeds.append(int(token))
+    unique = tuple(dict.fromkeys(seeds))
+    if not unique:
+        raise ValueError("at least one model seed is required")
+    return unique
+
+
+def write_revision_validation(
+    results: Path,
+    seeds: tuple[int, ...],
+    test_traces: int,
+) -> None:
+    raw = pd.read_csv(results / "seven_regimes_raw.csv")
+    sensitivity = pd.read_csv(results / "sensitivity_raw.csv")
+    manifest = pd.read_csv(results / "model_manifest.csv")
+    metadata = json.loads((results / "metadata.json").read_text(encoding="utf-8"))
+    expected_steps = int(metadata["real_steps_per_model"])
+    expected_main = len(SCENARIOS) * len(POLICIES) * len(seeds) * test_traces
+    expected_sensitivity = len(SENSITIVITY_PROFILES) * 4 * len(seeds) * test_traces
+    cells = raw.groupby(["scenario", "policy", "model_seed"]).size()
+    if len(raw) != expected_main or len(sensitivity) != expected_sensitivity:
+        raise AssertionError("reviewer-revision row count mismatch")
+    if len(cells) != len(SCENARIOS) * len(POLICIES) * len(seeds):
+        raise AssertionError("reviewer-revision cell count mismatch")
+    if not (cells == test_traces).all():
+        raise AssertionError("unequal test-trace count in reviewer revision")
+    if len(manifest) != len(LEARNED) * len(seeds):
+        raise AssertionError("checkpoint manifest count mismatch")
+    if set(manifest.model_seed.astype(int)) != set(seeds):
+        raise AssertionError("checkpoint manifest seed mismatch")
+    if not (manifest.training_steps.astype(int) == expected_steps).all():
+        raise AssertionError("checkpoint training-budget mismatch")
+    main_finite = bool(np.isfinite(raw.select_dtypes(include=[np.number])).all().all())
+    sensitivity_finite = bool(
+        np.isfinite(sensitivity.select_dtypes(include=[np.number])).all().all()
+    )
+    if not main_finite or not sensitivity_finite:
+        raise AssertionError("non-finite reviewer-revision evaluation value")
+    artifacts = {}
+    names = [
+        "seven_regimes_raw.csv",
+        "seven_regimes_seed_level.csv",
+        "seven_regimes_summary.csv",
+        "seven_regimes_paired_bootstrap.csv",
+        "seven_regimes_paired_seed_differences.csv",
+        "sensitivity_raw.csv",
+        "sensitivity_seed_level.csv",
+        "sensitivity_summary.csv",
+        "sensitivity_paired_bootstrap.csv",
+        "sensitivity_paired_seed_differences.csv",
+        "model_manifest.csv",
+        "metadata.json",
+    ]
+    mismatch_path = results / "preview_mismatch_raw.csv"
+    mismatch_rows = None
+    mismatch_checkpoints = None
+    mismatch_finite = None
+    if mismatch_path.exists():
+        mismatch = pd.read_csv(mismatch_path)
+        expected_mismatch = len(FULL_COUPLING) * 4 * len(seeds) * test_traces
+        if len(mismatch) != expected_mismatch:
+            raise AssertionError("preview-mismatch row count mismatch")
+        mismatch_manifest = pd.read_csv(results / "preview_mismatch_model_manifest.csv")
+        if len(mismatch_manifest) != len(PREVIEW_MISMATCH_SCALES) * len(seeds):
+            raise AssertionError("preview-mismatch checkpoint count mismatch")
+        if set(mismatch_manifest.model_seed.astype(int)) != set(seeds):
+            raise AssertionError("preview-mismatch checkpoint seed mismatch")
+        if not (
+            mismatch_manifest.training_steps.astype(int) == expected_steps
+        ).all():
+            raise AssertionError("preview-mismatch training-budget mismatch")
+        mismatch_finite = bool(
+            np.isfinite(mismatch.select_dtypes(include=[np.number])).all().all()
+        )
+        if not mismatch_finite:
+            raise AssertionError("non-finite preview-mismatch evaluation value")
+        mismatch_rows = len(mismatch)
+        mismatch_checkpoints = len(mismatch_manifest)
+        names.extend(
+            [
+                "preview_mismatch_raw.csv",
+                "preview_mismatch_seed_level.csv",
+                "preview_mismatch_summary.csv",
+                "preview_mismatch_inference.csv",
+                "preview_mismatch_seed_differences.csv",
+                "preview_mismatch_model_manifest.csv",
+            ]
+        )
+    for name in names:
+        path = results / name
+        artifacts[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    source_files = (
+        ROOT / "agent.py",
+        ROOT / "environment.py",
+        ROOT / "experiment.py",
+        ROOT / "planner.py",
+        ROOT / "reviewer_experiments.py",
+        ROOT / "reviewer_reporting.py",
+        ROOT / "plot_reviewer_results_matlab.m",
+        ROOT / "requirements.txt",
+        ROOT.parent / "paper" / "source.tex",
+    )
+    source_hashes = {
+        str(path.relative_to(ROOT.parent)).replace("\\", "/"): hashlib.sha256(path.read_bytes()).hexdigest()
+        for path in source_files
+    }
+    payload = {
+        "status": "passed",
+        "model_seeds": list(seeds),
+        "n_independent_model_seeds": len(seeds),
+        "test_traces_per_seed": test_traces,
+        "seven_regimes_rows": len(raw),
+        "seven_regimes_policy_seed_cells": len(cells),
+        "sensitivity_rows": len(sensitivity),
+        "checkpoints": len(manifest),
+        "expected_real_steps_per_checkpoint": expected_steps,
+        "seven_regimes_all_numeric_finite": main_finite,
+        "sensitivity_all_numeric_finite": sensitivity_finite,
+        "preview_mismatch_rows": mismatch_rows,
+        "preview_mismatch_checkpoints": mismatch_checkpoints,
+        "preview_mismatch_all_numeric_finite": mismatch_finite,
+        "artifacts_sha256": artifacts,
+        "source_sha256": source_hashes,
+    }
+    (results / "validation.json").write_text(
+        json.dumps(payload, indent=2), encoding="utf-8"
+    )
 
 
 def main() -> None:
     args = parse_args()
-    seeds = MODEL_SEEDS
+    seeds = parse_seeds(args.seeds)
     if args.smoke:
         args.episodes, args.horizon, args.test_traces = 12, 16, 3
-        seeds = (MODEL_SEEDS[0],)
+        seeds = (CONFIRMATION_SEEDS[0],)
         if args.results == DEFAULT_RESULTS:
             args.results = ROOT / "results" / "reviewer_revision_smoke"
     args.results.mkdir(parents=True, exist_ok=True)
@@ -508,6 +884,9 @@ def main() -> None:
     print(f"stage={args.stage} device={device} results={args.results}", flush=True)
     audit_parameter_generator(args.results)
     write_metadata(args.results, seeds, args.episodes, args.horizon, args.test_traces)
+    if args.stage == "validate":
+        write_revision_validation(args.results, seeds, args.test_traces)
+        return
     agents: dict[tuple[str, int], DQNAgent] | None = None
     if args.stage in {"train", "all"}:
         agents = train_revision_models(
@@ -542,6 +921,22 @@ def main() -> None:
         expected = len(SENSITIVITY_PROFILES) * 4 * len(seeds) * args.test_traces
         if len(raw) != expected:
             raise AssertionError(f"expected {expected} sensitivity rows, found {len(raw)}")
+    if args.stage in {"model-mismatch", "all"}:
+        raw = run_model_mismatch(
+            args.results,
+            agents,
+            seeds,
+            args.episodes,
+            args.horizon,
+            args.test_traces,
+            device,
+            args.resume,
+        )
+        expected = len(FULL_COUPLING) * 4 * len(seeds) * args.test_traces
+        if len(raw) != expected:
+            raise AssertionError(f"expected {expected} mismatch rows, found {len(raw)}")
+    if args.stage == "all":
+        write_revision_validation(args.results, seeds, args.test_traces)
 
 
 if __name__ == "__main__":

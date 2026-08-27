@@ -24,7 +24,6 @@ POLICIES = (
     "contextual_bandit",
     "threshold",
     "standard_dqn",
-    "md_cfba_dqn",
     "md_cbad_dqn",
 )
 POLICY_LABELS = {
@@ -33,7 +32,6 @@ POLICY_LABELS = {
     "contextual_bandit": "Bandit",
     "threshold": "Threshold",
     "standard_dqn": "DQN",
-    "md_cfba_dqn": "CFBA",
     "md_cbad_dqn": "CBAD",
 }
 SCENARIO_LABELS = {
@@ -66,9 +64,9 @@ def _metric(summary: pd.DataFrame, scenario: str, policy: str, column: str) -> f
 
 def _write_main(summary: pd.DataFrame, output: Path) -> None:
     lines = [
-        r"\begin{tabular}{lrrrrrrr}",
+        r"\begin{tabular}{lrrrrrr}",
         r"\toprule",
-        r"Regime & Argmin & MPC-4 & Bandit & Threshold & DQN & CFBA & CBAD \\",
+        r"Regime & Argmin & MPC-4 & Bandit & Threshold & DQN & CBAD \\",
         r"\midrule",
     ]
     for scenario, _, _ in SCENARIOS:
@@ -87,40 +85,12 @@ def _write_main(summary: pd.DataFrame, output: Path) -> None:
     (output / "table_reviewer_main.tex").write_text("\n".join(lines), encoding="utf-8")
 
 
-def _write_ablation(comparison: pd.DataFrame, output: Path) -> None:
-    comparisons = (
-        ("md_cfba_dqn - standard_dqn", "CFBA $-$ DQN"),
-        ("md_cbad_dqn - md_cfba_dqn", "CBAD $-$ CFBA"),
-        ("md_cbad_dqn - standard_dqn", "CBAD $-$ DQN"),
-    )
-    lines = [
-        r"\begin{tabular}{llrrr}",
-        r"\toprule",
-        r"Regime & Comparison & Mean difference & 95\% interval & Supported \\",
-        r"\midrule",
-    ]
-    for scenario, _, _ in FULL_COUPLING:
-        for key, label in comparisons:
-            row = comparison[
-                (comparison.scenario == scenario) & (comparison.comparison == key)
-            ].iloc[0]
-            supported = "yes" if bool(row.supported) else "no"
-            lines.append(
-                f"{SCENARIO_LABELS[scenario]} & {label} & {row.mean_difference:.2f} & "
-                f"[{row.ci95_low:.2f}, {row.ci95_high:.2f}] & {supported} \\\\"
-            )
-    lines.extend((r"\bottomrule", r"\end{tabular}"))
-    (output / "table_reviewer_ablation.tex").write_text(
-        "\n".join(lines), encoding="utf-8"
-    )
-
-
 def _write_sensitivity(sensitivity: pd.DataFrame, output: Path) -> None:
     selected = sensitivity[sensitivity.comparison == "md_cbad_dqn - standard_dqn"]
     lines = [
-        r"\begin{tabular}{lrrr}",
+        r"\begin{tabular}{lrrrr}",
         r"\toprule",
-        r"Parameter profile & Mean difference & 95\% interval & Improvement \\",
+        r"Parameter profile & Mean difference & 95\% interval & Improvement & Holm $p$ \\",
         r"\midrule",
     ]
     for profile in PROFILE_LABELS:
@@ -128,7 +98,8 @@ def _write_sensitivity(sensitivity: pd.DataFrame, output: Path) -> None:
         lines.append(
             f"{PROFILE_LABELS[profile]} & {row.mean_difference:.2f} & "
             f"[{row.ci95_low:.2f}, {row.ci95_high:.2f}] & "
-            f"{row.relative_improvement_percent:.2f}\\% \\\\"
+            f"{row.relative_improvement_percent:.2f}\\% & "
+            f"{row.holm_adjusted_p:.4g} \\\\"
         )
     lines.extend((r"\bottomrule", r"\end{tabular}"))
     (output / "table_sensitivity.tex").write_text("\n".join(lines), encoding="utf-8")
@@ -136,8 +107,8 @@ def _write_sensitivity(sensitivity: pd.DataFrame, output: Path) -> None:
 
 def _write_parameters(output: Path) -> None:
     rows = (
-        ("Raw task data", "8--64 Mbit", "Engineering envelope; sensitivity $\\pm20\\%$"),
-        ("Arithmetic workload", "0.25--4.0 GFLOP", "Engineering envelope; correlated with data size"),
+        ("Raw task data", "8--64 Mbit nominal", "Stress interval reaches 92.8 Mbit before sensitivity scaling"),
+        ("Arithmetic workload", "0.25--4.0 GFLOP nominal", "Stress interval reaches 5.8 GFLOP"),
         ("Result / raw-data ratio", "1--5\\%", "Bounded compression assumption"),
         ("Feature / raw-data ratio", "8--30\\%", "Bounded collaborative-processing assumption"),
         ("Preprocessing fraction", "20--45\\%", "Deterministic function of workload quantile"),
@@ -160,10 +131,146 @@ def _write_parameters(output: Path) -> None:
     )
 
 
+def _write_state_dictionary(output: Path) -> None:
+    rows = (
+        ("$x_1$", "Onboard compute heat", "J", "100"),
+        ("$x_2$", "Total workload", "GFLOP", "4.8"),
+        ("$x_3$", "Onboard compute time", "ms", "1400"),
+        ("$x_4$", "Result transmit time at 50 Mbit s$^{-1}$", "ms", "100"),
+        ("$x_5$", "Squared co-location count", "count$^2$", "2401"),
+        ("$x_6$", "Onboard-result data", "Mbit", "4"),
+        ("$x_7$", "Full-offload transmit heat", "J", "100"),
+        ("$x_8$", "Ground compute time", "ms", "100"),
+        ("$x_9$", "Raw input data", "Mbit", "76.8"),
+        ("$x_{10}$", "Preprocessing heat", "J", "100"),
+        ("$x_{11}$", "Feature-transmit heat", "J", "100"),
+        ("$x_{12}$", "Onboard preprocessing work", "GFLOP", "2.2"),
+        ("$x_{13}$", "Remaining ground compute time", "ms", "100"),
+        ("$x_{14}$", "Total workload descriptor", "GFLOP", "4.8"),
+        ("$x_{15}$", "Collaborative feature data", "Mbit", "32"),
+    )
+    lines = [
+        r"\begin{tabular}{llll}",
+        r"\toprule",
+        r"Coordinate & Descriptor & Unit & Normalization scale $s_k$ \\",
+        r"\midrule",
+    ]
+    lines.extend(" & ".join(row) + r" \\" for row in rows)
+    lines.extend((r"\bottomrule", r"\end{tabular}"))
+    (output / "table_state_dictionary.tex").write_text(
+        "\n".join(lines), encoding="utf-8"
+    )
+
+
+def _write_primary_inference(comparison: pd.DataFrame, output: Path) -> None:
+    full_names = [row[0] for row in FULL_COUPLING]
+    selected = comparison[
+        (comparison.comparison == "md_cbad_dqn - standard_dqn")
+        & comparison.scenario.isin(full_names)
+    ].set_index("scenario")
+    lines = [
+        r"\begin{tabular}{lrrrrr}",
+        r"\toprule",
+        r"Regime & Mean difference & 95\% interval & Negative seeds & Holm $p$ & LOO range \\",
+        r"\midrule",
+    ]
+    for scenario in full_names:
+        row = selected.loc[scenario]
+        lines.append(
+            f"{SCENARIO_LABELS[scenario]} & {row.mean_difference:.2f} & "
+            f"[{row.ci95_low:.2f}, {row.ci95_high:.2f}] & "
+            f"{int(row.negative_seed_pairs)}/{int(row.n_pairs)} & "
+            f"{row.holm_adjusted_p:.4g} & "
+            f"[{row.loo_mean_min:.2f}, {row.loo_mean_max:.2f}] \\\\"
+        )
+    lines.extend((r"\bottomrule", r"\end{tabular}"))
+    (output / "table_primary_inference.tex").write_text(
+        "\n".join(lines), encoding="utf-8"
+    )
+
+
+def _write_engineering_outcomes(summary: pd.DataFrame, output: Path) -> None:
+    scenarios = ("nominal", "link_limited", "energy_limited", "thermal_stress")
+    delta_lines = [
+        r"\begin{tabular}{lrrrrr}",
+        r"\toprule",
+        r"Regime & $\Delta$ immediate & $\Delta$ penalty & $\Delta$ energy & $\Delta$ latency (s) & $\Delta$ data (Mbit) \\",
+        r"\midrule",
+    ]
+    exposure_lines = [
+        r"\begin{tabular}{lrrr}",
+        r"\toprule",
+        r"Regime & Low-energy steps DQN/CBAD & Min. energy DQN/CBAD & Max. heat DQN/CBAD \\",
+        r"\midrule",
+    ]
+    for scenario in scenarios:
+        def delta(column: str) -> float:
+            return _metric(summary, scenario, "md_cbad_dqn", column) - _metric(
+                summary, scenario, "standard_dqn", column
+            )
+        energy_dqn = _metric(summary, scenario, "standard_dqn", "energy_violation_mean")
+        energy_cbad = _metric(summary, scenario, "md_cbad_dqn", "energy_violation_mean")
+        minimum_energy_dqn = _metric(summary, scenario, "standard_dqn", "minimum_energy_mean")
+        minimum_energy_cbad = _metric(summary, scenario, "md_cbad_dqn", "minimum_energy_mean")
+        heat_dqn = _metric(summary, scenario, "standard_dqn", "maximum_heat_mean")
+        heat_cbad = _metric(summary, scenario, "md_cbad_dqn", "maximum_heat_mean")
+        delta_lines.append(
+            f"{SCENARIO_LABELS[scenario]} & {delta('immediate_cost_mean'):.2f} & "
+            f"{delta('penalty_mean'):.2f} & {delta('energy_use_mean'):.3f} & "
+            f"{delta('latency_ms_mean') / 1000.0:.2f} & "
+            f"{delta('transmitted_mbit_mean'):.1f} \\\\"
+        )
+        exposure_lines.append(
+            f"{SCENARIO_LABELS[scenario]} & {energy_dqn:.1f}/{energy_cbad:.1f} & "
+            f"{minimum_energy_dqn:.2f}/{minimum_energy_cbad:.2f} & "
+            f"{heat_dqn:.3f}/{heat_cbad:.3f} \\\\"
+        )
+    delta_lines.extend((r"\bottomrule", r"\end{tabular}"))
+    exposure_lines.extend((r"\bottomrule", r"\end{tabular}"))
+    lines = delta_lines + [r"\par\medskip"] + exposure_lines
+    (output / "table_engineering_outcomes.tex").write_text(
+        "\n".join(lines), encoding="utf-8"
+    )
+
+
+def _write_preview_mismatch(inference: pd.DataFrame, output: Path) -> None:
+    labels = {
+        "md_cbad_dqn_exact - standard_dqn": "Simulator-exact preview",
+        "md_cbad_dqn_preview_0p85 - standard_dqn": "Consequences scaled to 0.85",
+        "md_cbad_dqn_preview_1p15 - standard_dqn": "Consequences scaled to 1.15",
+    }
+    scenarios = [row[0] for row in FULL_COUPLING]
+    lines = [
+        r"\begin{tabular}{llrrrr}",
+        r"\toprule",
+        r"Training preview & Regime & Mean difference & 95\% interval & Negative seeds & Holm $p$ \\",
+        r"\midrule",
+    ]
+    for comparison, label in labels.items():
+        subset = inference[inference.comparison == comparison].set_index("scenario")
+        for index, scenario in enumerate(scenarios):
+            row = subset.loc[scenario]
+            first = label if index == 0 else ""
+            lines.append(
+                f"{first} & {SCENARIO_LABELS[scenario]} & {row.mean_difference:.2f} & "
+                f"[{row.ci95_low:.2f}, {row.ci95_high:.2f}] & "
+                f"{int(row.negative_seed_pairs)}/{int(row.n_pairs)} & "
+                f"{row.holm_adjusted_p:.4g} \\\\"
+            )
+        if comparison != list(labels)[-1]:
+            lines.append(r"\addlinespace")
+    lines.extend((r"\bottomrule", r"\end{tabular}"))
+    (output / "table_preview_mismatch.tex").write_text(
+        "\n".join(lines), encoding="utf-8"
+    )
+
+
 def _write_macros(
     summary: pd.DataFrame,
     comparison: pd.DataFrame,
     sensitivity: pd.DataFrame,
+    training: pd.DataFrame,
+    mismatch: pd.DataFrame | None,
     validity: dict,
     output: Path,
 ) -> None:
@@ -172,14 +279,17 @@ def _write_macros(
         (comparison.comparison == "md_cbad_dqn - standard_dqn")
         & comparison.scenario.isin(full_names)
     ]
-    cbad_cfba = comparison[
-        (comparison.comparison == "md_cbad_dqn - md_cfba_dqn")
-        & comparison.scenario.isin(full_names)
-    ]
     sens = sensitivity[sensitivity.comparison == "md_cbad_dqn - standard_dqn"]
     planning_per_step = _metric(
         summary, "nominal", "mpc_h4", "planning_time_ms_mean"
     ) / 64.0
+    late = training[
+        training.variant.isin(("standard_dqn", "md_cbad_dqn"))
+        & (training.episode >= 500)
+    ]
+    late_means = late.groupby("variant")[["cost", "energy_use", "latency_ms", "penalty"]].mean()
+    dqn_late = late_means.loc["standard_dqn"]
+    cbad_late = late_means.loc["md_cbad_dqn"]
     macros = {
         "PhysicalCBADMinPct": f"{cbad_dqn.relative_improvement_percent.min():.2f}\\%",
         "PhysicalCBADMaxPct": f"{cbad_dqn.relative_improvement_percent.max():.2f}\\%",
@@ -190,9 +300,28 @@ def _write_macros(
         "MPCNominalCost": f"{_metric(summary, 'nominal', 'mpc_h4', 'total_cost_mean'):.2f}",
         "PhysicalNominalDQNCost": f"{_metric(summary, 'nominal', 'standard_dqn', 'total_cost_mean'):.2f}",
         "PhysicalNominalCBADCost": f"{_metric(summary, 'nominal', 'md_cbad_dqn', 'total_cost_mean'):.2f}",
-        "CenteringSupportedCount": str(int(cbad_cfba.supported.sum())),
         "PhysicalAuditTasks": f"{int(validity['n_tasks']):,}",
+        "IndependentModelSeeds": f"{int(summary.n_model_seeds.max())}",
+        "PrimaryHolmPMax": f"{cbad_dqn.holm_adjusted_p.max():.4g}",
+        "LateCBADCost": f"{cbad_late.cost:.2f}",
+        "LateDQNCost": f"{dqn_late.cost:.2f}",
+        "LateCBADEnergy": f"{cbad_late.energy_use:.2f}",
+        "LateDQNEnergy": f"{dqn_late.energy_use:.2f}",
+        "LateCBADLatency": f"{cbad_late.latency_ms / 1000.0:.2f}",
+        "LateDQNLatency": f"{dqn_late.latency_ms / 1000.0:.2f}",
+        "LateCBADPenalty": f"{cbad_late.penalty:.2f}",
+        "LateDQNPenalty": f"{dqn_late.penalty:.2f}",
     }
+    if mismatch is not None:
+        misspecified = mismatch[
+            mismatch.comparison.isin(
+                (
+                    "md_cbad_dqn_preview_0p85 - standard_dqn",
+                    "md_cbad_dqn_preview_1p15 - standard_dqn",
+                )
+            )
+        ]
+        macros["MismatchHolmPMax"] = f"{misspecified.holm_adjusted_p.max():.4g}"
     lines = [f"\\newcommand{{\\{key}}}{{{value}\\xspace}}" for key, value in macros.items()]
     (output / "reviewer_macros.tex").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -210,22 +339,30 @@ def main() -> None:
     comparison = paired_bootstrap(
         raw,
         (
-            ("md_cfba_dqn", "standard_dqn"),
-            ("md_cbad_dqn", "md_cfba_dqn"),
             ("md_cbad_dqn", "standard_dqn"),
             ("md_cbad_dqn", "mpc_h4"),
             ("mpc_h4", "immediate_argmin"),
         ),
+        inference_family=tuple(item[0] for item in FULL_COUPLING),
     )
     comparison.to_csv(args.results / "seven_regimes_paired_bootstrap_complete.csv", index=False)
     sensitivity = pd.read_csv(args.results / "sensitivity_paired_bootstrap.csv")
+    training = pd.read_csv(args.results / "training_curves.csv")
     validity = pd.read_json(args.results / "parameter_validity.json", typ="series").to_dict()
 
     _write_main(summary, args.tables)
-    _write_ablation(comparison, args.tables)
     _write_sensitivity(sensitivity, args.tables)
     _write_parameters(args.tables)
-    _write_macros(summary, comparison, sensitivity, validity, args.tables)
+    _write_state_dictionary(args.tables)
+    _write_primary_inference(comparison, args.tables)
+    _write_engineering_outcomes(summary, args.tables)
+    mismatch_path = args.results / "preview_mismatch_inference.csv"
+    mismatch = pd.read_csv(mismatch_path) if mismatch_path.exists() else None
+    if mismatch_path.exists():
+        _write_preview_mismatch(mismatch, args.tables)
+    _write_macros(
+        summary, comparison, sensitivity, training, mismatch, validity, args.tables
+    )
 
     generated = args.paper / "generated"
     generated.mkdir(parents=True, exist_ok=True)

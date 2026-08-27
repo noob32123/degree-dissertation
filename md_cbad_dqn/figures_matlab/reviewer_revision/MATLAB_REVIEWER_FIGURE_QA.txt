@@ -1,8 +1,9 @@
 Backend: MATLAB R2026a
 Data source: H:\degree-dissertation\md_cbad_dqn\results\reviewer_revision
-Primary summary: 63 rows = 7 scenarios x 9 policies.
-Training curves: 12,000 rows = 4 methods x 5 seeds x 600 episodes.
-Curve bands: mean +/- SD across five seeds after a causal 25-episode mean.
-Sensitivity intervals: fixed-seed paired 95% bootstrap, 10,000 resamples.
+Primary summary: 56 rows = 7 scenarios x 8 policies.
+Training curves: 36,000 rows = 3 methods x 20 seeds x 600 episodes.
+Curve bands: mean +/- SD across twenty seeds after a causal 25-episode mean.
+Sensitivity intervals: paired 95% bootstrap across 20 independent model seeds, 10,000 resamples.
+Multiplicity: exact paired sign tests with Holm adjustment; individual seed effects are plotted.
 Physical scatter: every tenth row shown for legibility; all 20,000 rows used for correlations and checks.
-Exports: vector PDF/SVG and 600-dpi TIFF; all figure fonts forced to Arial.
+Exports: vector PDF/SVG, 600-dpi TIFF, and 220-dpi PNG QA copies; all figure fonts forced to Arial.

@@ -10,19 +10,21 @@ Quick validation:
 
 ```powershell
 conda run --no-capture-output -n yolo python -m unittest md_cbad_dqn.tests.test_core -v
-conda run --no-capture-output -n yolo python -m md_cbad_dqn.validate
+conda run --no-capture-output -n yolo python -m md_cbad_dqn.reviewer_experiments validate --seeds 800-819
 ```
 
 Reproduce the reviewer-revision physical-consistency study and manuscript assets:
 
 ```powershell
-conda run --no-capture-output -n yolo python -m md_cbad_dqn.reviewer_experiments all --resume
+conda run --no-capture-output -n yolo python -m md_cbad_dqn.reviewer_experiments all --seeds 800-819 --resume
 conda run --no-capture-output -n yolo python -m md_cbad_dqn.reviewer_reporting
 matlab -batch "addpath(fullfile(pwd,'md_cbad_dqn')); plot_reviewer_results_matlab(pwd)"
 ```
 
-The revision adds a correlated physical generator, a side-effect-free exact
-four-step receding-horizon comparator, per-episode cost/energy/latency logs,
-and eight prespecified parameter-sensitivity profiles. MATLAB exclusively
+The revision adds a correlated physical generator, a side-effect-free four-step
+receding-horizon comparator that is exact for its stated finite-horizon objective,
+20 independent confirmation seeds,
+paired seed-level inference with Holm correction, preview-model mismatch tests,
+per-episode engineering outcomes, and eight prespecified parameter profiles. MATLAB exclusively
 generates quantitative figures. Python reporting generates only LaTeX tables
 and macros and cannot overwrite the MATLAB exports.

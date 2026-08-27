@@ -1,26 +1,38 @@
 \begin{thebibliography}{10}
 
-\bibitem{abdulkarim2025multi}
-Abubakar Abdulkarim, Behrouz Maham, and Refik~Caglar Kizilirmak.
-\newblock Multi-leo satellite networks for integrated access and backhaul:
-  Delay analysis.
-\newblock In {\em 2025 International Wireless Communications and Mobile
-  Computing (IWCMC)}, pages 1300--1305. IEEE, 2025.
+\bibitem{9925218}
+Yanhua Pang, Yamin Zhang, Yi~Wang, Xiaofeng Wei, and Bo~Chen.
+\newblock Socnet: A lightweight and fine-grained object recognition network for
+  satellite on-orbit computing.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 60:1--13,
+  2022.
 
-\bibitem{armengol2024caiac}
-N{\'u}ria Armengol~Urp{\'i}, Marco Bagatella, Marin Vlastelica, and Georg
-  Martius.
-\newblock Causal action influence aware counterfactual data augmentation.
-\newblock In {\em Proceedings of the 41st International Conference on Machine
-  Learning}, volume 235 of {\em Proceedings of Machine Learning Research},
-  pages 1709--1729, 2024.
+\bibitem{10107454}
+Yanhua Pang, Yamin Zhang, Qinglei Kong, Yi~Wang, Bo~Chen, and Xibin Cao.
+\newblock Socdet: A lightweight and accurate oriented object detection network
+  for satellite on-orbit computing.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 61:1--15,
+  2023.
 
-\bibitem{bellemare2016gap}
-Marc~G. Bellemare, Georg Ostrovski, Arthur Guez, Philip~S. Thomas, and R{\'e}mi
-  Munos.
-\newblock Increasing the action gap: New operators for reinforcement learning.
-\newblock In {\em Proceedings of the Thirtieth AAAI Conference on Artificial
-  Intelligence}, pages 1476--1483, 2016.
+\bibitem{10378728}
+Yanhua Pang, Yamin Zhang, Yi~Wang, Xiaofeng Wei, and Bo~Chen.
+\newblock Exploring model compression limits and laws: A pyramid knowledge
+  distillation framework for satellite-on-orbit object recognition.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 62:1--13,
+  2024.
+
+\bibitem{10440355}
+Yanhua Pang, Libo Yao, Yiping Luo, Chengguo Dong, Qinglei Kong, and Bo~Chen.
+\newblock Repsvit: An efficient vision transformer based on spiking neural
+  networks for object recognition in satellite on-orbit remote sensing images.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 62:1--16,
+  2024.
+
+\bibitem{10423050}
+Yin Zhang, Mu~Ye, Guiyi Zhu, Yong Liu, Pengyu Guo, and Junhua Yan.
+\newblock Ffca-yolo for small object detection in remote sensing images.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 62:1--15,
+  2024.
 
 \bibitem{RN8}
 Emiliano Casalicchio and Danilo Magliarisi.
@@ -28,45 +40,11 @@ Emiliano Casalicchio and Danilo Magliarisi.
 \newblock In {\em 2024 9th International Conference on Fog and Mobile Edge
   Computing (FMEC)}, pages 154--161. IEEE, 2024.
 
-\bibitem{ccsds122}
-{Consultative Committee for Space Data Systems}.
-\newblock Image data compression.
-\newblock Technical Report CCSDS 122.0-B-2, CCSDS, September 2017.
-
-\bibitem{forney2017counterfactual}
-Andrew Forney, Judea Pearl, and Elias Bareinboim.
-\newblock Counterfactual data-fusion for online reinforcement learners.
-\newblock In {\em Proceedings of the 34th International Conference on Machine
-  Learning}, volume~70 of {\em Proceedings of Machine Learning Research}, pages
-  1156--1164, 2017.
-
-\bibitem{RN22}
-Qiangqiang Jiang, Haipeng Wang, Qinglei Kong, Yamin Zhang, and Bo~Chen.
-\newblock On-orbit remote sensing image processing complex task scheduling
-  model based on heterogeneous multiprocessor.
-\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 61:1--18,
-  2023.
-
-\bibitem{RN23}
-Qiangqiang Jiang, Lujie Zheng, Yu~Zhou, Hao Liu, Qinglei Kong, Yamin Zhang, and
-  Bo~Chen.
-\newblock Efficient on-orbit remote sensing imagery processing via satellite
-  edge computing resource scheduling optimization.
-\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 2025.
-
-\bibitem{karkadakattil2025ai}
-Aswin Karkadakattil.
-\newblock Ai-tuned hybrid thermal control of cubesats using phase change
-  material: a matlab-based simulation study: Independent researcher, india.
-\newblock {\em Aerospace Systems}, pages 1--10, 2025.
-
-\bibitem{kaya2026joint}
-Ege~Can Kaya, Mahsa Ghasemi, and Abolfazl Hashemi.
-\newblock Joint mdps and reinforcement learning in coupled-dynamics
-  environments.
-\newblock In {\em Proceedings of the 42nd Conference on Uncertainty in
-  Artificial Intelligence}, volume 337 of {\em Proceedings of Machine Learning
-  Research}, pages 2877--2893, 2026.
+\bibitem{RN9}
+Pavlo Molchanov, Stephen Tyree, Tero Karras, Timo Aila, and Jan Kautz.
+\newblock Pruning convolutional neural networks for resource efficient
+  inference.
+\newblock {\em arXiv preprint arXiv:1611.06440}, 2016.
 
 \bibitem{RN10}
 Junhong Kim, Jaemyung Ahn, Han-Lim Choi, and Doo-Hyun Cho.
@@ -82,15 +60,33 @@ Weisen Liu, Zeqi Lai, Qian Wu, Hewu Li, Qi~Zhang, Zonglun Li, Yuanjie Li, and
 \newblock In {\em IEEE INFOCOM 2024-IEEE Conference on Computer
   Communications}, pages 881--890. IEEE, 2024.
 
-\bibitem{mesnard2021counterfactual}
-Thomas Mesnard, Theophane Weber, Fabio Viola, Shantanu Thakoor, Alaa Saade,
-  Anna Harutyunyan, Will Dabney, Thomas~S. Stepleton, Nicolas Heess, Arthur
-  Guez, Eric Moulines, Marcus Hutter, Lars Buesing, and Remi Munos.
-\newblock Counterfactual credit assignment in model-free reinforcement
-  learning.
-\newblock In {\em Proceedings of the 38th International Conference on Machine
-  Learning}, volume 139 of {\em Proceedings of Machine Learning Research},
-  pages 7654--7664, 2021.
+\bibitem{RN22}
+Qiangqiang Jiang, Haipeng Wang, Qinglei Kong, Yamin Zhang, and Bo~Chen.
+\newblock On-orbit remote sensing image processing complex task scheduling
+  model based on heterogeneous multiprocessor.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 61:1--18,
+  2023.
+
+\bibitem{RN23}
+Qiangqiang Jiang, Lujie Zheng, Yu~Zhou, Hao Liu, Qinglei Kong, Yamin Zhang, and
+  Bo~Chen.
+\newblock Efficient on-orbit remote sensing imagery processing via satellite
+  edge computing resource scheduling optimization.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 2025.
+
+\bibitem{RN27}
+Xin Shen, Zezhong Lu, Litao Li, Yaxin Chen, Xufei Li, Jiaying Wang, and Wei
+  Yao.
+\newblock Multi-strip stitching imaging mission planning method for sar
+  satellites regional mapping considering on-board energy consumption.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 2024.
+
+\bibitem{RN28}
+Wei Yao, Xin Shen, Guo Zhang, Zezhong Lu, Jiaying Wang, Yanjie Song, and Zhiwei
+  Li.
+\newblock A spiking neural network based proximal policy optimization method
+  for multi-point imaging mission scheduling of earth observation satellite.
+\newblock {\em Swarm and Evolutionary Computation}, 94:101867, 2025.
 
 \bibitem{mnih2015human}
 Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei~A. Rusu, Joel Veness,
@@ -101,16 +97,91 @@ Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei~A. Rusu, Joel Veness,
 \newblock Human-level control through deep reinforcement learning.
 \newblock {\em Nature}, 518:529--533, 2015.
 
-\bibitem{RN9}
-Pavlo Molchanov, Stephen Tyree, Tero Karras, Timo Aila, and Jan Kautz.
-\newblock Pruning convolutional neural networks for resource efficient
-  inference.
-\newblock {\em arXiv preprint arXiv:1611.06440}, 2016.
+\bibitem{watkins1992q}
+Christopher J. C.~H. Watkins and Peter Dayan.
+\newblock Q-learning.
+\newblock {\em Machine Learning}, 8:279--292, 1992.
 
-\bibitem{nasa2026soa}
+\bibitem{sutton1991dyna}
+Richard~S. Sutton.
+\newblock Dyna, an integrated architecture for learning, planning, and
+  reacting.
+\newblock {\em ACM SIGART Bulletin}, 2(4):160--163, 1991.
+
+\bibitem{forney2017counterfactual}
+Andrew Forney, Judea Pearl, and Elias Bareinboim.
+\newblock Counterfactual data-fusion for online reinforcement learners.
+\newblock In {\em Proceedings of the 34th International Conference on Machine
+  Learning}, volume~70 of {\em Proceedings of Machine Learning Research}, pages
+  1156--1164, 2017.
+
+\bibitem{armengol2024caiac}
+N{\'u}ria Armengol~Urp{\'i}, Marco Bagatella, Marin Vlastelica, and Georg
+  Martius.
+\newblock Causal action influence aware counterfactual data augmentation.
+\newblock In {\em Proceedings of the 41st International Conference on Machine
+  Learning}, volume 235 of {\em Proceedings of Machine Learning Research},
+  pages 1709--1729, 2024.
+
+\bibitem{mesnard2021counterfactual}
+Thomas Mesnard, Theophane Weber, Fabio Viola, Shantanu Thakoor, Alaa Saade,
+  Anna Harutyunyan, Will Dabney, Thomas~S. Stepleton, Nicolas Heess, Arthur
+  Guez, Eric Moulines, Marcus Hutter, Lars Buesing, and Remi Munos.
+\newblock Counterfactual credit assignment in model-free reinforcement
+  learning.
+\newblock In {\em Proceedings of the 38th International Conference on Machine
+  Learning}, volume 139 of {\em Proceedings of Machine Learning Research},
+  pages 7654--7664, 2021.
+
+\bibitem{kaya2026joint}
+Ege~Can Kaya, Mahsa Ghasemi, and Abolfazl Hashemi.
+\newblock Joint mdps and reinforcement learning in coupled-dynamics
+  environments.
+\newblock In {\em Proceedings of the 42nd Conference on Uncertainty in
+  Artificial Intelligence}, volume 337 of {\em Proceedings of Machine Learning
+  Research}, pages 2877--2893, 2026.
+
+\bibitem{bellemare2016gap}
+Marc~G. Bellemare, Georg Ostrovski, Arthur Guez, Philip~S. Thomas, and R{\'e}mi
+  Munos.
+\newblock Increasing the action gap: New operators for reinforcement learning.
+\newblock In {\em Proceedings of the Thirtieth AAAI Conference on Artificial
+  Intelligence}, pages 1476--1483, 2016.
+
+\bibitem{karkadakattil2025ai}
+Aswin Karkadakattil.
+\newblock Ai-tuned hybrid thermal control of cubesats using phase change
+  material: a matlab-based simulation study: Independent researcher, india.
+\newblock {\em Aerospace Systems}, pages 1--10, 2025.
+
+\bibitem{abdulkarim2025multi}
+Abubakar Abdulkarim, Behrouz Maham, and Refik~Caglar Kizilirmak.
+\newblock Multi-leo satellite networks for integrated access and backhaul:
+  Delay analysis.
+\newblock In {\em 2025 International Wireless Communications and Mobile
+  Computing (IWCMC)}, pages 1300--1305. IEEE, 2025.
+
+\bibitem{10589437}
+Xinyuan Zhang, Jiang Liu, Zehui Xiong, Yudong Huang, Ran Zhang, Shiwen Mao, and
+  Zhu Han.
+\newblock Cost-effective hybrid computation offloading in satellite-terrestrial
+  integrated networks.
+\newblock {\em IEEE Internet of Things Journal}, 11(22):36786--36800, 2024.
+
+\bibitem{zhang2024dynamic}
+Hangyu Zhang, Hongbo Zhao, Rongke Liu, Xiangqiang Gao, and Shenzhan Xu.
+\newblock Dynamic user association and computation offloading in satellite edge
+  computing networks via deep reinforcement learning.
+\newblock {\em IEEE Transactions on Green Communications and Networking},
+  8(4):1888--1901, 2024.
+
+\bibitem{nasa2026avionics}
 {NASA Small Spacecraft Systems Virtual Institute}.
-\newblock State-of-the-art of small spacecraft technology.
-\newblock \url{https://www.nasa.gov/smallsat-institute/sst-soa/}, 2026.
+\newblock State-of-the-art of small spacecraft technology: Small spacecraft
+  avionics.
+\newblock
+  \url{https://www.nasa.gov/smallsat-institute/sst-soa/small-spacecraft-avionics/},
+  2026.
 \newblock Accessed 26 August 2026.
 
 \bibitem{nasa2026ground}
@@ -122,86 +193,15 @@ Pavlo Molchanov, Stephen Tyree, Tero Karras, Timo Aila, and Jan Kautz.
   2026.
 \newblock Accessed 26 August 2026.
 
-\bibitem{nasa2026avionics}
+\bibitem{ccsds122}
+{Consultative Committee for Space Data Systems}.
+\newblock Image data compression.
+\newblock Technical Report CCSDS 122.0-B-2, CCSDS, September 2017.
+
+\bibitem{nasa2026soa}
 {NASA Small Spacecraft Systems Virtual Institute}.
-\newblock State-of-the-art of small spacecraft technology: Small spacecraft
-  avionics.
-\newblock
-  \url{https://www.nasa.gov/smallsat-institute/sst-soa/small-spacecraft-avionics/},
-  2026.
+\newblock State-of-the-art of small spacecraft technology.
+\newblock \url{https://www.nasa.gov/smallsat-institute/sst-soa/}, 2026.
 \newblock Accessed 26 August 2026.
-
-\bibitem{10440355}
-Yanhua Pang, Libo Yao, Yiping Luo, Chengguo Dong, Qinglei Kong, and Bo~Chen.
-\newblock Repsvit: An efficient vision transformer based on spiking neural
-  networks for object recognition in satellite on-orbit remote sensing images.
-\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 62:1--16,
-  2024.
-
-\bibitem{10107454}
-Yanhua Pang, Yamin Zhang, Qinglei Kong, Yi~Wang, Bo~Chen, and Xibin Cao.
-\newblock Socdet: A lightweight and accurate oriented object detection network
-  for satellite on-orbit computing.
-\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 61:1--15,
-  2023.
-
-\bibitem{9925218}
-Yanhua Pang, Yamin Zhang, Yi~Wang, Xiaofeng Wei, and Bo~Chen.
-\newblock Socnet: A lightweight and fine-grained object recognition network for
-  satellite on-orbit computing.
-\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 60:1--13,
-  2022.
-
-\bibitem{10378728}
-Yanhua Pang, Yamin Zhang, Yi~Wang, Xiaofeng Wei, and Bo~Chen.
-\newblock Exploring model compression limits and laws: A pyramid knowledge
-  distillation framework for satellite-on-orbit object recognition.
-\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 62:1--13,
-  2024.
-
-\bibitem{RN27}
-Xin Shen, Zezhong Lu, Litao Li, Yaxin Chen, Xufei Li, Jiaying Wang, and Wei
-  Yao.
-\newblock Multi-strip stitching imaging mission planning method for sar
-  satellites regional mapping considering on-board energy consumption.
-\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 2024.
-
-\bibitem{sutton1991dyna}
-Richard~S. Sutton.
-\newblock Dyna, an integrated architecture for learning, planning, and
-  reacting.
-\newblock {\em ACM SIGART Bulletin}, 2(4):160--163, 1991.
-
-\bibitem{watkins1992q}
-Christopher J. C.~H. Watkins and Peter Dayan.
-\newblock Q-learning.
-\newblock {\em Machine Learning}, 8:279--292, 1992.
-
-\bibitem{RN28}
-Wei Yao, Xin Shen, Guo Zhang, Zezhong Lu, Jiaying Wang, Yanjie Song, and Zhiwei
-  Li.
-\newblock A spiking neural network based proximal policy optimization method
-  for multi-point imaging mission scheduling of earth observation satellite.
-\newblock {\em Swarm and Evolutionary Computation}, 94:101867, 2025.
-
-\bibitem{zhang2024dynamic}
-Hangyu Zhang, Hongbo Zhao, Rongke Liu, Xiangqiang Gao, and Shenzhan Xu.
-\newblock Dynamic user association and computation offloading in satellite edge
-  computing networks via deep reinforcement learning.
-\newblock {\em IEEE Transactions on Green Communications and Networking},
-  8(4):1888--1901, 2024.
-
-\bibitem{10589437}
-Xinyuan Zhang, Jiang Liu, Zehui Xiong, Yudong Huang, Ran Zhang, Shiwen Mao, and
-  Zhu Han.
-\newblock Cost-effective hybrid computation offloading in satellite-terrestrial
-  integrated networks.
-\newblock {\em IEEE Internet of Things Journal}, 11(22):36786--36800, 2024.
-
-\bibitem{10423050}
-Yin Zhang, Mu~Ye, Guiyi Zhu, Yong Liu, Pengyu Guo, and Junhua Yan.
-\newblock Ffca-yolo for small object detection in remote sensing images.
-\newblock {\em IEEE Transactions on Geoscience and Remote Sensing}, 62:1--15,
-  2024.
 
 \end{thebibliography}

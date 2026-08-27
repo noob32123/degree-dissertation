@@ -362,31 +362,31 @@ File: l3backend-xetex.def 2022-02-07 L3 backend support: XeTeX
 ) (source.aux)
 \openout1 = `source.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 3
-2.
+1.
  (ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 32.
-LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 31.
+LaTeX Font Info:    ... okay on input line 31.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -425,11 +425,11 @@ LaTeX Font Info:    ... okay on input line 32.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Info: Redefining \microtypecontext on input line 32.
-Package microtype Info: Applying patch `item' on input line 32.
-Package microtype Info: Applying patch `toc' on input line 32.
-Package microtype Info: Applying patch `eqnum' on input line 32.
-Package microtype Info: Applying patch `footnote' on input line 32.
+LaTeX Info: Redefining \microtypecontext on input line 31.
+Package microtype Info: Applying patch `item' on input line 31.
+Package microtype Info: Applying patch `toc' on input line 31.
+Package microtype Info: Applying patch `eqnum' on input line 31.
+Package microtype Info: Applying patch `footnote' on input line 31.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: No adjustment of tracking.
@@ -439,7 +439,7 @@ Package microtype Info: No adjustment of kerning.
 File: mt-LatinModernRoman.cfg 2021/02/21 v1.1 microtype config. file: Latin Mod
 ern Roman (RS)
 )
-Package hyperref Info: Link coloring OFF on input line 32.
+Package hyperref Info: Link coloring OFF on input line 31.
  (nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (refcount.sty
@@ -449,9 +449,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count303
 )
-LaTeX Info: Redefining \ref on input line 32.
-LaTeX Info: Redefining \pageref on input line 32.
-LaTeX Info: Redefining \nameref on input line 32.
+LaTeX Info: Redefining \ref on input line 31.
+LaTeX Info: Redefining \pageref on input line 31.
+LaTeX Info: Redefining \nameref on input line 31.
 
 (source.out) (source.out)
 \@outlinefile=\write3
@@ -461,72 +461,70 @@ LaTeX Info: Redefining \nameref on input line 32.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 35.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 34.
 
  (umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 35.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 34.
 
  (umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 (mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-) (generated/results_macros.tex) (generated/reviewer_macros.tex)
+) (generated/reviewer_macros.tex)
 File: figures/ai/fig_graphical_abstract_arial.png Graphic file (type bmp)
 <figures/ai/fig_graphical_abstract_arial.png>
-
-[1
+ [1
 
 ] [2]
 File: figures/ai/fig_system_modes_arial.png Graphic file (type bmp)
 <figures/ai/fig_system_modes_arial.png>
- [3] [4] [5] (generated/table_parameter_provenance.tex)
+ [3] [4] [5]
+(generated/table_parameter_provenance.tex)
 File: figures/fig_physical_generator.pdf Graphic file (type pdf)
 <use figures/fig_physical_generator.pdf>
  [6] [7] [8]
 File: figures/ai/fig_cbad_mechanism_arial.png Graphic file (type bmp)
 <figures/ai/fig_cbad_mechanism_arial.png>
-
-[9]
+ [9]
 File: figures/ai/fig_experiment_protocol_arial.png Graphic file (type bmp)
 <figures/ai/fig_experiment_protocol_arial.png>
- [10] [11] (generated/table_reviewer_main.tex)
+ [10] [11]
+(generated/table_reviewer_main.tex)
 File: figures/fig_reviewer_primary.pdf Graphic file (type pdf)
 <use figures/fig_reviewer_primary.pdf>
  [12]
-(generated/table_reviewer_ablation.tex) [13]
 File: figures/fig_training_diagnostics.pdf Graphic file (type pdf)
 <use figures/fig_training_diagnostics.pdf>
- [14]
-(generated/table_sensitivity.tex) [15]
+ [13] (generated/table_sensitivity.tex) [14]
 File: figures/fig_sensitivity_planning.pdf Graphic file (type pdf)
 <use figures/fig_sensitivity_planning.pdf>
 File: figures/fig_reviewer_actions.pdf Graphic file (type pdf)
 <use figures/fig_reviewer_actions.pdf>
- [16] [17] (source.bbl [18]
+ [15] [16] (source.bbl [17] [18]
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \hbox (badness 1348) in paragraph at lines 126--133
+Underfull \hbox (badness 1348) in paragraph at lines 179--186
 []\TU/lmr/m/n/10 NASA Small Spacecraft Systems Virtual Institute.  State-of-the
 -art of small spacecraft tech-
  []
 
 
-Underfull \hbox (badness 5563) in paragraph at lines 126--133
+Underfull \hbox (badness 5563) in paragraph at lines 179--186
 \TU/lmr/m/n/10 nology: Small spacecraft avionics.  []$[][][][][] [] [] [] [][][
 ] [] [][][][] [] [][][] [] [][][][][][][][][][][][][][][][][][][] [] [][][][][]
 [][][] []
  []
 
-[19]) [20] (source.aux)
+) [19] (source.aux)
 Package rerunfilecheck Info: File `source.out' has not changed.
-(rerunfilecheck)             Checksum: 9EC85B9212C7282901CB219336D77B75;7764.
+(rerunfilecheck)             Checksum: CF0E0B0EA719B7F74DE971FA0990F176;7370.
  )
-Output written on source.xdv (20 pages, 423684 bytes).
+Output written on source.xdv (19 pages, 400472 bytes).

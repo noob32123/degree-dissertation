@@ -74,13 +74,12 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Side-effect-free full-action preview}{8}{subsection.5.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.2}All-action counterfactual Bellman targets}{8}{subsection.5.2}\protected@file@percent }
 \newlabel{eq:cf_target}{{19}{8}{All-action counterfactual Bellman targets}{equation.5.19}{}}
-\newlabel{eq:cfba}{{20}{8}{All-action counterfactual Bellman targets}{equation.5.20}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Centered advantage distillation}{9}{subsection.5.3}\protected@file@percent }
-\newlabel{eq:center}{{21}{9}{Centered advantage distillation}{equation.5.21}{}}
-\newlabel{eq:cbad}{{22}{9}{Centered advantage distillation}{equation.5.22}{}}
+\newlabel{eq:center}{{20}{9}{Centered advantage distillation}{equation.5.20}{}}
+\newlabel{eq:cbad}{{21}{9}{Centered advantage distillation}{equation.5.21}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Training-only CBAD mechanism. The upper path retains the factual standard-DQN target and Huber loss. The lower path previews all three actions, constructs three Bellman targets, centers them within state, and distills their relative advantages. Both losses update the online Q-network; the target network is synchronized only at the shared fixed interval. Preview outputs are unavailable during evaluation and deployment.\relax }}{9}{figure.caption.5}\protected@file@percent }
 \newlabel{fig:mechanism}{{4}{9}{Training-only CBAD mechanism. The upper path retains the factual standard-DQN target and Huber loss. The lower path previews all three actions, constructs three Bellman targets, centers them within state, and distills their relative advantages. Both losses update the online Q-network; the target network is synchronized only at the shared fixed interval. Preview outputs are unavailable during evaluation and deployment.\relax }{figure.caption.5}{}}
-\newlabel{alg:cbad}{{\caption@xref {alg:cbad}{ on input line 326}}{10}{Centered advantage distillation}{Item.8}{}}
+\newlabel{alg:cbad}{{\caption@xref {alg:cbad}{ on input line 317}}{10}{Centered advantage distillation}{Item.8}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {6}Experimental Design and Settings}{10}{section.6}\protected@file@percent }
 \newlabel{sec:experiments}{{6}{10}{Experimental Design and Settings}{section.6}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Design principles}{10}{subsection.6.1}\protected@file@percent }
@@ -93,56 +92,53 @@
 \@writefile{toc}{\contentsline {section}{\numberline {7}Results}{12}{section.7}\protected@file@percent }
 \newlabel{sec:results}{{7}{12}{Results}{section.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Physical consistency preserves the CBAD--DQN effect}{12}{subsection.7.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Episode total cost under the physically coupled generator. MPC-4 is exact only for its stated four-step perfect-forecast objective. Lower is better; bold marks the lowest mean.\relax }}{12}{table.caption.8}\protected@file@percent }
-\newlabel{tab:main}{{2}{12}{Episode total cost under the physically coupled generator. MPC-4 is exact only for its stated four-step perfect-forecast objective. Lower is better; bold marks the lowest mean.\relax }{table.caption.8}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Episode total cost for deployment comparators under the physically coupled generator. MPC-4 is exact only for its stated four-step perfect-forecast objective. Lower is better; bold marks the lowest mean.\relax }}{12}{table.caption.8}\protected@file@percent }
+\newlabel{tab:main}{{2}{12}{Episode total cost for deployment comparators under the physically coupled generator. MPC-4 is exact only for its stated four-step perfect-forecast objective. Lower is better; bold marks the lowest mean.\relax }{table.caption.8}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Seven-regime performance under physically coupled task generation. Error bars are SD across five model seeds after within-seed trace averaging. The ordinate changes between the coupling-control and fully coupled panels.\relax }}{13}{figure.caption.9}\protected@file@percent }
 \newlabel{fig:seven}{{6}{13}{Seven-regime performance under physically coupled task generation. Error bars are SD across five model seeds after within-seed trace averaging. The ordinate changes between the coupling-control and fully coupled panels.\relax }{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Full-action supervision is supported; centering is not isolated}{14}{subsection.7.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Seed-paired ablation in the five fully coupled regimes under the physical generator. ``Supported'' denotes a 95\% paired bootstrap interval entirely below zero.\relax }}{14}{table.caption.10}\protected@file@percent }
-\newlabel{tab:ablation}{{3}{14}{Seed-paired ablation in the five fully coupled regimes under the physical generator. ``Supported'' denotes a 95\% paired bootstrap interval entirely below zero.\relax }{table.caption.10}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Training diagnostics show stabilization of cost, energy, and latency}{15}{subsection.7.3}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Training diagnostics for standard DQN and MD-CBAD-DQN\xspace  . Lines are means across five model seeds after a causal 25-episode moving average; shaded regions are $\pm $1 SD. Curves describe the training distribution and are not used as independent test observations.\relax }}{15}{figure.caption.11}\protected@file@percent }
-\newlabel{fig:training}{{7}{15}{Training diagnostics for standard DQN and \method . Lines are means across five model seeds after a causal 25-episode moving average; shaded regions are $\pm $1 SD. Curves describe the training distribution and are not used as independent test observations.\relax }{figure.caption.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}The result is robust within the tested parameter envelope}{16}{subsection.7.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Prespecified parameter sensitivity for CBAD minus standard DQN. Negative differences favor CBAD; $n=5$ paired model seeds in each profile.\relax }}{16}{table.caption.12}\protected@file@percent }
-\newlabel{tab:sensitivity}{{4}{16}{Prespecified parameter sensitivity for CBAD minus standard DQN. Negative differences favor CBAD; $n=5$ paired model seeds in each profile.\relax }{table.caption.12}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Parameter robustness and planning boundary. (a) Mean paired CBAD--DQN differences with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.\relax }}{16}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:sensitivity}{{8}{16}{Parameter robustness and planning boundary. (a) Mean paired CBAD--DQN differences with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.\relax }{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Training diagnostics show stabilization of cost, energy, and latency}{14}{subsection.7.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Training diagnostics for standard DQN and MD-CBAD-DQN\xspace  . Lines are means across five model seeds after a causal 25-episode moving average; shaded regions are $\pm $1 SD. Curves describe the training distribution and are not used as independent test observations.\relax }}{14}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:training}{{7}{14}{Training diagnostics for standard DQN and \method . Lines are means across five model seeds after a causal 25-episode moving average; shaded regions are $\pm $1 SD. Curves describe the training distribution and are not used as independent test observations.\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}The result is robust within the tested parameter envelope}{15}{subsection.7.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Prespecified parameter sensitivity for CBAD minus standard DQN. Negative differences favor CBAD; $n=5$ paired model seeds in each profile.\relax }}{15}{table.caption.11}\protected@file@percent }
+\newlabel{tab:sensitivity}{{3}{15}{Prespecified parameter sensitivity for CBAD minus standard DQN. Negative differences favor CBAD; $n=5$ paired model seeds in each profile.\relax }{table.caption.11}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Parameter robustness and planning boundary. (a) Mean paired CBAD--DQN differences with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.\relax }}{15}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:sensitivity}{{8}{15}{Parameter robustness and planning boundary. (a) Mean paired CBAD--DQN differences with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.\relax }{figure.caption.12}{}}
 \citation{nasa2026soa}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.5}The learned policy adapts its action mix}{17}{subsection.7.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Mean deployment action fractions for MD-CBAD-DQN\xspace  under the physically coupled generator.\relax }}{17}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:actions}{{9}{17}{Mean deployment action fractions for \method under the physically coupled generator.\relax }{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Discussion and Limitations}{17}{section.8}\protected@file@percent }
-\bibstyle{plain}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}The learned policy adapts its action mix}{16}{subsection.7.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Mean deployment action fractions for MD-CBAD-DQN\xspace  under the physically coupled generator.\relax }}{16}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:actions}{{9}{16}{Mean deployment action fractions for \method under the physically coupled generator.\relax }{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Discussion and Limitations}{16}{section.8}\protected@file@percent }
+\bibstyle{unsrt}
 \bibdata{ref}
-\bibcite{abdulkarim2025multi}{1}
-\bibcite{armengol2024caiac}{2}
-\bibcite{bellemare2016gap}{3}
-\bibcite{RN8}{4}
-\bibcite{ccsds122}{5}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{18}{section.9}\protected@file@percent }
-\bibcite{forney2017counterfactual}{6}
-\bibcite{RN22}{7}
-\bibcite{RN23}{8}
-\bibcite{karkadakattil2025ai}{9}
-\bibcite{kaya2026joint}{10}
-\bibcite{RN10}{11}
-\bibcite{RN20}{12}
-\bibcite{mesnard2021counterfactual}{13}
+\bibcite{9925218}{1}
+\bibcite{10107454}{2}
+\bibcite{10378728}{3}
+\bibcite{10440355}{4}
+\bibcite{10423050}{5}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Conclusion}{17}{section.9}\protected@file@percent }
+\bibcite{RN8}{6}
+\bibcite{RN9}{7}
+\bibcite{RN10}{8}
+\bibcite{RN20}{9}
+\bibcite{RN22}{10}
+\bibcite{RN23}{11}
+\bibcite{RN27}{12}
+\bibcite{RN28}{13}
 \bibcite{mnih2015human}{14}
-\bibcite{RN9}{15}
-\bibcite{nasa2026soa}{16}
-\bibcite{nasa2026ground}{17}
-\bibcite{nasa2026avionics}{18}
-\bibcite{10440355}{19}
-\bibcite{10107454}{20}
-\bibcite{9925218}{21}
-\bibcite{10378728}{22}
-\bibcite{RN27}{23}
-\bibcite{sutton1991dyna}{24}
-\bibcite{watkins1992q}{25}
-\bibcite{RN28}{26}
-\bibcite{zhang2024dynamic}{27}
-\bibcite{10589437}{28}
-\bibcite{10423050}{29}
-\gdef \@abspage@last{20}
+\bibcite{watkins1992q}{15}
+\bibcite{sutton1991dyna}{16}
+\bibcite{forney2017counterfactual}{17}
+\bibcite{armengol2024caiac}{18}
+\bibcite{mesnard2021counterfactual}{19}
+\bibcite{kaya2026joint}{20}
+\bibcite{bellemare2016gap}{21}
+\bibcite{karkadakattil2025ai}{22}
+\bibcite{abdulkarim2025multi}{23}
+\bibcite{10589437}{24}
+\bibcite{zhang2024dynamic}{25}
+\bibcite{nasa2026avionics}{26}
+\bibcite{nasa2026ground}{27}
+\bibcite{ccsds122}{28}
+\bibcite{nasa2026soa}{29}
+\gdef \@abspage@last{19}

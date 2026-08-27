@@ -1,8 +1,8 @@
-"""Independent pure-DQN implementation of DQN, CFBA, and CBAD.
+"""Independent pure-DQN implementation of standard DQN and MD-CBAD-DQN.
 
-The three variants share the same network, uniform replay, one-step
-transitions, epsilon-greedy exploration, optimizer, and standard DQN target.
-Only the optional auxiliary loss differs.
+The variants share the same network, uniform replay, one-step transitions,
+epsilon-greedy exploration, optimizer, and standard DQN target. CBAD adds the
+training-only centered counterfactual advantage objective.
 """
 
 from __future__ import annotations
@@ -17,7 +17,15 @@ import torch
 from torch import nn
 
 
-VARIANTS = ("standard_dqn", "md_cfba_dqn", "md_cbad_dqn", "contextual_bandit")
+VARIANTS = (
+    "standard_dqn",
+    "md_cbad_dqn",
+    "md_fullq_dqn",
+    "md_immediate_advantage_dqn",
+    "double_dqn",
+    "double_cbad_dqn",
+    "contextual_bandit",
+)
 
 
 class QNetwork(nn.Module):
@@ -70,7 +78,7 @@ class ReplayBuffer:
 
 
 class DQNAgent:
-    """Pure DQN with an optional CFBA or CBAD auxiliary objective."""
+    """Pure DQN with an optional CBAD auxiliary objective."""
 
     def __init__(
         self,
@@ -85,8 +93,8 @@ class DQNAgent:
             raise ValueError(f"unknown variant: {variant}")
         if action_dim != 3:
             raise ValueError("the scheduling task requires exactly three actions")
-        if variant in {"md_cfba_dqn", "md_cbad_dqn"} and config.auxiliary_lambda <= 0:
-            raise ValueError("auxiliary_lambda must be positive for CFBA/CBAD")
+        if self._variant_uses_counterfactuals(variant) and config.auxiliary_lambda <= 0:
+            raise ValueError("auxiliary_lambda must be positive for model supervision")
 
         self.variant = variant
         self.config = config
@@ -106,7 +114,20 @@ class DQNAgent:
 
     @property
     def uses_counterfactuals(self) -> bool:
-        return self.variant in {"md_cfba_dqn", "md_cbad_dqn"}
+        return self._variant_uses_counterfactuals(self.variant)
+
+    @staticmethod
+    def _variant_uses_counterfactuals(variant: str) -> bool:
+        return variant in {
+            "md_cbad_dqn",
+            "md_fullq_dqn",
+            "md_immediate_advantage_dqn",
+            "double_cbad_dqn",
+        }
+
+    @property
+    def uses_double_target(self) -> bool:
+        return self.variant in {"double_dqn", "double_cbad_dqn"}
 
     def act(self, state: np.ndarray, explore: bool = True) -> int:
         if explore and self.rng.random() < self.epsilon:
@@ -168,9 +189,13 @@ class DQNAgent:
         with torch.no_grad():
             # Deliberately not Double DQN: target-network max both selects and
             # evaluates the next action.
-            next_value = self.target(
-                counterfactual_next.reshape(-1, state_dim)
-            ).max(dim=1).values.reshape(batch_size, self.action_dim)
+            flat_next = counterfactual_next.reshape(-1, state_dim)
+            if self.uses_double_target:
+                selected = self.online(flat_next).argmax(dim=1, keepdim=True)
+                next_value = self.target(flat_next).gather(1, selected).squeeze(1)
+            else:
+                next_value = self.target(flat_next).max(dim=1).values
+            next_value = next_value.reshape(batch_size, self.action_dim)
             return -preview_costs + self.config.gamma * (
                 1.0 - dones[:, None]
             ) * next_value
@@ -192,9 +217,12 @@ class DQNAgent:
         q_values = self.online(states_t)
         chosen_q = q_values.gather(1, actions_t[:, None]).squeeze(1)
         with torch.no_grad():
-            factual_target = rewards_t + self.config.gamma * (1.0 - dones_t) * (
-                self.target(next_states_t).max(dim=1).values
-            )
+            if self.uses_double_target:
+                selected = self.online(next_states_t).argmax(dim=1, keepdim=True)
+                next_value = self.target(next_states_t).gather(1, selected).squeeze(1)
+            else:
+                next_value = self.target(next_states_t).max(dim=1).values
+            factual_target = rewards_t + self.config.gamma * (1.0 - dones_t) * next_value
         td_loss = nn.functional.smooth_l1_loss(chosen_q, factual_target)
         auxiliary_loss = torch.zeros((), dtype=torch.float32, device=self.device)
 
@@ -203,16 +231,14 @@ class DQNAgent:
             resources_t = torch.as_tensor(
                 resources, dtype=torch.float32, device=self.device
             )
-            targets = self.counterfactual_targets(
-                next_states_t, dones_t, costs_t, resources_t
-            )
-            if self.variant == "md_cfba_dqn":
-                unchosen = ~nn.functional.one_hot(
-                    actions_t, num_classes=self.action_dim
-                ).bool()
-                auxiliary_loss = nn.functional.smooth_l1_loss(
-                    q_values[unchosen], targets[unchosen]
+            if self.variant == "md_immediate_advantage_dqn":
+                targets = -costs_t
+            else:
+                targets = self.counterfactual_targets(
+                    next_states_t, dones_t, costs_t, resources_t
                 )
+            if self.variant == "md_fullq_dqn":
+                auxiliary_loss = nn.functional.smooth_l1_loss(q_values, targets)
             else:
                 auxiliary_loss = nn.functional.smooth_l1_loss(
                     self.centered(q_values), self.centered(targets)

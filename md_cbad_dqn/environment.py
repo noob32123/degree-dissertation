@@ -27,6 +27,23 @@ class SatelliteSchedulingEnv:
     resource_dim = 6
     state_dim = 21
     action_dim = 3
+    physics_task_names = (
+        "onboard_heat_j",
+        "workload_gflop",
+        "onboard_compute_ms",
+        "result_tx_ms_at_50mbps",
+        "colocation_count_squared",
+        "result_mbit",
+        "ground_tx_heat_j",
+        "ground_compute_ms",
+        "raw_mbit",
+        "preprocess_heat_j",
+        "feature_tx_heat_j",
+        "preprocess_work_gflop",
+        "remaining_ground_ms",
+        "total_workload_gflop",
+        "feature_mbit",
+    )
     physics_task_scales = np.array(
         [100, 4.8, 1400, 100, 2401, 4, 100, 100, 76.8,
          100, 100, 2.2, 100, 4.8, 32],

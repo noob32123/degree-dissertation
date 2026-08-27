@@ -46,7 +46,7 @@ SCENARIOS = (
     ("thermal_stress", "thermal_stress", 1.0),
 )
 FULL_COUPLING = tuple(item for item in SCENARIOS if item[2] == 1.0)
-LEARNED = ("contextual_bandit", "standard_dqn", "md_cfba_dqn", "md_cbad_dqn")
+LEARNED = ("contextual_bandit", "standard_dqn", "md_cbad_dqn")
 HEURISTICS = ("immediate_argmin", "threshold", "fixed_onboard", "fixed_ground")
 ALL_POLICIES = HEURISTICS + LEARNED
 MAIN_POLICIES = (
@@ -54,7 +54,6 @@ MAIN_POLICIES = (
     "contextual_bandit",
     "threshold",
     "standard_dqn",
-    "md_cfba_dqn",
     "md_cbad_dqn",
 )
 
@@ -80,8 +79,11 @@ def config_for(variant: str, episodes: int = EPISODES, horizon: int = HORIZON,
 def model_path(results: Path, stage: str, variant: str, seed: int) -> Path:
     configuration = {
         "standard_dqn": "standard",
-        "md_cfba_dqn": "lambda_0p3_uncentered",
         "md_cbad_dqn": "lambda_0p3",
+        "md_fullq_dqn": "lambda_0p3_uncentered",
+        "md_immediate_advantage_dqn": "lambda_0p3_immediate",
+        "double_dqn": "double",
+        "double_cbad_dqn": "double_lambda_0p3",
         "contextual_bandit": "gamma_0",
     }[variant]
     return results / "models" / stage / f"{variant}__{configuration}__seed_{seed}.pth"
@@ -104,7 +106,11 @@ def save_checkpoint(path: Path, agent: DQNAgent, seed: int, episodes: int,
         "state_dim": 21,
         "action_dim": 3,
         "agent_config": asdict(agent.config),
-        "bellman_target": "target_network_max_not_double_dqn",
+        "bellman_target": (
+            "online_argmax_target_evaluation"
+            if agent.uses_double_target
+            else "target_network_max_not_double_dqn"
+        ),
         "replay": "uniform_one_step",
         "network": "21-128-128-64-3",
         "online_state_dict": agent.online.state_dict(),
@@ -126,13 +132,11 @@ def _validate_legacy_config(payload: dict, expected: AgentConfig, variant: str) 
     for key in shared:
         if key in actual and actual[key] != getattr(expected, key):
             raise ValueError(f"checkpoint config mismatch: {key}")
-    if variant == "md_cfba_dqn":
-        weight = actual.get("counterfactual_lambda", actual.get("auxiliary_lambda"))
-    elif variant == "md_cbad_dqn":
+    if DQNAgent._variant_uses_counterfactuals(variant):
         weight = actual.get("advantage_lambda", actual.get("auxiliary_lambda"))
     else:
         weight = 0.0
-    if variant in {"md_cfba_dqn", "md_cbad_dqn"} and weight != expected.auxiliary_lambda:
+    if DQNAgent._variant_uses_counterfactuals(variant) and weight != expected.auxiliary_lambda:
         raise ValueError(f"checkpoint auxiliary weight mismatch: {weight}")
 
 
@@ -163,6 +167,7 @@ def load_checkpoint(path: Path, variant: str, seed: int, device: torch.device,
 def train_model(variant: str, seed: int, episodes: int, horizon: int,
                 device: torch.device, auxiliary_lambda: float = AUXILIARY_LAMBDA,
                 environment_config: EnvConfig | None = None,
+                preview_transition_scale: float = 1.0,
                 ) -> tuple[DQNAgent, list[dict]]:
     set_deterministic(seed)
     config = config_for(variant, episodes, horizon, auxiliary_lambda)
@@ -191,6 +196,15 @@ def train_model(variant: str, seed: int, episodes: int, horizon: int,
         while not done:
             if agent.uses_counterfactuals:
                 preview_costs, preview_resources = env.preview_all_actions()
+                if preview_transition_scale != 1.0:
+                    preview_costs = preview_costs * preview_transition_scale
+                    current_resources = state[-env.resource_dim:]
+                    preview_resources = current_resources + preview_transition_scale * (
+                        preview_resources - current_resources
+                    )
+                    lower = np.array([0.0, 0.0, 0.0, 0.0, 0.08, 0.05])
+                    upper = np.array([1.3, 1.0, 1.3, 1.2, 1.0, 1.0])
+                    preview_resources = np.clip(preview_resources, lower, upper)
             else:
                 preview_costs = preview_resources = None
             action = agent.act(state, explore=True)
@@ -336,8 +350,6 @@ def summarize(raw: pd.DataFrame) -> pd.DataFrame:
 def paired_bootstrap(raw: pd.DataFrame) -> pd.DataFrame:
     by_seed = seed_level(raw)
     core_comparisons = (
-        ("md_cfba_dqn", "standard_dqn", "absolute counterfactual targets"),
-        ("md_cbad_dqn", "md_cfba_dqn", "within-state centering"),
         ("md_cbad_dqn", "standard_dqn", "complete CBAD"),
     )
     extra_comparisons = (
@@ -485,7 +497,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "stage",
-        choices=("calibration", "confirmatory", "ablation", "seven-scenarios", "all"),
+        choices=("calibration", "confirmatory", "seven-scenarios", "all"),
     )
     parser.add_argument("--results", type=Path, default=DEFAULT_RESULTS)
     parser.add_argument("--episodes", type=int, default=EPISODES)
@@ -506,7 +518,7 @@ def main() -> None:
     if args.stage == "calibration":
         calibration(args.results, args.episodes, args.horizon, device, args.resume)
         return
-    if args.stage in {"confirmatory", "ablation"}:
+    if args.stage == "confirmatory":
         raw = run_evaluation(
             args.results, FULL_COUPLING, args.episodes, args.horizon,
             args.test_traces, device, args.resume,

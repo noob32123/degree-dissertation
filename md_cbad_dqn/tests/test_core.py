@@ -11,6 +11,10 @@ import torch
 from md_cbad_dqn.agent import AgentConfig, DQNAgent, QNetwork
 from md_cbad_dqn.environment import EnvConfig, SatelliteSchedulingEnv
 from md_cbad_dqn.planner import PlannerConfig, RecedingHorizonPlanner
+from md_cbad_dqn.reviewer_experiments import (
+    _exact_two_sided_sign_p,
+    _holm_adjust,
+)
 
 
 class EnvironmentPreviewTests(unittest.TestCase):
@@ -63,6 +67,77 @@ class EnvironmentPreviewTests(unittest.TestCase):
 
 
 class PhysicsGeneratorTests(unittest.TestCase):
+    def test_reported_physics_cost_equations_match_code(self) -> None:
+        env = SatelliteSchedulingEnv(
+            EnvConfig(horizon=16, generator="physics_correlated")
+        )
+        env.reset(seed=19_006)
+        x = env.tasks[0].astype(float)
+        heat, energy, queue, _, bandwidth, contact = env.resources.astype(float)
+        xn = np.clip(x / env.physics_task_scales, 0.0, 1.5)
+        actual_rate = 2.2 + 217.8 * bandwidth
+        onboard_latency = x[2] + 1000.0 * x[5] / max(actual_rate, 2.2)
+        ground_latency = x[7] + 1000.0 * x[8] / max(actual_rate, 2.2)
+        hybrid_latency = (
+            1000.0 * x[11] / 4.0
+            + x[12]
+            + 1000.0 * x[14] / max(actual_rate, 2.2)
+        )
+        expected = np.array(
+            [
+                0.70 * xn[0] + 0.65 * xn[1] + 0.00045 * onboard_latency
+                + 0.55 * xn[4] + 0.35 * xn[5] + 0.35 * heat
+                + 0.12 * (1.0 - energy),
+                0.45 * xn[6] + 0.00045 * ground_latency + 0.55 * xn[8]
+                + 0.35 * max(0.0, 0.28 - contact),
+                0.55 * (xn[9] + xn[10]) + 0.55 * xn[13]
+                + 0.00045 * hybrid_latency + 0.45 * xn[14]
+                + 0.18 * heat + 0.12 * queue
+                + 0.18 * max(0.0, 0.22 - contact),
+            ]
+        )
+        np.testing.assert_allclose(
+            env.immediate_costs(), expected, rtol=2e-7, atol=2e-7
+        )
+
+    def test_reported_contact_hinges_match_thresholds(self) -> None:
+        env = SatelliteSchedulingEnv(
+            EnvConfig(horizon=16, generator="physics_correlated")
+        )
+        env.reset(seed=19_007)
+        resources = env.resources.copy()
+        resources[5] = 0.28
+        at_ground_threshold = env._immediate_costs_from(0, resources)
+        resources[5] = 0.27
+        below_ground_threshold = env._immediate_costs_from(0, resources)
+        self.assertAlmostEqual(
+            float(below_ground_threshold[1] - at_ground_threshold[1]),
+            0.35 * 0.01,
+            places=6,
+        )
+        resources[5] = 0.22
+        at_hybrid_threshold = env._immediate_costs_from(0, resources)
+        resources[5] = 0.21
+        below_hybrid_threshold = env._immediate_costs_from(0, resources)
+        self.assertAlmostEqual(
+            float(below_hybrid_threshold[2] - at_hybrid_threshold[2]),
+            0.18 * 0.01,
+            places=6,
+        )
+
+    def test_reported_normalization_clips_out_of_envelope_descriptor(self) -> None:
+        env = SatelliteSchedulingEnv(
+            EnvConfig(horizon=16, generator="physics_correlated")
+        )
+        env.reset(seed=19_008)
+        original = float(env.tasks[0, 4])
+        env.tasks[0, 4] = 1.5 * env.physics_task_scales[4]
+        at_clip = env.immediate_costs()
+        env.tasks[0, 4] = 3.0 * env.physics_task_scales[4]
+        beyond_clip = env.immediate_costs()
+        self.assertAlmostEqual(float(at_clip[0]), float(beyond_clip[0]), places=6)
+        env.tasks[0, 4] = original
+
     def test_task_descriptors_obey_dataflow_constraints(self) -> None:
         env = SatelliteSchedulingEnv(
             EnvConfig(horizon=20_000, generator="physics_correlated")
@@ -166,7 +241,7 @@ class PureDQNTests(unittest.TestCase):
 
     def test_all_variants_share_network_shape(self) -> None:
         reference = [p.shape for p in QNetwork().parameters()]
-        for variant in ("standard_dqn", "md_cfba_dqn", "md_cbad_dqn"):
+        for variant in ("standard_dqn", "md_cbad_dqn"):
             agent = DQNAgent(
                 variant, AgentConfig(), torch.device("cpu"), seed=1
             )
@@ -203,6 +278,21 @@ class SourceGuardTests(unittest.TestCase):
         )
         for symbol in forbidden_symbols:
             self.assertNotIn(symbol, source)
+
+
+class StatisticalInferenceTests(unittest.TestCase):
+    def test_exact_sign_test_uses_independent_seed_count(self) -> None:
+        differences = -np.arange(1.0, 21.0)
+        self.assertAlmostEqual(
+            _exact_two_sided_sign_p(differences), 2.0 / (2**20), places=12
+        )
+
+    def test_holm_adjustment_is_monotone_in_sorted_order(self) -> None:
+        p_values = np.array([0.01, 0.04, 0.02])
+        adjusted = _holm_adjust(p_values)
+        self.assertTrue(np.all((0.0 <= adjusted) & (adjusted <= 1.0)))
+        order = np.argsort(p_values)
+        self.assertTrue(np.all(np.diff(adjusted[order]) >= -1e-12))
 
 
 if __name__ == "__main__":

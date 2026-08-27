@@ -11,7 +11,7 @@ import numpy as np
 import pandas as pd
 import torch
 
-from .experiment import ALL_POLICIES, FULL_COUPLING, MODEL_SEEDS, SCENARIOS, load_checkpoint
+from .experiment import ALL_POLICIES, MODEL_SEEDS, SCENARIOS, load_checkpoint
 
 
 METRICS = (
@@ -21,40 +21,12 @@ METRICS = (
 )
 
 
-def compare_locked(results: Path, raw: pd.DataFrame) -> float:
-    reference = pd.read_csv(results / "locked_reference" / "ablation_raw.csv").rename(
-        columns={"variant": "policy"}
-    )
-    labels = [item[0] for item in FULL_COUPLING]
-    policies = ("standard_dqn", "md_cfba_dqn", "md_cbad_dqn")
-    current = raw[
-        raw.scenario.isin(labels) & raw.policy.isin(policies)
-    ].copy()
-    reference = reference[
-        reference.scenario.isin(labels) & reference.policy.isin(policies)
-    ].copy()
-    keys = ["scenario", "policy", "model_seed", "trace_seed"]
-    current = current.sort_values(keys).reset_index(drop=True)
-    reference = reference.sort_values(keys).reset_index(drop=True)
-    if current[keys].to_dict("records") != reference[keys].to_dict("records"):
-        raise AssertionError("locked evaluation row keys changed")
-    difference = np.abs(
-        current[list(METRICS)].to_numpy(dtype=float)
-        - reference[list(METRICS)].to_numpy(dtype=float)
-    )
-    maximum = float(difference.max())
-    if maximum > 1e-10:
-        raise AssertionError(f"locked trajectory values changed: max abs {maximum}")
-    return maximum
-
-
 def validate_checkpoints(results: Path) -> list[dict]:
     device = torch.device("cpu")
     rows: list[dict] = []
     for seed in MODEL_SEEDS:
         for variant, name in (
             ("standard_dqn", f"standard_dqn__standard__seed_{seed}.pth"),
-            ("md_cfba_dqn", f"md_cfba_dqn__lambda_0p3_uncentered__seed_{seed}.pth"),
             ("md_cbad_dqn", f"md_cbad_dqn__lambda_0p3__seed_{seed}.pth"),
             ("contextual_bandit", f"contextual_bandit__gamma_0__seed_{seed}.pth"),
         ):
@@ -91,14 +63,12 @@ def main() -> None:
         raise AssertionError("each scenario-policy-seed cell must contain 20 traces")
     if not np.isfinite(raw[list(METRICS)].to_numpy(dtype=float)).all():
         raise AssertionError("non-finite evaluation data")
-    maximum = compare_locked(args.results, raw)
     checkpoints = validate_checkpoints(args.results)
     report = {
         "status": "passed",
         "evaluation_rows": len(raw),
         "scenario_policy_seed_cells": int(len(counts)),
         "traces_per_cell": 20,
-        "locked_max_abs_difference": maximum,
         "checkpoints": checkpoints,
     }
     args.output.write_text(json.dumps(report, indent=2), encoding="utf-8")

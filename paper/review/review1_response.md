@@ -48,9 +48,9 @@ We agree that this does not replace telemetry fitting. The revised paper labels 
 
 > The proposed method was not compared with unoptimized DQN; relevant mechanisms require ablation.
 
-**Response.** The revised study directly compares standard DQN, uncentered CFBA, and centered CBAD using identical networks, standard DQN targets, uniform one-step replay, exploration, update cadence, and training budgets. No Double DQN, dueling network, prioritized replay, n-step return, noisy network, or distributional DQN is used. Under the physical generator, both CFBA and CBAD improve on standard DQN in all five fully coupled regimes. CBAD–CFBA intervals cross zero in all five regimes, so we no longer claim an independently significant centering effect. Epsilon reset and replay flushing are not components of the current method and therefore are not presented as ablations.
+**Response.** The revised study directly compares the complete MD-CBAD-DQN objective with an unmodified standard DQN using identical networks, standard DQN targets, uniform one-step replay, exploration, update cadence, and training budgets. No Double DQN, dueling network, prioritized replay, n-step return, noisy network, or distributional DQN is used. MD-CBAD-DQN improves on standard DQN in all five fully coupled regimes, with every paired interval below zero. Epsilon reset and replay flushing are not components of the current method and therefore are not presented as ablations.
 
-**Changes.** See Table 3 and lines 406–415.
+**Changes.** See the matched-method specification and the seven-regime main results.
 
 ## Comment 7
 
@@ -70,4 +70,3 @@ We agree that this does not replace telemetry fitting. The revised paper labels 
 
 - Resolved: Comments 1, 3, 4, 5, 6, 7, and 8.
 - Partially resolved: Comment 2, because the revised generator is physically constrained and source-bounded but is not fitted to flight telemetry.
-
