@@ -1,32 +1,36 @@
-# Controlled DQN comparison for satellite-ground scheduling
+# Current DQN-family satellite-ground scheduling manuscript
 
-This repository accompanies **A Controlled Synthetic Comparison of Deep Q-Network Objectives for Soft-Constrained Satellite-Ground Scheduling**.
+This workspace contains the active materials for **A Statistically Supported DQN-Family Advantage in a Resource-Coupled Satellite-Ground Scheduling Benchmark**.
 
-- `md_cbad_dqn/` contains the independent pure-DQN implementation, locked models, seven-regime data, statistical analysis, tests, a MATLAB figure generator, and a Python LaTeX-table generator.
-- `paper/` contains the single-column English manuscript and final PDF.
-- `wasted/` preserves superseded one-step code, unsuccessful historical studies, smoke runs, sweeps, and the previous paper version. Nothing was deleted during the restructure.
+## Active package
 
-Quick validation:
+- paper/source.tex is the authoritative manuscript source.
+- paper/output/pdf/dqn_variants_satellite_ground_manuscript.pdf is the clean current PDF.
+- paper/figures and paper/generated contain only the figures and generated LaTeX inputs retained for the current manuscript.
+- md_cbad_dqn contains the active Python implementation, MATLAB figure generator, tests, reporting scripts and requirements.
+- md_cbad_dqn/results/reviewer_revision_state_complete is the locked current result set, including 180 checkpoints, 180 training-curve files and 39 top-level result or validation files.
+- md_cbad_dqn/figures_matlab/reviewer_revision_state_complete and md_cbad_dqn/tables/reviewer_revision_state_complete contain current generated scientific assets.
+- paper/review contains the latest three blind reviews, the synthesis, and the current polishing and revision audits.
+- CURRENT_VERSION_MANIFEST.md documents the complete active layout and key hashes.
+- CURRENT_VERSION_SHA256SUMS.txt is the machine-readable checksum inventory for active research materials.
+
+## Historical package
+
+Superseded manuscripts, older result sets, smoke runs, unused figure iterations and build previews were moved without deletion to archive/history_before_current_2026-08-27. Original relative paths are preserved under that directory.
+
+## Validation
+
+Run from the repository root:
 
 ```powershell
-conda run --no-capture-output -n yolo python -m unittest md_cbad_dqn.tests.test_core -v
-conda run --no-capture-output -n yolo python -m md_cbad_dqn.reviewer_experiments validate --seeds 800-819
+H:\anaconda\envs\yolo\python.exe -m unittest md_cbad_dqn.tests.test_core -v
+H:\anaconda\envs\yolo\python.exe -m md_cbad_dqn.reviewer_experiments validate --seeds 800-819
+H:\anaconda\envs\yolo\python.exe -m md_cbad_dqn.reviewer_reporting
+H:\anaconda\envs\yolo\python.exe -m md_cbad_dqn.extended_reporting
 ```
 
-Reproduce the state-complete synthetic-scheduler study and manuscript assets:
+Compile the manuscript from paper with:
 
 ```powershell
-conda run --no-capture-output -n yolo python -m md_cbad_dqn.reviewer_experiments all --seeds 800-819 --resume
-conda run --no-capture-output -n yolo python -m md_cbad_dqn.reviewer_reporting
-matlab -batch "addpath(fullfile(pwd,'md_cbad_dqn')); plot_reviewer_results_matlab(pwd)"
+H:\degree-dissertation\.tools\tectonic-env\Library\bin\tectonic.exe source.tex --outdir output\build_current --keep-logs
 ```
-
-The revision adds a correlated internally consistent generator, an explicit
-time/link-phase context in the 24-dimensional state, a side-effect-free four-step
-receding-horizon comparator that is exact for its stated finite-horizon objective,
-20 independent confirmation seeds,
-paired seed-level inference with Holm correction, preview-model mismatch tests,
-per-episode engineering outcomes, training information/computation accounting,
-and eight prespecified parameter profiles. MATLAB exclusively
-generates quantitative figures. Python reporting generates only LaTeX tables
-and macros and cannot overwrite the MATLAB exports.

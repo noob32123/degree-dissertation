@@ -1,0 +1,150 @@
+\bisection{Results}{结果}
+\label{sec:results}
+\bisubsection{Direct paired inference establishes a DQN-family advantage under full coupling}{直接配对推断确立完全耦合条件下的 DQN 家族优势}
+\begin{paired}
+\pair{We first tested the family-level claim against the strongest implemented non-DQN comparator. MPC-4 had the lowest non-DQN mean in every fully coupled regime. All \DQNvsMPCContrastCount{} paired objective--regime comparisons favored DQN, and every individual 95\% bootstrap interval excluded zero.}
+{我们首先用已实现的最强非 DQN 比较器检验家族级主张。在每种完全耦合工况中，MPC-4 都具有最低的非 DQN 均值。全部 \DQNvsMPCContrastCount{} 个配对“目标—工况”比较均有利于 DQN，且每个单独的 95\% bootstrap 区间均不包含零。}
+\end{paired}
+\clearpage
+\begin{table}[H]
+\centering
+\bicap{Episode total cost under the internally consistent synthetic generator. For learned policies, SD is across 20 independently trained model-seed blocks after within-seed trace averaging. For deterministic nonlearned policies, SD is across the 20 disjoint trace namespaces and does not represent model-training variability. These two SDs quantify different sources of variation and are not directly comparable as inferential uncertainty. All learned policies were trained only at nominal $c=1$; static and reduced-coupling rows are transfers without retraining. MPC-4 is exact only for its stated four-step perfect-forecast objective. Lower is better.}
+{内部一致合成生成器下的回合总成本。对于学习策略，标准差基于 20 个独立训练的模型种子区组，并先在种子内对轨迹取平均。对于确定性非学习策略，标准差来自 20 个互不重叠的轨迹命名空间，不代表模型训练变异。两类标准差量化不同变异来源，不能作为推断不确定性直接比较。所有学习策略仅在名义 $c=1$ 下训练；静态和弱耦合行均为不经重新训练的迁移。MPC-4 仅对其声明的四步完美预测目标是精确的。数值越低越好。}
+\label{tab:main}
+\resizebox{\textwidth}{!}{\input{../generated/table_reviewer_main.tex}}
+\end{table}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_reviewer_primary.pdf}
+\bicap{Seven-regime performance under internally consistent synthetic task generation. For learned policies, error bars are SD across 20 model-seed blocks after within-seed trace averaging. Deterministic comparators instead show variation across trace namespaces, so their error bars are descriptive and not inferentially interchangeable with those of learned methods. All learned models were trained at nominal $c=1$; the $c<1$ rows are transfers without retraining. The ordinate changes between panels and panel heights should not be compared directly.}
+{内部一致合成任务生成下的七工况性能。对于学习策略，误差条为 20 个模型种子区组在种子内轨迹平均后的标准差。确定性比较器显示的则是轨迹命名空间之间的变异，因此其误差条仅具描述性，不能与学习方法的误差条作推断性互换。所有学习模型均在名义 $c=1$ 下训练；$c<1$ 的两行是不经重新训练的迁移。不同面板的纵轴尺度不同，不能直接比较面板高度。}
+\label{fig:seven}
+\end{figure}
+\begin{table}[H]
+\centering
+\bicap{Direct joint inference for the DQN family relative to MPC-4. Differences are DQN minus MPC-4, so negative values favor DQN. Within each regime, the table reports the largest, least-favorable mean among six DQN-objective contrasts; the final row takes the maximum across all 30 objective--regime cells. Intervals are percentile intervals for the corresponding maximum from 10,000 joint bootstrap resamples. Simultaneous one-sided 95\% upper bounds use the maximum centered bootstrap deviation. The independent unit is the model-seed block ($n=20$), after averaging 20 shared held-out traces within each block.}
+{DQN 家族相对 MPC-4 的直接联合推断。差值定义为 DQN 减 MPC-4，因此负值有利于 DQN。每种工况报告六个 DQN 目标对比中最大、即最不利的均值；最后一行取全部 30 个“目标—工况”单元格中的最大值。区间为 10,000 次联合 bootstrap 重采样所得相应最大值的百分位区间。同时单侧 95\% 上界使用最大中心化 bootstrap 偏差。独立单位为模型种子区组（$n=20$），每个区组内先对 20 条共享留出轨迹取平均。}
+\label{tab:dqn_vs_mpc_family}
+\resizebox{\textwidth}{!}{\input{../generated/table_dqn_vs_mpc_family_inference.tex}}
+\end{table}
+\begin{paired}
+\pair{The joint seed-block analysis supported the same conclusion after controlling multiplicity across all 30 cells. Every seed block favored DQN, and the largest Holm-adjusted sign-test value was \DQNvsMPCHolmPMax. The least-favorable cell was Double DQN under energy limitation, with a mean difference of \DQNvsMPCGlobalWorstDifference{} and a simultaneous 95\% upper bound of \DQNvsMPCGlobalUpperBound{} (Table~\ref{tab:dqn_vs_mpc_family}; Fig.~\ref{fig:graphical}). Nominal DQN-family means spanned \DQNFamilyNominalMinCost--\DQNFamilyNominalMaxCost, compared with \MPCNominalCost{} for MPC-4. This direct inference establishes the DQN-family advantage as the central benchmark finding.}
+{在控制全部 30 个单元格的多重性后，联合种子区组分析支持相同结论。每个种子区组均有利于 DQN，最大的 Holm 校正符号检验值为 \DQNvsMPCHolmPMax。最不利单元格是能量受限条件下的 Double DQN，其均值差为 \DQNvsMPCGlobalWorstDifference{}，同时单侧 95\% 上界为 \DQNvsMPCGlobalUpperBound{}（表~\ref{tab:dqn_vs_mpc_family}；图~\ref{fig:graphical}）。名义工况下 DQN 家族均值范围为 \DQNFamilyNominalMinCost--\DQNFamilyNominalMaxCost，而 MPC-4 为 \MPCNominalCost{}。这一直接推断确立了 DQN 家族优势是该基准的核心发现。}
+\end{paired}
+
+\bisubsection{Target design fine-tunes performance within a consistently strong DQN family}{目标设计在整体强势的 DQN 家族内部微调性能}
+\begin{table}[H]
+\centering
+\bicap{Episode total cost across six DQN-family objectives in the five fully coupled regimes. Values are mean $\pm$ SD across 20 independently trained model-seed blocks after within-seed averaging of 20 shared held-out traces. Lower is better, and the leading objective varies across regimes.}
+{六种 DQN 家族目标在五种完全耦合工况下的回合总成本。数值为 20 个独立训练模型种子区组的均值 $\pm$ 标准差，每个区组先对 20 条共享留出轨迹取平均。数值越低越好，领先目标随工况而变化。}
+\label{tab:dqn_family}
+\resizebox{\textwidth}{!}{\input{../generated/table_dqn_family_performance.tex}}
+\end{table}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_dqn_family.pdf}
+\bicap{DQN-family performance across fully coupled regimes. Points show model-seed means and error bars show $\pm$1 SD across 20 independently trained model seeds. The figure shows overlapping distributions and scenario-dependent ordering across objectives.}
+{DQN 家族在完全耦合工况下的性能。点表示模型种子均值，误差条表示 20 个独立训练模型种子之间的 $\pm$1 个标准差。图中显示不同目标的性能分布相互重叠，且排序随工况变化。}
+\label{fig:dqn_family}
+\end{figure}
+\begin{table}[H]
+\centering
+\bicap{Nominal fixed-coefficient component and backbone comparisons. All models use 20 prespecified model-seed blocks, identical real-interaction budgets, and the same held-out traces. Full-action Q and immediate advantage receive the same three modeled action outcomes as the centered full-action variant. The shared $\lambda=0.3$ was calibrated for the centered objective and not tuned separately for the other auxiliary losses, so these rows do not isolate centering or bootstrapping. Holm adjustment covers the five fully coupled regimes separately for each displayed contrast. “Supported” requires a favorable mean, a paired interval below zero, and Holm $p<0.05$.}
+{名义工况下固定系数组件与主干比较。所有模型均使用 20 个预设模型种子区组、相同真实交互预算和相同留出轨迹。全动作 Q 和即时优势接收与中心化全动作变体相同的三个模型化动作结果。共享的 $\lambda=0.3$ 针对中心化目标校准，未对其他辅助损失单独调参，因此这些行不能识别中心化或 bootstrap 的独立作用。每个展示的对比分别在五种完全耦合工况上进行 Holm 校正。“支持”要求均值有利、配对区间低于零且 Holm $p<0.05$。}
+\label{tab:extended_ablation}
+\resizebox{\textwidth}{!}{\input{../generated/table_extended_ablation.tex}}
+\end{table}
+\begin{table}[H]
+\centering
+\bicap{Paired inference for centered full-action minus standard DQN across the five fully coupled regimes. Negative differences favor centered full-action supervision. Each comparison uses 20 model-seed blocks after averaging 20 shared held-out traces. Holm adjustment covers the five prespecified regimes, and LOO denotes the leave-one-seed-out mean range.}
+{五种完全耦合工况下中心化全动作减标准 DQN 的配对推断。负差值有利于中心化全动作监督。每个比较使用 20 个模型种子区组，并先对每个区组的 20 条共享留出轨迹取平均。Holm 校正覆盖五种预设工况，LOO 表示留一模型种子的均值范围。}
+\label{tab:primary_inference}
+\resizebox{\textwidth}{!}{\input{../generated/table_primary_inference.tex}}
+\end{table}
+\begin{table}[H]
+\centering
+\bicap{Training information and computation accounting. Wall time is mean $\pm$ SD across 20 models. “Modeled action outcomes” counts analytical action evaluations used by the learning objective. Information and computational budgets additionally reflect these modeled action outcomes.}
+{训练信息与计算量核算。墙钟时间为 20 个模型的均值 $\pm$ 标准差。“模型化动作结果”统计学习目标使用的解析动作评估次数。信息预算与计算预算还取决于这些模型化动作结果。}
+\label{tab:training_accounting}
+\resizebox{0.92\textwidth}{!}{\input{../generated/table_training_accounting.tex}}
+\end{table}
+\begin{paired}
+\pair{Across the five fully coupled regimes, the six objectives occupied a narrow performance band (Table~\ref{tab:dqn_family}; Fig.~\ref{fig:dqn_family}). Nominal means ranged from \DQNFamilyNominalMinCost{} to \DQNFamilyNominalMaxCost. The leading objective varied by regime, and the family-to-MPC gap exceeded the differences among target designs.}
+{在五种完全耦合工况下，六种目标处于较窄的性能区间内（表~\ref{tab:dqn_family}；图~\ref{fig:dqn_family}）。名义均值范围为 \DQNFamilyNominalMinCost{} 至 \DQNFamilyNominalMaxCost。领先目标随工况变化，且 DQN 家族与 MPC 的差距大于不同目标设计之间的差异。}
+\pair{Centered full-action produced favorable mean differences against standard DQN in all five regimes and met the complete support rule in \PrimarySupportedCount{} (Table~\ref{tab:primary_inference}). The remaining component and Double-DQN contrasts changed the ordering by smaller, scenario-dependent amounts (Table~\ref{tab:extended_ablation}). Target construction contributed smaller, scenario-dependent variation within the family. All objectives used the same real-interaction budget, while the auxiliary objectives additionally consumed modeled action outcomes (Table~\ref{tab:training_accounting}).}
+{中心化全动作在全部五种工况下相对标准 DQN 均获得有利的均值差，并在其中 \PrimarySupportedCount{} 种工况满足完整支持规则（表~\ref{tab:primary_inference}）。其余组件与 Double-DQN 对比以较小且依赖工况的幅度改变排序（表~\ref{tab:extended_ablation}）。目标构造为家族内部带来较小且依赖工况的性能差异。所有目标使用相同的真实交互预算，而辅助目标还额外消耗模型化动作结果（表~\ref{tab:training_accounting}）。}
+\end{paired}
+
+\bisubsection{The DQN family retains an advantage over deeper exact planning}{DQN 家族相对更深层精确规划仍保持优势}
+\begin{table}[H]
+\centering
+\bicap{Nominal receding-horizon planning over 400 unique held-out traces. Each planner has perfect knowledge of the next $H$ tasks and exogenous link states and exactly enumerates $3^H$ sequences before every action. Runtime was measured on the same workstation and includes only planner action selection after environment construction. DQN inference time was not benchmarked in this experiment, so the table is not a matched deployment-latency comparison.}
+{在 400 条互不重复的留出轨迹上的名义滚动时域规划。每个规划器完美获知未来 $H$ 个任务与外生链路状态，并在每次动作前精确枚举 $3^H$ 个序列。运行时间在同一工作站上测量，仅包含环境构建后的规划器动作选择。该实验未测量 DQN 推理时间，因此本表不是匹配的部署时延比较。}
+\label{tab:planner_depth}
+\resizebox{0.85\textwidth}{!}{\input{../generated/table_planner_depth.tex}}
+\end{table}
+\begin{paired}
+\pair{Increasing planning depth reduced nominal mean cost from \PlannerCostHOne{} at $H=1$ to \PlannerCostHSix{} at $H=6$. Over the same range, mean decision time increased from \PlannerTimeHOne{} to \PlannerTimeHSix{} ms. MPC-6 remained above the nominal DQN-family range of \DQNFamilyNominalMinCost--\DQNFamilyNominalMaxCost. The DQN-family advantage therefore persisted through six-step exact planning.}
+{将规划深度从 $H=1$ 增至 $H=6$，名义平均成本从 \PlannerCostHOne{} 降至 \PlannerCostHSix{}；同期平均决策时间从 \PlannerTimeHOne{} ms 增至 \PlannerTimeHSix{} ms。MPC-6 的成本仍高于 DQN 家族的名义范围 \DQNFamilyNominalMinCost--\DQNFamilyNominalMaxCost。因此，DQN 家族的优势持续至六步精确规划。}
+\end{paired}
+\begin{table}[H]
+\centering
+\bicap{Engineering outcome decomposition for standard DQN relative to MPC-4. Standard DQN is shown as a conventional representative of the six-objective family. Delta columns report standard DQN minus MPC-4; negative values denote lower use or cost. Low-energy steps are soft-threshold exposure counts for decisions with remaining energy below 0.18.}
+{标准 DQN 相对 MPC-4 的工程结果分解。标准 DQN 作为六目标家族的常规代表展示。差值列为标准 DQN 减 MPC-4；负值表示更低的使用量或成本。低能量步数是剩余能量低于 0.18 的决策所对应的软阈值暴露计数。}
+\label{tab:engineering}
+\small\setlength{\tabcolsep}{4pt}
+\input{../generated/table_engineering_outcomes.tex}
+\end{table}
+\begin{paired}
+\pair{Table~\ref{tab:engineering} provides a representative decomposition of the standard-DQN--MPC-4 gap. Relative to MPC-4, standard DQN reduced delayed penalties in every fully coupled regime while changing immediate cost by only $-0.57$ to $1.36$. It also used less modeled energy, latency, and transmitted data. Both methods reached zero in the clipped energy state, while standard DQN produced slightly higher maximum heat. This resource-use decomposition applies specifically to standard DQN.}
+{表~\ref{tab:engineering} 给出标准 DQN 与 MPC-4 差距的一项代表性分解。相对 MPC-4，标准 DQN 在每种完全耦合工况下都降低了延迟惩罚，而即时成本仅变化 $-0.57$ 至 $1.36$；其模型化能耗、时延和传输数据量也更低。两种方法的裁剪能量状态均曾达到零，而标准 DQN 的最高热状态略高。这一资源使用分解具体适用于标准 DQN。}
+\end{paired}
+
+\clearpage
+\bisubsection{Representative DQN training diagnostics show empirical stabilization}{代表性 DQN 训练诊断显示经验趋稳}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_training_diagnostics.pdf}
+\bicap{Representative training diagnostics for standard DQN and the centered full-action DQN variant. Lines are means across 20 model seeds after a causal 25-episode moving average; shaded regions are $\pm$1 SD. Curves describe the training distribution and are not used as independent test observations or evidence for the whole DQN family.}
+{标准 DQN 和中心化全动作 DQN 变体的代表性训练诊断。曲线为 20 个模型种子在因果 25 回合移动平均后的均值，阴影表示 $\pm$1 个标准差。曲线描述训练分布，不作为独立测试观测，也不作为整个 DQN 家族的证据。}
+\label{fig:training}
+\end{figure}
+\begin{paired}
+\pair{All four logged quantities declined during approximately the first 220 episodes and then fluctuated around stable ranges (Fig.~\ref{fig:training}). The late-episode trajectories indicate empirical stabilization for these two representative family members.}
+{四个记录量均在约前 220 个回合内下降，随后围绕稳定区间波动（图~\ref{fig:training}）。后期轨迹表明这两个代表性家族成员的训练指标达到经验稳定状态。}
+\end{paired}
+
+\clearpage
+\bisubsection{Within-family sensitivity under parameter changes}{参数变化下的家族内部敏感性}
+\begin{table}[H]
+\centering
+\bicap{Prespecified parameter sensitivity for centered full-action minus standard DQN. Negative differences favor the centered full-action variant; $n=20$ independent paired model seeds in each profile. Holm adjustment covers the eight displayed profiles.}
+{中心化全动作减标准 DQN 的预设参数敏感性。负差值有利于中心化全动作变体；每种配置使用 $n=20$ 个独立配对模型种子。Holm 校正覆盖所示八种配置。}
+\label{tab:sensitivity}
+\resizebox{0.84\textwidth}{!}{\input{../generated/table_sensitivity.tex}}
+\end{table}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_sensitivity_planning.pdf}
+\bicap{Parameter sensitivity and planning boundary. (a) Mean paired differences between centered full-action and standard DQN with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.}
+{参数敏感性与规划边界。（a）中心化全动作与标准 DQN 的平均配对差值及 95\% 配对 bootstrap 区间。（b）即时策略、四步滚动规划与学习调度在不同耦合和压力工况下的表现。}
+\label{fig:sensitivity}
+\end{figure}
+\begin{paired}
+\pair{The paired interval for centered full-action minus standard DQN remained below zero in all eight profiles, with relative differences from \SensitivityMinPct{} to \SensitivityMaxPct. The largest difference occurred when raw data volume decreased by 20\%, whereas the smallest occurred when it increased by 20\%. The within-family direction therefore remained stable across the prespecified parameter envelope.}
+{在全部八种配置中，中心化全动作与标准 DQN 的配对区间均保持低于零，相对差异范围为 \SensitivityMinPct{} 至 \SensitivityMaxPct。原始数据量降低 20\% 时差异最大，提高 20\% 时差异最小。因此，家族内部方向在预设参数包络内保持稳定。}
+\end{paired}
+
+\clearpage
+\bisubsection{Preview-scale perturbations bound one model-assisted variant}{预览尺度扰动界定一个模型辅助变体的边界}
+\begin{table}[H]
+\centering
+\bicap{Effect of training-time preview misspecification. Differences are relative to the same standard-DQN models evaluated in the factual simulator. Scaling applies only to the centered full-action variant's training-time preview cost and action-induced resource changes.}
+{训练时预览误设的影响。差值均相对于在事实模拟器中评估的同一组标准 DQN 模型。缩放仅作用于中心化全动作变体的训练时预览成本和动作引起的资源变化。}
+\label{tab:preview_mismatch}
+\resizebox{\textwidth}{!}{\input{../generated/table_preview_mismatch.tex}}
+\end{table}
+\begin{paired}
+\pair{Uniform 15\% under- and over-scaling preserved favorable differences between centered full-action and standard DQN (Table~\ref{tab:preview_mismatch}). The two conditions met the complete rule in \MismatchLowSupportedCount{} and \MismatchHighSupportedCount{} regimes, respectively. Their largest Holm-adjusted sign-test values were \MismatchLowHolmPMax{} and \MismatchHighHolmPMax.}
+{统一下调和上调 15\% 均保留了有利于中心化全动作的差值（表~\ref{tab:preview_mismatch}）。两个条件分别在 \MismatchLowSupportedCount{} 和 \MismatchHighSupportedCount{} 种工况下满足完整规则，其最大 Holm 校正符号检验值分别为 \MismatchLowHolmPMax{} 和 \MismatchHighHolmPMax。}
+\end{paired}

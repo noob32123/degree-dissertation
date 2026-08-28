@@ -1,0 +1,59 @@
+\bisection{Introduction}{引言}
+\begin{paired}
+\pair{Earth-observation and communication satellites increasingly execute perception and decision workloads in orbit. Compact networks can reduce downlink demand and response latency under constrained onboard resources~\cite{9925218,10107454,10378728,10440355,10423050}. However, onboard execution consumes heat, energy, and compute capacity, whereas ground offloading consumes contact time and bandwidth. Effective scheduling must therefore coordinate onboard execution, complete offloading, and collaborative preprocessing over time.}
+{对地观测与通信卫星正越来越多地在轨执行感知和决策任务。在星上资源受限的条件下，轻量级网络可减少下行传输需求并缩短响应时延~\cite{9925218,10107454,10378728,10440355,10423050}。然而，星上执行会消耗热裕度、能量和计算能力，而地面卸载则占用过站时间和带宽。因此，有效调度必须在时间维度上协调星上执行、完整卸载以及协同预处理。}
+\pair{Existing schedulers optimize constellation coordination, observation plans, service placement, deadlines, makespan, or energy use~\cite{RN8,RN10,RN20,RN22,RN23,RN27,RN28}. Here, every decision changes six resources that persist across task arrivals: heat, energy, queue occupancy, compute utilization, bandwidth, and remaining contact. An inexpensive action can therefore restrict the choices available for later tasks. This temporal coupling motivates a central question: can learned long-horizon values outperform transparent one-step and finite-horizon alternatives across changing resource conditions?}
+{现有调度器主要优化星座协同、观测计划、服务部署、截止期、完工时间或能耗~\cite{RN8,RN10,RN20,RN22,RN23,RN27,RN28}。在本文问题中，每次决策都会改变六类会跨任务到达持续存在的资源：热状态、能量、队列占用、计算利用率、带宽和剩余过站时间。因此，当前看似成本较低的动作可能会限制后续任务的可选方案。这种时间耦合引出一个核心问题：在资源条件变化时，学习得到的长时程价值能否优于透明的一步方法和有限时域方法？}
+\pair{Standard DQN~\cite{mnih2015human,watkins1992q} learns one Bellman target from each factual tuple $(s_t,a_t,r_t,s_{t+1})$. In this setting, analytical resource equations can also evaluate every unexecuted action without advancing the environment or revealing later tasks. This structure enables a controlled test of both the DQN family and alternative ways to use full-action supervision during training.}
+{标准 DQN~\cite{mnih2015human,watkins1992q} 从每个事实元组 $(s_t,a_t,r_t,s_{t+1})$ 中学习一个 Bellman 目标。在本研究中，解析资源方程还能够评估每个未执行动作，而不会推进环境或提前暴露后续任务。该结构使我们能够受控检验 DQN 家族，以及训练阶段利用全动作监督的不同方式。}
+\pair{We compare six DQN objectives: standard DQN, full-action Q, immediate advantage, centered full-action, Double DQN, and Double DQN with centered full-action supervision. A separate $\gamma=0$ contextual bandit provides a learned one-step comparator. Model-evaluated alternatives are available only during training; every deployed policy acts directly from its learned Q-values.}
+{我们比较六种 DQN 目标：标准 DQN、全动作 Q、即时优势、中心化全动作、Double DQN，以及带中心化全动作监督的 Double DQN。另设 $\gamma=0$ 的上下文多臂老虎机作为学习型一步比较器。由模型评估的备选动作仅在训练期间可用；部署时所有策略均直接根据学习得到的 Q 值选择动作。}
+\pair{We make four contributions:
+\begin{enumerate}[leftmargin=1.5em]
+\item We introduce a fully specified, reproducible benchmark that links task primitives to three processing pathways and six persistent computational, energy, thermal, and communication resources.
+\item We construct a controlled six-objective DQN family that varies factual supervision, full-action targets, centering, bootstrapping, and Double-DQN evaluation under matched training conditions.
+\item We establish the family-level result directly against MPC-4 through 30 paired objective--regime contrasts, a correlation-preserving joint bootstrap, multiplicity-corrected tests, and a simultaneous upper bound.
+\item We provide an executable evidence chain connecting simulator equations, transition audits, trained checkpoints, seed-level inference, generated tables, validation hashes, and publication figures.
+\end{enumerate}}
+{我们的贡献包括以下四项：
+\begin{enumerate}[leftmargin=1.5em]
+\item 提出一个定义完整且可复现的基准，将任务原语与三种处理路径以及六类持续存在的计算、能量、热和通信资源相连接。
+\item 在匹配训练条件下构建包含六种目标的受控 DQN 家族，系统改变事实监督、全动作目标、中心化、bootstrap 以及 Double-DQN 目标评估。
+\item 通过 30 个配对“目标—工况”对比、保留相关性的联合 bootstrap、多重性校正检验和同时上界，直接建立 DQN 家族相对 MPC-4 的结果。
+\item 提供一条可执行证据链，将模拟器方程、转移审计、训练检查点、种子级推断、自动生成表格、验证哈希和发表级图形连接起来。
+\end{enumerate}}
+\end{paired}
+\bisection{Related Work and Study Positioning}{相关工作与研究定位}
+\bisubsection{Satellite-ground scheduling}{卫星地面调度}
+\begin{paired}
+\pair{Satellite schedulers cover constellation coordination, observation planning, service placement, and energy-aware offloading~\cite{RN8,RN10,RN20,RN22,RN23,RN27,RN28}. Our setting combines an explicit cost for every action with resource carryover between task arrivals. The one-step objective is therefore observed rather than hidden. The benchmark asks whether a learned value function can exploit consequences that persist beyond this observed one-step cost.}
+{卫星调度研究涵盖星座协同、观测规划、服务部署和能量感知卸载~\cite{RN8,RN10,RN20,RN22,RN23,RN27,RN28}。本文场景为每个动作赋予显式成本，并使资源状态在相邻任务到达之间延续，因此一步目标是可观测的而非隐藏的。该基准考察学习得到的价值函数能否利用超出这一可观测一步成本而持续存在的后果。}
+\end{paired}
+\bisubsection{Model use and full-action learning}{模型使用与全动作学习}
+\begin{paired}
+\pair{Dyna established predicted experience for value learning and planning~\cite{sutton1991dyna}, and fitted dynamics can accelerate deep Q-learning~\cite{gu2016continuous}. Counterfactual data fusion and causal augmentation construct transitions under structural assumptions~\cite{forney2017counterfactual,armengol2024caiac}. Counterfactual credit assignment instead separates action influence from future randomness~\cite{mesnard2021counterfactual}. Recent work also studies multi-action generative interfaces and joint quantities across action outcomes~\cite{kaya2026joint}. Together, these studies establish several routes for incorporating modeled alternatives into reinforcement learning.}
+{Dyna 奠定了利用预测经验进行价值学习和规划的框架~\cite{sutton1991dyna}，拟合动力学也可加速深度 Q 学习~\cite{gu2016continuous}。反事实数据融合和因果增强在结构假设下构造转移~\cite{forney2017counterfactual,armengol2024caiac}；反事实信用分配则将动作影响与未来随机性分离~\cite{mesnard2021counterfactual}。近期研究还考察多动作生成接口以及跨动作结果的联合量~\cite{kaya2026joint}。这些工作共同给出了将模型化备选结果纳入强化学习的多条路径。}
+\pair{Advantage learning widens action gaps through modified operators~\cite{bellemare2016gap}. Four objectives in the evaluated DQN family instead retain their respective Bellman target rules while adding training-time supervision from modeled outcomes for all actions at a sampled state. Table~\ref{tab:closest_methods} positions this shared supervision interface relative to related mechanisms. Standard DQN and Double DQN serve as factual-only family controls. We evaluate DQN-family performance relative to short-horizon planning under controlled conditions and characterize how target construction, centering, and target evaluation affect within-family variation.}
+{优势学习通过修改算子扩大动作间隔~\cite{bellemare2016gap}。本文评估的 DQN 家族中有四种目标保留各自的 Bellman 目标规则，同时利用采样状态下全部动作的模型化结果增加训练时监督。表~\ref{tab:closest_methods} 将这一共享监督接口与相关机制进行定位比较；标准 DQN 和 Double DQN 则作为仅使用事实转移的家族对照。我们在受控条件下评估 DQN 家族相对短时域规划的性能，并分析目标构造、中心化和目标评估如何影响家族内部的性能差异。}
+\pair{In this manuscript, “counterfactual” denotes a model-evaluated one-step outcome for an unexecuted action under the same current task and exogenous state. It does not denote an identified causal effect from observational data.}
+{本文中的“反事实”是指：在当前任务和外生状态相同的条件下，由模型评估某个未执行动作的一步结果。它不表示从观测数据中识别出的因果效应。}
+\end{paired}
+\begin{table}[H]
+\centering
+\bicap{Positioning of training-time modeled-action supervision used by four objectives in the evaluated DQN family. “All actions” means that one learning update can use modeled outcomes for every discrete action at the sampled state. Standard DQN and Double DQN provide factual-only family controls.}
+{本文所评估 DQN 家族中四种目标所用训练时模型化动作监督的定位。“全部动作”表示一次学习更新能够使用采样状态下每个离散动作的模型化结果；标准 DQN 和 Double DQN 提供仅使用事实转移的家族对照。}
+\label{tab:closest_methods}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}p{0.21\textwidth}>{\raggedright\arraybackslash}X}
+\toprule
+Method family & Source of modeled information & How it enters learning & Relation to the evaluated supervision interface \\
+\midrule
+Dyna and local model-based acceleration~\cite{sutton1991dyna,gu2016continuous} & Learned or fitted dynamics & Simulated experience or local rollouts & Does not use one simultaneous analytical outcome per action in a training-only auxiliary objective \\
+Causal counterfactual augmentation~\cite{armengol2024caiac} & Structural assumptions and offline trajectories & Synthetic transitions augment the training distribution & Targets distributional coverage rather than within-state Bellman action gaps \\
+Counterfactual credit assignment~\cite{mesnard2021counterfactual} & Future-conditioned trajectory information & Policy-gradient baseline or critic & Model-free and trajectory-conditioned rather than analytical one-step action enumeration \\
+Joint MDPs~\cite{kaya2026joint} & Multi-action sample transition model & Joint action-outcome quantities and Bellman operators & Closest formal interface; not a training-only auxiliary objective on a fixed factual DQN backbone \\
+Evaluated full-action DQN objectives & Deterministic analytical one-step transition for three actions & Auxiliary full-action targets or centered action gaps; no replay insertion & One controlled factor within a six-objective family; the family claim also includes factual-only controls \\
+\bottomrule
+\end{tabularx}
+\end{table}

@@ -1,0 +1,158 @@
+\bisection{Sequential Scheduling Formulation}{序贯调度建模}
+\label{sec:mdp}
+\bisubsection{State and transition}{状态与转移}
+\begin{paired}
+\pair{The normalized 24-dimensional state is}
+{归一化的 24 维状态为}
+\end{paired}
+\begin{equation}
+s_t=[x_t,\eta_t,z_t],\qquad
+\eta_t=[t/(T-1),\sin\phi,\cos\phi],\qquad
+z_t=[h_t,e_t,q_t,u_t,b_t,\tau_t],
+\end{equation}
+\begin{paired}
+\pair{where $x_t\in\R^{15}$ contains the task inputs defined in Table~\ref{tab:state_dictionary}. The context vector $\eta_t$ exposes absolute episode time and the reset-level link phase that determine the time-varying task and link distributions. The remaining task and link innovations are independent draws conditional on this context. The six resource variables denote normalized heat, remaining energy, queue occupancy, compute utilization, bandwidth, and contact duration. Thus, within each fixed regime, the transition distribution is conditioned on all persistent simulator variables rather than on a hidden reset phase.}
+{其中，$x_t\in\R^{15}$ 包含表~\ref{tab:state_dictionary} 定义的任务输入。上下文向量 $\eta_t$ 显式给出回合绝对时间和重置时的链路相位，它们共同决定随时间变化的任务与链路分布。在该上下文条件下，其余任务与链路扰动相互独立抽取。六个资源变量分别表示归一化热状态、剩余能量、队列占用、计算利用率、带宽和过站持续时间。因此，在每个固定工况内，转移分布以所有持续存在的模拟器变量为条件，而非受隐藏的重置相位影响。}
+\pair{Executing action $a_t$ changes resources before the next exogenous task arrives. The implemented transition is}
+{动作 $a_t$ 在下一个外生任务到达之前改变资源状态。实现的转移为}
+\end{paired}
+\begin{align}
+h_{t+1}&=\clip(0.86h_t+0.17c\widehat Q_t^{(a_t)},0,1.3),\notag\\
+e_{t+1}&=\clip(e_t+0.006-c\Delta e_t^{(a_t)},0,1),\notag\\
+q_{t+1}&=\clip(q_t+c(\Delta q_t^{(a_t)}-\mu_t^{(a_t)}),0,1.3),\notag\\
+u_{t+1}&=\clip(0.68u_t+0.32c\widehat w_t^{(a_t)},0,1.2),\notag\\
+b_{t+1}&=\clip(\bar b_{t+1}-c\ell_t^{(a_t)},0.08,1),\notag\\
+\tau_{t+1}&=\clip(\bar\tau_{t+1}-0.10c\widehat B_t^{(a_t)},0.05,1).
+\label{eq:transition}
+\end{align}
+\begin{paired}
+\pair{Here $\widehat Q$, $\widehat w$, and $\widehat B$ are normalized action-specific heat, work, and data demands. The terms $\Delta e$, $\Delta q$, $\mu$, and $\ell$ are the deterministic resource-use, queue, service, and link-occupation functions defined in Eq.~\eqref{eq:action_loads}. Exogenous link variables $\bar b$ and $\bar\tau$ follow Eq.~\eqref{eq:link_trace} and are sampled before each episode. Coupling $c=0$ removes action-dependent carryover, $c=0.5$ weakens it, and $c=1$ defines full coupling.}
+{其中，$\widehat Q$、$\widehat w$ 和 $\widehat B$ 分别为动作特异的归一化热、工作量和数据需求。$\Delta e$、$\Delta q$、$\mu$ 和 $\ell$ 是式~\eqref{eq:action_loads} 定义的确定性资源消耗、队列、服务和链路占用函数。外生链路变量 $\bar b$ 和 $\bar\tau$ 遵循式~\eqref{eq:link_trace}，并在每个回合开始前采样。耦合系数 $c=0$ 时去除动作相关的跨步延续效应，$c=0.5$ 时减弱该效应，$c=1$ 时为完全耦合。}
+\end{paired}
+
+\bisubsection{Reward and standard DQN backbone}{奖励与标准 DQN 主干}
+\begin{paired}
+\pair{The reward is the negative immediate cost plus post-decision feasibility penalties:}
+{奖励等于即时成本的相反数，再加上决策后的可行性惩罚：}
+\end{paired}
+\begin{align}
+r_t={}&-c_t^{imm}-c\big[12(h_{t+1}-0.78)_+ +15(0.18-e_{t+1})_+\notag\\
+&+8(q_{t+1}-0.75)_+ +10\mathbf 1_{a_t\ne\alpha_s}(0.14-\tau_t)_+\big].
+\label{eq:reward}
+\end{align}
+\begin{paired}
+\pair{The DQN uses the unmodified factual target}
+{DQN 使用未经修改的事实目标}
+\end{paired}
+\begin{equation}
+y_t=r_t+\gamma(1-d_t)\max_{a'}Q_{\bar\theta}(s_{t+1},a'),
+\label{eq:factual}
+\end{equation}
+\begin{paired}
+\pair{and factual loss}
+{以及事实损失}
+\end{paired}
+\begin{equation}
+L_{DQN}=\mathcal H\big(Q_\theta(s_t,a_t),y_t\big),
+\end{equation}
+\begin{paired}
+\pair{where $\mathcal H$ denotes the Huber loss. The target network both selects and evaluates the maximizing action, as required by standard DQN.}
+{其中 $\mathcal H$ 表示 Huber 损失。按照标准 DQN 的定义，目标网络同时选择并评估使 Q 值最大的动作。}
+\end{paired}
+
+\clearpage
+\bisection{DQN Objective Family and Full-Action Supervision}{DQN 目标家族与全动作监督}
+\label{sec:method}
+\begin{paired}
+\pair{The six-objective family shares the factual Huber loss and all implementation settings. Standard-DQN-based members use Eq.~\eqref{eq:factual}, whereas Double-DQN members use online-network action selection with target-network evaluation. Standard DQN and Double DQN learn only from factual transitions. Four model-assisted objectives add a training-only auxiliary path that can supply labels for unexecuted actions. The following construction defines the shared preview interface and the centered member; the experimental design also evaluates uncentered full-action Q, immediate advantage, and the corresponding Double-DQN auxiliary objective.}
+{六目标家族共享事实 Huber 损失及全部实现设置。以标准 DQN 为主干的成员使用式~\eqref{eq:factual}，Double-DQN 成员则以在线网络选择动作、以目标网络评估该动作。标准 DQN 和 Double DQN 仅从事实转移中学习；四种模型辅助目标另加一条仅用于训练的辅助路径，为未执行动作提供标签。以下构造定义共享预览接口和中心化成员，实验设计还评估非中心化全动作 Q、即时优势以及相应的 Double-DQN 辅助目标。}
+\end{paired}
+
+\bisubsection{Side-effect-free full-action preview}{无副作用的全动作预览}
+\begin{paired}
+\pair{For every replayed factual state, the analytical transition evaluates each $a\in\mathcal A$:}
+{对于经验回放中的每个事实状态，解析转移对每个 $a\in\mathcal A$ 进行评估：}
+\end{paired}
+\begin{equation}
+(\tilde \ell_{t,a},\tilde z'_{t,a})=F_{preview}(x_t,z_t,a).
+\end{equation}
+\begin{paired}
+\pair{Here $\tilde \ell_{t,a}$ contains the immediate cost and post-decision feasibility penalty for action $a$. The preview does not advance time, mutate state, alter trajectories, or consume random numbers. Before action selection it computes only the current-task cost and six post-action resources. The factual action is then executed once, after which the next exogenous task $x_{t+1}$ is revealed and the replay tuple is completed. During a later replay update, all alternatives reuse this observed next task and exogenous link trace. The counterfactual next state therefore replaces only the six endogenous resource coordinates:}
+{其中，$\tilde \ell_{t,a}$ 包含动作 $a$ 的即时成本和决策后可行性惩罚。预览不会推进时间、修改状态、改变轨迹或消耗随机数。在选择动作前，它只计算当前任务的成本和动作后的六个资源状态。随后，事实动作仅执行一次；下一个外生任务 $x_{t+1}$ 被揭示，经验回放元组由此完成。在之后的回放更新中，所有备选动作复用这一已观测的下一任务与外生链路轨迹。因此，反事实下一状态只替换六个内生资源坐标：}
+\end{paired}
+\begin{equation}
+\tilde s'_{t,a}=[x_{t+1},\eta_{t+1},\tilde z'_{t,a}].
+\end{equation}
+\begin{paired}
+\pair{Evaluation and deployment never call the preview interface.}
+{评估和部署阶段从不调用预览接口。}
+\end{paired}
+
+\bisubsection{All-action counterfactual Bellman targets}{全动作反事实 Bellman 目标}
+\begin{paired}
+\pair{The simulator-exact one-step outcome yields}
+{模拟器精确的一步结果给出}
+\end{paired}
+\begin{equation}
+\tilde y_{t,a}=-\tilde \ell_{t,a}+\gamma(1-d_t)
+\max_{a'}Q_{\bar\theta}(\tilde s'_{t,a},a').
+\label{eq:cf_target}
+\end{equation}
+\begin{paired}
+\pair{The targets create no multi-step rollout and insert no counterfactual transition into replay. The centered full-action objective uses them only after the state-wise centering defined below.}
+{这些目标不产生多步 rollout，也不向经验回放中插入反事实转移。中心化全动作目标仅在经过下文定义的状态内中心化之后使用这些目标。}
+\end{paired}
+
+\bisubsection{Centered advantage distillation}{中心化优势蒸馏}
+\begin{paired}
+\pair{Absolute targets in Eq.~\eqref{eq:cf_target} share a bootstrapped state-value offset. Deployment selects $\arg\max_a Q(s,a)$, so a common additive offset cannot change the action. We define predicted and target centered advantages as}
+{式~\eqref{eq:cf_target} 中的绝对目标共享一个由 bootstrap 产生的状态价值偏移。部署策略选择 $\arg\max_a Q(s,a)$，因此公共加性偏移不会改变所选动作。预测的中心化优势与目标中心化优势定义为}
+\end{paired}
+\begin{align}
+\widehat A_{t,a}&=Q_\theta(s_t,a)-\frac{1}{|\mathcal A|}\sum_jQ_\theta(s_t,j),\notag\\
+\tilde A_{t,a}&=\tilde y_{t,a}-\frac{1}{|\mathcal A|}\sum_j\tilde y_{t,j}.
+\label{eq:center}
+\end{align}
+\newpage
+\begin{paired}
+\pair{The advantage and total losses are}
+{优势损失与总损失为}
+\end{paired}
+\begin{align}
+L_{adv}&=\frac{1}{|\mathcal A|}
+\sum_{a\in\mathcal A}\mathcal H(\widehat A_{t,a},\tilde A_{t,a}),\notag\\
+L_{CFA}&=L_{DQN}+\lambda L_{adv}.
+\label{eq:cbad}
+\end{align}
+\begin{paired}
+\pair{The factual term anchors the absolute Q scale, while $L_{adv}$ teaches all action gaps. The only added algorithmic hyperparameter is $\lambda$.}
+{事实项固定 Q 值的绝对尺度，而 $L_{adv}$ 学习全部动作差距。新增的唯一算法超参数是 $\lambda$。}
+\end{paired}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth,height=0.42\textheight,keepaspectratio]{fig_cbad_mechanism_simulator_exact_arial.png}
+\bicap{Training-only centered full-action mechanism. The upper path retains the factual standard-DQN target and Huber loss. The lower path previews all three actions, constructs three Bellman targets, centers them within state, and distills their relative advantages. Both losses update the online Q-network; the target network is synchronized only at the shared fixed interval. Preview outputs are unavailable during evaluation and deployment.}
+{仅用于训练的中心化全动作机制。上方路径保留事实标准 DQN 目标与 Huber 损失；下方路径预览三个动作，构造三个 Bellman 目标，在状态内对其中心化，并蒸馏相对优势。两个损失共同更新在线 Q 网络；目标网络仅按共享的固定间隔同步。评估和部署期间无法使用预览输出。}
+\label{fig:mechanism}
+\end{figure}
+\begin{figure}[H]
+\centering
+\fbox{\begin{minipage}{0.93\textwidth}
+\textbf{Algorithm 1: DQN training with centered full-action supervision / 使用中心化全动作监督的 DQN 训练}
+\begin{enumerate}[leftmargin=1.6em,itemsep=2pt,topsep=4pt]
+\item Initialize uniform replay $\mathcal D$, online $Q_\theta$, and target $Q_{\bar\theta}\leftarrow Q_\theta$.\\
+初始化均匀经验回放 $\mathcal D$、在线网络 $Q_\theta$ 和目标网络 $Q_{\bar\theta}\leftarrow Q_\theta$。
+\item At each real step, observe $s_t$ and preview current-task outcomes $(\tilde \ell_{t,a},\tilde z'_{t,a})$ for all actions without side effects.\\
+在每个真实交互步观测 $s_t$，并以无副作用方式预览当前任务下所有动作的结果 $(\tilde \ell_{t,a},\tilde z'_{t,a})$。
+\item Select $a_t$ by the shared epsilon-greedy schedule and execute it once. After $x_{t+1}$ is revealed, store the factual tuple plus the previously computed previews.\\
+按共享的 epsilon-greedy 计划选择 $a_t$ 并执行一次。$x_{t+1}$ 被揭示后，存储事实元组及先前计算的预览。
+\item When an update is due, sample one uniform mini-batch, compute the factual loss, compute Eqs.~\eqref{eq:cf_target} and \eqref{eq:center}, and update $\theta$ using Eq.~\eqref{eq:cbad}.\\
+需要更新时，均匀采样一个小批量，计算事实损失以及式~\eqref{eq:cf_target} 和式~\eqref{eq:center}，再按式~\eqref{eq:cbad} 更新 $\theta$。
+\item Synchronize $Q_{\bar\theta}$ at the shared fixed interval.\\
+按共享的固定间隔同步 $Q_{\bar\theta}$。
+\end{enumerate}
+\end{minipage}}
+\par\smallskip
+\caption*{Training previews are never used for evaluation or deployment. / 训练预览从不用于评估或部署。}
+\label{alg:cbad}
+\end{figure}

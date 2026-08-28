@@ -1,0 +1,159 @@
+\bisection{System Model and Immediate-Cost Quantification}{系统模型与即时成本量化}
+\label{sec:system}
+\begin{paired}
+\pair{At task arrival $t$, a satellite selects one of three actions. Action $\alpha_s$ executes onboard and downlinks the result, whereas $\alpha_g$ downlinks the complete input for ground execution. Action $\alpha_{s\&g}$ performs onboard preprocessing followed by ground execution:}
+{任务在时刻 $t$ 到达时，卫星从三个动作中选择一个。动作 $\alpha_s$ 在星上执行并下传结果；$\alpha_g$ 下传完整输入，由地面执行；$\alpha_{s\&g}$ 先在星上预处理，再由地面完成执行：}
+\end{paired}
+\begin{equation}
+\mathcal A=\{\alpha_s,\alpha_g,\alpha_{s\&g}\},
+\end{equation}
+\begin{paired}
+\pair{where the subscripts denote satellite, ground, and collaborative processing, respectively.}
+{其中，下标分别表示星上处理、地面处理和协同处理。}
+\end{paired}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth,height=0.40\textheight,keepaspectratio]{fig_system_modes_arial.png}
+\bicap{Three satellite-ground processing pathways. Each arriving task is executed onboard, transferred for ground execution, or preprocessed collaboratively before ground completion. The analytical transition model returns the immediate cost and the post-action heat, energy, queue occupancy, compute utilization, bandwidth, and remaining contact.}
+{三种卫星地面处理路径。每个到达任务可在星上执行、传输至地面执行，或先协同预处理再由地面完成。解析转移模型返回即时成本，以及动作后的热状态、能量、队列占用、计算利用率、带宽和剩余过站时间。}
+\label{fig:system}
+\end{figure}
+
+\bisubsection{Implemented immediate-cost model}{实现的即时成本模型}
+\begin{paired}
+\pair{The experiments use the dimensionless linear cost implemented by the internally consistent synthetic simulator. Let $x_k$ denote the 15 task descriptors in Table~\ref{tab:state_dictionary}. Each descriptor is normalized as}
+{实验采用内部一致的合成模拟器所实现的无量纲线性成本。令 $x_k$ 表示表~\ref{tab:state_dictionary} 中的 15 个任务描述量。每个描述量按下式归一化：}
+\end{paired}
+\begin{equation}
+\bar x_k=\clip(x_k/s_k,0,1.5),
+\end{equation}
+\begin{paired}
+\pair{where $s_k$ is the corresponding scale. For inherited normalized bandwidth $b$, the available return rate is $R(b)=2.2+217.8b$ Mbit s$^{-1}$. The three action latencies are}
+{其中 $s_k$ 为相应尺度。对于继承的归一化带宽 $b$，可用回传速率为 $R(b)=2.2+217.8b$ Mbit s$^{-1}$。三个动作的时延为}
+\end{paired}
+\begin{align}
+L_s&=x_3+1000x_6/R(b),\notag\\
+L_g&=x_8+1000x_9/R(b),\notag\\
+L_{s\&g}&=1000x_{12}/4+x_{13}+1000x_{15}/R(b).
+\label{eq:latencies}
+\end{align}
+\begin{paired}
+\pair{The implemented immediate costs are}
+{实现的即时成本为}
+\end{paired}
+\begin{align}
+c_s^{imm}={}&0.70\bar x_1+0.65\bar x_2+0.00045L_s+0.55\bar x_5
++0.35\bar x_6+0.35h+0.12(1-e),\notag\\
+c_g^{imm}={}&0.45\bar x_7+0.00045L_g+0.55\bar x_9
++0.35(0.28-\tau)_+,\notag\\
+c_{s\&g}^{imm}={}&0.55(\bar x_{10}+\bar x_{11})+0.55\bar x_{14}
++0.00045L_{s\&g}+0.45\bar x_{15}\notag\\
+&+0.18h+0.12q+0.18(0.22-\tau)_+.
+\label{eq:implemented_costs}
+\end{align}
+\begin{paired}
+\pair{Here $h$, $e$, $q$, and $\tau$ are inherited heat, remaining energy, queue occupancy, and contact duration. The weights are fixed simulator assumptions rather than fitted mission utilities. They are applied identically during training, counterfactual preview, MPC evaluation, and deployment evaluation. Automated tests reproduce Eq.~\eqref{eq:implemented_costs} from the 15 raw descriptors and compare it with all three code outputs.}
+{其中 $h$、$e$、$q$ 和 $\tau$ 分别为继承的热状态、剩余能量、队列占用和过站持续时间。这些权重是固定的模拟器假设，而非拟合得到的任务效用；它们在训练、反事实预览、MPC 评估和部署评估中完全一致。自动化测试根据 15 个原始描述量复现式~\eqref{eq:implemented_costs}，并与代码的三个动作输出逐一比较。}
+\end{paired}
+\begin{table}[H]
+\centering
+\bicap{Implemented 15-dimensional task descriptor dictionary. The complete 24-dimensional observation appends normalized time, sine and cosine of link phase, and six resource coordinates: $h$, $e$, $q$, compute utilization $u$, bandwidth $b$, and contact duration $\tau$.}
+{实现的 15 维任务描述量字典。完整的 24 维观测还包括归一化时间、链路相位的正弦与余弦，以及六个资源坐标：$h$、$e$、$q$、计算利用率 $u$、带宽 $b$ 和过站持续时间 $\tau$。}
+\label{tab:state_dictionary}
+\resizebox{\textwidth}{!}{\input{../generated/table_state_dictionary.tex}}
+\end{table}
+
+\bisubsection{Internally consistent task and communication generator}{内部一致的任务与通信生成器}
+\begin{paired}
+\pair{The simulator does not sample heat, workload, data volume, and latency independently. It first draws correlated latent variables $(v_t,w_t)$ with correlation parameter 0.68 and maps them through a logistic transform to raw data volume $D_t\in[8,64]$ Mbit and workload $W_t\in[0.25,4.0]$ GFLOP. Result and collaborative-feature volumes are}
+{模拟器不会独立采样热量、工作负载、数据量和时延。它首先抽取相关参数为 0.68 的潜变量 $(v_t,w_t)$，再通过 logistic 变换映射为原始数据量 $D_t\in[8,64]$ Mbit 和工作负载 $W_t\in[0.25,4.0]$ GFLOP。结果数据量和协同特征数据量为}
+\end{paired}
+\begin{equation}
+D_t^{res}=r_tD_t,\quad r_t\in[0.01,0.05],\qquad
+D_t^{feat}=f_tD_t,\quad f_t\in[0.08,0.30].
+\end{equation}
+\begin{paired}
+\pair{The implementation enforces $D_t^{res}\le D_t^{feat}\le D_t$. A workload-dependent fraction $p_t\in[0.20,0.45]$ is processed onboard in the collaborative mode. Given onboard and ground rates $R_s=4$ and $R_g=80$ GFLOP s$^{-1}$, processing time is derived as $W/R$, rather than sampled separately. Compute power rises monotonically from 4 to 20 W with workload; compute heat is 0.78 times compute energy. Transmission time is data volume divided by the effective return rate}
+{实现中强制满足 $D_t^{res}\le D_t^{feat}\le D_t$。协同模式下，工作负载相关比例 $p_t\in[0.20,0.45]$ 在星上处理。给定星上和地面处理速率 $R_s=4$ 与 $R_g=80$ GFLOP s$^{-1}$，处理时间由 $W/R$ 推导，而不是单独采样。计算功率随工作负载从 4 W 单调增加至 20 W；计算热量为计算能耗的 0.78 倍。传输时间等于数据量除以有效回传速率}
+\end{paired}
+\begin{equation}
+R_t^{link}=2.2+217.8b_t\quad\text{Mbit s}^{-1},
+\end{equation}
+\begin{paired}
+\pair{and transmission heat is 0.55 times transmit energy. These values are engineering envelopes, not fitted flight distributions. Their scale is consistent with modern SmallSat computing-system power reported by NASA. NASA ground-network examples span 2.2 Mbit s$^{-1}$ S-band to 220 Mbit s$^{-1}$ X-band returns~\cite{nasa2026avionics,nasa2026ground}. The bounded data-reduction factors represent the bandwidth-reduction role of onboard image compression, not a claim about one instrument-specific codec~\cite{ccsds122}. Table~\ref{tab:parameters} states every implemented assumption.}
+{传输热量为传输能耗的 0.55 倍。这些数值构成工程包络，而非拟合的飞行分布。其量级与 NASA 报告的现代小卫星计算系统功率一致。NASA 地面网络示例的回传速率从 S 波段的 2.2 Mbit s$^{-1}$ 到 X 波段的 220 Mbit s$^{-1}$~\cite{nasa2026avionics,nasa2026ground}。有界数据缩减因子体现星上图像压缩降低带宽需求的作用，而非对某一特定仪器编解码器作出主张~\cite{ccsds122}。表~\ref{tab:parameters} 列出全部实现假设。}
+\end{paired}
+\begin{table}[H]
+\centering
+\bicap{Modeled engineering primitives and provenance of the current simulator. Values define a transparent synthetic envelope; they are not presented as a fitted flight distribution.}
+{当前模拟器中的工程原语及其依据。相关数值定义了透明的合成包络，并不作为拟合飞行分布呈现。}
+\label{tab:parameters}
+\resizebox{\textwidth}{!}{\input{../generated/table_parameter_provenance.tex}}
+\end{table}
+\begin{paired}
+\pair{An automated audit generated \PhysicalAuditTasks{} tasks before training. All values were finite and positive, all data-flow inequalities held, and the empirical raw-data--workload correlation was \PhysicalCorrDataWork. Figure~\ref{fig:physical} shows the resulting dependence structure. Constant-rate columns have zero variance and are therefore excluded from correlation coefficients.}
+{训练前的自动审计生成了 \PhysicalAuditTasks{} 个任务。所有数值均有限且为正，全部数据流不等式均成立，原始数据量与工作负载的经验相关系数为 \PhysicalCorrDataWork。图~\ref{fig:physical} 展示所得依赖结构。固定速率列的方差为零，因此不纳入相关系数计算。}
+\end{paired}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth]{fig_physical_generator.pdf}
+\bicap{Internal-consistency audit of the synthetic generator. (a) A legibility sample of 2,000 of 20,000 tasks; color encodes heat derived from compute energy. (b) Correlations computed from all 20,000 tasks. No fitted flight distribution is implied.}
+{合成生成器的内部一致性审计。（a）从 20,000 个任务中抽取 2,000 个用于清晰展示；颜色表示由计算能耗推导的热量。（b）基于全部 20,000 个任务计算的相关性。图中不隐含任何拟合飞行分布。}
+\label{fig:physical}
+\end{figure}
+
+\bisubsection{Complete stochastic generator and action-load specification}{完整随机生成器与动作负载规范}
+\label{sec:complete_simulator}
+\begin{paired}
+\pair{For independent reconstruction, this subsection states the remaining simulator functions that enter the transition. Let $u_D,\epsilon_W\sim\mathcal N(0,1)$ independently, $u_W=0.68u_D+\sqrt{1-0.68^2}\epsilon_W$, and $g(u)=[1+\exp(-1.55u)]^{-1}$. Nominal raw volume and workload are}
+{为支持独立重建，本小节给出其余进入状态转移的模拟器函数。令 $u_D,\epsilon_W\sim\mathcal N(0,1)$ 且相互独立，$u_W=0.68u_D+\sqrt{1-0.68^2}\epsilon_W$，并定义 $g(u)=[1+\exp(-1.55u)]^{-1}$。名义原始数据量和工作负载为}
+\end{paired}
+\begin{equation}
+D=8+56g(u_D)\ {\rm Mbit},\qquad W=0.25+3.75g(u_W)\ {\rm GFLOP}.
+\label{eq:primitive_generator}
+\end{equation}
+\begin{paired}
+\pair{The burst interval occupies indices $\lfloor T/3\rfloor$ through $\lfloor T/3\rfloor+\max(4,\lfloor T/4\rfloor)-1$ and multiplies both quantities by 1.45. With independent $U_r,U_f\sim\mathcal U(0,1)$,}
+{突发区间覆盖索引 $\lfloor T/3\rfloor$ 至 $\lfloor T/3\rfloor+\max(4,\lfloor T/4\rfloor)-1$，并将上述两个量同时乘以 1.45。对于相互独立的 $U_r,U_f\sim\mathcal U(0,1)$，}
+\end{paired}
+\begin{align}
+r&=0.01+0.04U_r,\qquad f=0.08+0.22\clip[0.65g(u_W)+0.35U_f,0,1],\notag\\
+p&=0.20+0.25g(u_W),\qquad D^{res}=rD,\quad D^{feat}=fD,\quad W^{pre}=pW,\notag\\
+n&=\operatorname{round}\{6+43\clip[0.60g(u_W)+0.40g(u_D),0,1]\},\qquad x_5=n^2.
+\label{eq:primitive_ratios}
+\end{align}
+\begin{paired}
+\pair{Onboard and ground rates are 4 and 80~GFLOP~s$^{-1}$, respectively. Compute power is $P_c=4+16\clip(W/4.8,0,1)^{0.70}$~W, and transmit power is 6~W. Compute and transmit heat are 0.78 and 0.55 times their corresponding energy use. These definitions generate all 15 coordinates in Table~\ref{tab:state_dictionary}.}
+{星上与地面的处理速率分别为 4 和 80~GFLOP~s$^{-1}$。计算功率为 $P_c=4+16\clip(W/4.8,0,1)^{0.70}$~W，发射功率为 6~W。计算热量和传输热量分别是相应能耗的 0.78 倍和 0.55 倍。这些定义生成表~\ref{tab:state_dictionary} 中的全部 15 个坐标。}
+\pair{At reset, a single phase $\phi\sim\mathcal U(0,2\pi)$ generates the exogenous link trace}
+{环境重置时，单个相位 $\phi\sim\mathcal U(0,2\pi)$ 用于生成外生链路轨迹}
+\end{paired}
+\begin{align}
+\bar b_t&=\clip\left\{\kappa_b[0.62+0.23\sin(2\pi t/24+\phi)+\epsilon^b_t]-I_{link},0.12,1\right\},\notag\\
+\bar\tau_t&=\clip\left\{0.55+0.35\sin(2\pi t/31+\phi/2)+\epsilon^\tau_t,0.08,1\right\},
+\label{eq:link_trace}
+\end{align}
+\begin{paired}
+\pair{where $\epsilon^b_t\sim\mathcal N(0,0.06^2)$, $\epsilon^\tau_t\sim\mathcal N(0,0.04^2)$, $\kappa_b$ is the sensitivity multiplier, and $I_{link}=0.22$ only in the link-limited regime. All episode tasks and link states are drawn at reset from one seeded NumPy generator.}
+{其中 $\epsilon^b_t\sim\mathcal N(0,0.06^2)$、$\epsilon^\tau_t\sim\mathcal N(0,0.04^2)$，$\kappa_b$ 为敏感性倍数，并且仅在链路受限工况下令 $I_{link}=0.22$。每个回合的所有任务和链路状态都在重置时由同一个带种子的 NumPy 生成器抽取。}
+\pair{The normalized action loads used in Eq.~\eqref{eq:transition} are stated here in action order $(\alpha_s,\alpha_g,\alpha_{s\&g})$:}
+{式~\eqref{eq:transition} 使用的归一化动作负载按动作顺序 $(\alpha_s,\alpha_g,\alpha_{s\&g})$ 表示为：}
+\end{paired}
+\begin{align}
+\widehat w&=(W,0.05W,W)/4.8,\qquad
+\widehat Q=(x_1,0.20x_7,x_{10}+x_{11})/100,\notag\\
+\widehat B&=(x_6,x_9,x_{15})/76.8,\notag\\
+\Delta e&=\kappa_e\left(0.012+0.042\widehat w_1,
+0.007+0.025\widehat B_2/b,
+0.010+0.025\widehat w_3+0.018\widehat B_3/b\right),\notag\\
+\Delta q&=\left(0.055\widehat w_1(1+u),
+0.048\widehat B_2/b,
+0.030(\widehat w_3+\widehat B_3/b)\right),\notag\\
+\mu&=\left(0.030(1-u),0.035b\tau,0.032(1-0.5u)\right),\notag\\
+\ell&=(0.02,0.18\widehat B_2,0.12\widehat B_3).
+\label{eq:action_loads}
+\end{align}
+\begin{paired}
+\pair{Here divisions by $b$ use $\max(b,0.1)$. The utilization targets in Eq.~\eqref{eq:transition} are $(\widehat w_1,0.10\widehat B_2,0.55\widehat w_3)$. Initial resources are $(h,e,q,u)=(0.22,0.88,0.12,0.18)$ except that energy-limited episodes use $e=0.62$ and thermal-stress episodes use $h=0.42$. Each episode terminates after exactly 64 executed actions; the terminal Bellman multiplier is zero. Energy and other resources remain soft-constrained clipped accounting states. In particular, $e=0$ neither masks infeasible actions nor terminates an episode. It therefore does not represent a conserved battery state, and clipping does not retain the magnitude of an energy deficit.}
+{其中，除以 $b$ 时实际使用 $\max(b,0.1)$。式~\eqref{eq:transition} 中的利用率目标为 $(\widehat w_1,0.10\widehat B_2,0.55\widehat w_3)$。初始资源为 $(h,e,q,u)=(0.22,0.88,0.12,0.18)$；能量受限回合改用 $e=0.62$，热应力回合改用 $h=0.42$。每个回合在恰好执行 64 个动作后终止，终止时 Bellman 乘子为零。能量及其他资源均为经过裁剪的软约束记账状态。特别地，$e=0$ 既不会屏蔽不可行动作，也不会终止回合。因此，它不代表守恒的电池状态，裁剪也不会保留能量赤字的大小。}
+\end{paired}

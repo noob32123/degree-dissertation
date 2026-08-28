@@ -1,0 +1,76 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=1.35cm]{geometry}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\setmainfont{Times New Roman}
+\setCJKmainfont{Microsoft YaHei}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs,tabularx,array,multirow}
+\usepackage{graphicx,float,caption}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{cite}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{paracol}
+\usepackage{microtype}
+\definecolor{modelblue}{HTML}{2874A6}
+\definecolor{zhgray}{HTML}{30363D}
+\definecolor{rulegray}{HTML}{D0D7DE}
+\newcommand{\R}{\mathbb{R}}
+\DeclareMathOperator{\clip}{clip}
+\setlength{\columnsep}{0.75cm}
+\setlength{\columnseprule}{0.3pt}
+\def\columnseprulecolor{\color{rulegray}}
+\setlength{\parindent}{1em}
+\setlength{\parskip}{0.35em}
+\captionsetup{font=small,labelfont=bf}
+\newenvironment{paired}{\begin{paracol}{2}\small}{\end{paracol}}
+\long\def\pair#1#2{#1\switchcolumn{\color{zhgray}#2}\switchcolumn*}
+\newcommand{\bicap}[2]{\caption{#1\\\textbf{中文：}#2}}
+\newcommand{\cmd}[1]{{\ttfamily\footnotesize #1}}
+\newcommand{\bisection}[2]{\section{#1\texorpdfstring{\\[-2pt]\large #2}{ / #2}}}
+\newcommand{\bisubsection}[2]{\subsection{#1\texorpdfstring{\\[-2pt]\normalsize #2}{ / #2}}}
+\graphicspath{{../figures/}{../figures/ai/}}
+\title{\textbf{A Statistically Supported DQN-Family Advantage in a Resource-Coupled Satellite-Ground Scheduling Benchmark}\\[4pt]
+\Large 资源耦合卫星地面调度基准中具有统计支持的 DQN 家族优势}
+\author{
+Bocheng Yang$^{1}$, Lujie Zheng$^{1}$, Jian Liu$^{1,2,*}$, and Bo Chen$^{1,*}$\\[3pt]
+\small $^{1}$School of Aerospace, Harbin Institute of Technology (Shenzhen), Shenzhen 518055, China\\
+\small $^{2}$Guangxi Key Laboratory of Precision Navigation Technology and Application,\\[-2pt]
+\small Guilin University of Electronic Technology, Guilin 541004, China\\
+\small $^{*}$Correspondence: liujian2024@hit.edu.cn; hitchenbo@hit.edu.cn
+}
+\date{}
+\begin{document}
+\emergencystretch=3em
+\maketitle
+\input{../generated/reviewer_macros.tex}
+\input{../generated/extended_macros.tex}
+\input{../generated/dqn_vs_mpc_macros.tex}
+\noindent\colorbox{modelblue!8}{\parbox{\dimexpr\textwidth-2\fboxsep\relax}{\small
+\textbf{Reader layout / 阅读版式：} English appears in the left column and its faithful Chinese translation in the right column. Equations, figures and tables are shared across both columns to preserve a single source of mathematical and visual evidence. References are retained in their published language.\\
+英文位于左栏，对应中文译文位于右栏。公式、图和表跨双栏共用，以确保数学与视觉证据只有一个权威版本；参考文献保留其发表语言。}}
+\begin{paired}
+\pair{\textbf{Abstract}\par
+Resource-coupled satellite-ground scheduling requires decisions whose computational, energy, thermal, and communication consequences persist across task arrivals. We investigated whether the deep Q-network (DQN) family shows a reproducible advantage over short-horizon planning in this temporal setting. Six DQN objectives shared identical states, network architecture, replay, optimization, interaction budgets, \IndependentModelSeeds{} model seeds, and held-out traces across five fully coupled regimes of a fully specified synthetic, soft-constrained benchmark. Across all \DQNvsMPCContrastCount{} objective--regime comparisons, every DQN mean was lower than MPC-4, every paired 95\% bootstrap interval excluded zero, and all Holm-adjusted sign tests supported the ordering. The least-favorable mean difference was \DQNvsMPCGlobalWorstDifference, and the family-wide simultaneous 95\% upper bound was \DQNvsMPCGlobalUpperBound. Within-family differences were smaller and scenario dependent, whereas increasing exact planning depth from one to six steps reduced cost at substantially higher decision time. Together, these results establish a DQN-family advantage that is statistically supported across objective designs and resource-stress regimes, while providing a reproducible platform for future operational validation.}
+{\textbf{摘要}\par
+资源耦合的卫星地面调度需要连续作出决策，而每次决策对计算、能量、热状态和通信资源的影响会延续到后续任务到达时。本文考察在这一时间性调度场景中，深度 Q 网络（DQN）家族相对短时域规划是否具有可重复优势。六种 DQN 目标在一个定义完整的合成软约束基准中共享完全相同的状态、网络结构、经验回放、优化方法、交互预算、\IndependentModelSeeds{} 个模型种子和留出测试轨迹，并在五种完全耦合工况下评估。在全部 \DQNvsMPCContrastCount{} 个“目标—工况”比较中，每种 DQN 的平均成本都低于 MPC-4，每个配对 95\% bootstrap 区间均不包含零，且所有经 Holm 校正的符号检验均支持这一排序。最不利的均值差为 \DQNvsMPCGlobalWorstDifference，家族整体的同时单侧 95\% 上界为 \DQNvsMPCGlobalUpperBound。DQN 家族内部差异较小且随工况变化；与此同时，将精确规划深度从一步增加到六步虽可降低成本，却显著增加决策时间。上述结果表明，DQN 家族在不同目标设计和资源压力工况下均具有统计支持的优势，并为未来运行级验证提供了可复现平台。}
+\pair{\textbf{Keywords:} deep Q-network variants; satellite edge computing; task scheduling; model-assisted reinforcement learning; full-action supervision.}
+{\textbf{关键词：}深度 Q 网络变体；卫星边缘计算；任务调度；模型辅助强化学习；全动作监督。}
+\end{paired}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.98\textwidth,height=0.43\textheight,keepaspectratio]{fig_dqn_family_summary.pdf}
+\bicap{Family-level DQN--MPC-4 evidence in the synthetic soft-constrained benchmark. (a) Six DQN objectives and MPC-4 are evaluated in 20 paired model-seed blocks, each averaging 20 shared held-out traces. (b) Cells report the mean episode-cost difference, DQN minus MPC-4, for all 30 objective--regime contrasts; negative values favor DQN. (c) Circles and lines show the largest, least-favorable mean difference within each scope and its 95\% joint-bootstrap interval; open triangles show simultaneous 95\% upper bounds. A single 10,000-resample seed-block bootstrap preserves correlation among the 30 contrasts. Exact two-sided sign tests are Holm-adjusted across all 30 comparisons, all of which satisfy the prespecified support rule.}
+{合成软约束基准中的 DQN 家族相对 MPC-4 的证据。（a）六种 DQN 目标与 MPC-4 在 20 个配对模型种子区组中评估，每个区组对 20 条共享留出轨迹取平均。（b）单元格给出全部 30 个“目标—工况”对比的平均回合成本差，即 DQN 减 MPC-4；负值有利于 DQN。（c）圆点和线段表示各范围内最大、即最不利的均值差及其 95\% 联合 bootstrap 区间；空心三角形表示同时单侧 95\% 上界。一次包含 10,000 次重采样的种子区组 bootstrap 保留 30 个对比之间的相关性。精确双侧符号检验在全部 30 个比较上进行 Holm 校正，且所有比较均满足预设支持规则。}
+\label{fig:graphical}
+\end{figure}
+\input{sections/01_intro_related.tex}
+\input{sections/02_system.tex}
+\input{sections/03_mdp_method.tex}
+\input{sections/04_experiments.tex}
+\input{sections/05_results.tex}
+\input{sections/06_discussion_end.tex}
+\end{document}

@@ -1,0 +1,45 @@
+\bisection{Discussion}{讨论}
+\begin{paired}
+\pair{Six DQN objectives retained a common advantage over MPC-4 across changes in supervision, centering, bootstrapping, and Double-DQN evaluation. Their narrow internal spread indicates that the shared sequential value-learning formulation contributed more to performance than target design.}
+{六种 DQN 目标在监督方式、中心化、bootstrap 和 Double-DQN 评估变化下均保持对 MPC-4 的共同优势。较窄的家族内部差异表明，共享的序贯价值学习建模对性能的贡献大于目标设计。}
+\pair{The contextual bandit comparison and planning-depth analysis support a temporal interpretation of this result. The DQN family outperformed immediate-reward learning, while deeper exact enumeration progressively narrowed the cost gap. Together, these observations are consistent with learned values capturing consequences that persist beyond the current allocation.}
+{上下文多臂老虎机比较和规划深度分析支持对这一结果的时间性解释。DQN 家族优于即时奖励学习，而更深的精确枚举逐步缩小了成本差距。综合来看，这些观测与“学习得到的价值捕捉了超出当前资源分配而持续存在的后果”这一解释相一致。}
+\pair{The benchmark provides a second contribution by making that comparison traceable and reusable. Shared task primitives generate heat, energy, latency, and transmitted volume, while transition audits connect the analytical previews to executed outcomes. Scripts then link checkpoints and seed-level estimates to tables, figures, and validation hashes. This evidence chain turns the scheduling problem into a reproducible platform for comparing sequential decision objectives.}
+{该基准的第二项贡献是使上述比较可追溯、可复用。共享任务原语生成热量、能量、时延和传输数据量，转移审计将解析预览与实际执行结果连接起来；脚本进一步把检查点和种子级估计连接至表格、图形和验证哈希。这条证据链使该调度问题成为比较序贯决策目标的可复现平台。}
+\end{paired}
+
+\bisubsection{Future work}{未来工作}
+\begin{paired}
+\pair{The first priority is operational validation. The current simulator uses dimensionless fixed weights and clipped soft resource states, so future versions should enforce feasibility through action masking, constrained reinforcement learning, and terminal resource conditions. Mission-derived utilities, telemetry, and hardware-in-the-loop traces can then test the ordering under physical resource dynamics. Multi-satellite, multi-ground-station, and variable-contact topologies will further establish scalability.}
+{首要方向是运行级验证。当前模拟器使用无量纲固定权重和经过裁剪的软资源状态，因此未来版本应通过动作屏蔽、约束强化学习和终止资源条件来强制满足可行性。随后，可使用任务来源的效用、遥测数据和硬件在环轨迹，在物理资源动力学下检验方法排序。多卫星、多地面站和可变过站拓扑还将进一步验证可扩展性。}
+\pair{The second priority is causal separation of the mechanisms that produce the family-level pattern. Future experiments should tune auxiliary weights by objective, normalize gradient contributions, and factorially separate centering, Bellman bootstrapping, and discounting. Future experiments should vary transition carryover and delayed-penalty scaling independently. Regime-specific retraining will complement the current $c=1$ transfer tests. Structural, state-dependent, and action-specific preview errors, together with family-wide action-mixture analyses, can identify which components sustain the result.}
+{第二个方向是对产生家族级模式的机制进行因果分离。未来实验应针对不同目标分别调整辅助权重、归一化梯度贡献，并通过析因设计分离中心化、Bellman bootstrap 和折扣的作用。未来实验应独立改变转移的跨步延续效应与延迟惩罚尺度。针对各工况重新训练可补充当前从 $c=1$ 直接迁移的检验。结构化、状态相关和动作特异的预览误差，结合家族范围的动作混合分析，有助于识别维持该结果的具体成分。}
+\pair{The third priority is a broader and computationally matched comparator frontier. Scalable tree search, dynamic programming, mixed-integer optimization, and satellite-specific schedulers should be evaluated under matched information and computation budgets. DQN inference latency and energy should be measured on the same deployment path as planning. These studies will determine how the benchmark advantage transfers to operational scheduling.}
+{第三个方向是构建更广泛且计算预算匹配的比较器前沿。应在匹配的信息与计算预算下评估可扩展树搜索、动态规划、混合整数优化和卫星专用调度器。DQN 的推理时延与能耗也应在与规划器相同的部署路径上测量。这些研究将确定基准中的优势如何迁移到运行调度。}
+\end{paired}
+
+\bisection{Conclusion}{结论}
+\begin{paired}
+\pair{We establish a statistically supported DQN-family advantage in a reproducible resource-coupled satellite-ground scheduling benchmark. All \DQNvsMPCContrastCount{} paired objective--regime contrasts favored DQN over MPC-4, with a family-wide simultaneous 95\% upper bound of \DQNvsMPCGlobalUpperBound. Smaller, scenario-dependent differences among DQN objectives reinforce the consistency of this family-level result. The benchmark now provides a rigorous foundation for the mission-calibrated, hard-constrained, and computationally matched studies defined in Future work.}
+{本文在一个可复现的资源耦合卫星地面调度基准中确立了具有统计支持的 DQN 家族优势。全部 \DQNvsMPCContrastCount{} 个配对“目标—工况”对比均有利于 DQN 而非 MPC-4，家族整体的同时单侧 95\% 上界为 \DQNvsMPCGlobalUpperBound。DQN 各目标之间较小且依赖工况的差异进一步强化了这一家族级结果的一致性。该基准为未来工作所界定的任务标定、硬约束和计算预算匹配研究提供了严格基础。}
+\end{paired}
+
+\section*{Funding / 资助}
+\begin{paired}
+\pair{This work was supported by the National Key Research and Development Program of China under Grants 2022YFF0503904 and 2022YFD2401202. Additional support came from the Shenzhen Higher Education Institutions Stabilization Support Program under Grant GXWD20220811163556003. The National Natural Science Foundation of China supported this work under Grant 62202127, and the Shenzhen Natural Science Foundation under Grant JCYJ20241202123731040. Further support came from the Guangxi Science and Technology Base and Talent Special Project under Grant Gui Ke AD25069103.}
+{本研究得到国家重点研发计划项目（2022YFF0503904、2022YFD2401202）资助，并得到深圳市高等院校稳定支持计划项目（GXWD20220811163556003）支持。国家自然科学基金项目（62202127）和深圳市自然科学基金项目（JCYJ20241202123731040）亦对本研究提供资助。此外，本研究还得到广西科技基地和人才专项项目（桂科 AD25069103）支持。}
+\end{paired}
+
+\section*{Data and Code Availability / 数据与代码可用性}
+\begin{paired}
+\pair{The versioned reproducibility package contains the simulator, 180 trained checkpoints, training curves, locked raw evaluations, seed-level summaries, and direct DQN--MPC-4 inference. It also provides transition audits, Python and MATLAB figure-generation source, and LaTeX-table generators under \texttt{dqn\_family\_satellite\_ground/}, together with the current manuscript PDF. The package covers the six DQN objectives, the contextual-bandit comparator, preview-error tests, parameter sensitivity, exact MPC planning-depth analysis, joint bootstrap, and maximum-statistic results reported here. No pre-rendered manuscript figures or LaTeX source files are included. Scripts write regenerated outputs to \texttt{reproduced\_outputs/}. Machine-readable metadata, a manifest, and SHA-256 checksums record seeds, budgets, package versions, source files, and artifacts. The complete versioned package is publicly available at \url{https://github.com/noob32123/dqn_family_satellite_ground}.}
+{版本化复现包在 \texttt{dqn\_family\_satellite\_ground/} 下包含模拟器、180 个训练检查点、训练曲线、锁定的原始评估、种子级汇总、DQN--MPC-4 直接推断、转移审计、Python 与 MATLAB 绘图源码以及 LaTeX 表格生成器，并附当前论文 PDF。复现包覆盖本文报告的六种 DQN 目标、上下文老虎机对照、预览误差测试、参数敏感性、精确 MPC 规划深度分析、联合 bootstrap 与最大统计量结果。包内不预置论文图片或 LaTeX 源码；脚本将重新生成的输出写入 \texttt{reproduced\_outputs/}。机器可读元数据、清单和 SHA-256 校验和记录种子、预算、软件包版本、源文件与制品。完整的版本化复现包已公开发布于 \url{https://github.com/noob32123/dqn_family_satellite_ground}。}
+\end{paired}
+
+\section*{References / 参考文献}
+\begingroup
+\small
+\setlength{\itemsep}{0.2em}
+\bibliographystyle{unsrt}
+\bibliography{../ref}
+\endgroup

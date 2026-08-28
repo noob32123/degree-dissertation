@@ -24,7 +24,6 @@
 \definecolor{cbadred}{HTML}{C0392B}
 \definecolor{modelblue}{HTML}{2874A6}
 \definecolor{softgray}{HTML}{F3F5F7}
-\newcommand{\method}{centered full-action DQN\xspace}
 \newcommand{\R}{\mathbb{R}}
 \DeclareMathOperator{\clip}{clip}
 
@@ -46,14 +45,14 @@ Bocheng Yang$^{1}$, Lujie Zheng$^{1}$, Jian Liu$^{1,2,*}$, and Bo Chen$^{1,*}$\\
 \input{generated/dqn_vs_mpc_macros.tex}
 
 \begin{abstract}
-Resource-coupled satellite-ground scheduling requires decisions whose computational, energy, thermal, and communication consequences persist across task arrivals. We asked whether this temporal structure produces a reproducible advantage for the deep Q-network (DQN) family rather than for one selected objective. Six DQN objectives shared identical states, network architecture, replay, optimization, interaction budgets, \IndependentModelSeeds{} model seeds, and held-out traces across five fully coupled regimes of a fully specified synthetic, soft-constrained benchmark. Across all \DQNvsMPCContrastCount{} objective--regime comparisons, every DQN mean was lower than MPC-4, every paired 95\% bootstrap interval excluded zero, and all Holm-adjusted sign tests supported the ordering. The least-favorable mean difference was \DQNvsMPCGlobalWorstDifference, and the family-wide simultaneous 95\% upper bound was \DQNvsMPCGlobalUpperBound. Within-family differences were smaller and scenario dependent, whereas increasing exact planning depth from one to six steps reduced cost at substantially higher decision time. Together, these results establish a DQN-family advantage that is statistically supported across objective designs and resource-stress regimes, while providing a reproducible platform for future operational validation.
+Resource-coupled satellite-ground scheduling requires decisions whose computational, energy, thermal, and communication consequences persist across task arrivals. We investigated whether the deep Q-network (DQN) family shows a reproducible advantage over short-horizon planning in this temporal setting. Six DQN objectives shared identical states, network architecture, replay, optimization, interaction budgets, \IndependentModelSeeds{} model seeds, and held-out traces across five fully coupled regimes of a fully specified synthetic, soft-constrained benchmark. Across all \DQNvsMPCContrastCount{} objective--regime comparisons, every DQN mean was lower than MPC-4, every paired 95\% bootstrap interval excluded zero, and all Holm-adjusted sign tests supported the ordering. The least-favorable mean difference was \DQNvsMPCGlobalWorstDifference, and the family-wide simultaneous 95\% upper bound was \DQNvsMPCGlobalUpperBound. Within-family differences were smaller and scenario dependent, whereas increasing exact planning depth from one to six steps reduced cost at substantially higher decision time. Together, these results establish a DQN-family advantage that is statistically supported across objective designs and resource-stress regimes, while providing a reproducible platform for future operational validation.
 \end{abstract}
 
 \noindent\textbf{Keywords:} deep Q-network variants; satellite edge computing; task scheduling; model-assisted reinforcement learning; full-action supervision.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.98\textwidth,height=0.45\textheight,keepaspectratio]{figures/fig_dqn_family_summary.pdf}
+\includegraphics[width=0.98\textwidth,height=0.45\textheight,keepaspectratio]{fig1.jpg}
 \caption{Family-level DQN--MPC-4 evidence in the synthetic soft-constrained benchmark. (a) Six DQN objectives and MPC-4 are evaluated in 20 paired model-seed blocks, each averaging 20 shared held-out traces. (b) Cells report the mean episode-cost difference, DQN minus MPC-4, for all 30 objective--regime contrasts; negative values favor DQN. (c) Circles and lines show the largest, least-favorable mean difference within each scope and its 95\% joint-bootstrap interval; open triangles show simultaneous 95\% upper bounds. A single 10,000-resample seed-block bootstrap preserves correlation among the 30 contrasts. Exact two-sided sign tests are Holm-adjusted across all 30 comparisons, all of which satisfy the prespecified support rule.}
 \label{fig:graphical}
 \end{figure}
@@ -68,7 +67,7 @@ Standard DQN~\cite{mnih2015human,watkins1992q} learns one Bellman target from ea
 
 We compare six DQN objectives: standard DQN, full-action Q, immediate advantage, centered full-action, Double DQN, and Double DQN with centered full-action supervision. A separate $\gamma=0$ contextual bandit provides a learned one-step comparator. Model-evaluated alternatives are available only during training; every deployed policy acts directly from its learned Q-values.
 
-This study makes four contributions:
+We make four contributions:
 
 \begin{enumerate}[leftmargin=1.6em]
     \item We introduce a fully specified, reproducible benchmark that links task primitives to three processing pathways and six persistent computational, energy, thermal, and communication resources.
@@ -87,24 +86,25 @@ Satellite schedulers cover constellation coordination, observation planning, ser
 
 Dyna established predicted experience for value learning and planning~\cite{sutton1991dyna}, and fitted dynamics can accelerate deep Q-learning~\cite{gu2016continuous}. Counterfactual data fusion and causal augmentation construct transitions under structural assumptions~\cite{forney2017counterfactual,armengol2024caiac}. Counterfactual credit assignment instead separates action influence from future randomness~\cite{mesnard2021counterfactual}. Recent work also studies multi-action generative interfaces and joint quantities across action outcomes~\cite{kaya2026joint}. Together, these studies establish several routes for incorporating modeled alternatives into reinforcement learning.
 
-Advantage learning widens action gaps through modified operators~\cite{bellemare2016gap}. The centered full-action DQN objective instead retains the selected Bellman operator and adds supervised within-state action gaps. Table~\ref{tab:closest_methods} distinguishes this construction from related mechanisms. Joint MDPs provide the closest multi-action interface~\cite{kaya2026joint}, while full-action Q provides the closest empirical control. Our contribution is a controlled family-level evaluation that separates shared DQN performance from the smaller effects of target construction, centering, and bootstrapping.
+Advantage learning widens action gaps through modified operators~\cite{bellemare2016gap}. Four objectives in the evaluated DQN family instead retain their respective Bellman target rules while adding training-time supervision from modeled outcomes for all actions at a sampled state. Table~\ref{tab:closest_methods} positions this shared supervision interface relative to related mechanisms. Standard DQN and Double DQN serve as factual-only family controls. We evaluate DQN-family performance relative to short-horizon planning under controlled conditions and characterize how target construction, centering, and target evaluation affect within-family variation.
 
 In this manuscript, ``counterfactual'' denotes a model-evaluated one-step outcome for an unexecuted action under the same current task and exogenous state. It does not denote an identified causal effect from observational data.
 
 \begin{table}[H]
 \centering
-\caption{Feature comparison with the closest method families. ``All actions'' means that one learning update can use modeled outcomes for every discrete action at the sampled state.}
+\caption{Positioning of training-time modeled-action supervision used by four objectives in the evaluated DQN family. ``All actions'' means that one learning update can use modeled outcomes for every discrete action at the sampled state. Standard DQN and Double DQN provide factual-only family controls.}
 \label{tab:closest_methods}
 \small
-\begin{tabularx}{\textwidth}{lXXX}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}p{0.21\textwidth}>{\raggedright\arraybackslash}X}
 \toprule
-Method family & Source of modeled information & How it enters learning & Relation to this study \\
+Method family & Source of modeled information & How it enters learning & Relation to the evaluated supervision interface \\
 \midrule
-Dyna and local model-based acceleration~\cite{sutton1991dyna,gu2016continuous} & Learned or fitted dynamics & Simulated experience or local rollouts & Does not use one simultaneous analytical label per action in the reported auxiliary loss \\
+Dyna and local model-based acceleration~\cite{sutton1991dyna,gu2016continuous} & Learned or fitted dynamics & Simulated experience or local rollouts & Does not use one simultaneous analytical outcome per action in a training-only auxiliary objective \\
 Causal counterfactual augmentation~\cite{armengol2024caiac} & Structural assumptions and offline trajectories & Synthetic transitions augment the training distribution & Targets distributional coverage rather than within-state Bellman action gaps \\
 Counterfactual credit assignment~\cite{mesnard2021counterfactual} & Future-conditioned trajectory information & Policy-gradient baseline or critic & Model-free and trajectory-conditioned rather than analytical one-step action enumeration \\
-Joint MDPs~\cite{kaya2026joint} & Multi-action sample transition model & Joint action-outcome quantities and Bellman operators & Closest formal interface; it does not specify the centered DQN auxiliary loss evaluated here \\
-This study & Deterministic analytical one-step transition for three actions & Auxiliary full-action Bellman targets; no replay insertion & Same real interactions as DQN, but three modeled action outcomes per eligible training state \\
+Joint MDPs~\cite{kaya2026joint} & Multi-action sample transition model & Joint action-outcome quantities and Bellman operators & Closest formal interface; not a training-only auxiliary objective on a fixed factual DQN backbone \\
+Evaluated full-action DQN objectives & Deterministic analytical one-step transition for three actions & Auxiliary full-action targets or centered action gaps; no replay insertion & One controlled factor within a six-objective family; the family claim also includes factual-only controls \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -273,10 +273,10 @@ L_{DQN}=\mathcal H\big(Q_\theta(s_t,a_t),y_t\big),
 \end{equation}
 where $\mathcal H$ denotes the Huber loss. The target network both selects and evaluates the maximizing action, as required by standard DQN.
 
-\section{DQN Variants with Model-Evaluated Full-Action Targets}
+\section{DQN Objective Family and Full-Action Supervision}
 \label{sec:method}
 
-The DQN family shares the factual target and loss in Eq.~\eqref{eq:factual}. Its model-assisted variants add a training-only auxiliary path that can supply labels for unexecuted actions. The following construction defines the centered full-action member; the experimental design then removes centering, removes the bootstrap, or changes target evaluation to measure how these choices alter performance.
+The six-objective family shares the factual Huber loss and all implementation settings. Standard-DQN-based members use Eq.~\eqref{eq:factual}, whereas Double-DQN members use online-network action selection with target-network evaluation. Standard DQN and Double DQN learn only from factual transitions. Four model-assisted objectives add a training-only auxiliary path that can supply labels for unexecuted actions. The following construction defines the shared preview interface and the centered member; the experimental design also evaluates uncentered full-action Q, immediate advantage, and the corresponding Double-DQN auxiliary objective.
 
 \subsection{Side-effect-free full-action preview}
 
@@ -298,7 +298,7 @@ The simulator-exact one-step outcome yields
 \max_{a'}Q_{\bar\theta}(\tilde s'_{t,a},a').
 \label{eq:cf_target}
 \end{equation}
-The targets create no multi-step rollout and insert no counterfactual transition into replay. They are used only after state-wise centering in the complete method below.
+The targets create no multi-step rollout and insert no counterfactual transition into replay. The centered full-action objective uses them only after the state-wise centering defined below.
 
 \subsection{Centered advantage distillation}
 
@@ -346,18 +346,11 @@ The factual term anchors the absolute Q scale, while $L_{adv}$ teaches all actio
 
 \subsection{Design principles}
 
-The design addresses four comparisons. Standard DQN versus its centered full-action variant measures the effect of adding the complete auxiliary objective to an unchanged factual DQN backbone. Uncentered full-action Q and centered immediate-cost targets receive the same three modeled outcomes per state. They match the type and count of model outputs. They do not by themselves isolate centering or Bellman bootstrapping because their target scales differ and their auxiliary weights were not tuned separately. Double DQN with and without centered full-action supervision assesses whether the fixed auxiliary implementation has a similar descriptive effect when action selection and target evaluation are decoupled~\cite{vanhasselt2016double}. The $c\in\{0,0.5,1\}$ regimes and planners with $H\in\{1,2,4,6\}$ bound the family comparison as the implemented objective and planning depth change.
+The design separates primary family-level inference from secondary within-family analysis. The primary comparison evaluates all six DQN objectives against MPC-4 across the five fully coupled regimes, yielding 30 objective--regime contrasts under shared seed blocks and traces. Secondary comparisons examine how auxiliary supervision and Double-DQN target evaluation alter performance within the family. Standard DQN versus its centered full-action variant measures the effect of adding that auxiliary objective to an unchanged factual DQN backbone. Uncentered full-action Q and centered immediate-cost targets receive the same three modeled outcomes per state. They match the type and count of model outputs. However, they do not by themselves isolate centering or Bellman bootstrapping because their target scales differ and their auxiliary weights were not tuned separately. Double DQN with and without centered full-action supervision assesses whether the fixed auxiliary implementation has a similar descriptive effect when action selection and target evaluation are decoupled~\cite{vanhasselt2016double}. The $c\in\{0,0.5,1\}$ regimes and planners with $H\in\{1,2,4,6\}$ bound the family comparison as the implemented objective and planning depth change.
 
 Standard DQN and its centered full-action variant share every component except the auxiliary objective. They use the same input, network, replay, exploration, optimizer, update cadence, target synchronization, and gradient clipping. The full-action Q control applies the same auxiliary weight directly to the three uncentered Bellman targets. The immediate-advantage control centers the negative analytical one-step costs but omits their bootstrapped future values. Both Double-DQN variants use online-network action selection with target-network evaluation in factual and auxiliary Bellman targets. Dueling networks, prioritized replay, multi-step returns, noisy networks, and distributional value learning remain outside the comparison.
 
 The auxiliary weight was fixed before the internally consistent simulator experiment. A preceding calibration with model seeds 700--703 compared $\lambda\in\{0.1,0.3,1,3\}$. It selected $\lambda=0.3$ by maximizing the worst relative improvement of the centered full-action variant across five coupled regimes, with the smaller weight as the tie-break. This selection rule was specific to the centered objective. The uncentered full-action, immediate-advantage, and Double-DQN auxiliary variants inherited $\lambda=0.3$ without method-specific calibration. Because auxiliary losses differ in scale and error structure, their comparisons are fixed-coefficient implementation comparisons rather than a factorial identification of centering or bootstrapping. The calibration used an earlier simulator version and is a prior specification rather than evidence from the current generator. Confirmation and all component comparisons use seeds 800--819 without post hoc removal, replacement, or selection. Every learned policy was trained only on the nominal $c=1$ distribution.
-
-\begin{figure}[!htbp]
-\centering
-\includegraphics[width=0.98\textwidth,height=0.42\textheight,keepaspectratio]{figures/ai/fig_experiment_protocol_20seeds_arial.png}
-\caption{Prespecification and confirmation protocol. An earlier-simulator calibration with four seeds selected $\lambda=0.3$ for the centered full-action objective before the current synthetic experiment. Other auxiliary objectives inherited this coefficient without method-specific tuning. Twenty disjoint confirmation seeds, 800--819, are each evaluated on 20 shared held-out traces in seven regimes, with no current-generator tuning or seed exclusion.}
-\label{fig:protocol}
-\end{figure}
 
 \subsection{Training configuration}
 
@@ -385,7 +378,7 @@ The first two regimes are composite interventions because the same $c$ appears i
 
 \subsection{Planning comparator, outcomes, and inference}
 
-The deployment comparison includes immediate-cost argmin, a contextual bandit, a prespecified resource-threshold heuristic, standard DQN, \method, and an exact $H$-step receding-horizon model-based planner. The threshold rule selects ground processing when $h>0.72$ or $e<0.24$ and both $b>0.28$ and $\tau>0.18$; under the same heat or energy condition it otherwise selects collaborative processing. If that condition is absent, it selects onboard processing when $b<0.22$ or $\tau<0.14$, collaborative processing when $q>0.70$, and immediate-cost argmin otherwise. These thresholds were hand specified and not fitted to the evaluation traces. Fixed onboard and fixed ground policies always select $\alpha_s$ and $\alpha_g$, respectively. At every real decision, the planner enumerates all $3^H$ action sequences over the next $H$ known tasks and link states. It minimizes discounted modeled cost with $\gamma=0.97$, executes only the first action, and replans. The primary table retains $H=4$. A separate nominal analysis evaluates $H\in\{1,2,4,6\}$ on 400 unique held-out traces and reports wall-clock cost per decision. Each planner is exact only for its stated perfect-forecast objective, not for the 64-step global problem.
+The deployment comparison includes immediate-cost argmin, a contextual bandit, a prespecified resource-threshold heuristic, standard DQN, the centered full-action family member, and an exact $H$-step receding-horizon model-based planner. The threshold rule selects ground processing when $h>0.72$ or $e<0.24$ and both $b>0.28$ and $\tau>0.18$; under the same heat or energy condition it otherwise selects collaborative processing. If that condition is absent, it selects onboard processing when $b<0.22$ or $\tau<0.14$, collaborative processing when $q>0.70$, and immediate-cost argmin otherwise. These thresholds were hand specified and not fitted to the evaluation traces. Fixed onboard and fixed ground policies always select $\alpha_s$ and $\alpha_g$, respectively. At every real decision, the planner enumerates all $3^H$ action sequences over the next $H$ known tasks and link states. It minimizes discounted modeled cost with $\gamma=0.97$, executes only the first action, and replans. The primary table retains $H=4$. A separate nominal analysis evaluates $H\in\{1,2,4,6\}$ on 400 unique held-out traces and reports wall-clock cost per decision. Each planner is exact only for its stated perfect-forecast objective, not for the 64-step global problem.
 
 The primary outcome is the undiscounted episode total cost
 \begin{equation}
@@ -396,7 +389,7 @@ where $p_t$ is the complete nonnegative penalty inside the square brackets in Eq
 
 The independent inferential unit is the model-seed block. For learned--learned comparisons, the same seed initializes network weights and controls episode task seeds, exploration draws, and replay-index sampling. Trajectories may diverge after different greedy actions, but the matched seed remains the randomization block. Each seed is evaluated on the same 20 held-out traces, which are averaged within seed, giving $n=20$ blocks per learned method. For the central DQN-family--MPC-4 claim, every raw row is matched on regime, model-seed trace namespace, and trace seed before trace-level differences are averaged within seed. MPC-4 is deterministic conditional on a trace; the model-seed field therefore indexes its matched trace namespace rather than a trained planner replicate.
 
-All paired bootstrap analyses use 10,000 resamples with seed 20260829. Individual two-sided 95\% intervals are percentile intervals, and exact two-sided paired sign tests assess directional consistency. For the 30 DQN-objective--regime contrasts against MPC-4, one joint bootstrap resamples the same 20 seed blocks across all contrasts, preserving their correlation. Sign-test values are Holm-adjusted across all 30 cells. We additionally report the maximum, least-favorable mean difference within each regime and across all 30 cells. A simultaneous one-sided 95\% upper bound adds a joint critical value to every observed cell mean. The critical value is the 95th percentile of the largest centered bootstrap deviation across the relevant cells. An upper bound below zero supports the joint statement that every mean difference is negative. For within-family contrasts, Holm adjustment is applied across the five fully coupled regimes separately for each prespecified contrast. The eight parameter profiles form a separate family, and each preview-scale contrast forms its own five-regime family. A directional cell is labelled supported only when its mean favors the first-named method, its paired interval excludes zero, and its family-adjusted sign-test value is below 0.05. We report seed-level differences and leave-one-seed-out ranges for the primary centered-full-action contrast. Its conservative sensitivity analysis resamples the two sets of 20 seed means independently and ignores matching. Test traces and bootstrap draws are never treated as independent model replicates.
+All paired bootstrap analyses use 10,000 resamples with seed 20260829. Individual two-sided 95\% intervals are percentile intervals, and exact two-sided paired sign tests assess directional consistency. For the 30 DQN-objective--regime contrasts against MPC-4, one joint bootstrap resamples the same 20 seed blocks across all contrasts, preserving their correlation. Sign-test values are Holm-adjusted across all 30 cells. We additionally report the maximum, least-favorable mean difference within each regime and across all 30 cells. A simultaneous one-sided 95\% upper bound adds a joint critical value to every observed cell mean. The critical value is the 95th percentile of the largest centered bootstrap deviation across the relevant cells. An upper bound below zero supports the joint statement that every mean difference is negative. For within-family contrasts, Holm adjustment is applied across the five fully coupled regimes separately for each prespecified contrast. The eight parameter profiles form a separate family, and each preview-scale contrast forms its own five-regime family. A directional cell is labelled supported only when its mean favors the first-named method, its paired interval excludes zero, and its family-adjusted sign-test value is below 0.05. We report seed-level differences and leave-one-seed-out ranges for the prespecified centered full-action versus standard-DQN contrast. Its conservative sensitivity analysis resamples the two sets of 20 seed means independently and ignores matching. Test traces and bootstrap draws are never treated as independent model replicates.
 
 \subsection{Prespecified sensitivity and training diagnostics}
 
@@ -408,7 +401,7 @@ The main experiment assumes that the analytical preview matches the simulator tr
 
 \subsection{Reproducible result entry point}
 
-The core result entry point is \texttt{python -m md\_cbad\_dqn.\allowbreak reviewer\_experiments all \allowbreak --seeds 800-819 \allowbreak --resume}. Component and Double-DQN comparisons use \texttt{python -m md\_cbad\_dqn.\allowbreak extended\_revision \allowbreak --seeds 800-819 \allowbreak --stage all \allowbreak --resume}. The first command trains or loads 60 primary learned-policy checkpoints plus 40 preview-error checkpoints. The second reuses the primary DQN checkpoints and trains 80 component and Double-DQN checkpoints. It then evaluates six DQN objectives, performs the independent-seed bootstrap, and evaluates four planning depths on 400 unique traces. The command \texttt{python -m md\_cbad\_dqn.\allowbreak extended\_reporting} recomputes the 30 paired DQN--MPC-4 contrasts, joint maximum statistics, LaTeX tables, and artifact hashes from locked raw CSV files. The command \texttt{python -m md\_cbad\_dqn.\allowbreak transition\_audit} writes a fixed-seed, all-action example in which preview and executed costs and six resources agree coordinate by coordinate. Unit tests repeat this equality at both resource clipping boundaries and on the terminal step, and verify that time and link phase occupy the three added state coordinates. Experiments used Python 3.13.9, NumPy 2.4.1, pandas 3.0.3, and PyTorch 2.8.0 with CUDA 12.9. Hardware comprised an NVIDIA GeForce RTX 5070 Ti running Windows 11. Planning wall time was measured on a 12th Gen Intel Core i9-12900K with 24 logical processors after one untimed warm-up episode. Values report the mean over all timed decisions. Machine-readable metadata record the 24-dimensional state definition, resolved variants, seeds, budgets, randomization blocks, model-information counts, result files, and runtime environment. Table and figure scripts consume these files directly.
+The core result entry point is \texttt{python -m dqn\_family\_satellite\_ground.\allowbreak reviewer\_experiments all \allowbreak --seeds 800-819 \allowbreak --resume}. Component and Double-DQN comparisons use \texttt{python -m dqn\_family\_satellite\_ground.\allowbreak extended\_revision \allowbreak --seeds 800-819 \allowbreak --stage all \allowbreak --resume}. The first command trains or loads 60 primary learned-policy checkpoints plus 40 preview-error checkpoints. The second reuses the primary DQN checkpoints and trains 80 component and Double-DQN checkpoints. It then evaluates six DQN objectives, performs the independent-seed bootstrap, and evaluates four planning depths on 400 unique traces. The command \texttt{python -m dqn\_family\_satellite\_ground.\allowbreak extended\_reporting} recomputes the 30 paired DQN--MPC-4 contrasts, joint maximum statistics, LaTeX tables, and artifact hashes from locked raw CSV files. The command \texttt{python -m dqn\_family\_satellite\_ground.\allowbreak transition\_audit} writes a fixed-seed, all-action example in which preview and executed costs and six resources agree coordinate by coordinate. Unit tests repeat this equality at both resource clipping boundaries and on the terminal step, and verify that time and link phase occupy the three added state coordinates. Experiments used Python 3.13.9, NumPy 2.4.1, pandas 3.0.3, and PyTorch 2.8.0 with CUDA 12.9. Hardware comprised an NVIDIA GeForce RTX 5070 Ti running Windows 11. Planning wall time was measured on a 12th Gen Intel Core i9-12900K with 24 logical processors after one untimed warm-up episode. Values report the mean over all timed decisions. Machine-readable metadata record the 24-dimensional state definition, resolved variants, seeds, budgets, randomization blocks, model-information counts, result files, and runtime environment. Table and figure scripts consume these files directly.
 
 \section{Results}
 \label{sec:results}
@@ -444,7 +437,7 @@ The joint seed-block analysis supported the same conclusion after controlling mu
 
 \begin{table}[H]
 \centering
-\caption{Episode total cost across six DQN-family objectives in the five fully coupled regimes. Values are mean $\pm$ SD across 20 independently trained model-seed blocks after within-seed averaging of 20 shared held-out traces. Lower is better; no row is designated as a uniformly preferred method.}
+\caption{Episode total cost across six DQN-family objectives in the five fully coupled regimes. Values are mean $\pm$ SD across 20 independently trained model-seed blocks after within-seed averaging of 20 shared held-out traces. Lower is better, and the leading objective varies across regimes.}
 \label{tab:dqn_family}
 \resizebox{\textwidth}{!}{\input{generated/table_dqn_family_performance.tex}}
 \end{table}
@@ -452,7 +445,7 @@ The joint seed-block analysis supported the same conclusion after controlling mu
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.98\textwidth]{figures/fig_dqn_family.pdf}
-\caption{DQN-family performance across fully coupled regimes. Points show model-seed means and error bars show $\pm$1 SD across 20 independently trained model seeds. The figure emphasizes overlap and scenario-dependent ordering rather than a single winning objective.}
+\caption{DQN-family performance across fully coupled regimes. Points show model-seed means and error bars show $\pm$1 SD across 20 independently trained model seeds. The figure shows overlapping distributions and scenario-dependent ordering across objectives.}
 \label{fig:dqn_family}
 \end{figure}
 
@@ -472,16 +465,16 @@ The joint seed-block analysis supported the same conclusion after controlling mu
 
 \begin{table}[H]
 \centering
-\caption{Training information and computation accounting. Wall time is mean $\pm$ SD across 20 models. ``Modeled action outcomes'' counts analytical action evaluations used by the learning objective. Equal real interactions therefore do not imply equal information or computational budgets.}
+\caption{Training information and computation accounting. Wall time is mean $\pm$ SD across 20 models. ``Modeled action outcomes'' counts analytical action evaluations used by the learning objective. Information and computational budgets additionally reflect these modeled action outcomes.}
 \label{tab:training_accounting}
 \resizebox{0.92\textwidth}{!}{\input{generated/table_training_accounting.tex}}
 \end{table}
 
-Across the five fully coupled regimes, the six objectives occupied a narrow performance band (Table~\ref{tab:dqn_family}; Fig.~\ref{fig:dqn_family}). Nominal means ranged from \DQNFamilyNominalMinCost{} to \DQNFamilyNominalMaxCost. No objective was uniformly best, and the family-to-MPC gap exceeded the differences among target designs.
+Across the five fully coupled regimes, the six objectives occupied a narrow performance band (Table~\ref{tab:dqn_family}; Fig.~\ref{fig:dqn_family}). Nominal means ranged from \DQNFamilyNominalMinCost{} to \DQNFamilyNominalMaxCost. The leading objective varied by regime, and the family-to-MPC gap exceeded the differences among target designs.
 
-Centered full-action produced favorable mean differences against standard DQN in all five regimes and met the complete support rule in \PrimarySupportedCount{} (Table~\ref{tab:primary_inference}). The remaining component and Double-DQN contrasts changed the ordering by smaller, scenario-dependent amounts (Table~\ref{tab:extended_ablation}). Target construction therefore tuned performance without determining the family-level result. All objectives used the same real-interaction budget, while the auxiliary objectives additionally consumed modeled action outcomes (Table~\ref{tab:training_accounting}).
+Centered full-action produced favorable mean differences against standard DQN in all five regimes and met the complete support rule in \PrimarySupportedCount{} (Table~\ref{tab:primary_inference}). The remaining component and Double-DQN contrasts changed the ordering by smaller, scenario-dependent amounts (Table~\ref{tab:extended_ablation}). Target construction contributed smaller, scenario-dependent variation within the family. All objectives used the same real-interaction budget, while the auxiliary objectives additionally consumed modeled action outcomes (Table~\ref{tab:training_accounting}).
 
-\subsection{Deeper exact planning improves cost but retains a gap to the DQN family}
+\subsection{The DQN family retains an advantage over deeper exact planning}
 
 \begin{table}[H]
 \centering
@@ -490,18 +483,18 @@ Centered full-action produced favorable mean differences against standard DQN in
 \resizebox{0.85\textwidth}{!}{\input{generated/table_planner_depth.tex}}
 \end{table}
 
-Increasing planning depth reduced nominal mean cost from \PlannerCostHOne{} at $H=1$ to \PlannerCostHSix{} at $H=6$. Over the same range, mean decision time increased from \PlannerTimeHOne{} to \PlannerTimeHSix{} ms. Even MPC-6 remained above the nominal DQN-family range of \DQNFamilyNominalMinCost--\DQNFamilyNominalMaxCost. Exact short-horizon planning therefore narrowed, but did not close, the family-level cost gap.
+Increasing planning depth reduced nominal mean cost from \PlannerCostHOne{} at $H=1$ to \PlannerCostHSix{} at $H=6$. Over the same range, mean decision time increased from \PlannerTimeHOne{} to \PlannerTimeHSix{} ms. MPC-6 remained above the nominal DQN-family range of \DQNFamilyNominalMinCost--\DQNFamilyNominalMaxCost. The DQN-family advantage therefore persisted through six-step exact planning.
 
 \begin{table}[H]
 \centering
-\caption{Engineering outcome decomposition for standard DQN relative to MPC-4. Standard DQN is shown as a conventional representative of the six-objective family. Delta columns report standard DQN minus MPC-4; negative values denote lower use or cost. Low-energy steps count decisions with remaining energy below 0.18 and are soft-threshold exposures, not certified safety violations.}
+\caption{Engineering outcome decomposition for standard DQN relative to MPC-4. Standard DQN is shown as a conventional representative of the six-objective family. Delta columns report standard DQN minus MPC-4; negative values denote lower use or cost. Low-energy steps are soft-threshold exposure counts for decisions with remaining energy below 0.18.}
 \label{tab:engineering}
 \small
 \setlength{\tabcolsep}{4pt}
 \input{generated/table_engineering_outcomes.tex}
 \end{table}
 
-Table~\ref{tab:engineering} decomposes the family--planner gap using standard DQN as a conventional family member. Relative to MPC-4, standard DQN reduced delayed penalties in every fully coupled regime while changing immediate cost by only $-0.57$ to $1.36$. It also used less modeled energy, latency, and transmitted data. Both methods reached zero in the clipped energy state, while standard DQN produced slightly higher maximum heat.
+Table~\ref{tab:engineering} provides a representative decomposition of the standard-DQN--MPC-4 gap. Relative to MPC-4, standard DQN reduced delayed penalties in every fully coupled regime while changing immediate cost by only $-0.57$ to $1.36$. It also used less modeled energy, latency, and transmitted data. Both methods reached zero in the clipped energy state, while standard DQN produced slightly higher maximum heat. This resource-use decomposition applies specifically to standard DQN.
 
 \subsection{Representative DQN training diagnostics show empirical stabilization}
 
@@ -512,7 +505,7 @@ Table~\ref{tab:engineering} decomposes the family--planner gap using standard DQ
 \label{fig:training}
 \end{figure}
 
-All four logged quantities declined during approximately the first 220 episodes and then fluctuated around stable ranges (Fig.~\ref{fig:training}). The late-episode trajectories provide evidence of empirical optimization stability for the representative DQN members.
+All four logged quantities declined during approximately the first 220 episodes and then fluctuated around stable ranges (Fig.~\ref{fig:training}). The late-episode trajectories indicate empirical stabilization for these two representative family members.
 
 \subsection{Within-family sensitivity under parameter changes}
 
@@ -526,11 +519,11 @@ All four logged quantities declined during approximately the first 220 episodes 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.98\textwidth]{figures/fig_sensitivity_planning.pdf}
-\caption{Parameter sensitivity and planning boundary. (a) Mean paired centered full-action--standard DQN differences with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.}
+\caption{Parameter sensitivity and planning boundary. (a) Mean paired differences between centered full-action and standard DQN with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.}
 \label{fig:sensitivity}
 \end{figure}
 
-The paired centered-full-action--standard-DQN interval remained below zero in all eight profiles, with relative differences from \SensitivityMinPct{} to \SensitivityMaxPct. The largest difference occurred when raw data volume decreased by 20\%, whereas the smallest occurred when it increased by 20\%. The within-family direction therefore remained stable across the prespecified parameter envelope.
+The paired interval for centered full-action minus standard DQN remained below zero in all eight profiles, with relative differences from \SensitivityMinPct{} to \SensitivityMaxPct. The largest difference occurred when raw data volume decreased by 20\%, whereas the smallest occurred when it increased by 20\%. The within-family direction therefore remained stable across the prespecified parameter envelope.
 
 \subsection{Preview-scale perturbations bound one model-assisted variant}
 
@@ -541,13 +534,13 @@ The paired centered-full-action--standard-DQN interval remained below zero in al
 \resizebox{\textwidth}{!}{\input{generated/table_preview_mismatch.tex}}
 \end{table}
 
-Uniform 15\% under- and over-scaling preserved favorable centered-full-action differences (Table~\ref{tab:preview_mismatch}). The two conditions met the complete rule in \MismatchLowSupportedCount{} and \MismatchHighSupportedCount{} regimes, respectively. Their largest Holm-adjusted sign-test values were \MismatchLowHolmPMax{} and \MismatchHighHolmPMax. Scalar preview perturbations therefore did not reverse the observed within-family direction.
+Uniform 15\% under- and over-scaling preserved favorable differences between centered full-action and standard DQN (Table~\ref{tab:preview_mismatch}). The two conditions met the complete rule in \MismatchLowSupportedCount{} and \MismatchHighSupportedCount{} regimes, respectively. Their largest Holm-adjusted sign-test values were \MismatchLowHolmPMax{} and \MismatchHighHolmPMax.
 
 \section{Discussion}
 
-The principal contribution is a family-level result rather than the success of one selected objective. Six DQN objectives retained a common advantage over MPC-4 despite changes in supervision, centering, bootstrapping, and Double-DQN evaluation. Their narrow internal spread further shows that the shared sequential value-learning formulation dominated the smaller effects of target design.
+Six DQN objectives retained a common advantage over MPC-4 across changes in supervision, centering, bootstrapping, and Double-DQN evaluation. Their narrow internal spread indicates that the shared sequential value-learning formulation contributed more to performance than target design.
 
-The contextual bandit comparison and planning-depth analysis support a temporal interpretation of this result. Immediate-reward learning did not reproduce the DQN-family performance, while deeper exact enumeration progressively narrowed the cost gap. Together, these observations are consistent with learned values capturing consequences that persist beyond the current allocation.
+The contextual bandit comparison and planning-depth analysis support a temporal interpretation of this result. The DQN family outperformed immediate-reward learning, while deeper exact enumeration progressively narrowed the cost gap. Together, these observations are consistent with learned values capturing consequences that persist beyond the current allocation.
 
 The benchmark provides a second contribution by making that comparison traceable and reusable. Shared task primitives generate heat, energy, latency, and transmitted volume, while transition audits connect the analytical previews to executed outcomes. Scripts then link checkpoints and seed-level estimates to tables, figures, and validation hashes. This evidence chain turns the scheduling problem into a reproducible platform for comparing sequential decision objectives.
 
@@ -555,13 +548,13 @@ The benchmark provides a second contribution by making that comparison traceable
 
 The first priority is operational validation. The current simulator uses dimensionless fixed weights and clipped soft resource states, so future versions should enforce feasibility through action masking, constrained reinforcement learning, and terminal resource conditions. Mission-derived utilities, telemetry, and hardware-in-the-loop traces can then test the ordering under physical resource dynamics. Multi-satellite, multi-ground-station, and variable-contact topologies will further establish scalability.
 
-The second priority is causal separation of the mechanisms that produce the family-level pattern. Future experiments should tune auxiliary weights by objective, normalize gradient contributions, and factorially separate centering, Bellman bootstrapping, and discounting. Transition carryover and delayed-penalty scaling should also vary independently rather than share the coupling coefficient $c$. Regime-specific retraining will complement the current $c=1$ transfer tests. Structural, state-dependent, and action-specific preview errors, together with family-wide action-mixture analyses, can identify which components sustain the result.
+The second priority is causal separation of the mechanisms that produce the family-level pattern. Future experiments should tune auxiliary weights by objective, normalize gradient contributions, and factorially separate centering, Bellman bootstrapping, and discounting. Future experiments should vary transition carryover and delayed-penalty scaling independently. Regime-specific retraining will complement the current $c=1$ transfer tests. Structural, state-dependent, and action-specific preview errors, together with family-wide action-mixture analyses, can identify which components sustain the result.
 
 The third priority is a broader and computationally matched comparator frontier. Scalable tree search, dynamic programming, mixed-integer optimization, and satellite-specific schedulers should be evaluated under matched information and computation budgets. DQN inference latency and energy should be measured on the same deployment path as planning. These studies will determine how the benchmark advantage transfers to operational scheduling.
 
 \section{Conclusion}
 
-We establish a statistically supported DQN-family advantage in a reproducible resource-coupled satellite-ground scheduling benchmark. All \DQNvsMPCContrastCount{} paired objective--regime contrasts favored DQN over MPC-4, with a family-wide simultaneous 95\% upper bound of \DQNvsMPCGlobalUpperBound. Differences among DQN objectives were smaller and scenario dependent, making family-level consistency the principal contribution. The benchmark now provides a rigorous foundation for the mission-calibrated, hard-constrained, and computationally matched studies defined in Future work.
+We establish a statistically supported DQN-family advantage in a reproducible resource-coupled satellite-ground scheduling benchmark. All \DQNvsMPCContrastCount{} paired objective--regime contrasts favored DQN over MPC-4, with a family-wide simultaneous 95\% upper bound of \DQNvsMPCGlobalUpperBound. Smaller, scenario-dependent differences among DQN objectives reinforce the consistency of this family-level result. The benchmark now provides a rigorous foundation for the mission-calibrated, hard-constrained, and computationally matched studies defined in Future work.
 
 \section*{Funding}
 
@@ -569,7 +562,7 @@ This work was supported by the National Key Research and Development Program of 
 
 \section*{Data and Code Availability}
 
-The local versioned research package contains the simulator, checkpoints, raw evaluations, seed-level summaries, direct DQN--MPC-4 inference, Python and MATLAB figure source, and LaTeX-table generators under \texttt{md\_cbad\_dqn/} and \texttt{paper/figures/}. It includes the primary, preview-error, component-control, Double-DQN, joint-bootstrap, and maximum-statistic results. Machine-readable validation and metadata files record expected rows, model seeds, training budgets, randomization blocks, package versions, source files, and artifact hashes. The commands in the reproducibility subsection regenerate the result chain. A permanent public archive has not yet been supplied for review. \textbf{AUTHOR ARCHIVE IDENTIFIER TO BE INSERTED BEFORE SUBMISSION.}
+The versioned reproducibility package contains the simulator, 180 trained checkpoints, training curves, locked raw evaluations, seed-level summaries, and direct DQN--MPC-4 inference. It also provides transition audits, Python and MATLAB figure-generation source, and LaTeX-table generators under \texttt{dqn\_family\_satellite\_ground/}, together with the current manuscript PDF. The package covers the six DQN objectives, the contextual-bandit comparator, preview-error tests, parameter sensitivity, exact MPC planning-depth analysis, joint bootstrap, and maximum-statistic results reported here. No pre-rendered manuscript figures or LaTeX source files are included. Scripts write regenerated outputs to \texttt{reproduced\_outputs/}. Machine-readable metadata, a manifest, and SHA-256 checksums record seeds, budgets, package versions, source files, and artifacts. The complete versioned package is publicly available at \url{https://github.com/noob32123/dqn_family_satellite_ground}.
 
 \begingroup
 \small

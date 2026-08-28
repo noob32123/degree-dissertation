@@ -1,0 +1,24 @@
+\documentclass[9pt]{article}
+\usepackage[a3paper,landscape,margin=1.5cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+\usepackage{booktabs,tabularx,array,multirow,graphicx,amsmath,amssymb}
+\usepackage{xspace}
+\pagestyle{empty}
+\input{../generated/reviewer_macros.tex}
+\input{../generated/extended_macros.tex}
+\input{../generated/dqn_vs_mpc_macros.tex}
+\begin{document}
+\centering\resizebox{0.97\textwidth}{!}{\input{../generated/table_state_dictionary.tex}}\newpage
+\centering\resizebox{0.97\textwidth}{!}{\input{../generated/table_parameter_provenance.tex}}\newpage
+\centering\resizebox{0.97\textwidth}{!}{\input{../generated/table_reviewer_main.tex}}\newpage
+\centering\resizebox{0.97\textwidth}{!}{\input{../generated/table_dqn_vs_mpc_family_inference.tex}}\newpage
+\centering\resizebox{0.97\textwidth}{!}{\input{../generated/table_dqn_family_performance.tex}}\newpage
+\centering\resizebox{0.97\textwidth}{!}{\input{../generated/table_extended_ablation.tex}}\newpage
+\centering\resizebox{0.97\textwidth}{!}{\input{../generated/table_primary_inference.tex}}\newpage
+\centering\resizebox{0.92\textwidth}{!}{\input{../generated/table_training_accounting.tex}}\newpage
+\centering\resizebox{0.85\textwidth}{!}{\input{../generated/table_planner_depth.tex}}\newpage
+\centering\resizebox{0.97\textwidth}{!}{\input{../generated/table_engineering_outcomes.tex}}\newpage
+\centering\resizebox{0.84\textwidth}{!}{\input{../generated/table_sensitivity.tex}}\newpage
+\centering\resizebox{0.97\textwidth}{!}{\input{../generated/table_preview_mismatch.tex}}
+\end{document}

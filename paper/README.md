@@ -1,18 +1,20 @@
-# Manuscript
+# Current manuscript package
 
-The clean manuscript source is `source.tex`. The baseline for the current
-state-completeness revision is `source_pre_state_complete_revision_2026-08-27.tex`; the marked manuscript is
-generated from that baseline after the clean text is finalized. Primary and
-second-round numerical tables are generated from
-`../md_cbad_dqn/results/reviewer_revision_state_complete/` rather than maintained manually.
-Run `python -m md_cbad_dqn.reviewer_reporting` followed by
-`python -m md_cbad_dqn.extended_reporting` to synchronize the LaTeX tables.
+The authoritative source is source.tex. References are stored in ref.bib. All included figures and LaTeX table inputs are retained under figures and generated.
 
-Run `python paper/audit_manuscript.py` from the repository root to check sentence length, citation keys, cross-references, and prohibited dash-based prose before compilation.
+Primary and extended numerical tables are generated from ../md_cbad_dqn/results/reviewer_revision_state_complete by:
 
-Final outputs:
+```powershell
+H:\anaconda\envs\yolo\python.exe -m md_cbad_dqn.reviewer_reporting
+H:\anaconda\envs\yolo\python.exe -m md_cbad_dqn.extended_reporting
+```
 
-- `output/pdf/dqn_variants_satellite_ground_manuscript.pdf`
-- `output/pdf/dqn_variants_satellite_ground_manuscript_marked.pdf`
+Run H:\anaconda\envs\yolo\python.exe paper/audit_manuscript.py from the repository root for manuscript checks.
 
-The source uses a generic 11pt single-column preprint layout and replaces the superseded manuscript in full. The marked PDF shows inserted or replaced visible blocks in red relative to `source_pre_state_complete_revision_2026-08-27.tex`.
+The clean release files are:
+
+- output/pdf/dqn_variants_satellite_ground_manuscript.pdf
+- output/pdf/dqn_variants_satellite_ground_manuscript.log
+- output/pdf/SHA256SUMS.txt
+
+Superseded source snapshots, marked manuscripts, duplicate PDFs, auxiliary files and rendered page previews are preserved under ../archive/history_before_current_2026-08-27/paper.
