@@ -29,11 +29,12 @@
 
 \title{\textbf{\revised{A Statistically Supported DQN-Family Advantage in a Resource-Coupled Satellite-Ground Scheduling Benchmark}}}
 \author{
-Bocheng Yang$^{1}$, Lujie Zheng$^{1}$, Jian Liu$^{1,2,*}$, and Bo Chen$^{1,*}$\\[3pt]
-\small $^{1}$School of Aerospace, Harbin Institute of Technology (Shenzhen), Shenzhen 518055, China\\
+Bocheng Yang$^{1}$, Lujie Zheng$^{1}$, Dingyang Lyu$^{3}$, Jian Liu$^{1,2,*}$, and Bo Chen$^{1,*}$\\[3pt]
+\small $^{1}$School of Aerospace, Harbin Institute of Technology, Shenzhen 518055, China\\
 \small $^{2}$Guangxi Key Laboratory of Precision Navigation Technology and Application,\\[-2pt]
 \small Guilin University of Electronic Technology, Guilin 541004, China\\
-\small $^{*}$Correspondence: liujian2024@hit.edu.cn; hitchenbo@hit.edu.cn
+\small $^{3}$Zhongguancun Academy, Beijing 100094, China\\
+\small $^{*}$Correspondence: hitchenbo@hit.edu.cn; liujian2024@hit.edu.cn
 }
 \date{}
 
@@ -120,7 +121,7 @@ where the subscripts denote satellite, ground, and collaborative processing, res
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.98\textwidth,height=0.42\textheight,keepaspectratio]{figures/ai/fig_system_modes_arial.png}
+\includegraphics[width=0.98\textwidth,height=0.42\textheight,keepaspectratio]{fig2.jpg}
 \caption{Three satellite-ground processing pathways. Each arriving task is executed onboard, transferred for ground execution, or preprocessed collaboratively before ground completion. The analytical transition model returns the immediate cost and the post-action heat, energy, queue occupancy, compute utilization, bandwidth, and remaining contact.}
 \label{fig:system}
 \end{figure}
@@ -316,13 +317,6 @@ L_{CFA}&=L_{DQN}+\lambda L_{adv}.
 \label{eq:cbad}
 \end{align}
 The factual term anchors the absolute Q scale, while $L_{adv}$ teaches all action gaps. The only added algorithmic hyperparameter is $\lambda$.
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.98\textwidth,height=0.43\textheight,keepaspectratio]{figures/ai/fig_cbad_mechanism_simulator_exact_arial.png}
-\caption{Training-only centered full-action mechanism. The upper path retains the factual standard-DQN target and Huber loss. The lower path previews all three actions, constructs three Bellman targets, centers them within state, and distills their relative advantages. Both losses update the online Q-network; the target network is synchronized only at the shared fixed interval. Preview outputs are unavailable during evaluation and deployment.}
-\label{fig:mechanism}
-\end{figure}
 
 \begin{figure}[H]
 \centering
