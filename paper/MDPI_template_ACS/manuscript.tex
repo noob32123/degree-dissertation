@@ -93,13 +93,12 @@ Standard deep Q-network (DQN) learning~\cite{mnih2015human,watkins1992q} constru
 
 We compare six DQN objectives: standard DQN, full-action Q, immediate advantage, centered full-action, Double DQN, and Double DQN with centered full-action supervision. A separate $\gamma=0$ contextual bandit provides a learned one-step comparator. Model-evaluated alternatives are used only during training. During evaluation and deployment, every policy acts directly from its learned Q-values.
 
-We make four contributions:
+We make three contributions:
 
 \begin{enumerate}[leftmargin=1.6em]
     \item We introduce a fully specified, reproducible benchmark that links task primitives to three processing pathways and six persistent computational, energy, thermal, and communication resources.
     \item We construct a controlled six-objective DQN family that varies factual supervision, full-action targets, centering, bootstrapping, and Double DQN evaluation under matched training conditions.
     \item We test the family-level result against four-step model-predictive control (MPC-4) through \DQNvsMPCContrastCount{} paired objective--regime contrasts, a correlation-preserving joint bootstrap, multiplicity-corrected tests, and a simultaneous upper bound.
-    \item We provide an executable evidence chain connecting simulator equations, transition audits, trained checkpoints, seed-level inference, generated tables, validation hashes, and publication figures.
 \end{enumerate}
 
 \section{Related Work and Study Positioning}

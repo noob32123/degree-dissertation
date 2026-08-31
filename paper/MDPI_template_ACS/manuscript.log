@@ -1271,13 +1271,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-6.18796pt}.
 
 [7]
-Underfull \hbox (badness 1048) in paragraph at lines 246--247
+Underfull \hbox (badness 1048) in paragraph at lines 245--246
 []\T1/ppl/m/n/10 The nor-mal-ized ac-tion loads used in Eq. [] are stated here 
 in ac-tion or-der
  []
 
 
-Underfull \hbox (badness 4416) in paragraph at lines 260--262
+Underfull \hbox (badness 4416) in paragraph at lines 259--261
 \T1/ppl/m/n/10 Each di-vi-sion by $\OML/zplm/m/it/10 b$ \T1/ppl/m/n/10 uses $[]
 \OT1/zplm/m/n/10 (\OML/zplm/m/it/10 b\OT1/ppl/m/n/10 , 0.1\OT1/zplm/m/n/10 )$\T
 1/ppl/m/n/10 . The uti-liza-tion tar-gets in Eq. [] are
@@ -1311,7 +1311,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [10]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-81.
+80.
  (t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
@@ -1347,13 +1347,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-6.18796pt}.
 
 [13]
-Underfull \hbox (badness 10000) in paragraph at lines 428--429
+Underfull \hbox (badness 10000) in paragraph at lines 427--428
 []\T1/ppl/m/n/10 The core re-sult en-try point is \T1/lmtt/m/n/10 python -m dqn
 _family_satellite_ground.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 428--429
+Underfull \hbox (badness 10000) in paragraph at lines 427--428
 \T1/ppl/m/n/10 com-par-isons use \T1/lmtt/m/n/10 python -m dqn_family_satellite
 _ground.extended_revision 
  []
@@ -1477,4 +1477,4 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 Package rerunfilecheck Info: File `manuscript.out' has not changed.
 (rerunfilecheck)             Checksum: BF0ECFFD1388739C32FBE8E1445901A5;8948.
  )
-Output written on manuscript.xdv (24 pages, 190692 bytes).
+Output written on manuscript.xdv (24 pages, 190200 bytes).
