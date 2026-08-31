@@ -1,0 +1,44 @@
+\documentclass[11pt]{letter}
+
+\usepackage[margin=0.78in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[hidelinks]{hyperref}
+\usepackage{setspace}
+
+\address{School of Aerospace\\
+Harbin Institute of Technology\\
+Shenzhen 518055, China\\
+\href{mailto:liujian2024@hit.edu.cn}{liujian2024@hit.edu.cn};
+\href{mailto:hitchenbo@hit.edu.cn}{hitchenbo@hit.edu.cn}}
+\date{31 August 2026}
+
+\begin{document}
+
+\begin{letter}{Editors\\
+\emph{Remote Sensing}}
+
+\opening{Dear Editors of \emph{Remote Sensing},}
+
+Please consider our manuscript entitled ``Statistical Evidence for a DQN-Family Advantage in a Resource-Coupled Satellite-Ground Scheduling Benchmark'' for publication as an Article in \emph{Remote Sensing}.
+
+Satellite systems supporting Earth observation must allocate computation, energy, thermal capacity, bandwidth, and contact time across sequential workloads. Existing studies have advanced constellation scheduling, observation planning, service placement, and reinforcement-learning controllers. However, controlled evidence separating the benefit of long-horizon value learning from the choice of a particular deep Q-network (DQN) training objective remains limited in resource-coupled satellite-ground scheduling.
+
+Our study establishes a fully specified synthetic benchmark and evaluates six DQN objectives under matched architectures, training budgets, model seeds, and held-out traces. Across all 30 objective--regime comparisons, every DQN objective achieved a lower mean episode cost than four-step model-predictive control (MPC-4). All paired 95\% bootstrap intervals excluded zero, and Holm-adjusted sign tests supported the same ordering. A correlation-preserving joint bootstrap and a simultaneous upper bound assess this family-level result without selecting only the best-performing variant. The manuscript also reports the smaller, scenario-dependent differences within the DQN family, the cost--runtime trade-off of deeper exact planning, sensitivity analyses, and robustness to training-time preview misspecification.
+
+The manuscript fits the scope and readership of \emph{Remote Sensing} because it examines reproducible algorithms for satellite-ground processing and the management of persistent onboard and communication resources relevant to responsive remote-sensing operations. The conclusions are explicitly bounded to a synthetic benchmark with soft constraints, and the accompanying public reproducibility package provides a transparent basis for subsequent mission-calibrated, hard-constrained, and operational validation.
+
+We confirm that neither the manuscript nor any parts of its content are currently under consideration for publication with or published in another journal.
+
+All authors have approved the manuscript and agree with its submission to \emph{Remote Sensing}.
+
+Thank you for your consideration.
+
+\vspace{0.8em}
+Sincerely,\\[1em]
+Jian Liu and Bo Chen\\
+Corresponding Authors, on behalf of all authors
+
+\end{letter}
+\end{document}
