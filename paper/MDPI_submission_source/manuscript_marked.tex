@@ -17,9 +17,11 @@
 \ifshowrevisions
   \newcommand{\revised}[1]{\textcolor{red}{#1}}
   \newenvironment{revisedblock}{\color{red}}{}
+  \newcommand{\revisedcaption}[1]{\color{red}\caption{#1}\color{black}}
 \else
   \newcommand{\revised}[1]{#1}
   \newenvironment{revisedblock}{}{}
+  \newcommand{\revisedcaption}[1]{\caption{#1}}
 \fi
 
 \definecolor{cbadred}{HTML}{C0392B}
@@ -216,7 +218,9 @@ The implementation enforces $D_t^{res}\le D_t^{feat}\le D_t$. A workload-depende
 \begin{equation}
 R_t^{link}=2.2+217.8b_t\quad\text{Mbit s}^{-1},
 \end{equation}
-and transmission heat equals 0.55 times transmit energy. These values define engineering envelopes rather than fitted flight distributions. Their scales are consistent with modern SmallSat computing-system power reported by the National Aeronautics and Space Administration (NASA). NASA ground-network examples range from 2.2 Mbit s$^{-1}$ S-band to 220 Mbit s$^{-1}$ X-band returns~\cite{nasa2026avionics,nasa2026ground}. The bounded data-reduction factors model the bandwidth-reduction role of onboard image compression rather than any instrument-specific codec~\cite{ccsds122}. Table~\ref{tab:parameters} lists every implemented assumption.
+\begin{revisedblock}
+and transmission heat equals 0.55 times transmit energy. The parameters serve three distinct roles. Compute power and link rates are engineering-scale anchors supported by public NASA ranges, including SmallSat computing-system power and ground-network examples from 2.2 Mbit s$^{-1}$ S-band to 220 Mbit s$^{-1}$ X-band returns~\cite{nasa2026avionics,nasa2026ground}. Data-reduction factors and task correlations are synthetic workload assumptions; the reduction factors represent the bandwidth-reduction role of onboard image compression rather than an instrument-specific codec~\cite{ccsds122}. Heat, energy, queue, utilization, bandwidth, and contact coordinates are normalized accounting states rather than calibrated hardware variables. Table~\ref{tab:parameters} therefore defines a transparent engineering envelope, not a fitted flight distribution or spacecraft digital twin; mission-specific discrepancies in these scales and joint distributions may change absolute costs and potentially the method ordering.
+\end{revisedblock}
 
 \begin{table}[H]
 \centering
@@ -537,7 +541,7 @@ Centered full-action produced favorable mean differences against standard DQN in
 
 \begin{table}[H]
 \centering
-\caption{\revised{Nominal receding-horizon planning over 400 unique held-out traces. Each planner has perfect knowledge of the next $H$ tasks and exogenous link states and exactly enumerates $3^H$ sequences before every action. Runtime was measured on the same workstation and includes only planner action selection after environment construction. The separate matched latency comparison, including DQN inference, is reported in Table~\ref{tab:revision_runtime}.}}
+\revisedcaption{Nominal receding-horizon planning over 400 unique held-out traces. Each planner has perfect knowledge of the next $H$ tasks and exogenous link states and exactly enumerates $3^H$ sequences before every action. Runtime was measured on the same workstation and includes only planner action selection after environment construction. The separate matched latency comparison, including DQN inference, is reported in Table~\ref{tab:revision_runtime}.}
 \label{tab:planner_depth}
 \resizebox{0.85\textwidth}{!}{\input{generated/table_planner_depth.tex}}
 \end{table}
@@ -561,7 +565,7 @@ Table~\ref{tab:engineering} provides a representative decomposition of the gap b
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.98\textwidth]{figures/fig_revision_learning_curves.pdf}
-\caption{Training diagnostics for all six DQN objectives. Lines are means across 20 model seeds after a causal 25-episode moving average; shaded regions are $\pm$1 SD. Curves describe optimization on the training distribution and are not treated as independent test observations.}
+\revisedcaption{Training diagnostics for all six DQN objectives. Lines are means across 20 model seeds after a causal 25-episode moving average; shaded regions are $\pm$1 SD. Curves describe optimization on the training distribution and are not treated as independent test observations.}
 \label{fig:training}
 \end{figure}
 
@@ -576,7 +580,7 @@ At $\gamma=0.95$, none of the six contrasts with $\gamma=0.97$ was supported aft
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.98\textwidth]{figures/fig_revision_sensitivity.pdf}
-\caption{Nominal sensitivity of all six DQN objectives. (a) Discount-factor sensitivity after 600 training episodes. (b) Held-out episode cost at 300, 600, and 900 training episodes with epsilon decay fixed at 13,440 interactions. Points show means across 20 model-seed blocks after averaging 20 shared traces; bars show 95\% seed-block bootstrap intervals.}
+\revisedcaption{Nominal sensitivity of all six DQN objectives. (a) Discount-factor sensitivity after 600 training episodes. (b) Held-out episode cost at 300, 600, and 900 training episodes with epsilon decay fixed at 13,440 interactions. Points show means across 20 model-seed blocks after averaging 20 shared traces; bars show 95\% seed-block bootstrap intervals.}
 \label{fig:revision_sensitivity}
 \end{figure}
 
@@ -590,8 +594,9 @@ The eight-step greedy rollout uses the same perfect preview information as MPC a
 
 \begin{table}[H]
 \centering
-\caption{Nominal greedy-rollout and matched CPU decision-time comparison. DQN rows use the current state only; MPC-4 and greedy rollout receive perfect next-task and link-state previews.}
+\revisedcaption{Nominal greedy-rollout and matched CPU decision-time comparison. DQN rows use the current state only; MPC-4 and greedy rollout receive perfect next-task and link-state previews.}
 \label{tab:revision_runtime}
+\ifshowrevisions\color{red}\fi
 \resizebox{\textwidth}{!}{\input{generated/table_revision_runtime.tex}}
 \end{table}
 
@@ -679,7 +684,24 @@ The results support a DQN-family advantage within the specified reproducible, re
 
 \begin{adjustwidth}{-\extralength}{0cm}
 \reftitle{References}
+\makeatletter
+% In the marked manuscript, color only the references added in this revision.
+\newif\ifmarked@reference
+\def\marked@setbibcolor#1{%
+  \marked@referencefalse
+  \def\marked@key{#1}%
+  \@for\marked@candidate:=schulman2017ppo,haarnoja2018sac,chen2019milp,peng2020exact\do{%
+    \ifx\marked@key\marked@candidate\marked@referencetrue\fi}%
+  \ifmarked@reference\color{red}\else\color{black}\fi}
+\ifshowrevisions
+\let\marked@originalbibitem\bibitem
+\def\marked@bibitem#1{\marked@setbibcolor{#1}\marked@originalbibitem{#1}}
+\def\marked@lbibitem[#1]#2{\marked@setbibcolor{#2}\marked@originalbibitem[#1]{#2}}
+\renewcommand{\bibitem}{\@ifnextchar[{\marked@lbibitem}{\marked@bibitem}}
+\fi
+\makeatother
 \bibliography{ref}
+\ifshowrevisions\color{black}\fi
 \PublishersNote{}
 \end{adjustwidth}
 

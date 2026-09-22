@@ -1,0 +1,26 @@
+{
+  "baseline_manuscript": "MDPI_submission_source.zip!/MDPI_submission_source/manuscript.tex",
+  "baseline_bibliography": "MDPI_submission_source.zip!/MDPI_submission_source/ref.bib",
+  "changed_opcodes": 25,
+  "uncovered_substantive_lines": [],
+  "added_reference_keys": [
+    "chen2019milp",
+    "peng2020exact",
+    "schulman2017ppo",
+    "haarnoja2018sac"
+  ],
+  "marked_reference_keys": [
+    "chen2019milp",
+    "peng2020exact",
+    "schulman2017ppo",
+    "haarnoja2018sac"
+  ],
+  "float_color_scope_fixes": [
+    "Table 10 caption",
+    "Figure 6 caption",
+    "Figure 7 caption",
+    "Table 12 caption and body"
+  ],
+  "visual_check": "passed",
+  "status": "passed"
+}

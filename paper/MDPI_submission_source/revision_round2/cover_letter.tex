@@ -1,24 +1,17 @@
 \documentclass[11pt]{article}
-\usepackage[a4paper,margin=2.35cm]{geometry}
-\usepackage{microtype}
+\usepackage[a4paper,margin=2.4cm]{geometry}
 \usepackage{xcolor}
+\usepackage{microtype}
 \usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
+\definecolor{responseblue}{HTML}{1F4E79}
+\newcommand{\ReviewerComment}[1]{\par\medskip\noindent\textbf{Comment.} \emph{#1}\par}
+\newcommand{\AuthorResponse}[1]{\par\smallskip\noindent\textcolor{responseblue}{\textbf{Response.} #1}\par}
+\newcommand{\RevisedExcerpt}[1]{\par\smallskip\noindent\textbf{Revised manuscript text.}\par\begin{quote}\itshape #1\end{quote}}
+\newcommand{\ManuscriptLocation}[1]{\par\smallskip\noindent\textbf{Location in the revised manuscript PDF.} #1\par}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{5pt}
-\definecolor{revisionblue}{HTML}{1F4E79}
-\newcommand{\Location}[1]{\textbf{Location in the revised manuscript PDF:} #1}
-\newcommand{\RevisedText}[1]{\textbf{Revised manuscript text:} \textit{``#1''}}
-\newcommand{\RevisionPoint}[5]{%
-  \subsection*{#1}
-  \textbf{Reviewer comment:} #2
-
-  \textbf{Response and modification:} #3
-
-  \RevisedText{#4}
-
-  \Location{#5}
-}
+\setlength{\emergencystretch}{1em}
 
 \begin{document}
 
@@ -38,79 +31,16 @@ Please find our substantially revised manuscript, ``Statistical Evidence for a D
 
 The revision adds discount-factor and training-length experiments for all six DQN objectives, complete six-objective learning curves, an eight-step greedy rollout, and a matched single-thread CPU decision-time comparison. It also narrows every principal claim to the synthetic, clipped-resource, soft-constraint benchmark; recasts the fixed-$\lambda$ component comparisons as descriptive; and expands the discussion of hard constraints, MILP, dynamic programming, PPO, SAC, forecast information asymmetry, structural model error, simulator provenance, and real-mission validation. All new learned-policy experiments use 20 prespecified model seeds and 20 shared held-out traces per seed. Inference uses 10,000 model-seed-block bootstrap resamples and separate Holm families.
 
-For convenient editorial review, the complete point-by-point revision record, including the location of each revised passage in the final clean manuscript PDF, is provided below. Separate reviewer-specific response documents are also supplied.
+For convenient editorial review, the complete reviewer comments and author responses are reproduced below verbatim from the three reviewer-specific response documents. Each entry also gives the revised manuscript excerpt and its exact location in the final clean manuscript PDF.
 
 \section*{Response to Reviewer 1}
-
-\RevisionPoint{Reviewer 1, Comment 1: Scope and hard constraints}
-{The Abstract and Conclusions should state that the results apply only to a clipped-resource, soft-constrained benchmark, and the Discussion should assess hard constraints.}
-{We revised the Abstract, Introduction, Highlights, Discussion, Scope and Limitations, and Conclusions. The manuscript now explains that operational hard constraints can mask actions, reject tasks, or trigger protective shutdown, thereby changing the feasible set and possibly the algorithm ordering.}
-{These findings describe this synthetic soft-constraint benchmark only; hard energy and thermal limits can change the feasible action set and therefore the algorithm ordering.}
-{p.~1, Abstract and Highlights; p.~3, Introduction; p.~23, Section~5.1; p.~24, Conclusions.}
-
-\RevisionPoint{Reviewer 1, Comment 2: Six objectives and fixed auxiliary weight}
-{The rationale for the six DQN variants was insufficient, and reusing $\lambda=0.3$ prevents a fair hyperparameter-optimized component attribution.}
-{We explain that the six objectives form matched controls spanning factual-only versus full-action supervision, absolute versus centered auxiliary targets, one-step versus bootstrapped auxiliary targets, and standard versus Double-DQN backups. We retained the prespecified coefficient and explicitly characterize the comparisons as fixed-coefficient descriptive contrasts rather than causal isolation of centering or bootstrapping.}
-{Because the auxiliary losses differ in scale and error structure, these are fixed-coefficient implementation comparisons. They do not factorially isolate centering or bootstrapping.}
-{p.~11, Section~3.4.1; pp.~17--18, Tables~7--8 and accompanying Results text; p.~23, Section~5.1.}
-
-\RevisionPoint{Reviewer 1, Comment 3: Optimization comparators and lightweight baseline}
-{The comparison should discuss MILP and dynamic programming and, if feasible, add a lightweight optimization baseline.}
-{We added literature-based discussion of MILP, dynamic programming, PPO, and SAC and removed any implication of universal DQN optimality. We also implemented an eight-step greedy rollout with the same perfect preview available to MPC-4. It enumerates the first action, completes the predicted rollout with one-step greedy actions, executes the first action, and replans. Its mean nominal cost was 88.79, compared with 90.83 for MPC-4 and 77.66--78.40 for the six DQN objectives.}
-{The greedy rollout reduced mean cost relative to MPC-4 (88.79 versus 90.83) but remained above all six DQN means (77.66--78.40).}
-{pp.~2--3, Related Work and Introduction; pp.~12--13, Section~3.4.4; pp.~20--21, Section~4.6 and Table~12; p.~23, Future Work.}
-
-\RevisionPoint{Reviewer 1, Comment 4: Discount factor, training length, and learning curves}
-{The manuscript should test $\gamma\in\{0.90,0.95,0.99\}$ and show learning curves for all six objectives.}
-{We evaluated all six objectives at $\gamma\in\{0.90,0.95,0.97,0.99\}$ with 20 seeds and matched nominal traces; MPC-4 used the corresponding discount. We trained each objective to 900 episodes and evaluated checkpoints at 300, 600, and 900 episodes while fixing epsilon decay at 13,440 interactions. The revised learning-curve figure contains all six objectives. The $\gamma=0.90$ models were worse than the $\gamma=0.97$ reference for all objectives, whereas no $\gamma=0.95$ contrast was supported after Holm correction. All 300-episode checkpoints were worse than their 600-episode counterparts; extending to 900 episodes produced no consistent family-wide gain.}
-{At $\gamma=0.95$, none of the six contrasts with $\gamma=0.97$ was supported after Holm correction. Reducing $\gamma$ to 0.90 increased mean cost for every objective by 2.63--4.57.}
-{p.~14, Section~3.4.5; pp.~19--20, Sections~4.4--4.5 and Figures~6--7.}
-
-\RevisionPoint{Reviewer 1, Comment 5: Structural preview misspecification}
-{Uniform 0.85/1.15 scaling tests amplitude error but not structural errors such as incorrect thermal dynamics.}
-{We now distinguish amplitude perturbation from structural model error and identify alternate thermal recurrence, actuator saturation, state-dependent contact loss, telemetry-calibrated dynamics, and hardware-in-the-loop evaluation as necessary future tests.}
-{Preview misspecification was examined using uniform $\pm15\%$ scaling, which tests amplitude error but not structural error such as an incorrect thermal recurrence, unmodeled actuator saturation, or state-dependent contact loss.}
-{p.~22, Section~5; p.~23, Sections~5.1--5.2.}
+\input{reviewer1_points.tex}
 
 \section*{Response to Reviewer 2}
-
-\RevisionPoint{Reviewer 2, Comment 1: Practical scheduling difficulties and the soft/hard-constraint distinction}
-{The Introduction and limitations should explain practical difficulties of MPC and dynamic programming and distinguish the simulator's soft constraints from operational hard constraints.}
-{We added a dedicated Introduction discussion of model calibration, computational growth, forecast dependence, and onboard decision budgets. We also explain that the simulator clips resource states and continues the episode after penalized exposure, whereas flight systems may prohibit actions or shut down. All principal claims are now explicitly restricted to the evaluated soft-constraint benchmark.}
-{A hard constraint changes the feasible action set and can make a policy with a lower penalized cost infeasible. Consequently, the ordering observed below is a statement about the specified soft-constraint benchmark and cannot be transferred directly to an on-orbit controller.}
-{pp.~2--3, Introduction; p.~23, Section~5.1; p.~24, Conclusions.}
-
-\RevisionPoint{Reviewer 2, Comment 2: Missing DRL and operations-research baselines}
-{The comparator set lacks PPO, SAC, MIP/MILP, and rolling-horizon heuristics.}
-{We added the eight-step rolling greedy look-ahead experiment and literature-based discussion of PPO, discrete-action SAC, MILP, and dynamic programming. The claims now refer only to the implemented comparator set. The manuscript explicitly records that PPO, SAC, MILP, and dynamic programming were not evaluated experimentally and could change the ordering under different feasibility, action-space, information, or computation conditions.}
-{A broader comparator frontier should include scalable tree search, dynamic programming, mixed-integer optimization, PPO, SAC, and satellite-specific schedulers.}
-{pp.~2--3, Related Work; pp.~20--21, Section~4.6 and Table~12; p.~23, Section~5.2.}
-
-\RevisionPoint{Reviewer 2, Comment 3: Identifiability of the auxiliary-loss comparison}
-{The shared $\lambda=0.3$ does not decouple centralization, Bellman bootstrapping, and coefficient effects.}
-{We agree and do not present the component rows as independently optimized ablations. The Methods, captions, Results, limitations, and future work now state that objective-specific tuning, gradient normalization, and factorial controls are required for mechanism identification.}
-{The uncentered full-action, immediate-advantage, and Double DQN auxiliary variants inherited $\lambda=0.3$ without method-specific calibration.}
-{p.~11, Section~3.4.1; pp.~17--18, Tables~7--8; p.~23, Sections~5.1--5.2.}
-
-\RevisionPoint{Reviewer 2, Comment 4: Perfect-preview information asymmetry}
-{MPC receives perfect future tasks and link states, whereas DQN sees only the current state; this asymmetry and forecast error should be addressed.}
-{We state the information asymmetry in Methods, the planning-results caption, the new baseline comparison, and Discussion. The greedy rollout deliberately receives the same perfect preview as MPC. We did not impose an arbitrary prediction-noise distribution; instead, we explain that an informative imperfect-MPC experiment requires mission-calibrated task-arrival and link-state forecast distributions.}
-{Both MPC and greedy rollout receive perfect next-task and link-state previews; learned policies receive only the current state, so the comparison includes an explicit information asymmetry.}
-{pp.~12--13, Section~3.4.4; p.~16, Figure~5 caption; p.~21, Section~4.6; p.~22, Discussion.}
+\input{reviewer2_points.tex}
 
 \section*{Response to Reviewer 3}
-
-\RevisionPoint{Reviewer 3, Comment 1: MPC-4 rationale and matched decision time}
-{The manuscript should justify MPC-4 and compare DQN inference time with MPC decision time on the same hardware.}
-{We explain that four steps provide nontrivial look-ahead while retaining transparent exhaustive enumeration at every decision, and we preserve the $H\in\{1,2,4,6\}$ planning-depth analysis. We added a matched single-thread CPU benchmark for six DQN objectives, MPC-4, and greedy rollout using batch size one, shared saved states, warm-up, and three timed repetitions. Mean DQN latency was 0.050--0.051~ms, compared with 2.538~ms for greedy rollout and 4.772~ms for MPC-4; mean, median, and P95 values are all reported.}
-{Mean DQN decision time was 0.050--0.051~ms, compared with 2.538~ms for greedy rollout and 4.772~ms for MPC-4.}
-{pp.~12--13, Section~3.4.4; p.~18, Table~10; pp.~20--21, Section~4.6 and Table~12.}
-
-\RevisionPoint{Reviewer 3, Comment 2: Simulator provenance and real-mission validity}
-{The relation between synthetic parameter ranges and representative satellite conditions should be clarified, and the absence of real mission validation should be discussed.}
-{We distinguish engineering-scale anchors, synthetic assumptions, and normalized accounting states. Compute power and link rates are tied to cited public engineering sources; data-reduction factors and task correlations remain synthetic; and the heat, energy, queue, utilization, bandwidth, and contact states are not a calibrated spacecraft digital twin. The Discussion now requires telemetry and hardware-in-the-loop validation before operational transfer.}
-{These values define engineering envelopes rather than fitted flight distributions.}
-{pp.~6--7, Section~3.1.2 and Table~3; p.~23, Sections~5.1--5.2; p.~24, Conclusions.}
+\input{reviewer3_points.tex}
 
 \section*{Reproducibility and availability}
 
