@@ -1,0 +1,98 @@
+{"kind":"deck","id":"pr/nc73yd","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"标题和内容"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout2.xml","name":"空白","type":"blank"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"CVPR 2026 论文汇报：UAVGen","textShapes":4}
+{"kind":"textbox","id":"sh/sryl4zqx","slide":1,"name":"文本框 6","text":"CVPR 2026 论文汇报：UAVGen","textPreview":"CVPR 2026 论文汇报：UAVGen","textChars":21,"textLines":1,"bbox":[159.36,459.52,960.64,77.55]}
+{"kind":"shape","id":"sh/k3yl0zql","slide":1,"name":"矩形 2","bbox":[0,171.33,1280,269.46]}
+{"kind":"textbox","id":"sh/65g3298r","slide":1,"name":"文本框 14","text":"视觉原型条件化的无人机目标检测数据生成","textPreview":"视觉原型条件化的无人机目标检测数据生成","textChars":19,"textLines":1,"bbox":[145.04,267.6,989.27,86.4]}
+{"kind":"textbox","id":"sh/0bmd476t","slide":1,"name":"文本框 20","text":"原文作者：Wenhao Li、Zimeng Wu、Yu Wu、Zehua Fu、Jiaxin Chen\n北京航空航天大学","textPreview":"原文作者：Wenhao Li、Zimeng Wu、Yu Wu、Zehua Fu、Jiaxin Chen | 北京航空航天大学","textChars":60,"textLines":2,"bbox":[159.36,562.8,960.64,106.63]}
+{"kind":"textbox","id":"sh/utg3698n","slide":1,"name":"文本框 8","text":"Visual Prototype Conditioned Focal Region Generation","textPreview":"Visual Prototype Conditioned Focal Region Generation","textChars":52,"textLines":1,"bbox":[806.73,103.59,381.96,105.6]}
+{"kind":"image","id":"im/cfmxk3yp","slide":1,"name":"图片 13","bbox":[0,171.33,1280,268.18]}
+{"kind":"image","id":"im/dgvyd8fa","slide":1,"name":"图片 22","bbox":[7.51,67.79,368.4,90.68]}
+{"kind":"image","id":"im/eh4fmdgv","slide":1,"name":"图片 5","bbox":[1161.95,79.3,98.22,85.6]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":"论文：Visual Prototype Conditioned Focal Region Generation for UAV-Based Object Detection，CVPR 2026，3772–3782。汇报结构严格沿用原始12页组会模板。原文：https://openaccess.thecvf.com/content/CVPR2026/papers/Li_Visual_Prototype_Conditioned_Focal_Region_Generation_for_UAV-Based_Object_Detection_CVPR_2026_paper.pdf"}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"目    录","textShapes":7}
+{"kind":"textbox","id":"sh/9072xkry","slide":2,"name":"矩形 1","text":"目    录","textPreview":"目    录","textChars":6,"textLines":1,"bbox":[160,18.39,960,61.39]}
+{"kind":"textbox","id":"sh/a10jqpsj","slide":2,"name":"任意多边形 17","text":"  问题背景与研究动机","textPreview":"问题背景与研究动机","textChars":11,"textLines":1,"bbox":[443.2,252.42,504.99,69.8]}
+{"kind":"textbox","id":"sh/x4r21kru","slide":2,"name":"任意多边形 18","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[337.86,249.49,129.05,76.21]}
+{"kind":"textbox","id":"sh/q5wjelsz","slide":2,"name":"任意多边形 22","text":"  UAVGen 方法与数据流程","textPreview":"UAVGen 方法与数据流程","textChars":16,"textLines":1,"bbox":[443.2,340.97,504.99,69.99]}
+{"kind":"textbox","id":"sh/ove9o7yd","slide":2,"name":"任意多边形 23","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[337.86,338.22,129.05,76.03]}
+{"kind":"textbox","id":"sh/9wnqhczy","slide":2,"name":"任意多边形 24","text":"  实验结果与结论","textPreview":"实验结果与结论","textChars":9,"textLines":1,"bbox":[443.2,430.74,504.99,69.99]}
+{"kind":"textbox","id":"sh/mtwrmxg7","slide":2,"name":"任意多边形 25","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[337.86,427.81,129.05,76.21]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":2,"text":"第一部分讲无人机目标检测的标注数据不足及通用生成方法的问题；第二部分讲 VPC-DM 和 FRE-DP；第三部分讲 VisDrone、UAVDT 的结果与消融。"}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"核心问题：怎样生成更可信、标签更一致的无人机训练图像？","textShapes":5}
+{"kind":"textbox","id":"sh/obq90bml","slide":3,"name":"文本框 5","text":"核心问题：怎样生成更可信、标签更一致的无人机训练图像？","textPreview":"核心问题：怎样生成更可信、标签更一致的无人机训练图像？","textChars":27,"textLines":1,"bbox":[235.61,641.77,808.78,38.78]}
+{"kind":"shape","id":"sh/e10f2twf","slide":3,"name":"矩形 19","bbox":[38.67,100.25,1213.33,61]}
+{"kind":"textbox","id":"sh/d0jax03i","slide":3,"name":"文本框 2","text":"一、问题背景与研究动机","textPreview":"一、问题背景与研究动机","textChars":11,"textLines":1,"bbox":[38.67,4,620.83,86.4]}
+{"kind":"textbox","id":"sh/cza94vmx","slide":3,"name":"文本框 1","text":"无人机图像中的目标常小而密集，并伴随遮挡与尺度变化。标注数据有限，使检测器难以覆盖复杂场景。","textPreview":"无人机图像中的目标常小而密集，并伴随遮挡与尺度变化。标注数据有限，使检测器难以覆盖复杂场景。","textChars":46,"textLines":1,"bbox":[23.6,476.77,616.4,160.29]}
+{"kind":"textbox","id":"sh/943mhgre","slide":3,"name":"矩形 11","text":"无人机目标检测的数据瓶颈","textPreview":"无人机目标检测的数据瓶颈","textChars":12,"textLines":1,"bbox":[52.83,111.25,1213.33,67.2]}
+{"kind":"textbox","id":"sh/x8nml0ra","slide":3,"name":"文本框 15","text":"通用布局到图像生成依赖类别与框位置，却常在小目标边界产生模糊或漏生成；不一致的合成标签还可能伤害检测训练。","textPreview":"通用布局到图像生成依赖类别与框位置，却常在小目标边界产生模糊或漏生成；不一致的合成标签还可能伤害检测训练。","textChars":53,"textLines":1,"bbox":[640.83,473.42,616.4,160.29]}
+{"kind":"image","id":"im/o32dw321","slide":3,"name":"图片 4","alt":"图4：GeoDiffusion 和 AeroGen 在密集目标上的生成问题","bbox":[38.67,173.94,572.83,298.13]}
+{"kind":"image","id":"im/n2tc3y1g","slide":3,"name":"图片 12","alt":"图1a：常规布局到图像生成流程","bbox":[668.5,141.75,509.78,311.06]}
+{"kind":"notes","id":"nt/ofy9wn61","slide":3,"text":"左图取自论文图4的两个基线方法，黄虚线表示与布局不一致或模糊的区域；右图是论文图1(a)所示常规布局到图像生成。不要将个例视作总体统计结果。"}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"核心思路：提高小目标保真度，同时控制图像—标签不一致","textShapes":4}
+{"kind":"textbox","id":"sh/doj29oba","slide":4,"name":"文本框 5","text":"核心思路：提高小目标保真度，同时控制图像—标签不一致","textPreview":"核心思路：提高小目标保真度，同时控制图像—标签不一致","textChars":26,"textLines":1,"bbox":[233.12,663.1,800.13,38.78]}
+{"kind":"textbox","id":"sh/p0batw72","slide":4,"name":"矩形 19","text":"从整图生成转向焦点区域生成","textPreview":"从整图生成转向焦点区域生成","textChars":13,"textLines":1,"bbox":[33.33,79.13,1213.33,67.2]}
+{"kind":"textbox","id":"sh/0ba143al","slide":4,"name":"文本框 2","text":"一、问题背景与研究动机","textPreview":"一、问题背景与研究动机","textChars":11,"textLines":1,"bbox":[38.67,4,620.83,86.4]}
+{"kind":"textbox","id":"sh/1cj2d8b6","slide":4,"name":"文本框 1","text":"UAVGen 将类别对应的高质量视觉原型融入布局条件，在目标密集区优先生成，再把局部图像拼回整图，并以检测器修正漏生成、多生成和框偏移。","textPreview":"UAVGen 将类别对应的高质量视觉原型融入布局条件，在目标密集区优先生成，再把局部图像拼回整图，并以检测器修正漏生成、多生成和框偏移。","textChars":68,"textLines":1,"bbox":[103.42,503.67,1066.08,137.2]}
+{"kind":"image","id":"im/n2187e1o","slide":4,"name":"图片 8","alt":"图1b：UAVGen 引入焦点区域、视觉原型及标签修正","bbox":[839.67,176.83,387.15,290.14]}
+{"kind":"image","id":"im/83apgj29","slide":4,"name":"图片 4","alt":"图1a：常规生成仅依赖布局信息","bbox":[53.18,140.13,746.86,369.9]}
+{"kind":"notes","id":"nt/jyx0ra1s","slide":4,"text":"两图来自原论文图1。左为常规数据生成，右为 UAVGen。VPC-DM 提升生成条件质量，FRE-DP 侧重目标密集区域并执行标签修正。"}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"二、UAVGen 方法与数据流程","textShapes":4}
+{"kind":"textbox","id":"sh/dgbulwnm","slide":5,"name":"文本框 1","text":"二、UAVGen 方法与数据流程","textPreview":"二、UAVGen 方法与数据流程","textChars":16,"textLines":1,"bbox":[38.67,4,620.83,86.4]}
+{"kind":"textbox","id":"sh/cf2tcr61","slide":5,"name":"矩形 2","text":"UAVGen：整体架构","textPreview":"UAVGen：整体架构","textChars":11,"textLines":1,"bbox":[28.86,99.09,1222.29,67.2]}
+{"kind":"textbox","id":"sh/n6dcr65o","slide":5,"name":"文本框 7","text":"1、VPC-DM：筛选清晰且定位可靠的视觉原型，联合布局和文本条件生成图像。\n2、FRE-DP：聚类目标中心，生成焦点区域并拼接；最后修正标签。","textPreview":"1、VPC-DM：筛选清晰且定位可靠的视觉原型，联合布局和文本条件生成图像。 | 2、FRE-DP：聚类目标中心，生成焦点区域并拼接；最后修正标签。","textChars":72,"textLines":2,"bbox":[754.16,131.77,491.76,364.79]}
+{"kind":"textbox","id":"sh/m5kbi1oj","slide":5,"name":"文本框 8","text":"两个模块分别提升生成保真度与合成数据的训练可用性","textPreview":"两个模块分别提升生成保真度与合成数据的训练可用性","textChars":24,"textLines":1,"bbox":[90.27,655.24,1022.08,38.78]}
+{"kind":"image","id":"im/rqdw7qls","slide":5,"name":"图片 5","alt":"图2：UAVGen 的 VPC-DM 与 FRE-DP 总体架构","bbox":[18.9,186.07,730.03,391.18]}
+{"kind":"notes","id":"nt/i107q5of","slide":5,"text":"论文图2。上半部分是 FRE-DP，下半部分是 VPC-DM。讲述顺序建议先 VPC-DM 条件构建，再讲 FRE-DP 区域生成及标签修正。图中的 trainable/frozen 由原论文给出。"}
+{"kind":"slide","id":"sl/x8f69ofe","slide":6,"title":"二、UAVGen 方法与数据流程","textShapes":4}
+{"kind":"textbox","id":"sh/yhg7epsj","slide":6,"name":"文本框 1","text":"二、UAVGen 方法与数据流程","textPreview":"二、UAVGen 方法与数据流程","textChars":16,"textLines":1,"bbox":[38.67,4,620.83,86.4]}
+{"kind":"textbox","id":"sh/zi98nu94","slide":6,"name":"矩形 2","text":"VPC-DM：视觉原型与多源条件","textPreview":"VPC-DM：视觉原型与多源条件","textChars":16,"textLines":1,"bbox":[28.86,99.09,1222.29,67.2]}
+{"kind":"textbox","id":"sh/oryp8fah","slide":6,"name":"文本框 7","text":"从检测候选中按定位、置信度和类别内特征筛选原型；图像编码器构成视觉原型布局，文本与位置编码补充场景和对象语义。","textPreview":"从检测候选中按定位、置信度和类别内特征筛选原型；图像编码器构成视觉原型布局，文本与位置编码补充场景和对象语义。","textChars":55,"textLines":1,"bbox":[728.74,146.38,480.06,364.79]}
+{"kind":"textbox","id":"sh/pc76hkr2","slide":6,"name":"文本框 8","text":"视觉原型＋布局语义共同约束扩散生成，使小目标外观更稳定","textPreview":"视觉原型＋布局语义共同约束扩散生成，使小目标外观更稳定","textChars":27,"textLines":1,"bbox":[128.96,641,1022.08,35.54]}
+{"kind":"image","id":"im/6xcbq9cz","slide":6,"name":"图片 4","alt":"图2下半部分：视觉原型条件化扩散模型","bbox":[24.04,231.71,709.52,279.46]}
+{"kind":"notes","id":"nt/x8f69ofe","slide":6,"text":"VPC-DM：预训练检测器获取可靠候选；同类原型经聚合形成增强布局；全局文本、对象文本和位置编码共同注入生成网络。训练时对目标区域赋予更高损失权重。原论文图2与第3.2节。"}
+{"kind":"slide","id":"sl/gnmp4jqx","slide":7,"title":"三、实验结果与结论","textShapes":5}
+{"kind":"textbox","id":"sh/cb2tkvap","slide":7,"name":"文本框 1","text":"三、实验结果与结论","textPreview":"三、实验结果与结论","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,86.4]}
+{"kind":"textbox","id":"sh/dcbud0ra","slide":7,"name":"Rectangle 1","text":"实验数据与评估方式","textPreview":"实验数据与评估方式","textChars":9,"textLines":1,"bbox":[21,103.76,1194.35,48.47]}
+{"kind":"textbox","id":"sh/xcz2l03q","slide":7,"name":"文本框 11","text":"VisDrone：6471 张训练图、10 类目标；UAVDT：24143 张训练图。\n生成质量用 FID↓，检测性能用 mAP、AP50 和尺度分组 AP↑。\n主实验使用 GFL-ResNet50；另用 RemDet-X 检查迁移效果。","textPreview":"VisDrone：6471 张训练图、10 类目标；UAVDT：24143 张训练图。 | 生成质量用 FID↓，检测性能用 mAP、AP50 和尺度分组 AP↑。 | 主实验使用 GFL-ResNet50；另用 RemDet-X 检查迁移效果。","textChars":119,"textLines":3,"bbox":[633.44,155.61,588.32,240.46]}
+{"kind":"textbox","id":"sh/n6x0fqlo","slide":7,"name":"文本框 13","text":"FID 衡量图像分布接近程度；AP 衡量合成数据对检测训练的实际价值","textPreview":"FID 衡量图像分布接近程度；AP 衡量合成数据对检测训练的实际价值","textChars":34,"textLines":1,"bbox":[671.42,564.39,532.43,60.8]}
+{"kind":"textbox","id":"sh/eh4jil4r","slide":7,"name":"文本框 18","text":"同一 VisDrone 样例：真实图、AeroGen、UAVGen","textPreview":"同一 VisDrone 样例：真实图、AeroGen、UAVGen","textChars":33,"textLines":1,"bbox":[365.43,472.23,255.58,76.8]}
+{"kind":"image","id":"im/hcbmpone","slide":7,"name":"图片 6","alt":"图4第一行：AeroGen 生成图像","bbox":[346.43,168.06,293.57,220.18]}
+{"kind":"image","id":"im/gb25wj6t","slide":7,"name":"图片 12","alt":"图4第一行：VisDrone 真实图像","bbox":[48.8,168.06,293.57,220.18]}
+{"kind":"image","id":"im/vat4ne5o","slide":7,"name":"图片 16","alt":"图4第一行：UAVGen 生成图像","bbox":[48.8,396.07,293.57,220.18]}
+{"kind":"notes","id":"nt/gnmp4jqx","slide":7,"text":"VisDrone：6471 train/548 val/1580 test；UAVDT：24143 train/16592 test。扩散模型以 FLUX 为基础，512×512 分辨率训练与生成。图片来自论文图4第一行，依次是真实、AeroGen、UAVGen；它们只是定性样例。"}
+{"kind":"slide","id":"sl/fu1gfa1s","slide":8,"title":"三、实验结果与结论","textShapes":4}
+{"kind":"textbox","id":"sh/18byd4zy","slide":8,"name":"文本框 1","text":"三、实验结果与结论","textPreview":"三、实验结果与结论","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,86.4]}
+{"kind":"textbox","id":"sh/g72x4zyd","slide":8,"name":"Rectangle 1","text":"生成图像的定性对比","textPreview":"生成图像的定性对比","textChars":9,"textLines":1,"bbox":[21,103.76,1194.35,48.47]}
+{"kind":"textbox","id":"sh/m5gvmhwn","slide":8,"name":"文本框 11","text":"图4显示，UAVGen 对小而密集的目标具有更清晰的外观与更好的布局一致性。","textPreview":"图4显示，UAVGen 对小而密集的目标具有更清晰的外观与更好的布局一致性。","textChars":38,"textLines":1,"bbox":[633.44,155.61,588.32,240.46]}
+{"kind":"textbox","id":"sh/0jydkreh","slide":8,"name":"文本框 13","text":"原论文图4：黄色虚线标出模糊或与布局不符的目标","textPreview":"原论文图4：黄色虚线标出模糊或与布局不符的目标","textChars":23,"textLines":1,"bbox":[373.78,598.47,532.43,35.54]}
+{"kind":"image","id":"im/ep47m9kn","slide":8,"name":"图片 4","alt":"原论文图4：Layout、GT、GeoDiffusion、AeroGen、UAVGen 三组定性对比","bbox":[0,155.61,1280,395.95]}
+{"kind":"notes","id":"nt/fu1gfa1s","slide":8,"text":"此页保留模板原有通栏图片版式，仅替换成论文图4的完整对照主体。图4仅用于展示生成质量，不作为 FID 或 AP 的统计替代。左右列依次是布局、真值、GeoDiffusion、AeroGen、UAVGen。"}
+{"kind":"slide","id":"sl/udsvah03","slide":9,"title":"三、实验结果与结论","textShapes":4}
+{"kind":"textbox","id":"sh/1cfmhgne","slide":9,"name":"文本框 1","text":"三、实验结果与结论","textPreview":"三、实验结果与结论","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,86.4]}
+{"kind":"textbox","id":"sh/0b65obm9","slide":9,"name":"Rectangle 1","text":"主结果：生成质量与检测精度","textPreview":"主结果：生成质量与检测精度","textChars":13,"textLines":1,"bbox":[15.32,92.09,1194.35,48.47]}
+{"kind":"textbox","id":"sh/ml8j6p8n","slide":9,"name":"文本框 22","text":"UAVGen 在两组数据上同时改善 FID 与检测 mAP","textPreview":"UAVGen 在两组数据上同时改善 FID 与检测 mAP","textChars":29,"textLines":1,"bbox":[234.04,653.99,756.92,35.54]}
+{"kind":"textbox","id":"sh/98ji147e","slide":9,"name":"文本框 19","text":"VisDrone：mAP 24.5→25.9，FID 48.04→34.34。\nUAVDT：mAP 14.5→16.6，FID 31.99→29.73。","textPreview":"VisDrone：mAP 24.5→25.9，FID 48.04→34.34。 | UAVDT：mAP 14.5→16.6，FID 31.99→29.73。","textChars":76,"textLines":2,"bbox":[940.65,153.13,306.77,139.17]}
+{"kind":"image","id":"im/aho72lwb","slide":9,"name":"图片 4","alt":"表1：VisDrone 与 UAVDT 的 FID、mAP 及分尺度 AP 对比","bbox":[15.32,140.56,925.33,483.48]}
+{"kind":"notes","id":"nt/udsvah03","slide":9,"text":"原论文表1。FID 对比中的 AeroGen 与 UAVGen 分别为：VisDrone 48.04、34.34；UAVDT 31.99、29.73。检测 mAP 与真实数据基线对比：VisDrone 24.5 到25.9，UAVDT 14.5 到16.6。FID 仅使用 VPC-DM 评估，检测训练使用完整 UAVGen 管线，注意二者设置不同。"}
+{"kind":"slide","id":"sl/m90b6t0r","slide":10,"title":"三、实验结果与结论","textShapes":4}
+{"kind":"textbox","id":"sh/xc3mho32","slide":10,"name":"文本框 1","text":"三、实验结果与结论","textPreview":"三、实验结果与结论","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,86.4]}
+{"kind":"textbox","id":"sh/cbu58j2h","slide":10,"name":"Rectangle 1","text":"消融：两个模块均有贡献","textPreview":"消融：两个模块均有贡献","textChars":11,"textLines":1,"bbox":[15.32,92.09,1194.35,48.47]}
+{"kind":"textbox","id":"sh/atwbelcn","slide":10,"name":"文本框 22","text":"VPC-DM 与 FRE-DP 各带来约 0.7 个 mAP 点提升","textPreview":"VPC-DM 与 FRE-DP 各带来约 0.7 个 mAP 点提升","textChars":34,"textLines":1,"bbox":[234.04,653.99,756.92,35.54]}
+{"kind":"textbox","id":"sh/xwnupgvy","slide":10,"name":"文本框 19","text":"仅加入生成图像：mAP 24.5→23.8。\nVPC-DM 完整：25.2；再加入 FRE-DP：25.9。\n焦点区域 256 分辨率表现最佳。","textPreview":"仅加入生成图像：mAP 24.5→23.8。 | VPC-DM 完整：25.2；再加入 FRE-DP：25.9。 | 焦点区域 256 分辨率表现最佳。","textChars":72,"textLines":3,"bbox":[940.65,153.13,306.77,139.17]}
+{"kind":"image","id":"im/u5obql8f","slide":10,"name":"图片 5","alt":"表3、表4及图5：模块、区域分辨率和数据量消融","bbox":[52.58,140.56,861.99,505.33]}
+{"kind":"notes","id":"nt/m90b6t0r","slide":10,"text":"原论文表3、表4和图5。表3：真实数据24.5；仅生成23.8；视觉原型+布局编码25.2；完整管线25.9。表4：焦点区域分辨率1024/512/256对应mAP 25.3/25.6/25.9。右图为不同合成图像数量表现。"}
+{"kind":"slide","id":"sl/jetc3ut0","slide":11,"title":"三、实验结果与结论","textShapes":4}
+{"kind":"textbox","id":"sh/xcryxg7y","slide":11,"name":"文本框 1","text":"三、实验结果与结论","textPreview":"三、实验结果与结论","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,86.4]}
+{"kind":"textbox","id":"sh/wbih4b6d","slide":11,"name":"Rectangle 1","text":"迁移效果、数据效率与边界","textPreview":"迁移效果、数据效率与边界","textChars":12,"textLines":1,"bbox":[15.32,92.09,1194.35,48.47]}
+{"kind":"textbox","id":"sh/65wzelo7","slide":11,"name":"文本框 22","text":"结论适用于所测数据与检测器；真实场景泛化仍是后续问题","textPreview":"结论适用于所测数据与检测器；真实场景泛化仍是后续问题","textChars":26,"textLines":1,"bbox":[234.04,653.99,756.92,35.54]}
+{"kind":"textbox","id":"sh/tsnip0ny","slide":11,"name":"文本框 19","text":"RemDet-X：mAP 29.8→30.2。\n仅增 100 张合成图，mAP 25.0，接近 AeroGen 用 6474 张图的 24.9。\n跨高度与视角变化仍待验证。","textPreview":"RemDet-X：mAP 29.8→30.2。 | 仅增 100 张合成图，mAP 25.0，接近 AeroGen 用 6474 张图的 24.9。 | 跨高度与视角变化仍待验证。","textChars":86,"textLines":3,"bbox":[940.65,153.13,306.77,139.17]}
+{"kind":"image","id":"im/6hkrqp43","slide":11,"name":"图片 4","alt":"表2与图5：RemDet-X 迁移效果和合成图像数量消融","bbox":[32.58,140.56,906.9,480.24]}
+{"kind":"notes","id":"nt/jetc3ut0","slide":11,"text":"原论文表2：RemDet-X 在 VisDrone 上，真实数据29.8，UAVGen 30.2；对照方法 mAP 不高于29.4。图5：100张UAVGen合成图像对应mAP25.0，AeroGen 6474张对应24.9。论文结论提到真实无人机场景的视角和高度变化仍是未来研究方向，因此不能宣称已验证全面泛化。"}
+{"kind":"slide","id":"sl/8f2psfyx","slide":12,"title":"感谢聆听！","textShapes":1}
+{"kind":"shape","id":"sh/0f2lgnmp","slide":12,"name":"矩形 2","bbox":[0,171.33,1280,269.46]}
+{"kind":"textbox","id":"sh/q903ad4n","slide":12,"name":"文本框 14","text":"感谢聆听！\n欢迎批评指正！","textPreview":"感谢聆听！ | 欢迎批评指正！","textChars":13,"textLines":2,"bbox":[181.73,204.35,916.57,203.47]}
+{"kind":"image","id":"im/83at8zyl","slide":12,"name":"图片 13","bbox":[0,171.33,1280,268.18]}
+{"kind":"notes","id":"nt/8f2psfyx","slide":12,"text":"感谢聆听。原文与代码地址见第一页讲稿备注；图表均来自原论文。"}

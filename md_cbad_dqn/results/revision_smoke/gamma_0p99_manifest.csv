@@ -1,0 +1,7 @@
+variant,gamma,model_seed,episodes,training_steps,curve_file,final_cost,final_rolling_cost
+standard_dqn,0.99,800,2,128,md_cbad_dqn/results/revision_smoke/gamma_models/standard_dqn__gamma_0p99__seed_800__curve.csv,131.36457111782425,112.72654090944228
+md_fullq_dqn,0.99,800,2,128,md_cbad_dqn/results/revision_smoke/gamma_models/md_fullq_dqn__gamma_0p99__seed_800__curve.csv,131.36457111782425,112.72654090944228
+md_immediate_advantage_dqn,0.99,800,2,128,md_cbad_dqn/results/revision_smoke/gamma_models/md_immediate_advantage_dqn__gamma_0p99__seed_800__curve.csv,131.36457111782425,112.72654090944228
+md_cbad_dqn,0.99,800,2,128,md_cbad_dqn/results/revision_smoke/gamma_models/md_cbad_dqn__gamma_0p99__seed_800__curve.csv,131.36457111782425,112.72654090944228
+double_dqn,0.99,800,2,128,md_cbad_dqn/results/revision_smoke/gamma_models/double_dqn__gamma_0p99__seed_800__curve.csv,131.36457111782425,112.72654090944228
+double_cbad_dqn,0.99,800,2,128,md_cbad_dqn/results/revision_smoke/gamma_models/double_cbad_dqn__gamma_0p99__seed_800__curve.csv,131.36457111782425,112.72654090944228

@@ -1,0 +1,666 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/udsvah03",
+    "id": "udsvah03",
+    "slide": 9,
+    "layoutId": "/ppt/slideLayouts/slideLayout2.xml",
+    "layoutName": "空白",
+    "layoutType": "blank",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "凸显",
+    "colors": {
+      "accent1": "#FE8637",
+      "accent2": "#7598D9",
+      "accent3": "#B32C16",
+      "accent4": "#F5CD2D",
+      "accent5": "#AEBAD5",
+      "accent6": "#777C84",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#575F6D",
+      "lt2": "#FFF39D",
+      "hlink": "#D2611C",
+      "folHlink": "#3B435B"
+    },
+    "fontScheme": {
+      "name": "纸张",
+      "majorFont": {
+        "latinTypeface": "Constantia"
+      },
+      "minorFont": {
+        "latinTypeface": "Constantia"
+      }
+    },
+    "typefaces": [
+      "+mn-ea",
+      "Constantia",
+      "微软雅黑"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout2.xml",
+      "name": "空白",
+      "type": "blank",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/3",
+          "id": "3",
+          "name": "直接连接符 2",
+          "bbox": [
+            0,
+            84.52,
+            1280,
+            1.61
+          ],
+          "geometry": "line",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "lineWidth": 4.33
+        },
+        {
+          "order": 2,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/4",
+          "id": "4",
+          "name": "图片 3",
+          "bbox": [
+            1180.36,
+            4.84,
+            87.58,
+            75.66
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.02734,
+            "top": 0.05571,
+            "right": 0.72733,
+            "bottom": 0.07404
+          },
+          "asset": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          }
+        },
+        {
+          "order": 3,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/5",
+          "id": "5",
+          "name": "图片 1",
+          "bbox": [
+            1093.85,
+            13.4,
+            73.48,
+            70.32
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.16887,
+            "top": 0.12347,
+            "right": 0.07013,
+            "bottom": 0.01495
+          },
+          "asset": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cfmhgne",
+      "id": "2",
+      "name": "文本框 1",
+      "bbox": [
+        37.71,
+        1.41,
+        635.12,
+        78.11
+      ],
+      "geometry": "rect",
+      "text": "三、实验结果与分析",
+      "textPreview": "三、实验结果与分析",
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "微软雅黑",
+        "color": "tx1",
+        "bold": true,
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "三、实验结果与分析"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "三、实验结果与分析",
+          "runs": [
+            {
+              "index": 1,
+              "text": "三、实验结果与分析"
+            }
+          ],
+          "marginLeft": 0,
+          "lineSpacingPercent": 150000
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0b65obm9",
+      "id": "3",
+      "name": "Rectangle 1",
+      "bbox": [
+        15.32,
+        92.09,
+        1194.35,
+        48.47
+      ],
+      "geometry": "rect",
+      "text": "各组别实验",
+      "textPreview": "各组别实验",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ø各组别实验"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "各组别实验",
+          "runs": [
+            {
+              "index": 1,
+              "text": "各组别实验",
+              "fontSize": 32,
+              "typeface": "微软雅黑",
+              "color": "#006282",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/ml8j6p8n",
+      "id": "23",
+      "name": "文本框 22",
+      "bbox": [
+        234.04,
+        653.99,
+        756.92,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "实验证明各配置中效果最好的为qwen3.5-35b+clip",
+      "textPreview": "实验证明各配置中效果最好的为qwen3.5-35b+clip",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "lt1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "实验证明各配置中效果最好的为qwen3.5-35b+clip"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "实验证明各配置中效果最好的为qwen3.5-35b+clip",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "实验证明各配置中效果最好的为",
+              "fontSize": 21.33,
+              "typeface": "微软雅黑",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "qwen3.5-35b+clip",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "bg1",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/aho72lwb",
+      "id": "24",
+      "name": "图片 4",
+      "bbox": [
+        15.32,
+        140.56,
+        925.33,
+        483.48
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image18.png",
+        "contentType": "image/png",
+        "byteLength": 252201
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image18.png",
+        "contentType": "image/png",
+        "byteLength": 252201
+      }
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/98ji147e",
+      "id": "20",
+      "name": "文本框 19",
+      "bbox": [
+        940.65,
+        153.13,
+        306.77,
+        139.17
+      ],
+      "geometry": "rect",
+      "text": "为了确定最适合我们导航任务的Qwen配置，我们评估了七种配置，涵盖三个模型代际和两种CLIP空间锚定条件。\n在两种模型规模下，加入CLIP的配置均显著优于未加入CLIP的对应版本。\n能力越强的MLLM虽然具有更丰富的视觉理解能力，但在处理无约束广域图像时也更容易出现注意力分散。因此越大的模型通过clip空间锚定获得的收益就越大。(CLIQ-NAV : qwen3.5-35b+clip)\n",
+      "textPreview": "为了确定最适合我们导航任务的Qwen配置，我们评估了七种配置，涵盖三个模型代际和两种CLIP空间锚定条件。 | 在两种模型规模下，加入CLIP的配置均显著优于未加入CLIP的对应版本。 | 能力越强的MLLM虽然具有更丰富的视觉理解能力，但在处理无约束广域图像时也更容易出现...",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 17,
+        "lines": [
+          {
+            "index": 1,
+            "text": "p"
+          },
+          {
+            "index": 2,
+            "text": "为了确定最适合我们导航任务"
+          },
+          {
+            "index": 3,
+            "text": "的Qwen配置，我们评估了"
+          },
+          {
+            "index": 4,
+            "text": "七种配置"
+          },
+          {
+            "index": 5,
+            "text": "，涵盖三个模型代际和两种CLIP"
+          },
+          {
+            "index": 6,
+            "text": "空间锚定条件。"
+          },
+          {
+            "index": 7,
+            "text": "p在两种模型规模下，加入CLIP"
+          },
+          {
+            "index": 8,
+            "text": "的配置均显著优于未加入CLIP"
+          },
+          {
+            "index": 9,
+            "text": "的对应版本。"
+          },
+          {
+            "index": 10,
+            "text": "p能力越强的MLLM"
+          },
+          {
+            "index": 11,
+            "text": "虽然具有更丰富的视觉理解能"
+          },
+          {
+            "index": 12,
+            "text": "力，但在处理无约束广域图像"
+          },
+          {
+            "index": 13,
+            "text": "时也更容易出现注意力分散。"
+          },
+          {
+            "index": 14,
+            "text": "因此越大的模型通过clip"
+          },
+          {
+            "index": 15,
+            "text": "空间锚定获得的收益就越大。("
+          },
+          {
+            "index": 16,
+            "text": "CLIQ-NAV : qwen3.5-35b+clip)"
+          },
+          {
+            "index": 17,
+            "text": ""
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "为了确定最适合我们导航任务的Qwen配置，我们评估了七种配置，涵盖三个模型代际和两种CLIP空间锚定条件。",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "为了确定最适合我们导航任务的",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "Qwen",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "配置，我们评估了",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "七种配置",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "，涵盖三个模型代际和两种",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "CLIP",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "空间锚定条件。",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 2,
+          "text": "在两种模型规模下，加入CLIP的配置均显著优于未加入CLIP的对应版本。",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "在两种模型规模下，加入",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "CLIP",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "的配置均",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "显著优于",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "未加入",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "CLIP",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "的对应版本。",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "能力越强的MLLM虽然具有更丰富的视觉理解能力，但在处理无约束广域图像时也更容易出现注意力分散。因此越大的模型通过clip空间锚定获得的收益就越大。(CLIQ-NAV : qwen3.5-35b+clip)",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "能力越强的",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "MLLM",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "虽然具有更丰富的视觉理解能力，但在处理无约束广域图像时也更容易出现注意力分散。因此越大的模型通过",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "clip",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "空间锚定获得的收益就越大。",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "(",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "CLIQ-NAV : qwen3.5-35b+clip",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": ")",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

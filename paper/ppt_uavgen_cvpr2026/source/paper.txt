@@ -1,0 +1,944 @@
+---PAGE 1---
+                  This CVPR paper is the Open Access version, provided by the Computer Vision Foundation.
+                          Except for this watermark, it is identical to the accepted version;
+                       the final published version of the proceedings is available on IEEE Xplore.
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                   Visual Prototype Conditioned Focal Region Generation             
+                                                                                    
+                             for UAV-Based Object Detection                         
+                                                                                    
+                    WenhaoLi1,2,ZimengWu1,2,YuWu1,2,ZehuaFu3,JiaxinChen1,2(cid:0)   
+                                                                                    
+           1StateKeyLaboratoryofVirtualRealityTechnologyandSystems,BeihangUniversity,China
+               2SchoolofComputerScienceandEngineering,BeihangUniversity,Beijing,China
+                   3HangzhouInnovationInstitute,BeihangUniversity,Hangzhou,China    
+                 {liwenha0, zimengwu, wuyu22230605, zehua fu, jiaxinchen}@buaa.edu.cn
+                                                                                    
+                                                                                    
+                     Abstract               (a) General Data Generation             
+                                                       Layout Prompt                
+        Unmanned aerial vehicle (UAV) based object detection is Generative          
+                                                       Layout Image                 
+                                                                Model               
+        a critical but challenging task, when applied in dynami-                    
+                                              (class, bbox)                         
+        cally changing scenarios with limited annotated training                    
+                                            (b) VisualPrototype Conditioned Focal Region Generation(UAVGen)
+        data. Layout-to-imagegenerationapproacheshaveproved                         
+                                                       Global Prompt                
+        effective in promoting detection accuracy by synthesizing    Label Refinement
+                                                      Layout Embedding              
+        labeled images based on diffusion models. However, they                     
+        suffer from frequently producing artifacts, especially near Generative      
+                                                       Layout Image Model           
+        layout boundaries of tiny objects, thus substantially limit- Focal Region   
+        ing their performance. To address these issues, we pro- (class, bbox) VisualPrototype
+        pose UAVGen, a novel layout-to-image generation frame-                      
+                                            Figure1.Illustrationofdifferentlayout-to-imagesdatageneration
+        worktailoredforUAV-basedobjectdetection. Specifically,                      
+                                            methods. (a) In general data generation, the layout information
+        UAVGendesignsaVisualPrototypeConditionedDiffusion                           
+                                            isdirectlyderivedfromrealdata,andsynthesizeddataisdirectly
+        Model (VPC-DM) that constructs representative instances usedastrainingdataforthedetector. (b)OurUAVGenenhances
+        for each class and integrates them into latent embeddings thisparadigmbyintroducingmulti-cue, high-qualitylayoutcon-
+        for high-fidelity object generation. Moreover, a Focal Re- ditionsforfocalregions,aswellasrefiningthesynthesizeddata.
+        gion Enhanced Data Pipeline (FRE-DP) is introduced to                       
+        emphasize object-concentrated foreground regions in syn-                    
+        thesis, combined with a label refinement to correct miss- scarcityofhigh-qualitytrainingdata,especiallyindynam-
+        ing, extra and misaligned generations. Extensive exper- ically changing environments [6, 8, 9]. Consequently, its
+        imental results demonstrate that our method significantly robustness and generalization capabilities still fall short of
+        outperforms state-of-the-art approaches, and consistently thoseachievedingeneralobjectdetectiontasks.
+        promotesaccuracywhenintegratedwithdistinctdetectors. In order to obtain sufficient and diverse training data
+        The source code is available at https://github.com/ under limited cost, data augmentation has emerged as a
+        Sirius-Li/UAVGen.                   promisingsolution[11,14,53]. Earlyapproachesconstruct
+                                            additional samples by applying geometric transformations
+                                            toexistingimages,suchasflipping,rotationorsimplecrop-
+                                            pingandpaste[15,59].Recently,benefitingfromthegener-
+        1.Introduction                                                              
+                                            alizationcapabilitiesofgenerativemodels,diffusion-driven
+        UnmannedAerialVehicle(UAV)basedobjectdetection[7, dataaugmentationhasemergedasanewparadigmthatsyn-
+        21, 28, 30, 36, 52], which localizes and identifies targets thesizesimagesfrominputlayouts(referredtoaslayout-to-
+        from aerial perspectives, has demonstrated practical value image), producing entirely novel variations in appearance.
+        acrossarangeofapplications[12,19,20,41]. However,as By textual prompt conditioning [3, 51], latent-space injec-
+        deeplearninghasbecomethemainstreamparadigm,UAV- tion [46], or layout-image conditioning [62], it has prone
+        based detection remains fundamentally constrained by the effective in enhancing detector training under limited-data
+                                            scenarios. Nonetheless,despitetheirsuccessongeneralob-
+        (cid:0)CorrespondingAuthor          ject detection benchmarks, such approaches have not yet
+                                         3772                                       
+---PAGE 2---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+        achievedcomparablegainsinUAV-baseddetection. detection performance, achieving state-of-the-art results
+          We attribute this performance gap to three key limita- acrossbothgeneralandUAV-baseddetectors.
+        tionsinherenttoUAVimagecharacteristics:1)Low-quality                        
+        visual layouts with small and overlapped targets. Limited 2.RelatedWork     
+        byflightaltitudeandfixedviewinggeometry,UAV-captured                        
+                                            2.1.UAV-basedObjectDetection            
+        objects often present small scales and frequent overlaps.                   
+        Such regions tend to produce blurred or visually entan- Object detection in UAV aerial imagery faces severe chal-
+        gledlayoutrepresentations,whichimpairtheclarityoffine- lenges including tiny objects, complex backgrounds, and
+        grained conditional signals, interfere with diffusion model strictcomputationalconstraints. Althoughgeneral-purpose
+        training, and lower the fidelity of synthesized samples. 2) detectors such as the YOLO series [24, 35, 36, 47] and
+        Inefficient utilization of model capacity under highly un- GFL [30] provide efficient foundational frameworks, they
+        evenspatialdistribution. ObjectsinUAVimageryaretyp- often underperform in aerial contexts without domain-
+        icallyconcentratedinasmallfractionofthescene,leaving specific modifications. To mitigate these issues, various
+        large regions with negligible informative. Diffusion mod- specialized detectors have been developed. CEASC [7]
+        els inadvertently allocate excessive capacity to these low- employs global context-enhanced normalization and adap-
+        informationregions,weakeningtheirabilitytocapturefine- tivesparseconvolutionforefficientsmallobjectdetection.
+        grained object characteristics. 3) Inconsistency between UFPMP-Det [21] utilizes foreground packing and multi-
+        synthesized images and ground-truth annotations. Due to proxy networks to jointly optimize accuracy and speed.
+        the inherent stochasticity of the diffusion process, existing RemDet[28]adoptsresidualcontextminingtoenhancethe
+        methodsinevitablygenerateimagesdeviatefromtheinput representationoftiny-objectsfeaturesandreducethedecay
+        layouts,resultinginmissinggenerations,extragenerations ofdeep-layerinformation.
+        and label misalignments. Such inconsistencies are further                   
+                                            2.2.DiffusionModels                     
+        amplifiedinsmall-object-dominatedUAVscenarios, intro-                       
+        ducinglabelnoisethatimpairsthetrainingofdetectors. Diffusion models have emerged as a leading paradigm in
+          To address these challenges, we propose UAVGen, a generative modeling due to their stability and superior im-
+        novel diffusion-driven data augmentation framework for age synthesis capabilities [5, 18, 26, 34, 40]. Unlike ear-
+        UAV-based object detection. To improve layout condi- lier frameworks such as Generative Adversarial Networks
+        tion quality, we first design a visual prototype conditioned (GANs) [2, 16, 23] and Variational Autoencoders (VAEs)
+        diffusion model (VPC-DM). Specifically, a dual-criteria [27,38,49],diffusionmodelsgeneratedatathroughapro-
+        selection mechanism extracts visually clear, semantically gressivedenoisingprocess. Theyiterativelyrefinesamples
+        well-definedobjectsfromannotateddatatoconstructhigh- from Gaussian noise to approximate the data distribution
+        fidelity visual prototypes. With these prototypes, we build [43–45]. Recenteffortsfocusonimprovingbothefficiency
+        layout images integrated with global and fine-grained tex- and controllability. Latent Diffusion Models (LDMs) [40]
+        tual layout semantics, delivering more robust guidance for perform denoising in latent space, boosting computational
+        image generation. Second, we develop a focal region en- efficiency while preserving image fidelity. Extensions like
+        hanced data pipeline (FRE-DP). Instead of conventional ControlNet [57] enable structural conditioning using seg-
+        full-imagegeneration,itfocusesondenselyclusteredsmall- mentation masks and layout annotations, allowing finer
+        object regions, steering both diffusion model and detector controloveroutputs.
+        optimizationtowarddetection-criticalareas. Finally,alabel                   
+        refinementstepcorrectsannotationsofsynthesizedimages, 2.3.Layout-to-ImageGeneration
+        providingmoreprecisetrainingdatafordetectors.                               
+                                            Generatingphotorealisticimagesfromabstractlayoutshas
+          Ourmaincontributionsaresummarizedinthree-fold: attracted increasing attention. Early layout-to-image (L2I)
+        • We propose a novel framework to synthesize data for methods based on GANs [32] or transformers [22], condi-
+         UAV-based object detection, dubbed UAVGen. To the tioned on bounding boxes and labels, often suffered from
+         bestofourknowledge,thisworkisthefirstdatasynthesis instability and limited realism in complex scenes [32].
+         approachforUAV-baseddetectortraining. Diffusion-based approaches alleviate these issues by en-
+        • Wedesignavisualprototypeconditioneddiffusionmodel hancing both fidelity and spatial alignment. LayoutDiffu-
+         as well as a focal region enhanced data pipeline, to ad- sion [60] and LayoutDiffuse [4] incorporate layout-aware
+         dresstheproblemsoflowlayout-quality,misfocusedop- attention into LDMs to better model object interactions.
+         timization and image-label inconsistency, thereby facili- Other frameworks, including MultiDiffusion [1], BoxDiff
+         tatingtheUAV-baseddetectortraining. [54],GLIGEN[31],ReCo[55],andGeoDiffusion[3],fur-
+        • Comprehensive experiments on multiple benchmarks therimprovelayoutconditioningviatraining-freesampling
+         demonstratethatourmethodconsistentlyimprovesobject orarchitecturalenhancements. Onafinerlevel,MIGC[61]
+                                         3773                                       
+---PAGE 3---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                              Focal Region-Enhanced Data Pipeline (FRE-DP)          
+                           Focal Region Image Generation      Label Refinement      
+                                                           Layout                   
+                                                                 Missed             
+                                    VPC-DM                       Gen.   R           
+                                                                        e           
+                     r                                                              
+                     et s ul                                                        
+                     C                                                              
+                                            ···              Gap F G a e l n se .   
+                                                                        L           
+                                                                        d e         
+                                                                        nif         
+                                                                        a           
+                                                                        b           
+            (class, bbox) Focal Region          Merged Image     Label  l e         
+                         (class, bbox)    Gen. Images      Gen. Img Misalign.       
+                          Visual Prototype Conditioned Diffusion Model (VPC-DM)     
+              trainable                                                             
+                           Global Prompt                                            
+                                             Text Encoder Diffusion                 
+              frozen   An aerial image with car, bus, people,…                      
+             An aerial image of car Text Encoder                                    
+                                              Gate      ControlNet Generated Image  
+                                      MLP                                           
+                                             Attention                              
+               (𝑥 ,𝑦 ,𝑥 ,𝑦 )  Fourier                                               
+                1 1 2 2                                                             
+                                   Visual Prototype Layout Encoder                  
+                                       Visual Prototype     Image Encoder           
+                           Detecting                                                
+                                        ···   people                                
+                                        ···    car                                  
+                                        ···                Object Layout Fuse       
+                           Clustering                                               
+                                        ···    bus                                  
+               Object Detection                                  ···                
+                 Dataset                                                            
+        Figure2.ArchitectureofVisualPrototypeConditionedFocalRegionGeneration.(a)VirtualPrototypeConditionedDiffusionModel
+        (VPC-DM)generatesimagesguidedbylayoutimageswhichisproducedfromselectedvisualprototypes.(b)FocalRegion-EnhancedData
+        Pipeline(FRE-DP)synthesizesimagesonobject-centricareastoavoidlimitationofsmallobjectgeneration.Moreover,LabelRefinement
+        mitigatesthemisalignmentbetweenlayoutsandgeneratedimages.                   
+        and InstanceDiffusion [50] introduce instance-aware con- ods like TrackDiffusion [29], MagicDrive [14], and Aero-
+        trolusingboxes,masks,orscribbles,enablingmorediverse Gen [46] improve spatial consistency through multi-object
+        andspatiallycoherentsynthesis.      tracking and 3D perception. Yet, occlusion, interference,
+                                            andscalevariationstillposeobstaclesinaerialscenes.
+        2.4.SyntheticDataGeneration                                                 
+                                            3.Method                                
+        Copy-Paste methods [10, 11, 15, 59] synthesize training                     
+        data by randomly placing foreground objects onto back- 3.1.FrameworkOverview
+        ground images, but produce noticeable artifacts along ob-                   
+        jectboundaries. Rendering-basedmethods[25,39,42,56] We follow the typical paradigm of diffusion-driven data
+        synthesize images from 3D simulators to enhance detec- augmentationforobjectdetection,conductingaframework
+        tion, which suffer from domain gap between rendered and specificallytailoredforUAV-baseddetectiontasks. Asfor
+        real UAV imagery. Recent efforts turn to diffusion-based theoverallprocess,letthereal-worldUAV-baseddetection
+        models to mitigate these limitations. DatasetGAN [58], dataset be denoted as Dreal={(I i real,Lr i eal)}N i=1 , consisting
+        DatasetDM [53], and Satsynth [48] produce high-quality ofN image-annotationpairs. EachimageI i realisassociated
+        annotated data for object detection. However, challenges withanannotationsetLr i eal={(br j eal,cr j eal)}n j= i 1 ,whichcon-
+        remainforsmallobjects,imageblurriness,anddenseback- tains n i bounding boxes br j eal with their corresponding cat-
+        grounds—particularlyinUAVimagery.Task-specificmeth- egorylabelscreal ∈ {1,2,...,C}. AdiffusionmodelG (·)
+                                                   j                      θ         
+                                         3774                                       
+---PAGE 4---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+        withparameterθistrainedonDrealtosynthesizeanewim- We further refine the candidates in the latent space to
+        agesconditionedonthelayoutLreal andauxiliaryinforma- clarifyfine-grainedclassboundariesandreducegeneration
+                          i                                                         
+        tionC ,therebyformingasyntheticdatasetDsyn asEq.(1). confusion. Concretely as shown in Eq. (4), for each can-
+           i                                                                        
+                                            didate region b ∈ Vc, we extract the corresponding image
+           I i syn =G θ (Lr i eal,C i ), Dsyn={(I i syn,Lr i eal)}M i=1 . (1) patchandencodeitusingaVAEencoderE img (·)toobtaina
+                                            latentrepresentation. Then,thevisualprototypesetPc for
+        Finally,DsynandDrealarecombinedfordetectortraining:                         
+                                            class c is constructed by selecting candidates whose latent
+                                            embeddingslieclosetotheclass-specificcentroidµc.
+              ϕ∗ =argminL (F (Dreal∪Dsyn)), (2)                                     
+                       det ϕ                                                        
+                    ϕ                            Pc ={b∈Vc |∥E (b)−µc∥2 <τlat},     
+                                                           img                      
+        w ab h l e e r p e a F ra ϕ m (· e ) te d r e ϕ no a t n es d t L he det d i e s si t r h e e d s o ta b n je d c a t rd de d t e e t c e t c o t r io w n it l h os t s r . ain- µc = |V 1 c| (cid:88) E img (b). (4)
+                                                            b∈Vc                    
+          However, such general paradigm encounters challenges                      
+                                            Multi-Source Condition Encoding. To achieve control-
+        inUAVscenariosduetothepreviouslydiscussedcomplex                            
+                                            lable and semantically consistent generation, we design a
+        imaging conditions, including small scale, uneven spatial                   
+                                            Multi-SourceConditionEncodingmechanismthatprovides
+        distribution and overlapping. To address these issues, we                   
+                                            complementary conditioning from both visual-prototype-
+        introduce an enhanced data synthetic framework, namely                      
+                                            enhancedlayoutsandtextualinformation.   
+        UAVGen,whichimprovesthefidelityandlabelconsistency                          
+                                             Given a layout Lreal as defined in Sec. 3.1, for each
+        of Dsyn, thereby facilitating the optimization of Eq. (2). i                
+                                            region (breal,creal) ∈ Lreal, we sample a visual prototype
+        Specifically, we first introduce a Visual Prototype Condi- j j i            
+                                            P from the corresponding class-specific set Pc, where
+                                             j                                      
+        tionedDiffusionModel(VPC-DM)toproducemorerealis-                            
+                                            c = creal. Then, P is placed at position breal with geo-
+        ticUAVimagery. Subsequently,aFocalRegion-Enhanced j j        j              
+                                            metrical transformation to match the target scale, forming
+        Data Pipeline (FRE-DP) is designed to further synthesize                    
+                                            acompositeimageIblank onablank(i.e.zero-valued)can-
+        the generated images and improve their consistency with j                   
+                                            vas. Finally, we obtain a layout embedding v , which is
+                                                                      i             
+        correspondinglabels.                                                        
+                                            enhancedbyvisualprototype,byaggregatingthelatentrep-
+                                            resentationsofallregionsthrougha3Dconvolutionalnet-
+        3.2.VisualPrototypeConditionedDiffusionModel                                
+                                            work Conv(·) formally expressed as Eq. (5). The module
+        Dual-Criterion Visual Prototype Selection. When train- fusesfeaturesalongtheprototypedimension:N featuresof
+        ingG θ (·)forconditionedgeneration,acommonpracticeis shapeB×C×H×W arestackedtoB×N×C×H×W,
+        directlycroppingallobjectregionsLrealfromDrealtoserve fusedtoB×1×C×H×W. Learnablepaddinghandles
+                             i                                                      
+        as supervision. However, due to the small-scale appear- caseswithfewerthanN prototypes.
+        ance and dense distribution with overlap of UAV objects,                    
+                                             v =Conv(E (Iblank),E (Iblank),...,E (Iblank)). (5)
+        these cropped patches are prone to suffer from noise and i img 1 img 2 img ni
+        lowquality,yieldingunstablediffusiontraining. Toensure Furthermore, to complement visual cues with class se-
+        reliablesupervision,weinsteademployhigh-qualitytarget mantics, we construct layout-aware textual embeddings.
+        regions,referredtoasvisualprototypes,whichareselected Specifically, we introduce two textual prompts describing
+        sequentiallyaccordingtotwocriteria. theoverallsceneandindividualobjects,respectively:
+          First, we retain prototypes with clear appearance and tg=‘Anaerialimagewith{c },{c },...,{c }.’
+        accurate localization in the visual space. Taking advan- i 1 2 ni  (6)      
+                                             tcj=‘Anaerialimageof {c }.’            
+        tage of the strong generalization capability, we use a pre- j               
+        trained detector D(·) to collect all detected regions from As shown in Eq. (7), tg is directly encoded by a text en-
+                                                         i                          
+        Dreal,andthengroupthembypredictedclass. Thisresults coder E (·) to gain the global embedding eg. To capture
+                                                text                 i              
+        inGc = {(bdet,s )}Kc foreachclassc,wherebdet denotes fine-grained, object-levelsemantics, weenricheachobject
+               i i i=1             i                                                
+        the detected bounding box and s is its confidence score. embeddingwithpositionalinformationviaFourierembed-
+                           i                                                        
+        Noting that the confidence score for each class c typically dingsF(·),inspiredbyGLIGEN[31]. Consequently,each
+        follows a normal distribution N(µ ,σ2), we select high- object-specifictextembeddingisconcatenatedwithitscor-
+                            c c                                                     
+        confidenceandwell-localizedcandidatesaccordingto: respondingpositionalembeddingandprocessedthroughan
+                                            MLP-basednetwork, afterwhichalln featuresareaggre-
+                                                                 i                  
+          Vc ={br i eal|(bd i et,s i )∈Gc,  gated by a gated attention network GA(·), resulting in a
+                                       (3)                                          
+                IoU(breal,bdet)≥τdet,s ≥Φ−1(α)}, unifiedfine-grainedlayoutembeddingef.
+                    i  i     i   c                                i                 
+                                                       eg=E (tg),                   
+        w α- h q e u r a e n τ ti d l e e t i o s f t t h h e e I c o o U nfi th d r e e n s c h e o d ld is , t a ri n b d ut Φ io − c n 1 f ( o α r ) G r c e . presentsthe ef i =GA (cid:16)(cid:8) ML i P([E t t e e x x t t (tcj);F(br j eal)]) (cid:9)n j= i 1 (cid:17) . (7)
+                                         3775                                       
+---PAGE 5---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+        Condition Injection and Training. Building upon the Finally, the generated focal-region images are merged
+        standarddiffusionprocessparameterizedbythenoisylatent back into the original image resolution to form a high-
+        x and timestep t, we incorporate the previously obtained information-density synthetic dataset Dsyndense as an alter-
+         t                                                                          
+        multi-sourceconditionstoenhancecontrollableandlayout- nativeofthetypicalDsyn. Thisdatasetisthenusedtotrain
+        consistent generation. Specifically, the visual prototype- thedetectorasformulatedinEq.(2).
+        based layout embedding v and the fine-grained textual Label Refinement. Despite advances by our proposed
+                        i                                                           
+        embedding ef are injected through a ControlNet CN(·), layout-to-image synthesis framework, discrepancies be-
+               i                                                                    
+        whichproducesalayout-awareconditionalfeatureC as: tweensynthesizedimagesandinputlayoutsremainasignif-
+                                     i                                              
+                                            icant challenge, especially for UAV imagery characterized
+                 C =CN(x ,t|v ,ef).    (8)                                          
+                  i     t   i i             bysmall-scaleobjects. Wecategorizetheseinconsistencies
+        Denoting ϵ as the noise prediction network of G , both intothreetypes: missedgenerations,falsegenerations,and
+              θ                      θ                                              
+        eg and C jointly guide the denoising process by ϵ . This labelmisalignments. Tomitigatetheseissues,weproposea
+         i   i                       θ                                              
+        enablesthegenerativeprocesstomaintaintheoverallscene post-processingpipelinewithlabelrefinement.
+        semanticsaswellaspreservingfine-grainedobjectlayouts. Givenasynthesizedsample(Isyn,Lreal) ∈ Dsyndense ob-
+          Tofurtherenhancethefidelityoftargetobjects,weem-                          
+                                            tainedabove(forsimplicity,thesubscript‘dense’isomitted),
+        ploy a foreground-aware reweighted loss that emphasizes                     
+                                            weapplyapretraineddetectorD(·)onIsyn,obtainingpre-
+        supervisiononobjectregions:         dictedresults:                          
+         L layout =w⊙E x0,t,ϵ∼N(0,1) (cid:2) ∥ϵ−ϵ θ (x t ,t|eg i ,C i )∥2(cid:3) , (9) Ldet =D(Isyn)={(bd j et,cd j et)}N j=1 . (12)
+        where w is a spatial weighting map derived from Lreal.                      
+                                       i    We then perform IoU-based matching with threshold τref
+        Pixels within object regions are assigned a higher weight                   
+                                            betweenpredictedboxesandrealboxes,resultingin:
+        (i.e.>1),whilebackgroundregionsretainaunitweight.                           
+        3.3.FocalRegionEnhancedDataPipeline.   M={(breal,bdet)|IoU(breal,bdet)≥τref}. (13)
+                                                    i  j     i  j                   
+        Region-based Data Synthesis. UAV-based images typi-                         
+                                             First,missedgenerationsrefertoregionswherethedif-
+        cally exhibit small-object clustering, with the majority of                 
+                                            fusionmodelfailstogeneratethecorrespondingobject,de-
+        image regions containing few or even no target instances. notedasLmiss.Todiscardmissinginstancesfromlabelsand
+        Such sparsely populated images may both limit the effec-                    
+                                            filter out low-quality ones, we preserve the labels aligned
+        tivenessofdiffusion-basedgenerationandreducethetrain- withdetectionresultsLdetanddiscardlow-qualityoneswith
+        ingefficiencyofobjectdetection. Toaddressthisissue,we                       
+                                            threshold α on corresponding detection confidence scores.
+        concentrate on object-rich areas, termed focal regions, to                  
+                                            TherefinedlabelsetisupdatedasEq.(14).   
+        enhancebothdatasynthesisanddetectortraining.                                
+          GivenalayoutLr                                                            
+                   i                                                                
+                   eal asdefinedinSec.3.1,wefirstcom- Lmiss =Lreal\{(br             
+                                                        i                           
+                                                         eal,cr                     
+                                                           i                        
+                                                           eal)|(br                 
+                                                               i                    
+                                                                eal,bd              
+                                                                  j                 
+                                                                   et)∈M},          
+        pute the geometric center of each breal, denoted as p . A         (14)      
+                            j         j      Lref ={(breal,creal)∈Lreal\Lmiss |s ≥Φ−1(α)}
+        K-means clustering is then applied to the set of centroids i i j cj         
+        {p }ni toobtainK clustercenters{m }K suchthat:                              
+         j j=1                k k=1          Second, false generations represent extra generated ob-
+               m =argmin (cid:88) ∥p −m∥2, (10) jects, denoted as Lfalse. Thus, we apply a confidence filter
+                k           j                                                       
+                     m                      per-classandupdatetherefinedsetasEq.(15).
+                       pj∈Sk                                                        
+        whereS isthesetofcentroidsassignedtoclusterk. Lfalse =Ldet\{(bdet,c )|(breal,bdet)∈M},
+             k                                           j j   i j                  
+          Next,foreachm ,thecorrespondingfocalregionB is                  (15)      
+                   k                   k     Lref ←Lref∪{(bdet,cdet)∈Lfalse|s ≥Φ−1(β)}.
+        determinedbysolvinganoverlapmaximizationproblem: j j     j  cj              
+           B k =arg B∈ m Ω( a m x k) (cid:88)                                       
+                      j                                                             
+                      n                                                             
+                      =                                                             
+                       i                                                            
+                       1                                                            
+                        I(cid:2) br j eal∩B =br j eal(cid:3) , (11)                 
+                                            a                                       
+                                            in                                      
+                                            s                                       
+                                             g                                      
+                                             E                                      
+                                             T l                                    
+                                              q                                     
+                                              h a                                   
+                                               .                                    
+                                               i b r                                
+                                               (                                    
+                                                e d                                 
+                                                1                                   
+                                                l ,                                 
+                                                 6                                  
+                                                 d                                  
+                                                 )                                  
+                                                  f i o                             
+                                                  w                                 
+                                                  s r c                             
+                                                   i                                
+                                                   r                                
+                                                   t                                
+                                                    l                               
+                                                    h                               
+                                                    e a p b                         
+                                                     γ                              
+                                                     a e n                          
+                                                      c                             
+                                                      l c                           
+                                                       o                            
+                                                       m i                          
+                                                       n                            
+                                                       e                            
+                                                        t                           
+                                                        s i                         
+                                                        r                           
+                                                         s                          
+                                                         o                          
+                                                         a b                        
+                                                          l                         
+                                                          l y                       
+                                                          l                         
+                                                          i                         
+                                                          i                         
+                                                          g                         
+                                                           n                        
+                                                           r n                      
+                                                           g                        
+                                                           e m fi                   
+                                                            re                      
+                                                             n e                    
+                                                             l                      
+                                                             n i                    
+                                                              i                     
+                                                              n t                   
+                                                              a                     
+                                                               s g                  
+                                                               n                    
+                                                               ,                    
+                                                                c                   
+                                                                e                   
+                                                                e                   
+                                                                w ac                
+                                                                 o                  
+                                                                 e h                
+                                                                  n                 
+                                                                  f                 
+                                                                   p                
+                                                                   ( o b            
+                                                                   r                
+                                                                    c               
+                                                                    e               
+                                                                    r j u e         
+                                                                     d              
+                                                                     f s ,          
+                                                                     ic             
+                                                                      c o           
+                                                                      t             
+                                                                      r j           
+                                                                       i            
+                                                                       e n          
+                                                                       o            
+                                                                       f)           
+                                                                        n           
+                                                                        m           
+                                                                        s           
+                                                                         ∈          
+                                                                         .          
+                                                                         itig L a r t e - f
+        whereΩ(m k )isthesetofcandidateregionswithidentical (cid:40) (bdet,cdet) ifs >Φ−1(γ)
+        sizecontainingm k .                    (bref,cref)← j j j  cj  .  (16)      
+          The selected object-dense regions are then cropped j j (bref,cref) otherwise
+                                                        j  j                        
+        to construct a high-information-density dataset Drealdense,                 
+        which serves as a refined substitute for Dreal and is subse- Ultimately,therefineddatasetDref = (Isyn,Lref)isem-
+        quently used as the training and generation target for our ployedtoconstructthetrainingsetforobjectdetector.α,β,
+        proposedVPC-DM(i.e.Sec.3.2).        andγ aresetaccordingtotheaccuracyofdetectorD(·).
+                                         3776                                       
+---PAGE 6---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+        Table1. ComparisonofFIDscoresandAveragePrecision(%)ofUAV-baseddetectortrainedwithaugmenteddataproducedbydifferent
+        methodsonVisDroneandUAVDT.“Realonly”meansthedetectoristrainedonlyonrealdata.Thebestresultsarehighlightedinbold.
+                                                 AveragePrecision↑                  
+                   Dataset Method     FID↓                                          
+                                          mAP  AP  AP   AP  AP  AP                  
+                                                50   75   s   m   l                 
+                           Realonly    -  24.5 42.1 24.5 15.4 36.1 37.9             
+                           CopyPaste[11] - 23.6 41.0 23.5 14.7 34.6 40.2            
+                  VisDrone[9]                                                       
+                           GLIGEN[31] 72.68 24.8 43.0 24.6 15.6 36.3 39.0           
+                           Geodiffusion[3] 57.96 24.7 42.9 24.7 15.4 36.1 39.1      
+                           AeroGen[46] 48.04 24.9 43.3 24.5 15.6 36.3 43.3          
+                           UAVGen(Ours) 34.34 25.9 44.8 26.0 16.7 37.5 43.7         
+                           Realonly    -  14.5 26.1 14.7 10.3 24.1 11.8             
+                           Geodiffusion[3] 47.81 14.0 28.4 12.1 10.3 24.2 12.2      
+                  UAVDT[8]                                                          
+                           AeroGen[46] 31.99 15.0 28.3 14.5 10.7 25.1 12.6          
+                           UAVGen(Ours) 29.73 16.6 30.9 16.1 11.7 27.8 14.8         
+                      pedestrian  w/o syn.  small objects with extreme scale variations, dense targets,
+                       1  23.1    w syn.                                            
+                                            frequentocclusions,anddynamicscenes.    
+                  22.5                                                              
+               motor           people                                               
+                       0.922.1               WeadoptFre´chetInceptionDistance(FID)[17]andAv-
+                                13.6                                                
+                   21.1                     eragePrecision(AP)[13]asourevaluationmetrics,where
+                       0.8                                                          
+                            11.8            FIDmeasuresimagegenerationqualityandAPassessesob-
+            bus 40.5   0.7          bicycle ject detection accuracy. For AP, we evaluate mAP, AP 50 ,
+            41         0.6    8.2   9.9     AP 75 ,AP s ,AP m andAP l ,followingthecommonsizedivi-
+                                            sioncriteriaofMSCOCObenckmark[33].      
+                       0.5                                                          
+                                            Implementation Details. Our diffusion-driven data syn-
+                 9.9                                                                
+          awning-                56.1 car   thesis method is built on the FLUX model, trained with a
+          tricycle                          learning rate of 1e-5 for 60K iterations, batch size 8, on
+             11.6                  56.9                                             
+                                            oneNVIDIAA800GPU.Trainingandgenerationareper-
+                   17.2                                                             
+                             33.7           formed at 512×512 resolution. The diffusion model, text
+                        25.2                                                        
+              tricycle         van          encoder, and VAE encoder are initialized from pretrained
+                  18.7        35.2                                                  
+                                            FLUXweightsandfrozen,withremainingparametersfine-
+                          27.2                                                      
+                       truck                tuned.WeadoptFasterR-CNN[37]asthebasedetectorfor
+                                            visualprototypeselectionandlabelrefinement. Forfidelity
+        Figure3. ComparisonofmAPacrossdifferentcategoriesonVis-                     
+                                            evaluation, wegenerateanequalnumberofimagestoreal
+        Drone. Ourmethod(wsyn.) generates738synthesizedimages,                      
+                                            data for FID computation; to ensure fair comparison, only
+        yieldsconsistentperformanceimprovementsacrossallcategories                  
+                                            VPC-DMisusedhere,whilethefullmethodisadoptedfor
+        whencomparedtothenon-augmentedbaseline(w/osyn.).                            
+                                            trainability evaluation. On VisDrone, we generate 18,649
+                                            patches and merge into 738 full images; on UAVDT, we
+        4.ExperimentalResultsandAnalysis    generate29,403patchesandmergeinto9,802fullimages.
+                                            All compared methods follow standard practice, generat-
+        4.1.ExperimentalSettings                                                    
+                                            ing datasets matching the training set size (6,474 for Vis-
+        Dataset and Evaluation Metrics. We evaluate our Drone, 24,143 for UAVDT). We also reproduce the Copy-
+        proposed UAVGen on two public UAV object detection Paste baseline [11], with masks inferred via DeepLabV3
+        datasets. VisDrone [9] is a UAV-view benchmark with ResNet101,synthesizing7,258imagesmixedwithrealdata
+        6,471training, 548validation, and 1,580testimages, cov- forGFLdetectortrainingonVisDrone.
+        ering 10 categories including pedestrians and vehicles.                     
+                                            4.2.Fidelity                            
+        UAVDT [8] is a UAV detection and tracking benchmark,                        
+        comprising24,143trainingand16,592testimagessampled We evaluated fidelity of UAVGen on the VisDrone [9]
+        from UAV-captured videos. Both datasets pose core chal- datasetandtheUAVDT[8]dataset,bycomparingwiththe
+        lengesforUAV-basedobjectdetection,includingabundant latestapproachesincludingGLIGEN[31],Geodiffusion[3]
+                                         3777                                       
+---PAGE 7---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                Layout       GT        Geodiffusion AeroGen       Ours              
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+        Figure4. Comparisonofgenerated imagesonVisDrone. Ourmethodexhibitssuperiorlayout-image consistencyandenhancedvisual
+        fidelityofgeneratedsmall-scaleobjects. Theyellowdashedboxesdenotetheregionswherethegeneratedtargetsareinconsistentwith
+        theinputs,aswellasblurrylow-qualitytargets. Forthegenerationofsmallpedestriantargets(line1),ourmethodachievessignificantly
+        higherclaritythanthecomparativemethods. Furthermore,inscenarioswithdensesmalltargets(line2,3),ourmethodexhibitssuperior
+        consistencybetweenobjectsandlayout.                                         
+                                                                                    
+        Table2. ComparisonofAveragePrecisions(%)achievedbydif- purpose model. We trained GFL-ResNet50 for 12 epochs.
+        ferent methods in enhancing the state-of-the-art UAV-based ob- As shown in Table 1, on VisDrone benchmark, UAVGen
+        jectdetectionmodelRemDet-XonVisDrone.Thebestresultsare                      
+                                            achieves state-of-the-art performance with only 738 aug-
+        highlightedinbold.                                                          
+                                            mented images, yielding 1.4% improvement in mAP over
+                                            baselinemethods. UAVGenachieves1.3%improvementin
+            Method     mAP↑ AP ↑ AP ↑                                               
+                              50   75       AP ,whiletheremainingmethodsshownoimprovementin
+                                              s                                     
+            Realonly   29.8  48.1 30.8      small object detection. Furthermore, our approach attains
+                                            superior mAP across all categories on VisDrone bench-
+            GLIGEN[31] 29.4  47.7 30.2                                              
+                                            mark,withmAPofseveralcategoriesshowninFig.3. On
+            Geodiffusion[3] 29.4 47.8 30.2                                          
+                                            UAVDTbenckmark,UAVGenyields2.1%improvementin
+            AeroGen[46] 28.8 46.9 29.6                                              
+                                            mAPand4.8%improvementinAP . ComparedtoGeod-
+            UAVGen(Ours) 30.2 48.7 31.1                        50                   
+                                            iffusion[3],ourmethodachievesmeasurablegainsinsmall-
+                                            targetdetectionprecision,with1.5%improvementonAP .
+                                                                           s        
+                                            SOTA Detector Enhancement. Beyond conventional de-
+        and AeroGEN [46]. As represented in Table 1, UAVGen                         
+                                            tectionmodels,weconductedexperimentonRemDet[28],
+        substantiallyoutperformsthecomparedmethods, reducing                        
+                                            the state-of-the-art detector based on YOLO for the Vis-
+        FID of UAV-based images generation by 13.7 and 2.3 on                       
+                                            Dronedataset.RemDetwastrainedusingdefaultconfigura-
+        VisDroneandUAVDT,respectively. Thisindicatesthatby                          
+                                            tions. AsshowninTable2, UAVGendeliverscomprehen-
+        leveraging high-quality visual prototypes and fine-grained                  
+                                            sive performance gains in mAP when applied to RemDet.
+        layout semantics, UAVGen effectively mitigates the chal-                    
+                                            Notably, comparative methods exhibit detrimental effects
+        lengesposedbysmall,overlappedobjectsinUAVimagery,                           
+                                            on SOTA detector. The experiment demonstrates the effi-
+        leadingtosignificantlyimprovedgenerationquality.                            
+                                            cacyofUAVGenforUAV-basedobjectdetection.
+          We further visualized the synthetic results, as shown                     
+        in Fig.4. UAVGen demonstrates strong consistency with                       
+                                            4.4.AblationStudy                       
+        the input layouts, particularly in challenging scenarios in-                
+        volving small and densely clustered objects. Our focal- OnVPC-DM.Tovalidatetheeffectivenessofthedatagen-
+        region generation strategy effectively improves the gener- eratedbyVPC-DM,weconductedablationexperimentson
+        ationqualityofsmallobjects,producingthemwithnotice- VisualPrototypesandLayoutEmbeddings. Asshowninin
+        ablyhigherfidelitycomparedtoexistingmethods. Table 3, when both components are employed, the detec-
+                                            tor’sperformanceimprovesfrom24.5%to25.2%. Notably,
+        4.3.Trainability                                                            
+                                            the generated images are detrimental to detector training
+        General Detector Enhancement. For UAV-based object when neither component is used, while the beneficial im-
+        detection,weadoptGFL[30]astherepresentativegeneral- pactofthegenerateddataondetectorgraduallystrengthens
+                                         3778                                       
+---PAGE 8---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+        Table 3. Ablation study on proposed methods in generation                   
+        pipeline. ”Gen.” suggests train detector with generated images,             
+        “VP” suggests Visual Prototype, ”LE” suggests Layout Embed-                 
+        dings,”FR”suggestsFocalRegionGeneration,”LR”suggestsLa-                     
+        belRefinement.                                                              
+             VPC-DM   FRE-DP                                                        
+                             mAP↑ AP ↑                                              
+                                    50                                              
+           Gen. VP LE FR LR                                                         
+                             24.5  42.1                                             
+            (cid:33)         23.8  42.1             (a)            (b)              
+            (cid:33) (cid:33) 24.1 42.4                                             
+            (cid:33) (cid:33) (cid:33) 25.2 43.8                                    
+            (cid:33) (cid:33) (cid:33) (cid:33) 25.5 44.5                           
+            (cid:33) (cid:33) (cid:33) (cid:33) 25.5 44.2                           
+            (cid:33) (cid:33) (cid:33) (cid:33) (cid:33) 25.9 44.8                  
+          Table4.Ablationstudyonresolutionscaleoffocalregion.                       
+                                                                                    
+              FRRes. mAP↑ AP ↑ AP ↑                 (c)            (d)              
+                           50    75                                                 
+               1024  25.3 43.9  25.3        Figure5. Impactofvariousscaleofgeneratedimagesonobject
+               512   25.6 44.7  25.4        detectionmodel. Withreducedimages, ourmethodachievessu-
+                                            periorperformance.                      
+               256   25.9 44.8  26.0                                                
+                                            toenhanceddetectionperformance. Whenusingthesmall-
+        asthetwocomponentsareincorporatedincrementally.                             
+                                            estresolutionof256,thedetectorachievesthebestresults,
+        OnFRE-DP.WeconductedablationstudyontheFocalRe-                              
+                                            with mAP 25.9%. This indicates that lower region resolu-
+        gion Generation Strategy and Label Refinement, with re- tionscanmoreeffectivelyenhancethequalityofsmallob-
+        sults summarized in Table 3. Specifically, based on VPC- jectimagesandcontributetosuperiormodelperformance.
+        DM, FRE-DP improves the baseline mAP from 25.2% to                          
+        25.9%, indicating the effectiveness of enhancing detection 5.Conclusion     
+        performance. Moreover, both VPC-DM and FRE-DP en-                           
+        hance the quality of the generated images, improving the In this paper, we introduce UAVGen, a diffusion-driven
+        performance of detector (each brings +0.7%). When both dataaugmentationframeworkforUAV-basedobjectdetec-
+        appliedconcurrently,detectorachievespeakmAP25.9%. tion: weconstructhigh-qualitylayoutconditionsforimage
+        OnSynthesizedDataScale. Tovalidatetheeffectiveness generationviaourVisualPrototypeConditionedDiffusion
+        ofsyntheticimagesgeneratedbyUAVGen,wetrainedGFL Model (VPC-DM), focus synthesis on focal regions, and
+        using randomly sampled sets of 100, 300, 500, and 738 correctmisalignmentsthroughourFocalRegionEnhanced
+        (all) synthesized images. As shown in Fig.5, the detector DataPipeline(FRE-DP),fullyexploitinggenerativepoten-
+        with 100 additional training images achieved performance tialandenhancingsynthesizeddataconsistency. Extensive
+        comparabletoAeroGen,whichutilizes6,474(all)images. experiments on diverse datasets demonstrate the effective-
+        The performance of detector exhibits consistent improve- nessofourmethod,whichachievessuperiorimagegenera-
+        mentasthenumberofsynthetictrainingimagesincreases, tionfidelityandsignificantlyimprovesUAV-baseddetector
+        confirming the effectiveness of our method. Furthermore, performance. While tailored for dense small-object detec-
+        ourmethodachievessuperiorenhancementwithfewersyn- tion in UAV scenes, our general-purpose fidelity enhance-
+        thesizedimages,demonstratingtheefficiencyofFRE-DP. mentandlabel–imagealignmentmodulesextendnaturally
+        OnRegionScale. Wealsoperformedanablationstudyon togeneralobjectdetection,andFRE-DP’ssmall-objectop-
+                                            timizationbringsnotablebenefitstofar-distantsurveillance
+        resolutionwithintheFocalRegionGeneration, assumma-                          
+                                            and remote sensing scenarios, with validation planned for
+        rizedinTable4. Weevaluatedeffectoffocalregionatdif-                         
+                                            future work. Addressing appearance and scale variations
+        ferentresolutions: 1024,512,and256. Theresultsdemon-                        
+                                            fromviewpointandaltitudechangesinreal-worldUAVsce-
+        strate a clear trend: as the region resolution decreases, the               
+                                            nariosremainsapromisingavenueforfurtherresearch.
+        quality of the generated object regions improves, leading                   
+                                         3779                                       
+---PAGE 9---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+        Acknowledgments                     [11] Debidatta Dwibedi, Ishan Misra, and Martial Hebert. Cut,
+                                               pasteandlearn: Surprisinglyeasysynthesisforinstancede-
+        This work was partly supported by the New Gen-                              
+                                               tection.InProceedingsoftheIEEE/CVFInternationalCon-
+        eration Artificial Intelligence-National Science and                        
+                                               ferenceonComputerVision,pages1301–1310,2017. 1,3,
+        Technology Major Project (2025ZD0124000), the Bei-                          
+                                               6                                    
+        jing Natural Science Foundation (No. 4242044 and                            
+                                            [12] MilanErdelj,EnricoNatalizio,KaushikRChowdhury,and
+        No. L259044), the CCF Baidu Open Fund, and the                              
+                                               IanFAkyildiz. Helpfromthesky:Leveraginguavsfordis-
+        Fundamental Research Funds for the Central Universities.                    
+                                               aster management. IEEE Pervasive Computing, 16(1):24–
+                                               32,2017. 1                           
+                                            [13] MarkEveringham,LucVanGool,ChristopherKIWilliams,
+        References                                                                  
+                                               JohnWinn,andAndrewZisserman.Thepascalvisualobject
+                                               classes(voc)challenge. InternationalJournalofComputer
+         [1] Omer Bar-Tal, Lior Yariv, Yaron Lipman, and Tali Dekel.                
+                                               Vision,88(2):303–338,2010. 6         
+           Multidiffusion: Fusingdiffusionpathsforcontrolledimage                   
+                                            [14] RuiyuanGao,KaiChen,EnzeXie,LanqingHONG,Zhen-
+           generation. InProceedingsoftheInternationalConference                    
+                                               guoLi,Dit-YanYeung,andQiangXu. Magicdrive: Street
+           onMachineLearning,pages1737–1752,2023. 2                                 
+                                               viewgenerationwithdiverse3dgeometrycontrol. InPro-
+         [2] AndrewBrock,JeffDonahue,andKarenSimonyan. Large                        
+                                               ceedingsoftheInternationalConferenceonLearningRep-
+           scalegantrainingforhighfidelitynaturalimagesynthesis.                    
+                                               resentations,pages904–923,2024. 1,3  
+           InProceedingsoftheInternationalConferenceonLearning                      
+                                            [15] GolnazGhiasi,YinCui,AravindSrinivas,RuiQian,Tsung-
+           Representations,pages9256–9291,2018. 2                                   
+                                               YiLin,EkinDCubuk,QuocVLe,andBarretZoph.Simple
+         [3] KaiChen,EnzeXie,ZheChen,YiboWang,LanqingHong,                          
+                                               copy-pasteisastrongdataaugmentationmethodforinstance
+           Zhenguo Li, and Dit-Yan Yeung. Geodiffusion: Text-                       
+                                               segmentation. InProceedingsoftheIEEE/CVFConference
+           prompted geometric control for object detection data gen-                
+                                               on Computer Vision and Pattern Recognition, pages 2918–
+           eration. InProceedingsoftheInternationalConferenceon                     
+                                               2928,2021. 1,3                       
+           LearningRepresentations,pages846–868,2024. 1,2,6,7                       
+                                            [16] IanJGoodfellow, JeanPouget-Abadie, MehdiMirza, Bing
+         [4] JiaxinCheng, XiaoLiang, XingjianShi, TongHe, Tianjun Xu,DavidWarde-Farley,SherjilOzair,AaronCourville,and
+           Xiao,andMuLi. Layoutdiffuse:Adaptingfoundationaldif- YoshuaBengio. Generativeadversarialnets. InAdvancesin
+           fusionmodelsforlayout-to-imagegeneration.arXivpreprint Neural Information Processing Systems, pages 2672–2680,
+           arXiv:2302.08908,2023. 2            2014. 2                              
+         [5] PrafullaDhariwalandAlexanderNichol. Diffusionmodels [17] Martin Heusel, Hubert Ramsauer, Thomas Unterthiner,
+           beatgansonimagesynthesis. InAdvancesinNeuralInfor- Bernhard Nessler, and Sepp Hochreiter. Gans trained by a
+           mationProcessingSystems,pages4643–4651,2025. 2 twotime-scaleupdateruleconvergetoalocalnashequilib-
+         [6] TamaraReginaDieter,AndreasWeinmann,StefanJa¨ger,and rium. In Advances in Neural Information Processing Sys-
+           Eva Brucherseifer. Quantifying the simulation–reality gap tems,page6629–6640,2017. 6
+           fordeeplearning-baseddronedetection.Electronics,12(10): [18] JonathanHo,AjayJain,andPieterAbbeel. Denoisingdif-
+           2197,2023. 1                        fusionprobabilisticmodels.InAdvancesinNeuralInforma-
+         [7] Bowei Du, Yecheng Huang, Jiaxin Chen, and Di Huang. tionProcessingSystems,pages6840–6851,2020. 2
+           Adaptivesparseconvolutionalnetworkswithglobalcontext [19] Eija Honkavaara, Heikki Saari, Jere Kaivosoja, Ilkka
+           enhancementforfasterobjectdetectionondroneimages. In Po¨lo¨nen, Teemu Hakala, Paula Litkey, Jussi Ma¨kynen, and
+           ProceedingsoftheIEEE/CVFConferenceonComputerVi- LiisaPesonen. Processingandassessmentofspectrometric,
+           sionandPatternRecognition,pages13435–13444,2023. 1, stereoscopicimagerycollectedusingalightweightuavspec-
+           2                                   tralcameraforprecisionagriculture.RemoteSensing,5(10):
+         [8] DaweiDu,YuankaiQi,HongyangYu,YifanYang,Kaiwen 5006–5039,2013. 1        
+           Duan,GuorongLi,WeigangZhang,QingmingHuang,and [20] HailongHuang,AndreyVSavkin,andChaoHuang.Decen-
+           Qi Tian. The unmanned aerial vehicle benchmark: Object tralized autonomous navigation of a uav network for road
+           detectionandtracking.InProceedingsoftheEuropeanCon- traffic monitoring. IEEE Transactions on Aerospace and
+           ferenceonComputerVision,pages370–386,2018. 1,6,2 ElectronicSystems,57(4):2558–2564,2021. 1
+         [9] Dawei Du, Pengfei Zhu, Longyin Wen, Xiao Bian, Haibin [21] Yecheng Huang, Jiaxin Chen, and Di Huang. Ufpmp-det:
+           Lin,QinghuaHu,TaoPeng,JiayuZheng,XinyaoWang,Yue Towardaccurateandefficientobjectdetectionondroneim-
+           Zhang,etal. Visdrone-det2019:Thevisionmeetsdroneob- agery. InProceedingsoftheAAAIconferenceonArtificial
+           jectdetectioninimagechallengeresults. InProceedingsof Intelligence,pages1026–1033,2022. 1,2
+           theIEEE/CVFInternationalConferenceonComputerVision [22] Manuel Jahn, Robin Rombach, and Bjo¨rn Ommer. High-
+           Workshops,pages213–226,2019. 1,6,2  resolution complex scene synthesis with transformers. In
+        [10] NikitaDvornik,JulienMairal,andCordeliaSchmid. Mod- ProceedingsoftheIEEE/CVFInternationalConferenceon
+           eling visual context is key to augmenting object detection ComputerVisionWorkshops,pages7054–7065,2021. 2
+           datasets. In Proceedings of the European Conference on [23] Tero Karras, Samuli Laine, and Timo Aila. A style-based
+           ComputerVision,pages364–380,2018. 3 generator architecture for generative adversarial networks.
+                                         3780                                       
+---PAGE 10---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+           In Proceedings of the IEEE/CVF Conference on Computer [37] Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun.
+           VisionandPatternRecognition,pages4401–4410,2019. 2 Fasterr-cnn: Towardsreal-timeobjectdetectionwithregion
+        [24] Rahima Khanam and Muhammad Hussain. Yolov11: An proposalnetworks. IEEETransactionsonPatternAnalysis
+           overview of the key architectural enhancements. arXiv andMachineIntelligence,39(6):1137–1149,2016. 6,1
+           preprintarXiv:2410.17725,2024. 2 [38] DaniloJimenezRezende,ShakirMohamed,andDaanWier-
+        [25] SahilKhose,AnishaPal,AayushiAgarwal,Deepanshi,Judy stra. Stochasticbackpropagationandapproximateinference
+           Hoffman,andPrithvijitChattopadhyay. Skyscenes: Asyn- in deep generative models. In Proceedings of the Interna-
+           theticdatasetforaerialsceneunderstanding. InProceedings tionalConferenceonMachineLearning,pages1278–1286,
+           oftheEuropeanConferenceonComputerVision,pages19– 2014. 2                 
+           35,2024. 3                       [39] Giulia Rizzoli, Francesco Barbato, Matteo Caligiuri, and
+        [26] Diederik Kingma, Tim Salimans, Ben Poole, and Jonathan PietroZanuttigh. Syndrone-multi-modaluavdatasetforur-
+           Ho. Variational diffusion models. In Advances in Neural ban scenarios. In Proceedings of the IEEE/CVF Interna-
+           InformationProcessingSystems,pages21696–21707,2021. tional Conference on Computer Vision, pages 2210–2220,
+           2                                   2023. 3                              
+        [27] DiederikPKingmaandMaxWelling. Auto-encodingvaria- [40] Robin Rombach, Andreas Blattmann, Dominik Lorenz,
+           tionalbayes. arXivpreprintarXiv:1312.6114,2013. 2 Patrick Esser, and Bjo¨rn Ommer. High-resolution image
+        [28] ChenLi,RuiZhao,ZeyuWang,HuiyingXu,andXinzhong synthesis with latent diffusion models. In Proceedings of
+           Zhu. Remdet:Rethinkingefficientmodeldesignforuavob- theIEEE/CVFConferenceonComputerVisionandPattern
+           ject detection. In Proceedings of the AAAI Conference on Recognition,pages10684–10695,2022. 2
+           ArtificialIntelligence,pages4643–4651,2025. 1,2,7                        
+                                            [41] FranciscoRovira-Ma´s,QinZhang,andJohnFReid. Stereo
+        [29] PengxiangLi, KaiChen, ZhiliLiu, RuiyuanGao, Lanqing                    
+                                               visionthree-dimensionalterrainmapsforprecisionagricul-
+           Hong, Dit-YanYeung, HuchuanLu, andXuJia. Trackdif- ture. ComputersandElectronicsinAgriculture,60(2):133–
+           fusion: Tracklet-conditionedvideogenerationviadiffusion                  
+                                               143,2008. 1                          
+           models. In Proceedings of the IEEE/CVF Winter Confer-                    
+                                            [42] Yi-Ting Shen, Hyungtae Lee, Heesung Kwon, and Shu-
+           enceonApplicationsofComputerVision,pages3539–3548,                       
+                                               vra S Bhattacharyya. Progressive transformation learning
+           2025. 3                                                                  
+                                               forleveragingvirtualimagesintraining. InProceedingsof
+        [30] XiangLi,WenhaiWang,LijunWu,ShuoChen,XiaolinHu,                         
+                                               theIEEE/CVFConferenceonComputerVisionandPattern
+           JunLi,JinhuiTang,andJianYang. Generalizedfocalloss:                      
+                                               Recognition,pages835–844,2023. 3     
+           Learningqualifiedanddistributedboundingboxesfordense                     
+                                            [43] JaschaSohl-Dickstein, EricWeiss, NiruMaheswaranathan,
+           object detection. In Advances in Neural Information Pro-                 
+                                               and Surya Ganguli. Deep unsupervised learning using
+           cessingSystems,pages21002–21012,2020. 1,2,7                              
+                                               nonequilibriumthermodynamics. InProceedingsoftheIn-
+        [31] YuhengLi,HaotianLiu,QingyangWu,FangzhouMu,Jian-                        
+                                               ternationalConferenceonMachineLearning, pages2256–
+           wei Yang, Jianfeng Gao, Chunyuan Li, and Yong Jae Lee.                   
+                                               2265,2015. 2                         
+           Gligen:Open-setgroundedtext-to-imagegeneration.InPro-                    
+                                            [44] JiamingSong,ChenlinMeng,andStefanoErmon. Denois-
+           ceedingsoftheIEEE/CVFConferenceonComputerVision                          
+                                               ing diffusion implicit models. In Proceedings of the In-
+           andPatternRecognition,pages22511–22521,2023. 2,4,6,                      
+                                               ternationalConferenceonLearningRepresentations,pages
+           7                                                                        
+                                               14205–14224,2021.                    
+        [32] ZejianLi,JingyuWu,ImmanuelKoh,YongchuanTang,and                        
+                                            [45] Yang Song and Stefano Ermon. Improved techniques for
+           Lingyun Sun. Image synthesis from layout with locality-                  
+                                               trainingscore-basedgenerativemodels.InAdvancesinNeu-
+           awaremaskadaption. InProceedingsoftheIEEE/CVFIn-                         
+                                               ral Information Processing Systems, pages 12438–12448,
+           ternational Conference on Computer Vision, pages 13819–                  
+                                               2020. 2                              
+           13828,2021. 2                                                            
+        [33] Tsung-YiLin,MichaelMaire,SergeBelongie,JamesHays, [46] DataoTang,XiangyongCao,XuanWu,JialinLi,JingYao,
+           PietroPerona,DevaRamanan,PiotrDolla´r,andCLawrence Xueru Bai, Dongsheng Jiang, Yin Li, and Deyu Meng.
+           Zitnick. Microsoft coco: Common objects in context. In Aerogen: Enhancing remote sensing object detection with
+           Proceedings of the European Conference on Computer Vi- diffusion-driven data generation. In Proceedings of the
+           sion,pages740–755,2014. 6           IEEE/CVF Conference on Computer Vision and Pattern
+                                               Recognition,pages3614–3624,2025. 1,3,6,7
+        [34] Alexander Quinn Nichol and Prafulla Dhariwal. Improved                 
+           denoisingdiffusionprobabilisticmodels. InProceedingsof [47] Yunjie Tian, Qixiang Ye, and David Doermann. Yolov12:
+           the International Conference on Machine Learning, pages Attention-centricreal-timeobjectdetectors. arXivpreprint
+           8162–8171,2021. 2                   arXiv:2502.12524,2025. 2             
+        [35] Joseph Redmon and Ali Farhadi. Yolov3: An incremental [48] Aysim Toker, Marvin Eisenberger, Daniel Cremers, and
+           improvement. arXivpreprintarXiv:1804.02767,2018. 2,1 LauraLeal-Taixe´. Satsynth: Augmentingimage-maskpairs
+        [36] Joseph Redmon, Santosh Divvala, Ross Girshick, and Ali through diffusion models for aerial semantic segmentation.
+           Farhadi.Youonlylookonce:Unified,real-timeobjectdetec- In Proceedings of the IEEE/CVF Conference on Computer
+           tion. InProceedingsoftheIEEE/CVFConferenceonCom- VisionandPatternRecognition,pages27695–27705,2024.
+           puterVisionandPatternRecognition,pages779–788,2016. 3                    
+           1,2                              [49] Arash Vahdat and Jan Kautz. Nvae: A deep hierarchical
+                                         3781                                       
+---PAGE 11---
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+           variationalautoencoder. InAdvancesinNeuralInformation sionmodelforlayout-to-imagegeneration. InProceedings
+           ProcessingSystems,pages19667–19679,2020. 2 oftheIEEE/CVFConferenceonComputerVisionandPat-
+        [50] Xudong Wang, Trevor Darrell, Sai Saketh Rambhatla, Ro- ternRecognition,pages22490–22499,2023. 2
+           hit Girdhar, and Ishan Misra. Instancediffusion: Instance- [61] DeweiZhou,YouLi,FanMa,XiaotingZhang,andYiYang.
+           level control for image generation. In Proceedings of the Migc:Multi-instancegenerationcontrollerfortext-to-image
+           IEEE/CVF Conference on Computer Vision and Pattern synthesis. In Proceedings of the IEEE/CVF Conference
+           Recognition,pages6232–6242,2024. 3  on Computer Vision and Pattern Recognition, pages 6818–
+        [51] Yibo Wang, Ruiyuan Gao, Kai Chen, Kaiqiang Zhou, 6828,2024. 2          
+           Yingjie Cai, Lanqing Hong, Zhenguo Li, Lihui Jiang, Dit- [62] JingyuanZhu,ShiyuLi,YuxuanAndyLiu,JianYuan,Ping
+           YanYeung,QiangXu,etal. Detdiffusion:Synergizinggen- Huang, Jiulong Shan, and Huimin Ma. Odgen: Domain-
+           erativeandperceptivemodelsforenhanceddatageneration specificobjectdetectiondatagenerationwithdiffusionmod-
+           andperception.InProceedingsoftheIEEE/CVFConference els. InAdvancesinNeuralInformationProcessingSystems,
+           on Computer Vision and Pattern Recognition, pages 7246– pages63599–63633,2024. 1
+           7255,2024. 1                                                             
+        [52] KeWu,JiaxinChen,andMiaoWang. Domainadaptiveob-                         
+           jectdetectionforuav-basedimagesbyrobustrepresentation                    
+           learningandmultiplepseudo-labelaggregation. InProceed-                   
+           ings of the ACM MM Workshops on Efficient Multimedia                     
+           ComputingunderLimited,page59–67,2024. 1                                  
+        [53] WeijiaWu,YuzhongZhao,HaoChen,YuchaoGu,RuiZhao,                         
+           Yefei He, Hong Zhou, Mike Zheng Shou, and Chunhua                        
+           Shen. Datasetdm: Synthesizingdatawithperceptionanno-                     
+           tationsusingdiffusionmodels. InAdvancesinNeuralInfor-                    
+           mation Processing Systems, pages 54683–54695, 2023. 1,                   
+           3                                                                        
+        [54] JinhengXie,YuexiangLi,YawenHuang,HaozheLiu,Wen-                        
+           tianZhang,YefengZheng,andMikeZhengShou. Boxdiff:                         
+           Text-to-image synthesis with training-free box-constrained               
+           diffusion. In Proceedings of the IEEE/CVF International                  
+           ConferenceonComputerVision,pages7452–7461,2023. 2                        
+        [55] ZhengyuanYang,JianfengWang,ZheGan,LinjieLi,Kevin                       
+           Lin,ChenfeiWu,NanDuan,ZichengLiu,CeLiu,Michael                           
+           Zeng,etal. Reco: Region-controlledtext-to-imagegenera-                   
+           tion. InProceedingsoftheIEEE/CVFConferenceonCom-                         
+           puterVisionandPatternRecognition, pages14246–14255,                      
+           2023. 2                                                                  
+        [56] Jinsub Yim, Hyungtae Lee, Sungmin Eum, Yi-Ting Shen,                   
+           Yan Zhang, Heesung Kwon, and Shuvra S Bhattacharyya.                     
+           Synplay: Importingreal-worlddiversityforasynthetichu-                    
+           mandataset. arXive-prints,pagesarXiv–2408,2024. 3                        
+        [57] LvminZhang, AnyiRao, andManeeshAgrawala. Adding                        
+           conditional control to text-to-image diffusion models. In                
+           ProceedingsoftheIEEE/CVFInternationalConferenceon                        
+           ComputerVision,pages3836–3847,2023. 2                                    
+        [58] Yuxuan Zhang, Huan Ling, Jun Gao, Kangxue Yin, Jean-                   
+           Francois Lafleche, Adela Barriuso, Antonio Torralba, and                 
+           SanjaFidler. Datasetgan:Efficientlabeleddatafactorywith                  
+           minimal human effort. In Proceedings of the IEEE/CVF                     
+           Conference on Computer Vision and Pattern Recognition,                   
+           pages10145–10155,2021. 3                                                 
+        [59] Hanqing Zhao, Dianmo Sheng, Jianmin Bao, Dongdong                      
+           Chen, Dong Chen, Fang Wen, Lu Yuan, Ce Liu, Wenbo                        
+           Zhou, Qi Chu, et al. X-paste: Revisiting scalable copy-                  
+           paste for instance segmentation using clip and stablediffu-              
+           sion.InProceedingsoftheInternationalConferenceonMa-                      
+           chineLearning,pages42098–42109,2023. 1,3                                 
+        [60] GuangcongZheng,XianpanZhou,XueweiLi,ZhongangQi,                        
+           YingShan,andXiLi. Layoutdiffusion: Controllablediffu-                    
+                                         3782                                       

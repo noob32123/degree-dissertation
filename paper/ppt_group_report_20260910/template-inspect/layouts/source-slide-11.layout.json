@@ -1,0 +1,717 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/jetc3ut0",
+    "id": "jetc3ut0",
+    "slide": 11,
+    "layoutId": "/ppt/slideLayouts/slideLayout2.xml",
+    "layoutName": "空白",
+    "layoutType": "blank",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "凸显",
+    "colors": {
+      "accent1": "#FE8637",
+      "accent2": "#7598D9",
+      "accent3": "#B32C16",
+      "accent4": "#F5CD2D",
+      "accent5": "#AEBAD5",
+      "accent6": "#777C84",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#575F6D",
+      "lt2": "#FFF39D",
+      "hlink": "#D2611C",
+      "folHlink": "#3B435B"
+    },
+    "fontScheme": {
+      "name": "纸张",
+      "majorFont": {
+        "latinTypeface": "Constantia"
+      },
+      "minorFont": {
+        "latinTypeface": "Constantia"
+      }
+    },
+    "typefaces": [
+      "+mn-ea",
+      "Constantia",
+      "微软雅黑"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout2.xml",
+      "name": "空白",
+      "type": "blank",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/3",
+          "id": "3",
+          "name": "直接连接符 2",
+          "bbox": [
+            0,
+            84.52,
+            1280,
+            1.61
+          ],
+          "geometry": "line",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "lineWidth": 4.33
+        },
+        {
+          "order": 2,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/4",
+          "id": "4",
+          "name": "图片 3",
+          "bbox": [
+            1180.36,
+            4.84,
+            87.58,
+            75.66
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.02734,
+            "top": 0.05571,
+            "right": 0.72733,
+            "bottom": 0.07404
+          },
+          "asset": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          }
+        },
+        {
+          "order": 3,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/5",
+          "id": "5",
+          "name": "图片 1",
+          "bbox": [
+            1093.85,
+            13.4,
+            73.48,
+            70.32
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.16887,
+            "top": 0.12347,
+            "right": 0.07013,
+            "bottom": 0.01495
+          },
+          "asset": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/xcryxg7y",
+      "id": "2",
+      "name": "文本框 1",
+      "bbox": [
+        37.71,
+        1.41,
+        635.12,
+        78.11
+      ],
+      "geometry": "rect",
+      "text": "三、实验结果与分析",
+      "textPreview": "三、实验结果与分析",
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "微软雅黑",
+        "color": "tx1",
+        "bold": true,
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "三、实验结果与分析"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "三、实验结果与分析",
+          "runs": [
+            {
+              "index": 1,
+              "text": "三、实验结果与分析"
+            }
+          ],
+          "marginLeft": 0,
+          "lineSpacingPercent": 150000
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/wbih4b6d",
+      "id": "3",
+      "name": "Rectangle 1",
+      "bbox": [
+        15.32,
+        92.09,
+        1194.35,
+        48.47
+      ],
+      "geometry": "rect",
+      "text": "各组别实验",
+      "textPreview": "各组别实验",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ø各组别实验"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "各组别实验",
+          "runs": [
+            {
+              "index": 1,
+              "text": "各组别实验",
+              "fontSize": 32,
+              "typeface": "微软雅黑",
+              "color": "#006282",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/65wzelo7",
+      "id": "23",
+      "name": "文本框 22",
+      "bbox": [
+        234.04,
+        653.99,
+        756.92,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "CLIQ-NAV在本任务上的表现超过了现有的方法",
+      "textPreview": "CLIQ-NAV在本任务上的表现超过了现有的方法",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "lt1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "CLIQ-NAV在本任务上的表现超过了现有的方法"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CLIQ-NAV在本任务上的表现超过了现有的方法",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "CLIQ-NAV",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "在本任务上的表现超过了现有的方法",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/tsnip0ny",
+      "id": "20",
+      "name": "文本框 19",
+      "bbox": [
+        940.65,
+        153.13,
+        306.77,
+        139.17
+      ],
+      "geometry": "rect",
+      "text": "我们将CLIQ-NAV与三种近期提出的、代表不同导航范式的方法进行了对比。CLIQ-NAV取得了80.7%的SR，分别以超过48个百分点的优势优于CityNavAgent（32.1%，基于拓扑记忆的层次化规划）、AerialVLA（17.9%，端到端VLA）和FineCog-Nav（2.9%，模块化认知推理）。SPL优势同样显著（68.7%对比16.0%–31.4%）。",
+      "textPreview": "我们将CLIQ-NAV与三种近期提出的、代表不同导航范式的方法进行了对比。CLIQ-NAV取得了80.7%的SR，分别以超过48个百分点的优势优于CityNavAgent（32.1%，基于拓扑记忆的层次化规划）、AerialVLA（17.9%，端到端VLA）和FineCog...",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 13,
+        "lines": [
+          {
+            "index": 1,
+            "text": "p我们将CLIQ-NAV"
+          },
+          {
+            "index": 2,
+            "text": "与三种近期提出的、代表不同"
+          },
+          {
+            "index": 3,
+            "text": "导航范式的方法进行了对比。"
+          },
+          {
+            "index": 4,
+            "text": "CLIQ-NAV取得了80.7%的SR"
+          },
+          {
+            "index": 5,
+            "text": "，分别以超过48个百分点"
+          },
+          {
+            "index": 6,
+            "text": "的优势优于CityNavAgent（"
+          },
+          {
+            "index": 7,
+            "text": "32.1%"
+          },
+          {
+            "index": 8,
+            "text": "，基于拓扑记忆的层次化规划"
+          },
+          {
+            "index": 9,
+            "text": "）、AerialVLA（17.9%，端到端"
+          },
+          {
+            "index": 10,
+            "text": "VLA）和FineCog-Nav（2.9%"
+          },
+          {
+            "index": 11,
+            "text": "，模块化认知推理）。SPL"
+          },
+          {
+            "index": 12,
+            "text": "优势同样显著（68.7%对比"
+          },
+          {
+            "index": 13,
+            "text": "16.0%–31.4%）。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "我们将CLIQ-NAV与三种近期提出的、代表不同导航范式的方法进行了对比。CLIQ-NAV取得了80.7%的SR，分别以超过48个百分点的优势优于CityNavAgent（32.1%，基于拓扑记忆的层次化规划）、AerialVLA（17.9%，端到端VLA）和FineCog-Nav（2.9%，模块化认知推理）。SPL优势同样显著（68.7%对比16.0%–31.4%）。",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "我们将",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "CLIQ-NAV",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "与三种近期提出的、代表不同导航范式的方法进行了对比。",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "CLIQ-NAV",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "取得了",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "80.7",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "%",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": "的",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 9,
+              "text": "SR",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 10,
+              "text": "，分别以超过",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 11,
+              "text": "48",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 12,
+              "text": "个百分点",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 13,
+              "text": "的优势优于",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 14,
+              "text": "CityNavAgent",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 15,
+              "text": "（",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 16,
+              "text": "32.1%",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 17,
+              "text": "，基于拓扑记忆的层次化规划）、",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 18,
+              "text": "AerialVLA",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 19,
+              "text": "（",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 20,
+              "text": "17.9%",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 21,
+              "text": "，端到端",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 22,
+              "text": "VLA",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 23,
+              "text": "）和",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 24,
+              "text": "FineCog",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 25,
+              "text": "-Nav",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 26,
+              "text": "（",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 27,
+              "text": "2.9%",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 28,
+              "text": "，模块化认知推理）。",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 29,
+              "text": "SPL",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 30,
+              "text": "优势同样显著（",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 31,
+              "text": "68.7%",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 32,
+              "text": "对比",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 33,
+              "text": "16.0%–31.4%",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 34,
+              "text": "）。",
+              "fontSize": 18.67,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/6hkrqp43",
+      "id": "24",
+      "name": "图片 4",
+      "bbox": [
+        32.58,
+        140.56,
+        906.9,
+        480.24
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image20.png",
+        "contentType": "image/png",
+        "byteLength": 199194
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image20.png",
+        "contentType": "image/png",
+        "byteLength": 199194
+      }
+    }
+  ],
+  "composeRuns": []
+}

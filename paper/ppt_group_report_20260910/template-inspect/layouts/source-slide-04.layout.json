@@ -1,0 +1,532 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/jyx0ra1s",
+    "id": "jyx0ra1s",
+    "slide": 4,
+    "layoutId": "/ppt/slideLayouts/slideLayout2.xml",
+    "layoutName": "空白",
+    "layoutType": "blank",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "凸显",
+    "colors": {
+      "accent1": "#FE8637",
+      "accent2": "#7598D9",
+      "accent3": "#B32C16",
+      "accent4": "#F5CD2D",
+      "accent5": "#AEBAD5",
+      "accent6": "#777C84",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#575F6D",
+      "lt2": "#FFF39D",
+      "hlink": "#D2611C",
+      "folHlink": "#3B435B"
+    },
+    "fontScheme": {
+      "name": "纸张",
+      "majorFont": {
+        "latinTypeface": "Constantia"
+      },
+      "minorFont": {
+        "latinTypeface": "Constantia"
+      }
+    },
+    "typefaces": [
+      "+mn-ea",
+      "Constantia",
+      "微软雅黑"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout2.xml",
+      "name": "空白",
+      "type": "blank",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/3",
+          "id": "3",
+          "name": "直接连接符 2",
+          "bbox": [
+            0,
+            84.52,
+            1280,
+            1.61
+          ],
+          "geometry": "line",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "lineWidth": 4.33
+        },
+        {
+          "order": 2,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/4",
+          "id": "4",
+          "name": "图片 3",
+          "bbox": [
+            1180.36,
+            4.84,
+            87.58,
+            75.66
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.02734,
+            "top": 0.05571,
+            "right": 0.72733,
+            "bottom": 0.07404
+          },
+          "asset": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          }
+        },
+        {
+          "order": 3,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/5",
+          "id": "5",
+          "name": "图片 1",
+          "bbox": [
+            1093.85,
+            13.4,
+            73.48,
+            70.32
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.16887,
+            "top": 0.12347,
+            "right": 0.07013,
+            "bottom": 0.01495
+          },
+          "asset": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/doj29oba",
+      "id": "6",
+      "name": "文本框 5",
+      "bbox": [
+        233.12,
+        663.1,
+        800.13,
+        38.78
+      ],
+      "geometry": "rect",
+      "text": "‘语义过载’导致幻觉，用于无人机导航的多模态大模型需要幻觉抑制",
+      "textPreview": "‘语义过载’导致幻觉，用于无人机导航的多模态大模型需要幻觉抑制",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "lt1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "‘语义过载’导致幻觉，用于无人机导航的多模态大模型需要幻觉抑制"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "‘语义过载’导致幻觉，用于无人机导航的多模态大模型需要幻觉抑制",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "‘语义过载’导致幻觉，用于无人机导航的多模态大模型需要幻觉抑制",
+              "typeface": "微软雅黑",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/p0batw72",
+      "id": "20",
+      "name": "矩形 19",
+      "bbox": [
+        33.33,
+        79.13,
+        1213.33,
+        61
+      ],
+      "geometry": "rect",
+      "text": "多模态大模型的幻觉",
+      "textPreview": "多模态大模型的幻觉",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ø多模态大模型的幻觉"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "多模态大模型的幻觉",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "多模态大模型的幻觉",
+              "fontSize": 32,
+              "typeface": "微软雅黑",
+              "color": "#006282",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0ba143al",
+      "id": "3",
+      "name": "文本框 2",
+      "bbox": [
+        38.67,
+        4,
+        620.83,
+        75.13
+      ],
+      "geometry": "rect",
+      "text": "一、研究背景与意义",
+      "textPreview": "一、研究背景与意义",
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "微软雅黑",
+        "color": "tx1",
+        "bold": true,
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "一、研究背景与意义"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "一、研究背景与意义",
+          "runs": [
+            {
+              "index": 1,
+              "text": "一、研究背景与意义"
+            }
+          ],
+          "marginLeft": 0,
+          "lineSpacingPercent": 150000
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/1cj2d8b6",
+      "id": "2",
+      "name": "文本框 1",
+      "bbox": [
+        103.42,
+        503.67,
+        1066.08,
+        137.2
+      ],
+      "geometry": "rect",
+      "text": "在低空城市环境中，画面包含建筑、树木、道路、遮阳伞等高密度视觉干扰，而导航目标通常只占一部分像素区域。大模型由于缺乏外部先验引导，注意力容易被任务无关的显著区域分散，导致输出的方向决策出现严重抖动、循环绕飞或早停等严重的“幻觉”行为。",
+      "textPreview": "在低空城市环境中，画面包含建筑、树木、道路、遮阳伞等高密度视觉干扰，而导航目标通常只占一部分像素区域。大模型由于缺乏外部先验引导，注意力容易被任务无关的显著区域分散，导致输出的方向决策出现严重抖动、循环绕飞或早停等严重的“幻觉”行为。",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "p在低空城市环境中，画面包含建筑、树木、道路、遮阳伞等高密度视觉干扰"
+          },
+          {
+            "index": 2,
+            "text": "，而导航目标通常只占一部分像素区域。大模型由于缺乏外部先验引导，注意力容易被任务无关的显著区域分散"
+          },
+          {
+            "index": 3,
+            "text": "，导致输出的方向决策出现严重抖动、循环绕飞或早停等严重的“幻觉”行为。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "在低空城市环境中，画面包含建筑、树木、道路、遮阳伞等高密度视觉干扰，而导航目标通常只占一部分像素区域。大模型由于缺乏外部先验引导，注意力容易被任务无关的显著区域分散，导致输出的方向决策出现严重抖动、循环绕飞或早停等严重的“幻觉”行为。",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "在低空城市环境中，画面包含建筑、树木、道路、遮阳伞等",
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "高密度视觉干扰",
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "，而导航目标通常只占一部分像素区域。大模型由于缺乏外部先验引导，",
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "注意力容易被任务无关的显著区域分散",
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "，导致输出的方向决策出现",
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "严重抖动",
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "、",
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": "循环绕飞",
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 9,
+              "text": "或",
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 10,
+              "text": "早停",
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 11,
+              "text": "等严重的",
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 12,
+              "text": "“幻觉”行为",
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 13,
+              "text": "。",
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/n2187e1o",
+      "id": "21",
+      "name": "图片 8",
+      "bbox": [
+        839.67,
+        176.83,
+        387.15,
+        290.14
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image9.png",
+        "contentType": "image/png",
+        "byteLength": 261202
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image9.png",
+        "contentType": "image/png",
+        "byteLength": 261202
+      }
+    },
+    {
+      "order": 6,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/83apgj29",
+      "id": "22",
+      "name": "图片 4",
+      "bbox": [
+        53.18,
+        140.13,
+        746.86,
+        369.9
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image10.png",
+        "contentType": "image/png",
+        "byteLength": 1623683
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image10.png",
+        "contentType": "image/png",
+        "byteLength": 1623683
+      }
+    }
+  ],
+  "composeRuns": []
+}

@@ -1,0 +1,14 @@
+\begin{tabular}{lrrrr}
+\toprule
+Policy & Episode cost, mean $\pm$ SD & Mean (ms) & Median (ms) & P95 (ms) \\
+\midrule
+Standard DQN & 78.33 $\pm$ 1.88 & 0.050 & 0.047 & 0.059 \\
+Full-action Q & 78.14 $\pm$ 2.23 & 0.050 & 0.047 & 0.059 \\
+Immediate advantage & 77.84 $\pm$ 1.82 & 0.051 & 0.047 & 0.064 \\
+Centered full-action & 77.66 $\pm$ 1.84 & 0.051 & 0.047 & 0.062 \\
+Double DQN & 78.40 $\pm$ 1.98 & 0.050 & 0.047 & 0.060 \\
+Double + centered & 77.73 $\pm$ 1.99 & 0.051 & 0.047 & 0.064 \\
+MPC-4 & 90.83 $\pm$ 1.71 & 4.772 & 4.985 & 5.434 \\
+Greedy rollout-8 & 88.79 $\pm$ 2.19 & 2.538 & 2.722 & 3.021 \\
+\bottomrule
+\end{tabular}

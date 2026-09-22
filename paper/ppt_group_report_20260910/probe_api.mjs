@@ -1,0 +1,10 @@
+import { pathToFileURL } from "node:url";
+const helperPath = "C:\\Users\\23201\\.codex\\plugins\\cache\\openai-primary-runtime\\presentations\\26.905.11957\\skills\\presentations\\container_tools\\runtime_helpers.mjs";
+const { importRuntimeModule } = await import(pathToFileURL(helperPath).href);
+const { FileBlob, PresentationFile } = await importRuntimeModule("@oai/artifact-tool");
+const p = await PresentationFile.importPptx(await FileBlob.load("H:\\degree-dissertation\\paper\\ppt_group_report_20260910\\template.pptx"));
+console.log((await p.help("slide duplicate remove delete collection", { include: ["index", "examples", "notes"], maxChars: 20000 })).ndjson ?? "");
+const s=p.slides.getItem(2);
+console.log("slides proto", Object.getOwnPropertyNames(Object.getPrototypeOf(p.slides)));
+console.log("slide proto", Object.getOwnPropertyNames(Object.getPrototypeOf(s)));
+console.log("shapes proto", Object.getOwnPropertyNames(Object.getPrototypeOf(s.shapes)));

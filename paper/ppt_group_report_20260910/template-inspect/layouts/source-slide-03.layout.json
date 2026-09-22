@@ -1,0 +1,701 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/ofy9wn61",
+    "id": "ofy9wn61",
+    "slide": 3,
+    "layoutId": "/ppt/slideLayouts/slideLayout2.xml",
+    "layoutName": "空白",
+    "layoutType": "blank",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "凸显",
+    "colors": {
+      "accent1": "#FE8637",
+      "accent2": "#7598D9",
+      "accent3": "#B32C16",
+      "accent4": "#F5CD2D",
+      "accent5": "#AEBAD5",
+      "accent6": "#777C84",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#575F6D",
+      "lt2": "#FFF39D",
+      "hlink": "#D2611C",
+      "folHlink": "#3B435B"
+    },
+    "fontScheme": {
+      "name": "纸张",
+      "majorFont": {
+        "latinTypeface": "Constantia"
+      },
+      "minorFont": {
+        "latinTypeface": "Constantia"
+      }
+    },
+    "typefaces": [
+      "+mn-ea",
+      "Constantia",
+      "微软雅黑"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout2.xml",
+      "name": "空白",
+      "type": "blank",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/3",
+          "id": "3",
+          "name": "直接连接符 2",
+          "bbox": [
+            0,
+            84.52,
+            1280,
+            1.61
+          ],
+          "geometry": "line",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "lineWidth": 4.33
+        },
+        {
+          "order": 2,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/4",
+          "id": "4",
+          "name": "图片 3",
+          "bbox": [
+            1180.36,
+            4.84,
+            87.58,
+            75.66
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.02734,
+            "top": 0.05571,
+            "right": 0.72733,
+            "bottom": 0.07404
+          },
+          "asset": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          }
+        },
+        {
+          "order": 3,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/5",
+          "id": "5",
+          "name": "图片 1",
+          "bbox": [
+            1093.85,
+            13.4,
+            73.48,
+            70.32
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.16887,
+            "top": 0.12347,
+            "right": 0.07013,
+            "bottom": 0.01495
+          },
+          "asset": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/o32dw321",
+      "id": "21",
+      "name": "图片 4",
+      "bbox": [
+        38.67,
+        173.94,
+        572.83,
+        298.13
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image7.png",
+        "contentType": "image/png",
+        "byteLength": 181697
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image7.png",
+        "contentType": "image/png",
+        "byteLength": 181697
+      }
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/obq90bml",
+      "id": "6",
+      "name": "文本框 5",
+      "bbox": [
+        235.61,
+        641.77,
+        808.78,
+        38.78
+      ],
+      "geometry": "rect",
+      "text": "传统无人机导航技术无法在GNSS信号衰退时实现可靠导航控制",
+      "textPreview": "传统无人机导航技术无法在GNSS信号衰退时实现可靠导航控制",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "lt1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "传统无人机导航技术无法在GNSS信号衰退时实现可靠导航控制"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "传统无人机导航技术无法在GNSS信号衰退时实现可靠导航控制",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "传统无人机导航技术无法在",
+              "typeface": "微软雅黑",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "GNSS",
+              "typeface": "微软雅黑",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "信号衰退时实现可靠导航控制",
+              "typeface": "微软雅黑",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/e10f2twf",
+      "id": "20",
+      "name": "矩形 19",
+      "bbox": [
+        38.67,
+        100.25,
+        1213.33,
+        61
+      ],
+      "geometry": "rect",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": ""
+          }
+        ]
+      }
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/d0jax03i",
+      "id": "3",
+      "name": "文本框 2",
+      "bbox": [
+        38.67,
+        4,
+        620.83,
+        75.13
+      ],
+      "geometry": "rect",
+      "text": "一、研究背景与意义",
+      "textPreview": "一、研究背景与意义",
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "微软雅黑",
+        "color": "tx1",
+        "bold": true,
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "一、研究背景与意义"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "一、研究背景与意义",
+          "runs": [
+            {
+              "index": 1,
+              "text": "一、研究背景与意义"
+            }
+          ],
+          "marginLeft": 0,
+          "lineSpacingPercent": 150000
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cza94vmx",
+      "id": "2",
+      "name": "文本框 1",
+      "bbox": [
+        23.6,
+        476.77,
+        616.4,
+        160.29
+      ],
+      "geometry": "rect",
+      "text": "传统无人机导航技术依赖GNSS/惯导组合导航技术和预设航线的策略，在较为开阔的环境下可实现连续、稳定、低延迟的导航控制，但非常依赖稳定连续的GNSS信号。",
+      "textPreview": "传统无人机导航技术依赖GNSS/惯导组合导航技术和预设航线的策略，在较为开阔的环境下可实现连续、稳定、低延迟的导航控制，但非常依赖稳定连续的GNSS信号。",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 3,
+        "lines": [
+          {
+            "index": 1,
+            "text": "p传统无人机导航技术依赖GNSS/惯导组合导航技术"
+          },
+          {
+            "index": 2,
+            "text": "和预设航线的策略，在较为开阔的环境下可实现连续、稳定"
+          },
+          {
+            "index": 3,
+            "text": "、低延迟的导航控制，但非常依赖稳定连续的GNSS信号。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "传统无人机导航技术依赖GNSS/惯导组合导航技术和预设航线的策略，在较为开阔的环境下可实现连续、稳定、低延迟的导航控制，但非常依赖稳定连续的GNSS信号。",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "传统无人机导航技术依赖",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "GNSS/",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "惯导组合导航技术",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "和预设航线的策略，在较为开阔的环境下可实现连续、稳定、低延迟的导航控制，但非常",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "依赖稳定连续的",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "GNSS",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "信号",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": "。",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/943mhgre",
+      "id": "12",
+      "name": "矩形 11",
+      "bbox": [
+        52.83,
+        111.25,
+        1213.33,
+        61
+      ],
+      "geometry": "rect",
+      "text": "现有技术的概况",
+      "textPreview": "现有技术的概况",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ø现有技术的概况"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "现有技术的概况",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "现有技术的概况",
+              "fontSize": 32,
+              "typeface": "微软雅黑",
+              "color": "#006282",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/n2tc3y1g",
+      "id": "22",
+      "name": "图片 12",
+      "bbox": [
+        668.5,
+        141.75,
+        509.78,
+        311.06
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image8.png",
+        "contentType": "image/png",
+        "byteLength": 886838
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image8.png",
+        "contentType": "image/png",
+        "byteLength": 886838
+      }
+    },
+    {
+      "order": 8,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/x8nml0ra",
+      "id": "16",
+      "name": "文本框 15",
+      "bbox": [
+        640.83,
+        473.42,
+        616.4,
+        160.29
+      ],
+      "geometry": "rect",
+      "text": "当前多数方案尝试引入视觉语言大模型（VLM），以替代GNSS完成安全、自主的导航任务。这一场景下的导航目标是由自然语言给出，例如“前方橘白色条纹遮阳伞附近”、“河对岸的餐厅门口附近”或“前方艺术雕塑附近”。",
+      "textPreview": "当前多数方案尝试引入视觉语言大模型（VLM），以替代GNSS完成安全、自主的导航任务。这一场景下的导航目标是由自然语言给出，例如“前方橘白色条纹遮阳伞附近”、“河对岸的餐厅门口附近”或“前方艺术雕塑附近”。",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 6,
+        "lines": [
+          {
+            "index": 1,
+            "text": "p当前多数方案尝试引入视觉语言大模型（VLM），以替代"
+          },
+          {
+            "index": 2,
+            "text": "GNSS"
+          },
+          {
+            "index": 3,
+            "text": "完成安全、自主的导航任务。这一场景下的导航目标是由"
+          },
+          {
+            "index": 4,
+            "text": "自然语言"
+          },
+          {
+            "index": 5,
+            "text": "给出，例如“前方橘白色条纹遮阳伞附近”、“河对岸的餐厅门"
+          },
+          {
+            "index": 6,
+            "text": "口附近”或“前方艺术雕塑附近”。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "当前多数方案尝试引入视觉语言大模型（VLM），以替代GNSS完成安全、自主的导航任务。这一场景下的导航目标是由自然语言给出，例如“前方橘白色条纹遮阳伞附近”、“河对岸的餐厅门口附近”或“前方艺术雕塑附近”。",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "当前多数方案尝试引入",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "视觉语言大模型",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "（",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "VLM",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "），以替代",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "GNSS",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "完成安全、自主的导航任务。这一场景下的导航目标是由",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": "自然语言",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 9,
+              "text": "给出，例如“前方橘白色条纹遮阳伞附近”、“河对岸的餐厅门口附近”或“前方艺术雕塑附近”。",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    }
+  ],
+  "composeRuns": []
+}

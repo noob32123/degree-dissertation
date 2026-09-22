@@ -1,0 +1,320 @@
+{"kind":"deck","id":"pr/sdkt7i","name":"Deck"}
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"标题和内容"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout2.xml","name":"空白","type":"blank"}
+{"kind":"slide","id":"sl/h9rqse","slide":1,"title":"卫星数据智能计算技术实验室","textShapes":6}
+{"kind":"shape","id":"sh/jexgraps","slide":1,"bbox":[0,171,1280,269]}
+{"kind":"textbox","id":"sh/sj6xofqp","slide":1,"text":"卫星数据智能计算技术实验室","textPreview":"卫星数据智能计算技术实验室","textChars":13,"textLines":1,"bbox":[760,88,420,38]}
+{"kind":"textbox","id":"sh/7ixgvup4","slide":1,"text":"资源耦合卫星地面调度中\nDQN 家族优势的统计证据","textPreview":"资源耦合卫星地面调度中 | DQN 家族优势的统计证据","textChars":25,"textLines":2,"bbox":[105,205,1070,128]}
+{"kind":"textbox","id":"sh/6hofmp8j","slide":1,"text":"Statistical Evidence for a DQN-Family Advantage in a Resource-Coupled Satellite-Ground Scheduling Benchmark","textPreview":"Statistical Evidence for a DQN-Family Advantage in a Resource-Coupled Satellite-Ground Scheduling Benchmark","textChars":107,"textLines":1,"bbox":[142,340,996,58]}
+{"kind":"textbox","id":"sh/9ovel0rq","slide":1,"text":"汇报人：杨博丞","textPreview":"汇报人：杨博丞","textChars":7,"textLines":1,"bbox":[160,477,960,50]}
+{"kind":"textbox","id":"sh/8nmxcvq5","slide":1,"text":"哈尔滨工业大学（深圳）空天科技学院\n卫星数据智能计算技术实验室","textPreview":"哈尔滨工业大学（深圳）空天科技学院 | 卫星数据智能计算技术实验室","textChars":31,"textLines":2,"bbox":[160,545,960,74]}
+{"kind":"textbox","id":"sh/mdgnyx4r","slide":1,"text":"2026.09.10","textPreview":"2026.09.10","textChars":10,"textLines":1,"bbox":[1015,668,205,24]}
+{"kind":"image","id":"im/5gbuporm","slide":1,"name":"","alt":"卫星与地球背景图（来自用户提供模板）","bbox":[0,171,1280,269]}
+{"kind":"image","id":"im/jetcne9w","slide":1,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[28,28,305,75]}
+{"kind":"image","id":"im/writcjq5","slide":1,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1170,35,72,72]}
+{"kind":"notes","id":"nt/h9rqse","slide":1,"text":"开场：本报告介绍当前论文的核心问题、方法、统计证据与适用边界。题目和作者信息来自 manuscript.tex；视觉风格及标识来自用户指定模板。建议用 30 秒说明研究对象不是一般任务分配，而是带持续资源状态的卫星—地面序贯调度。"}
+{"kind":"slide","id":"sl/8a0utk","slide":2,"title":"汇报提纲","textShapes":11}
+{"kind":"textbox","id":"sh/9wbal0jm","slide":2,"text":"汇报提纲","textPreview":"汇报提纲","textChars":4,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/2tkba5kv","slide":2,"text":"目录","textPreview":"目录","textChars":2,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/nutsja1g","slide":2,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/ep0b6lkz","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"textbox","id":"sh/fqtsfq14","slide":2,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[270,164,94,61]}
+{"kind":"textbox","id":"sh/s3i94v2t","slide":2,"text":"研究背景与问题","textPreview":"研究背景与问题","textChars":7,"textLines":1,"bbox":[390,164,550,61]}
+{"kind":"textbox","id":"sh/doradgje","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[270,266,94,61]}
+{"kind":"textbox","id":"sh/x0nm50ze","slide":2,"text":"基准与方法","textPreview":"基准与方法","textChars":5,"textLines":1,"bbox":[390,266,550,61]}
+{"kind":"textbox","id":"sh/wzelcfyt","slide":2,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[270,368,94,61]}
+{"kind":"textbox","id":"sh/by543ah8","slide":2,"text":"实验结果与统计证据","textPreview":"实验结果与统计证据","textChars":9,"textLines":1,"bbox":[390,368,550,61]}
+{"kind":"textbox","id":"sh/axw3a5gn","slide":2,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[270,470,94,61]}
+{"kind":"textbox","id":"sh/9cn210zi","slide":2,"text":"边界与结论","textPreview":"边界与结论","textChars":5,"textLines":1,"bbox":[390,470,550,61]}
+{"kind":"image","id":"im/dkbqpofi","slide":2,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/cj2pgjex","slide":2,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"notes","id":"nt/8a0utk","slide":2,"text":"汇报分为四部分：先界定资源耦合调度问题，再说明可复现基准与六种 DQN 目标，随后展示跨场景、跨随机种子的统计证据，最后讨论边界和结论。"}
+{"kind":"slide","id":"sl/dhp3n0","slide":3,"title":"一、研究背景与问题","textShapes":21}
+{"kind":"textbox","id":"sh/b6t872pg","slide":3,"text":"一、研究背景与问题","textPreview":"一、研究背景与问题","textChars":9,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/c72p07q1","slide":3,"text":"一次调度动作会同时改变多个持续资源状态","textPreview":"一次调度动作会同时改变多个持续资源状态","textChars":19,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/dsvq9c7m","slide":3,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/o32pw7q5","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/p4b65c7q","slide":3,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/ex07qd83","slide":3,"text":"关键难点不是单步代价，而是当前动作对后续可行性与累积成本的长期影响。","textPreview":"关键难点不是单步代价，而是当前动作对后续可行性与累积成本的长期影响。","textChars":34,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/fy9ozi9o","slide":3,"text":"三种处理路径","textPreview":"三种处理路径","textChars":6,"textLines":1,"bbox":[55,125,220,34]}
+{"kind":"textbox","id":"sh/zed8ba1g","slide":3,"text":"星上处理","textPreview":"星上处理","textChars":4,"textLines":1,"bbox":[58,172,200,48]}
+{"kind":"textbox","id":"sh/ydkr250v","slide":3,"text":"onboard","textPreview":"onboard","textChars":7,"textLines":1,"bbox":[58,222,200,24]}
+{"kind":"textbox","id":"sh/lgvqdkjm","slide":3,"text":"地面处理","textPreview":"地面处理","textChars":4,"textLines":1,"bbox":[300,172,200,48]}
+{"kind":"textbox","id":"sh/0fm94fi1","slide":3,"text":"ground","textPreview":"ground","textChars":6,"textLines":1,"bbox":[300,222,200,24]}
+{"kind":"textbox","id":"sh/n2d8fu1c","slide":3,"text":"星地协同","textPreview":"星地协同","textChars":4,"textLines":1,"bbox":[542,172,200,48]}
+{"kind":"textbox","id":"sh/mh4r6p0r","slide":3,"text":"collaborative","textPreview":"collaborative","textChars":13,"textLines":1,"bbox":[542,222,200,24]}
+{"kind":"textbox","id":"sh/94vqhkji","slide":3,"text":"持续演化的六类资源","textPreview":"持续演化的六类资源","textChars":9,"textLines":1,"bbox":[55,302,260,34]}
+{"kind":"textbox","id":"sh/83m98fix","slide":3,"text":"热状态","textPreview":"热状态","textChars":3,"textLines":1,"bbox":[62,350,186,48]}
+{"kind":"textbox","id":"sh/36983q18","slide":3,"text":"能量","textPreview":"能量","textChars":2,"textLines":1,"bbox":[284,350,186,48]}
+{"kind":"textbox","id":"sh/2l07ul0n","slide":3,"text":"任务队列","textPreview":"任务队列","textChars":4,"textLines":1,"bbox":[506,350,186,48]}
+{"kind":"textbox","id":"sh/618b2tkb","slide":3,"text":"计算利用率","textPreview":"计算利用率","textChars":5,"textLines":1,"bbox":[62,426,186,48]}
+{"kind":"textbox","id":"sh/72hcbylw","slide":3,"text":"链路带宽","textPreview":"链路带宽","textChars":4,"textLines":1,"bbox":[284,426,186,48]}
+{"kind":"textbox","id":"sh/s3qt432h","slide":3,"text":"接触时长","textPreview":"接触时长","textChars":4,"textLines":1,"bbox":[506,426,186,48]}
+{"kind":"shape","id":"sh/t4zud83m","slide":3,"bbox":[790,145,405,393]}
+{"kind":"textbox","id":"sh/ixobytkz","slide":3,"text":"资源耦合","textPreview":"资源耦合","textChars":4,"textLines":1,"bbox":[835,180,315,46]}
+{"kind":"textbox","id":"sh/jyhs7elk","slide":3,"text":"动作会改变热、能量、队列和链路状态；\n这些状态又共同决定后续动作的代价。","textPreview":"动作会改变热、能量、队列和链路状态； | 这些状态又共同决定后续动作的代价。","textChars":36,"textLines":2,"bbox":[840,248,305,110]}
+{"kind":"shape","id":"sh/kzqt0j25","slide":3,"bbox":[875,388,235,0]}
+{"kind":"textbox","id":"sh/50zu9o3q","slide":3,"text":"长期价值学习用于显式处理\n跨时段影响与软约束惩罚","textPreview":"长期价值学习用于显式处理 | 跨时段影响与软约束惩罚","textChars":24,"textLines":2,"bbox":[840,410,305,86]}
+{"kind":"image","id":"im/b69gzqxo","slide":3,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/a50f6lw3","slide":3,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"notes","id":"nt/dhp3n0","slide":3,"text":"对应 manuscript.tex 的 System Model 与 Introduction。强调资源是持久状态而不是独立任务属性。三个动作共同作用于六类资源，因此贪心选择可能把代价推迟到后续时段。"}
+{"kind":"slide","id":"sl/hupd7c","slide":4,"title":"一、研究背景与问题","textShapes":15}
+{"kind":"textbox","id":"sh/tojihw3q","slide":4,"text":"一、研究背景与问题","textPreview":"一、研究背景与问题","textChars":9,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/61sz6hkz","slide":4,"text":"研究问题与三项贡献","textPreview":"研究问题与三项贡献","textChars":9,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/7m10fmlk","slide":4,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/upsjahkb","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/fql0jmlg","slide":4,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/4vu1gb2d","slide":4,"text":"研究目标：在匹配训练预算和交互数据的条件下，检验 DQN 家族相对短视规划的稳定优势。","textPreview":"研究目标：在匹配训练预算和交互数据的条件下，检验 DQN 家族相对短视规划的稳定优势。","textChars":43,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/pw3ipg3y","slide":4,"text":"现有证据缺口","textPreview":"现有证据缺口","textChars":6,"textLines":1,"bbox":[55,125,230,34]}
+{"kind":"textbox","id":"sh/p07epw7i","slide":4,"text":"许多调度研究在算法、训练预算、测试轨迹和统计检验上并不完全可比，\n难以区分“算法优势”与“实验配置优势”。","textPreview":"许多调度研究在算法、训练预算、测试轨迹和统计检验上并不完全可比， | 难以区分“算法优势”与“实验配置优势”。","textChars":53,"textLines":2,"bbox":[55,165,1140,72]}
+{"kind":"textbox","id":"sh/4zyxwr6x","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[78,282,65,60]}
+{"kind":"textbox","id":"sh/3ypwnmpc","slide":4,"text":"可复现资源耦合基准","textPreview":"可复现资源耦合基准","textChars":9,"textLines":1,"bbox":[162,280,1016,32]}
+{"kind":"textbox","id":"sh/2xgvuhor","slide":4,"text":"统一任务生成、资源状态、软约束和评测轨迹。","textPreview":"统一任务生成、资源状态、软约束和评测轨迹。","textChars":21,"textLines":1,"bbox":[162,310,1016,55]}
+{"kind":"textbox","id":"sh/doretg7e","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[78,386,65,60]}
+{"kind":"textbox","id":"sh/cnix0b69","slide":4,"text":"匹配条件下比较六种 DQN 目标","textPreview":"匹配条件下比较六种 DQN 目标","textChars":16,"textLines":1,"bbox":[162,384,1016,32]}
+{"kind":"textbox","id":"sh/r2pwr6po","slide":4,"text":"共享网络结构、训练交互和测试场景，仅改变学习目标。","textPreview":"共享网络结构、训练交互和测试场景，仅改变学习目标。","textChars":25,"textLines":1,"bbox":[162,414,1016,55]}
+{"kind":"textbox","id":"sh/q1gfy1o3","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[78,490,65,60]}
+{"kind":"textbox","id":"sh/tsnehc7a","slide":4,"text":"用联合统计证据界定结论","textPreview":"用联合统计证据界定结论","textChars":11,"textLines":1,"bbox":[162,488,1016,32]}
+{"kind":"textbox","id":"sh/sredo76p","slide":4,"text":"跨 20 个模型种子与共享轨迹，报告联合区间、符号检验与敏感性结果。","textPreview":"跨 20 个模型种子与共享轨迹，报告联合区间、符号检验与敏感性结果。","textChars":34,"textLines":1,"bbox":[162,518,1016,55]}
+{"kind":"image","id":"im/583ixojq","slide":4,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/47u1ojil","slide":4,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"notes","id":"nt/hupd7c","slide":4,"text":"对应 Introduction 末尾现版本保留的三项贡献。第四点已按作者要求删除，因此本页不新增额外贡献。讲述时突出“匹配条件”和“联合统计证据”，避免把结论泛化到真实飞行环境。"}
+{"kind":"slide","id":"sl/qy3ofd","slide":5,"title":"二、基准与方法","textShapes":5}
+{"kind":"textbox","id":"sh/8vit4ne5","slide":5,"text":"二、基准与方法","textPreview":"二、基准与方法","textChars":7,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/7u9sbix0","slide":5,"text":"系统模型：动作路径与六类后置资源","textPreview":"系统模型：动作路径与六类后置资源","textChars":16,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/6t0b2dwf","slide":5,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/j69s7yxo","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/y5gbydw3","slide":5,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/x47a58fi","slide":5,"text":"同一任务在三种处理路径之间选择；每条路径对应不同的资源消耗与后续状态。","textPreview":"同一任务在三种处理路径之间选择；每条路径对应不同的资源消耗与后续状态。","textChars":35,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/29k32t8b","slide":5,"text":"图源：论文 Fig. 1（manuscript.tex）","textPreview":"图源：论文 Fig. 1（manuscript.tex）","textChars":28,"textLines":1,"bbox":[62,605,430,22]}
+{"kind":"image","id":"im/43i58r2p","slide":5,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/pormhw3a","slide":5,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"image","id":"im/9kv6tgje","slide":5,"name":"","alt":"三种调度动作及六类后置资源的系统示意图","bbox":[60,126,1160,475]}
+{"kind":"notes","id":"nt/qy3ofd","slide":5,"text":"对应论文 Fig. 1。上方是 onboard、ground、collaborative 三种动作，下方是动作后持续演化的资源量。建议按从任务输入到动作、再到资源状态的顺序讲图。"}
+{"kind":"slide","id":"sl/9hwinx","slide":6,"title":"二、基准与方法","textShapes":11}
+{"kind":"textbox","id":"sh/zm1wfipk","slide":6,"text":"二、基准与方法","textPreview":"二、基准与方法","textChars":7,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/07adon65","slide":6,"text":"合成任务生成器：保留任务属性间的物理一致性","textPreview":"合成任务生成器：保留任务属性间的物理一致性","textChars":21,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/18jehs7q","slide":6,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/obads76h","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/9c3els72","slide":6,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/2d8veto7","slide":6,"text":"生成器用于受控统计比较；它体现一致性约束，但不声称拟合真实在轨任务分布。","textPreview":"生成器用于受控统计比较；它体现一致性约束，但不声称拟合真实在轨任务分布。","textChars":36,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/vm14ja5o","slide":6,"text":"20,000","textPreview":"20,000","textChars":6,"textLines":1,"bbox":[920,175,255,54]}
+{"kind":"textbox","id":"sh/ul83q5oj","slide":6,"text":"独立物理审计任务","textPreview":"独立物理审计任务","textChars":8,"textLines":1,"bbox":[920,228,255,38]}
+{"kind":"textbox","id":"sh/h8jmlknu","slide":6,"text":"0.660","textPreview":"0.660","textChars":5,"textLines":1,"bbox":[920,302,255,54]}
+{"kind":"textbox","id":"sh/g7alsf69","slide":6,"text":"数据量—工作量相关系数","textPreview":"数据量—工作量相关系数","textChars":11,"textLines":1,"bbox":[920,355,255,38]}
+{"kind":"textbox","id":"sh/7ihkfa5s","slide":6,"text":"设计原则","textPreview":"设计原则","textChars":4,"textLines":1,"bbox":[930,432,235,30]}
+{"kind":"textbox","id":"sh/6h83m5o7","slide":6,"text":"任务属性相关\n资源转换可解释\n随机性可复现","textPreview":"任务属性相关 | 资源转换可解释 | 随机性可复现","textChars":21,"textLines":3,"bbox":[930,470,235,105]}
+{"kind":"textbox","id":"sh/tkz2h0ny","slide":6,"text":"图源：论文 Fig. 2","textPreview":"图源：论文 Fig. 2","textChars":12,"textLines":1,"bbox":[62,606,250,22]}
+{"kind":"image","id":"im/3m5cjy1k","slide":6,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/ilwbqdkz","slide":6,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"image","id":"im/qpgbudkv","slide":6,"name":"","alt":"合成任务生成器的散点关系与相关性热图","bbox":[55,130,825,455]}
+{"kind":"notes","id":"nt/9hwinx","slide":6,"text":"对应论文任务生成器审计图。20,000 个独立任务用于检查生成关系，数据量与工作量相关系数为 0.660。需要主动说明：该生成器是可控、可复现的合成基准，不是对真实飞行分布的经验拟合。"}
+{"kind":"slide","id":"sl/c4gqf0","slide":7,"title":"二、基准与方法","textShapes":5}
+{"kind":"textbox","id":"sh/l03udgjy","slide":7,"text":"二、基准与方法","textPreview":"二、基准与方法","textChars":7,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/yxsvi1k7","slide":7,"text":"六种 DQN 学习目标及匹配训练条件","textPreview":"六种 DQN 学习目标及匹配训练条件","textChars":18,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/zylcb61s","slide":7,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/mlcv6lkj","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/nmlcfq1o","slide":7,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/wredcv2l","slide":7,"text":"统一网络、训练交互和评测轨迹，使差异尽可能归因于目标构造。","textPreview":"统一网络、训练交互和评测轨迹，使差异尽可能归因于目标构造。","textChars":29,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/90zahwr6","slide":7,"text":"注：六个变体均使用相同状态、动作、网络容量、训练交互与评测协议。","textPreview":"注：六个变体均使用相同状态、动作、网络容量、训练交互与评测协议。","textChars":32,"textLines":1,"bbox":[94,578,1090,28]}
+{"kind":"table","id":"tb/4vup4zi1","slide":7,"name":"","rows":7,"cols":4,"preview":"目标变体 | 事实动作 Bellman | 全动作辅助 | Double 目标","bbox":[92,145,1096,410]}
+{"kind":"image","id":"im/18vihwfa","slide":7,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/07mhorep","slide":7,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"notes","id":"nt/c4gqf0","slide":7,"text":"对应 DQN Objective Family。Standard 为事实动作 Bellman；Full-action Q、Immediate advantage、Centered 引入不同的全动作辅助；Double 使用解耦选择与评估；Double + centered 组合两者。这里不把辅助监督表述为额外环境交互，因为它来自同一状态下的模型化动作评价。"}
+{"kind":"slide","id":"sl/06lpm0","slide":8,"title":"二、基准与方法","textShapes":27}
+{"kind":"textbox","id":"sh/ze5or2tg","slide":8,"text":"二、基准与方法","textPreview":"二、基准与方法","textChars":7,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/0fe5k7a1","slide":8,"text":"评测设计：共享轨迹、独立模型种子与联合推断","textPreview":"评测设计：共享轨迹、独立模型种子与联合推断","textChars":21,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/lgn6tcbm","slide":8,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/cre5g7up","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/dsn6psba","slide":8,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/2lcnadcn","slide":8,"text":"支持判据预先固定：均值差为负、95% 区间排除 0，并报告多重比较校正。","textPreview":"支持判据预先固定：均值差为负、95% 区间排除 0，并报告多重比较校正。","textChars":36,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/3mlojit8","slide":8,"text":"20","textPreview":"20","textChars":2,"textLines":1,"bbox":[70,145,210,54]}
+{"kind":"textbox","id":"sh/falgj25o","slide":8,"text":"独立模型种子","textPreview":"独立模型种子","textChars":6,"textLines":1,"bbox":[70,198,210,38]}
+{"kind":"textbox","id":"sh/u9cfqxo3","slide":8,"text":"20","textPreview":"20","textChars":2,"textLines":1,"bbox":[318,145,250,54]}
+{"kind":"textbox","id":"sh/hw3ylcne","slide":8,"text":"每种子共享测试轨迹","textPreview":"每种子共享测试轨迹","textChars":9,"textLines":1,"bbox":[318,198,250,38]}
+{"kind":"textbox","id":"sh/gvuhs76t","slide":8,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[606,145,210,54]}
+{"kind":"textbox","id":"sh/3y5gnm5k","slide":8,"text":"完全耦合场景","textPreview":"完全耦合场景","textChars":6,"textLines":1,"bbox":[606,198,210,38]}
+{"kind":"textbox","id":"sh/2xczuhoz","slide":8,"text":"30","textPreview":"30","textChars":2,"textLines":1,"bbox":[854,145,250,54]}
+{"kind":"textbox","id":"sh/p0nypwnq","slide":8,"text":"DQN–MPC-4 对比","textPreview":"DQN–MPC-4 对比","textChars":12,"textLines":1,"bbox":[854,198,250,38]}
+{"kind":"textbox","id":"sh/4zehwr65","slide":8,"text":"10,000","textPreview":"10,000","textChars":6,"textLines":1,"bbox":[1090,145,150,54]}
+{"kind":"textbox","id":"sh/j21gbipg","slide":8,"text":"联合 bootstrap 重采样","textPreview":"联合 bootstrap 重采样","textChars":16,"textLines":1,"bbox":[1090,198,150,38]}
+{"kind":"shape","id":"sh/i1sfidov","slide":8,"bbox":[84,275,1110,0]}
+{"kind":"textbox","id":"sh/mxgjql8j","slide":8,"text":"比较对象","textPreview":"比较对象","textChars":4,"textLines":1,"bbox":[75,306,220,32]}
+{"kind":"textbox","id":"sh/ny9kjqp4","slide":8,"text":"Argmin","textPreview":"Argmin","textChars":6,"textLines":1,"bbox":[76,352,190,48]}
+{"kind":"textbox","id":"sh/8zi1svq9","slide":8,"text":"MPC-4","textPreview":"MPC-4","textChars":5,"textLines":1,"bbox":[301,352,190,48]}
+{"kind":"textbox","id":"sh/9kr2l07u","slide":8,"text":"Contextual bandit","textPreview":"Contextual bandit","textChars":17,"textLines":1,"bbox":[526,352,190,48]}
+{"kind":"textbox","id":"sh/ytgjml87","slide":8,"text":"Threshold","textPreview":"Threshold","textChars":9,"textLines":1,"bbox":[751,352,190,48]}
+{"kind":"textbox","id":"sh/zup0fqps","slide":8,"text":"6× DQN","textPreview":"6× DQN","textChars":6,"textLines":1,"bbox":[976,352,190,48]}
+{"kind":"textbox","id":"sh/0vy1ovqd","slide":8,"text":"统计证据链","textPreview":"统计证据链","textChars":5,"textLines":1,"bbox":[75,446,220,32]}
+{"kind":"textbox","id":"sh/lw7ih07y","slide":8,"text":"①","textPreview":"①","textChars":1,"textLines":1,"bbox":[78,498,48,48]}
+{"kind":"textbox","id":"sh/qpwji18b","slide":8,"text":"逐对配对均值差","textPreview":"逐对配对均值差","textChars":7,"textLines":1,"bbox":[136,495,270,54]}
+{"kind":"textbox","id":"sh/bqp0b6pw","slide":8,"text":"②","textPreview":"②","textChars":1,"textLines":1,"bbox":[443,498,48,48]}
+{"kind":"textbox","id":"sh/tkvmx4re","slide":8,"text":"联合 95% 区间","textPreview":"联合 95% 区间","textChars":9,"textLines":1,"bbox":[501,495,270,54]}
+{"kind":"textbox","id":"sh/sjmlojat","slide":8,"text":"③","textPreview":"③","textChars":1,"textLines":1,"bbox":[808,498,48,48]}
+{"kind":"textbox","id":"sh/7id4ve98","slide":8,"text":"Holm 校正符号检验","textPreview":"Holm 校正符号检验","textChars":11,"textLines":1,"bbox":[866,495,270,54]}
+{"kind":"image","id":"im/fuxwbal4","slide":8,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/etov25kj","slide":8,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"notes","id":"nt/06lpm0","slide":8,"text":"对应 Experimental Design。五个完全耦合场景是 nominal、burst、link-limited、energy-limited、thermal-stress。每个模型种子在 20 条共享 held-out 轨迹上评测。30 个对比来自 6 个 DQN 目标乘 5 个场景。联合 bootstrap 使用 10,000 次重采样，符号检验按 Holm 校正。"}
+{"kind":"slide","id":"sl/3dmdw3","slide":9,"title":"三、实验结果与统计证据","textShapes":5}
+{"kind":"textbox","id":"sh/2p8f6p8r","slide":9,"text":"三、实验结果与统计证据","textPreview":"三、实验结果与统计证据","textChars":11,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/pszy1kr2","slide":9,"text":"七类场景中的总体表现","textPreview":"七类场景中的总体表现","textChars":10,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/orqx8zqx","slide":9,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/xwjy54re","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/cvaxczqt","slide":9,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/zy1g7e9k","slide":9,"text":"在五个完全耦合场景中，DQN 家族均低于所有非 DQN 基线；数值越低越好。","textPreview":"在五个完全耦合场景中，DQN 家族均低于所有非 DQN 基线；数值越低越好。","textChars":38,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/4bax4rml","slide":9,"text":"图源：论文 Fig. 3；Static 与 Reduced 用于诊断，五个 Full regimes 用于主要结论。","textPreview":"图源：论文 Fig. 3；Static 与 Reduced 用于诊断，五个 Full regimes 用于主要结论。","textChars":58,"textLines":1,"bbox":[62,600,1100,24]}
+{"kind":"image","id":"im/apcjat07","slide":9,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/bql03yhs","slide":9,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"image","id":"im/nml0zehw","slide":9,"name":"","alt":"七类场景中各调度器平均成本的比较","bbox":[55,128,1168,462]}
+{"kind":"notes","id":"nt/3dmdw3","slide":9,"text":"对应论文主结果图。静态和 reduced 场景用于诊断模型在耦合减弱时的行为，主要结论只基于右侧五个 fully coupled regimes。不要把 DQN 在所有七种场景中的排序笼统表述为无条件最优。"}
+{"kind":"slide","id":"sl/a6u4kx","slide":10,"title":"三、实验结果与统计证据","textShapes":12}
+{"kind":"textbox","id":"sh/1gf2dgbi","slide":10,"text":"三、实验结果与统计证据","textPreview":"三、实验结果与统计证据","textChars":11,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/edoji1sr","slide":10,"text":"30/30 个 DQN–MPC-4 对比支持家族优势","textPreview":"30/30 个 DQN–MPC-4 对比支持家族优势","textChars":26,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/zex0b6tc","slide":10,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/mhojmlsn","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/nixkfqt8","slide":10,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/47m1crap","slide":10,"text":"最不利比较仍为 −5.92；同时 95% 上界为 −5.03，保持在零以下。","textPreview":"最不利比较仍为 −5.92；同时 95% 上界为 −5.03，保持在零以下。","textChars":38,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/5w3u1gvi","slide":10,"text":"30 / 30","textPreview":"30 / 30","textChars":7,"textLines":1,"bbox":[925,164,260,54]}
+{"kind":"textbox","id":"sh/kvutsbex","slide":10,"text":"平均差均低于 0","textPreview":"平均差均低于 0","textChars":8,"textLines":1,"bbox":[925,217,260,38]}
+{"kind":"textbox","id":"sh/julcz6dc","slide":10,"text":"−5.92","textPreview":"−5.92","textChars":5,"textLines":1,"bbox":[925,286,260,54]}
+{"kind":"textbox","id":"sh/i9cbq1wr","slide":10,"text":"最不利均值差","textPreview":"最不利均值差","textChars":6,"textLines":1,"bbox":[925,339,260,38]}
+{"kind":"textbox","id":"sh/t0nu50ve","slide":10,"text":"−5.03","textPreview":"−5.03","textChars":5,"textLines":1,"bbox":[925,408,260,54]}
+{"kind":"textbox","id":"sh/szutwvut","slide":10,"text":"同时 95% 上界","textPreview":"同时 95% 上界","textChars":9,"textLines":1,"bbox":[925,461,260,38]}
+{"kind":"textbox","id":"sh/7ylc3qdo","slide":10,"text":"Holm 校正后最大 p = 5.722×10⁻⁵","textPreview":"Holm 校正后最大 p = 5.722×10⁻⁵","textChars":25,"textLines":1,"bbox":[915,535,280,40]}
+{"kind":"textbox","id":"sh/6xcbulc3","slide":10,"text":"图源：论文 Fig. 4","textPreview":"图源：论文 Fig. 4","textChars":12,"textLines":1,"bbox":[62,606,300,22]}
+{"kind":"image","id":"im/twf2l8jm","slide":10,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/8v61s3i1","slide":10,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"image","id":"im/oz21gzih","slide":10,"name":"","alt":"30 个 DQN–MPC-4 配对差异及联合区间","bbox":[50,128,840,475]}
+{"kind":"notes","id":"nt/a6u4kx","slide":10,"text":"核心结论页。差值定义为 DQN 成本减 MPC-4 成本，因此负值表示 DQN 更好。30 个均值差全部为负，且每个配对 95% 区间排除 0。跨全部比较的同时 95% 上界为 −5.03；最不利均值差为 −5.92；Holm 校正符号检验最大 p 值为 5.722e−05。"}
+{"kind":"slide","id":"sl/8jp3q0","slide":11,"title":"三、实验结果与统计证据","textShapes":10}
+{"kind":"textbox","id":"sh/sfql0zux","slide":11,"text":"三、实验结果与统计证据","textPreview":"三、实验结果与统计证据","textChars":11,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/reh4rutc","slide":11,"text":"DQN 家族内部差异随场景变化","textPreview":"DQN 家族内部差异随场景变化","textChars":15,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/qd83ypcr","slide":11,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/3ax4nutg","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/i9o3upcv","slide":11,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/hof2lkba","slide":11,"text":"证据支持的是“DQN 家族相对 MPC-4”的稳定优势，而非某一目标在所有场景中绝对占优。","textPreview":"证据支持的是“DQN 家族相对 MPC-4”的稳定优势，而非某一目标在所有场景中绝对占优。","textChars":45,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/qpcjmxcr","slide":11,"text":"Nominal 场景","textPreview":"Nominal 场景","textChars":10,"textLines":1,"bbox":[955,180,235,30]}
+{"kind":"textbox","id":"sh/bqlkf2dc","slide":11,"text":"77.66–78.40","textPreview":"77.66–78.40","textChars":11,"textLines":1,"bbox":[945,225,255,62]}
+{"kind":"textbox","id":"sh/cru1o7uh","slide":11,"text":"六种 DQN 的成本范围","textPreview":"六种 DQN 的成本范围","textChars":12,"textLines":1,"bbox":[945,287,255,28]}
+{"kind":"shape","id":"sh/ds32hcv2","slide":11,"bbox":[970,345,205,0]}
+{"kind":"textbox","id":"sh/21sjixcf","slide":11,"text":"Centered","textPreview":"Centered","textChars":8,"textLines":1,"bbox":[955,375,235,34]}
+{"kind":"textbox","id":"sh/3mlkb2d0","slide":11,"text":"在多个场景中数值最低，\n但领先幅度小且并非处处显著。","textPreview":"在多个场景中数值最低， | 但领先幅度小且并非处处显著。","textChars":26,"textLines":2,"bbox":[945,421,255,87]}
+{"kind":"textbox","id":"sh/onu1knul","slide":11,"text":"图源：论文 Fig. 5","textPreview":"图源：论文 Fig. 5","textChars":12,"textLines":1,"bbox":[62,606,300,22]}
+{"kind":"image","id":"im/g7e9gfad","slide":11,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/1sna9kby","slide":11,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"image","id":"im/hwjqxgbu","slide":11,"name":"","alt":"六种 DQN 目标在五个完全耦合场景中的成本及目标间区间","bbox":[50,132,870,455]}
+{"kind":"notes","id":"nt/8jp3q0","slide":11,"text":"对应论文 DQN-family 细分结果。Nominal 下六种目标范围为 77.66–78.40，远小于它们与 MPC-4（90.83）的差距。Centered 在若干场景中最低，但家族内部区间显示差异较小且依场景变化，因此不要宣称 centered 普遍最优。"}
+{"kind":"slide","id":"sl/cfgj8d","slide":12,"title":"三、实验结果与统计证据","textShapes":11}
+{"kind":"textbox","id":"sh/eto7ylsn","slide":12,"text":"三、实验结果与统计证据","textPreview":"三、实验结果与统计证据","textChars":11,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/1wf69gbe","slide":12,"text":"规划深度：成本下降伴随显著运行时间增长","textPreview":"规划深度：成本下降伴随显著运行时间增长","textChars":19,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/0v6p0vat","slide":12,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/pkz6d0ba","slide":12,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/ozqp4vap","slide":12,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/j2doz6t0","slide":12,"text":"更深的精确规划继续降低成本，但从 H=1 到 H=6，运行时间增长约 327 倍。","textPreview":"更深的精确规划继续降低成本，但从 H=1 到 H=6，运行时间增长约 327 倍。","textChars":41,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/kjehormh","slide":12,"text":"成本","textPreview":"成本","textChars":2,"textLines":1,"bbox":[900,168,250,28]}
+{"kind":"textbox","id":"sh/lknixwn2","slide":12,"text":"99.33 → 89.35","textPreview":"99.33 → 89.35","textChars":13,"textLines":1,"bbox":[890,207,270,55]}
+{"kind":"textbox","id":"sh/yhwzmh4b","slide":12,"text":"−10.0%","textPreview":"−10.0%","textChars":6,"textLines":1,"bbox":[930,264,190,28]}
+{"kind":"shape","id":"sh/zi50vm5w","slide":12,"bbox":[925,318,200,0]}
+{"kind":"textbox","id":"sh/8ny1srmd","slide":12,"text":"运行时间","textPreview":"运行时间","textChars":4,"textLines":1,"bbox":[900,342,250,28]}
+{"kind":"textbox","id":"sh/9o7i1w3y","slide":12,"text":"0.13 → 42.50 ms","textPreview":"0.13 → 42.50 ms","textChars":15,"textLines":1,"bbox":[875,383,300,55]}
+{"kind":"textbox","id":"sh/mlwjq14n","slide":12,"text":"约 327×","textPreview":"约 327×","textChars":6,"textLines":1,"bbox":[930,439,190,28]}
+{"kind":"textbox","id":"sh/7mp0zm58","slide":12,"text":"基于 400 条 held-out 轨迹；本文未进行匹配的 DQN 推理延迟测量。","textPreview":"基于 400 条 held-out 轨迹；本文未进行匹配的 DQN 推理延迟测量。","textChars":41,"textLines":1,"bbox":[74,535,1095,32]}
+{"kind":"table","id":"tb/je9g369w","slide":12,"name":"","rows":5,"cols":4,"preview":"规划深度 H | 枚举序列数 | 平均成本 | 单步运行时间 (ms)","bbox":[70,160,770,332]}
+{"kind":"image","id":"im/q5gvih4v","slide":12,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/r6pwrmlg","slide":12,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"notes","id":"nt/cfgj8d","slide":12,"text":"对应规划深度消融。H=1、2、4、6 的成本分别为 99.33、92.80、90.83、89.35，运行时间为 0.13、0.50、4.82、42.50 ms。该表基于 400 条 held-out 轨迹。必须保留限定：没有在同一硬件和实现条件下测量 DQN 推理延迟，因此不能据此声称 DQN 在墙钟时间上快于 MPC。"}
+{"kind":"slide","id":"sl/irpurn","slide":13,"title":"三、实验结果与统计证据","textShapes":11}
+{"kind":"textbox","id":"sh/2dwfexw3","slide":13,"text":"三、实验结果与统计证据","textPreview":"三、实验结果与统计证据","textChars":11,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/pgnypsfu","slide":13,"text":"参数敏感性与预览误差","textPreview":"参数敏感性与预览误差","textChars":10,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/ofexgne9","slide":13,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/hcnylsfi","slide":13,"text":"13","textPreview":"13","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/gbuxcned","slide":13,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/76lgfyxg","slide":13,"text":"参数剖面支持 8/8；预览缩放 ±15% 时各仅支持 3/5 个场景，应按边界而非失败解读。","textPreview":"参数剖面支持 8/8；预览缩放 ±15% 时各仅支持 3/5 个场景，应按边界而非失败解读。","textChars":46,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/g3ihg7i1","slide":13,"text":"8 / 8","textPreview":"8 / 8","textChars":5,"textLines":1,"bbox":[940,170,250,54]}
+{"kind":"textbox","id":"sh/h4by9cjm","slide":13,"text":"参数剖面区间低于 0","textPreview":"参数剖面区间低于 0","textChars":10,"textLines":1,"bbox":[940,223,250,38]}
+{"kind":"textbox","id":"sh/u10zex0v","slide":13,"text":"0.50–1.66%","textPreview":"0.50–1.66%","textChars":10,"textLines":1,"bbox":[920,298,290,54]}
+{"kind":"textbox","id":"sh/v29g721g","slide":13,"text":"Centered 相对 Standard 改善","textPreview":"Centered 相对 Standard 改善","textChars":23,"textLines":1,"bbox":[920,351,290,38]}
+{"kind":"textbox","id":"sh/8zihcni5","slide":13,"text":"预览缩放","textPreview":"预览缩放","textChars":4,"textLines":1,"bbox":[950,434,230,28]}
+{"kind":"textbox","id":"sh/t0ry5sja","slide":13,"text":"0.85：3/5 场景支持\n1.15：3/5 场景支持","textPreview":"0.85：3/5 场景支持 | 1.15：3/5 场景支持","textChars":27,"textLines":2,"bbox":[930,472,270,82]}
+{"kind":"textbox","id":"sh/6x0zax0z","slide":13,"text":"图源：论文 Fig. 6","textPreview":"图源：论文 Fig. 6","textChars":12,"textLines":1,"bbox":[62,606,300,22]}
+{"kind":"image","id":"im/mx0rat0z","slide":13,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/ny983eh4","slide":13,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"image","id":"im/za98zeh8","slide":13,"name":"","alt":"参数敏感性及规划预览误差结果","bbox":[55,130,850,455]}
+{"kind":"notes","id":"nt/irpurn","slide":13,"text":"左侧参数敏感性覆盖 8 个剖面，Centered 相对 Standard 的改善约 0.50%–1.66%，所有配对区间低于 0。右侧预览误差把规划输入统一缩放为 0.85 或 1.15，两种情况下都只有 3/5 场景满足原支持判据，因此只能称部分稳健，不能称对预览误差完全鲁棒。"}
+{"kind":"slide","id":"sl/ne2mwt","slide":14,"title":"三、实验结果与统计证据","textShapes":16}
+{"kind":"textbox","id":"sh/nu9sfq9c","slide":14,"text":"三、实验结果与统计证据","textPreview":"三、实验结果与统计证据","textChars":11,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/8v2tovqx","slide":14,"text":"训练稳定性与工程指标","textPreview":"训练稳定性与工程指标","textChars":10,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/9gbah07i","slide":14,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/0ritkbql","slide":14,"text":"14","textPreview":"14","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/lsradgr6","slide":14,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/ilkbu58z","slide":14,"text":"成本优势主要来自更少的延迟惩罚；工程指标改善伴随热峰值略高这一权衡。","textPreview":"成本优势主要来自更少的延迟惩罚；工程指标改善伴随热峰值略高这一权衡。","textChars":34,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/769sb65c","slide":14,"text":"约 220 episodes","textPreview":"约 220 episodes","textChars":14,"textLines":1,"bbox":[880,153,305,48]}
+{"kind":"textbox","id":"sh/650ri14r","slide":14,"text":"Standard 与 Centered 曲线趋于稳定","textPreview":"Standard 与 Centered 曲线趋于稳定","textChars":26,"textLines":1,"bbox":[875,202,315,48]}
+{"kind":"textbox","id":"sh/tsradgn2","slide":14,"text":"延迟惩罚","textPreview":"延迟惩罚","textChars":4,"textLines":1,"bbox":[885,286,170,40]}
+{"kind":"textbox","id":"sh/87i9kbmx","slide":14,"text":"更低","textPreview":"更低","textChars":2,"textLines":1,"bbox":[1060,286,105,40]}
+{"kind":"textbox","id":"sh/vutsf658","slide":14,"text":"建模能耗","textPreview":"建模能耗","textChars":4,"textLines":1,"bbox":[885,344,170,40]}
+{"kind":"textbox","id":"sh/ut0bm14n","slide":14,"text":"更低","textPreview":"更低","textChars":2,"textLines":1,"bbox":[1060,344,105,40]}
+{"kind":"textbox","id":"sh/hwbahgne","slide":14,"text":"时延","textPreview":"时延","textChars":2,"textLines":1,"bbox":[885,402,170,40]}
+{"kind":"textbox","id":"sh/gv2tobmt","slide":14,"text":"更低","textPreview":"更低","textChars":2,"textLines":1,"bbox":[1060,402,105,40]}
+{"kind":"textbox","id":"sh/3ytsjq5k","slide":14,"text":"传输数据量","textPreview":"传输数据量","textChars":5,"textLines":1,"bbox":[885,460,170,40]}
+{"kind":"textbox","id":"sh/ixkbql4z","slide":14,"text":"更低","textPreview":"更低","textChars":2,"textLines":1,"bbox":[1060,460,105,40]}
+{"kind":"textbox","id":"sh/etovipo7","slide":14,"text":"边界：两者都触及 clipped energy=0；DQN 最大热状态略高。","textPreview":"边界：两者都触及 clipped energy=0；DQN 最大热状态略高。","textChars":38,"textLines":1,"bbox":[850,535,360,55]}
+{"kind":"textbox","id":"sh/fuxcrups","slide":14,"text":"图源：论文 Fig. 7","textPreview":"图源：论文 Fig. 7","textChars":12,"textLines":1,"bbox":[62,606,300,22]}
+{"kind":"image","id":"im/3yhorq9s","slide":14,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/2x8nil87","slide":14,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"image","id":"im/u9one18b","slide":14,"name":"","alt":"Standard DQN 与 Centered 目标的训练诊断曲线","bbox":[48,130,790,440]}
+{"kind":"notes","id":"nt/ne2mwt","slide":14,"text":"对应训练诊断和工程分解。曲线在约 220 episodes 后趋于稳定。与 MPC-4 相比，Standard DQN 在五个 fully coupled regimes 中具有更低的延迟惩罚、建模能耗、时延和传输数据量。两者 clipped energy 都到 0，DQN 最大热状态略高，因此应作为资源权衡而不是全面占优来呈现。"}
+{"kind":"slide","id":"sl/7kry2x","slide":15,"title":"四、边界与结论","textShapes":18}
+{"kind":"textbox","id":"sh/xkr2h0n6","slide":15,"text":"四、边界与结论","textPreview":"四、边界与结论","textChars":7,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/ahgj65of","slide":15,"text":"适用边界与可复现性","textPreview":"适用边界与可复现性","textChars":9,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/bi9kfa50","slide":15,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/2tgj2loj","slide":15,"text":"15","textPreview":"15","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"shape","id":"sh/nepkbq54","slide":15,"bbox":[204,642,872,38]}
+{"kind":"textbox","id":"sh/0ry10b6d","slide":15,"text":"当前结果建立受控基准证据；真实任务标定、硬约束安全性与在轨验证是下一步。","textPreview":"当前结果建立受控基准证据；真实任务标定、硬约束安全性与在轨验证是下一步。","textChars":36,"textLines":1,"bbox":[216,646,848,29]}
+{"kind":"textbox","id":"sh/1s729gny","slide":15,"text":"当前证据边界","textPreview":"当前证据边界","textChars":6,"textLines":1,"bbox":[72,132,310,38]}
+{"kind":"shape","id":"sh/lwfy9kf6","slide":15,"bbox":[76,186,17,17]}
+{"kind":"textbox","id":"sh/0v6h0fel","slide":15,"text":"合成任务与固定的无量纲权重","textPreview":"合成任务与固定的无量纲权重","textChars":13,"textLines":1,"bbox":[108,174,495,44]}
+{"kind":"shape","id":"sh/zuxg7ax0","slide":15,"bbox":[76,255,17,17]}
+{"kind":"textbox","id":"sh/ytozy5wv","slide":15,"text":"软约束与截断资源状态","textPreview":"软约束与截断资源状态","textChars":10,"textLines":1,"bbox":[108,243,495,44]}
+{"kind":"shape","id":"sh/dsfy50fa","slide":15,"bbox":[76,324,17,17]}
+{"kind":"textbox","id":"sh/cr6hwvep","slide":15,"text":"全部模型在耦合系数 c=1 下训练","textPreview":"全部模型在耦合系数 c=1 下训练","textChars":17,"textLines":1,"bbox":[108,312,495,44]}
+{"kind":"shape","id":"sh/bqdg3ax4","slide":15,"bbox":[76,393,17,17]}
+{"kind":"textbox","id":"sh/q54fu5wj","slide":15,"text":"规划器使用完美短期预览","textPreview":"规划器使用完美短期预览","textChars":11,"textLines":1,"bbox":[108,381,495,44]}
+{"kind":"shape","id":"sh/p4vy10fy","slide":15,"bbox":[76,462,17,17]}
+{"kind":"textbox","id":"sh/o3mxsved","slide":15,"text":"未测量匹配条件下的 DQN 推理延迟","textPreview":"未测量匹配条件下的 DQN 推理延迟","textChars":18,"textLines":1,"bbox":[108,450,495,44]}
+{"kind":"shape","id":"sh/g7qh8vm9","slide":15,"bbox":[646,145,2,410]}
+{"kind":"textbox","id":"sh/h8zyh0nu","slide":15,"text":"可复现材料","textPreview":"可复现材料","textChars":5,"textLines":1,"bbox":[700,132,310,38]}
+{"kind":"textbox","id":"sh/ul8zml4j","slide":15,"text":"公开代码与结果包","textPreview":"公开代码与结果包","textChars":8,"textLines":1,"bbox":[710,198,430,38]}
+{"kind":"textbox","id":"sh/f6hgfq5o","slide":15,"text":"github.com/noob32123/\ndqn_family_satellite_ground","textPreview":"github.com/noob32123/ | dqn_family_satellite_ground","textChars":49,"textLines":2,"bbox":[710,245,450,70]}
+{"kind":"textbox","id":"sh/sj6hkvmd","slide":15,"text":"下一步验证","textPreview":"下一步验证","textChars":5,"textLines":1,"bbox":[710,360,430,38]}
+{"kind":"shape","id":"sh/tkfydgny","slide":15,"bbox":[716,416,10,10]}
+{"kind":"textbox","id":"sh/6hofil47","slide":15,"text":"真实任务分布标定","textPreview":"真实任务分布标定","textChars":8,"textLines":1,"bbox":[738,402,420,34]}
+{"kind":"shape","id":"sh/7ixgbq5s","slide":15,"bbox":[716,451,10,10]}
+{"kind":"textbox","id":"sh/cfahgfmh","slide":15,"text":"硬约束与安全屏蔽","textPreview":"硬约束与安全屏蔽","textChars":8,"textLines":1,"bbox":[738,437,420,34]}
+{"kind":"shape","id":"sh/dgjipkn2","slide":15,"bbox":[716,486,10,10]}
+{"kind":"textbox","id":"sh/nalkfep4","slide":15,"text":"不完美预览与分布漂移","textPreview":"不完美预览与分布漂移","textChars":10,"textLines":1,"bbox":[738,472,420,34]}
+{"kind":"shape","id":"sh/m9cjm9oz","slide":15,"bbox":[716,521,10,10]}
+{"kind":"textbox","id":"sh/9wn2ho7a","slide":15,"text":"匹配硬件上的端到端时延","textPreview":"匹配硬件上的端到端时延","textChars":11,"textLines":1,"bbox":[738,507,420,34]}
+{"kind":"image","id":"im/90jm9c32","slide":15,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/ozal072h","slide":15,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"notes","id":"nt/7kry2x","slide":15,"text":"对应 Discussion 和 Data Availability。公开仓库地址来自论文数据可用性声明。边界措辞按当前稿件的审慎表述，不把合成基准结果外推为真实在轨性能。这里可用 45 秒说明后续验证路线。"}
+{"kind":"slide","id":"sl/gldbj2","slide":16,"title":"四、边界与结论","textShapes":13}
+{"kind":"textbox","id":"sh/p0r69sbm","slide":16,"text":"四、边界与结论","textPreview":"四、边界与结论","textChars":7,"textLines":1,"bbox":[42,12,510,28]}
+{"kind":"textbox","id":"sh/2dgnexsv","slide":16,"text":"结论","textPreview":"结论","textChars":2,"textLines":1,"bbox":[42,39,890,50]}
+{"kind":"shape","id":"sh/nepon2tg","slide":16,"bbox":[42,96,1196,0]}
+{"kind":"textbox","id":"sh/a10nixsr","slide":16,"text":"16","textPreview":"16","textChars":2,"textLines":1,"bbox":[1174,678,60,20]}
+{"kind":"textbox","id":"sh/b29ob2tc","slide":16,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[92,160,65,60]}
+{"kind":"textbox","id":"sh/s7e583at","slide":16,"text":"家族级证据稳定","textPreview":"家族级证据稳定","textChars":7,"textLines":1,"bbox":[176,158,986,32]}
+{"kind":"textbox","id":"sh/d876h8be","slide":16,"text":"五个完全耦合场景中的 30 个 DQN–MPC-4 对比全部支持 DQN 家族。","textPreview":"五个完全耦合场景中的 30 个 DQN–MPC-4 对比全部支持 DQN 家族。","textChars":40,"textLines":1,"bbox":[176,188,986,55]}
+{"kind":"textbox","id":"sh/pcjy90ja","slide":16,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[92,282,65,60]}
+{"kind":"textbox","id":"sh/obaxgv25","slide":16,"text":"目标内部差异有限","textPreview":"目标内部差异有限","textChars":8,"textLines":1,"bbox":[176,280,986,32]}
+{"kind":"textbox","id":"sh/3q1w7q1k","slide":16,"text":"不同 DQN 目标的差异较小且依场景变化，不支持“单一目标普遍最优”。","textPreview":"不同 DQN 目标的差异较小且依场景变化，不支持“单一目标普遍最优”。","textChars":35,"textLines":1,"bbox":[176,310,986,55]}
+{"kind":"textbox","id":"sh/2p8felkz","slide":16,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[92,404,65,60]}
+{"kind":"textbox","id":"sh/dgjydkjm","slide":16,"text":"计算与性能存在权衡","textPreview":"计算与性能存在权衡","textChars":9,"textLines":1,"bbox":[176,402,986,32]}
+{"kind":"textbox","id":"sh/cfaxkf21","slide":16,"text":"更深规划继续降低成本，但运行时间快速增长；推理延迟仍需匹配测量。","textPreview":"更深规划继续降低成本，但运行时间快速增长；推理延迟仍需匹配测量。","textChars":32,"textLines":1,"bbox":[176,432,986,55]}
+{"kind":"shape","id":"sh/be1gba1g","slide":16,"bbox":[220,547,840,0]}
+{"kind":"textbox","id":"sh/qdsfi5kv","slide":16,"text":"谢谢聆听 · 敬请批评指正","textPreview":"谢谢聆听 · 敬请批评指正","textChars":13,"textLines":1,"bbox":[240,568,800,55]}
+{"kind":"image","id":"im/lo3mx8fy","slide":16,"name":"","alt":"卫星数据智能计算技术实验室标识","bbox":[1092,17,55,55]}
+{"kind":"image","id":"im/03u543yd","slide":16,"name":"","alt":"哈尔滨工业大学（深圳）标识","bbox":[1153,21,87,37]}
+{"kind":"notes","id":"nt/gldbj2","slide":16,"text":"收束在三点：一是家族相对 MPC-4 的统计优势；二是家族内部没有普遍赢家；三是规划质量与计算代价的权衡。最后邀请讨论真实数据标定、硬约束和在线部署评测。"}

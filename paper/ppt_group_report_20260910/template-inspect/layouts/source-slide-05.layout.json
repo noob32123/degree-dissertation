@@ -1,0 +1,722 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/i107q5of",
+    "id": "i107q5of",
+    "slide": 5,
+    "layoutId": "/ppt/slideLayouts/slideLayout2.xml",
+    "layoutName": "空白",
+    "layoutType": "blank",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "凸显",
+    "colors": {
+      "accent1": "#FE8637",
+      "accent2": "#7598D9",
+      "accent3": "#B32C16",
+      "accent4": "#F5CD2D",
+      "accent5": "#AEBAD5",
+      "accent6": "#777C84",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#575F6D",
+      "lt2": "#FFF39D",
+      "hlink": "#D2611C",
+      "folHlink": "#3B435B"
+    },
+    "fontScheme": {
+      "name": "纸张",
+      "majorFont": {
+        "latinTypeface": "Constantia"
+      },
+      "minorFont": {
+        "latinTypeface": "Constantia"
+      }
+    },
+    "typefaces": [
+      "+mn-ea",
+      "Constantia",
+      "微软雅黑"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout2.xml",
+      "name": "空白",
+      "type": "blank",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/3",
+          "id": "3",
+          "name": "直接连接符 2",
+          "bbox": [
+            0,
+            84.52,
+            1280,
+            1.61
+          ],
+          "geometry": "line",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "lineWidth": 4.33
+        },
+        {
+          "order": 2,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/4",
+          "id": "4",
+          "name": "图片 3",
+          "bbox": [
+            1180.36,
+            4.84,
+            87.58,
+            75.66
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.02734,
+            "top": 0.05571,
+            "right": 0.72733,
+            "bottom": 0.07404
+          },
+          "asset": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          }
+        },
+        {
+          "order": 3,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/5",
+          "id": "5",
+          "name": "图片 1",
+          "bbox": [
+            1093.85,
+            13.4,
+            73.48,
+            70.32
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.16887,
+            "top": 0.12347,
+            "right": 0.07013,
+            "bottom": 0.01495
+          },
+          "asset": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/dgbulwnm",
+      "id": "2",
+      "name": "文本框 1",
+      "bbox": [
+        38.67,
+        4,
+        620.83,
+        78.11
+      ],
+      "geometry": "rect",
+      "text": "二、研究思路与内容",
+      "textPreview": "二、研究思路与内容",
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "微软雅黑",
+        "color": "tx1",
+        "bold": true,
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "二、研究思路与内容"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "二、研究思路与内容",
+          "runs": [
+            {
+              "index": 1,
+              "text": "二、研究思路与内容"
+            }
+          ],
+          "marginLeft": 0,
+          "lineSpacingPercent": 150000
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/cf2tcr61",
+      "id": "3",
+      "name": "矩形 2",
+      "bbox": [
+        28.86,
+        99.09,
+        1222.29,
+        61
+      ],
+      "geometry": "rect",
+      "text": "CLIQ-Nav——整体架构",
+      "textPreview": "CLIQ-Nav——整体架构",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "ØCLIQ-Nav——整体架构"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "CLIQ-Nav——整体架构",
+          "lineSpacingPercent": 150000,
+          "runs": [
+            {
+              "index": 1,
+              "text": "CLIQ-Nav——",
+              "fontSize": 32,
+              "typeface": "微软雅黑",
+              "color": "#006282",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "整体架构",
+              "fontSize": 32,
+              "typeface": "微软雅黑",
+              "color": "#006282",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/n6dcr65o",
+      "id": "8",
+      "name": "文本框 7",
+      "bbox": [
+        754.16,
+        131.77,
+        491.76,
+        364.79
+      ],
+      "geometry": "rect",
+      "text": "1、城市低空GNSS衰退下基于历史航迹的加权航向预测，解决无人机在GNSS信号丢失后丧失绝对定位参考、无法判断目标方位的问题；\n\n2、基于CLIP的语义区域提示与大模型幻觉抑制，解决多模态大模型在整图端到端决策时因'语义过载'产生方向误判、循环绕飞等幻觉行为的问题；\n\n3、“动作+幅度”的无人机动作集合，解决大模型自由文本输出无法直接、可靠地转换为飞控系统确定性控制指令的跨模态映射问题；",
+      "textPreview": "1、城市低空GNSS衰退下基于历史航迹的加权航向预测，解决无人机在GNSS信号丢失后丧失绝对定位参考、无法判断目标方位的问题； |  | 2、基于CLIP的语义区域提示与大模型幻觉抑制，解决多模态大模型在整图端到端决策时因'语义过载'产生方向误判、循环绕飞等幻觉行为的问题；...",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 15,
+        "lines": [
+          {
+            "index": 1,
+            "text": "p1、城市低空GNSS衰退下"
+          },
+          {
+            "index": 2,
+            "text": "基于历史航迹的加权航向预测，解决无人机在"
+          },
+          {
+            "index": 3,
+            "text": "GNSS"
+          },
+          {
+            "index": 4,
+            "text": "信号丢失后丧失绝对定位参考、无法判断目标"
+          },
+          {
+            "index": 5,
+            "text": "方位的问题；"
+          },
+          {
+            "index": 6,
+            "text": ""
+          },
+          {
+            "index": 7,
+            "text": "p2、基于CLIP的语义区域提示与大模型幻觉抑制"
+          },
+          {
+            "index": 8,
+            "text": "，解决多模态大模型在整图端到端决策时因'"
+          },
+          {
+            "index": 9,
+            "text": "语义过载'产生方向误判、循环绕飞"
+          },
+          {
+            "index": 10,
+            "text": "等幻觉行为的问题；"
+          },
+          {
+            "index": 11,
+            "text": ""
+          },
+          {
+            "index": 12,
+            "text": "p3、“动作+幅度”"
+          },
+          {
+            "index": 13,
+            "text": "的无人机动作集合，解决大模型自由文本输出"
+          },
+          {
+            "index": 14,
+            "text": "无法直接、可靠地转换为飞控系统确定性控制"
+          },
+          {
+            "index": 15,
+            "text": "指令的跨模态映射问题；"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "1、城市低空GNSS衰退下基于历史航迹的加权航向预测，解决无人机在GNSS信号丢失后丧失绝对定位参考、无法判断目标方位的问题；",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "1",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "、城市低空",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "GNSS",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "衰退下",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "基于历史航迹的加权航向预测",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "，解决无人机在",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "GNSS",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": "信号丢失后丧失绝对定位参考、无法判断目标方位的问题；",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 3,
+          "text": "2、基于CLIP的语义区域提示与大模型幻觉抑制，解决多模态大模型在整图端到端决策时因'语义过载'产生方向误判、循环绕飞等幻觉行为的问题；",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "2",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "、",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "基于",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "CLIP",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "的语义区域提示与大模型幻觉抑制",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "，解决多模态大模型在整图端到端决策时因",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "'",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": "语义过载",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 9,
+              "text": "'",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 10,
+              "text": "产生",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 11,
+              "text": "方向误判",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 12,
+              "text": "、",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 13,
+              "text": "循环绕飞",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 14,
+              "text": "等幻觉行为的问题；",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        },
+        {
+          "index": 5,
+          "text": "3、“动作+幅度”的无人机动作集合，解决大模型自由文本输出无法直接、可靠地转换为飞控系统确定性控制指令的跨模态映射问题；",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "3",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "、",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "“动作",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "+",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "幅度”",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "的无人机动作集合，解决大模型自由文本输出无法直接、可靠地转换为飞控系统确定性控制指令的",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "跨模态映射",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": "问题；",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m5kbi1oj",
+      "id": "9",
+      "name": "文本框 8",
+      "bbox": [
+        90.27,
+        655.24,
+        1022.08,
+        38.78
+      ],
+      "geometry": "rect",
+      "text": "搭建了一套基于仿真的面向城市场景的低空无人机零样本视觉语言导航",
+      "textPreview": "搭建了一套基于仿真的面向城市场景的低空无人机零样本视觉语言导航",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "lt1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "搭建了一套基于仿真的面向城市场景的低空无人机零样本视觉语言导航"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "搭建了一套基于仿真的面向城市场景的低空无人机零样本视觉语言导航",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "搭建了一套基于仿真的面向城市场景的低空无人机零样本视觉语言导航",
+              "typeface": "微软雅黑",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/rqdw7qls",
+      "id": "10",
+      "name": "图片 5",
+      "bbox": [
+        18.9,
+        186.07,
+        730.03,
+        391.18
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image11.png",
+        "contentType": "image/png",
+        "byteLength": 542027
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image11.png",
+        "contentType": "image/png",
+        "byteLength": 542027
+      }
+    }
+  ],
+  "composeRuns": []
+}

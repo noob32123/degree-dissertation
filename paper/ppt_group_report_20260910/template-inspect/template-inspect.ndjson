@@ -1,0 +1,97 @@
+{"kind":"layout","layoutId":"/ppt/slideMasters/slideMaster1.xml","name":"","type":"master"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout1.xml","name":"标题和内容"}
+{"kind":"layout","layoutId":"/ppt/slideLayouts/slideLayout2.xml","name":"空白","type":"blank"}
+{"kind":"slide","id":"sl/y90nupkv","slide":1,"title":"汇报人：杨博丞","textShapes":4}
+{"kind":"textbox","id":"sh/sryl4zqx","slide":1,"name":"文本框 6","text":"汇报人：杨博丞","textPreview":"汇报人：杨博丞","textChars":7,"textLines":1,"bbox":[159.36,459.52,960.64,77.55]}
+{"kind":"shape","id":"sh/k3yl0zql","slide":1,"name":"矩形 2","bbox":[0,171.33,1280,269.46]}
+{"kind":"textbox","id":"sh/65g3298r","slide":1,"name":"文本框 14","text":"面向城市场景的低空无人机零样本视觉语言导航","textPreview":"面向城市场景的低空无人机零样本视觉语言导航","textChars":21,"textLines":1,"bbox":[145.04,267.6,989.27,75.13]}
+{"kind":"textbox","id":"sh/0bmd476t","slide":1,"name":"文本框 20","text":"哈尔滨工业大学（深圳）  空天科技学院\n卫星数据智能计算技术实验室","textPreview":"哈尔滨工业大学（深圳）  空天科技学院 | 卫星数据智能计算技术实验室","textChars":33,"textLines":2,"bbox":[159.36,562.8,960.64,106.63]}
+{"kind":"textbox","id":"sh/utg3698n","slide":1,"name":"文本框 8","text":"卫星数据智能计算技术实验室","textPreview":"卫星数据智能计算技术实验室","textChars":13,"textLines":1,"bbox":[806.73,103.59,381.96,42.01]}
+{"kind":"image","id":"im/cfmxk3yp","slide":1,"name":"图片 13","bbox":[0,171.33,1280,268.18]}
+{"kind":"image","id":"im/dgvyd8fa","slide":1,"name":"图片 22","bbox":[7.51,67.79,368.4,90.68]}
+{"kind":"image","id":"im/eh4fmdgv","slide":1,"name":"图片 5","bbox":[1161.95,79.3,98.22,85.6]}
+{"kind":"notes","id":"nt/y90nupkv","slide":1,"text":""}
+{"kind":"slide","id":"sl/hwbqtkby","slide":2,"title":"目     录","textShapes":7}
+{"kind":"textbox","id":"sh/9072xkry","slide":2,"name":"矩形 1","text":"目     录","textPreview":"目     录","textChars":7,"textLines":1,"bbox":[160,18.39,960,61.39]}
+{"kind":"textbox","id":"sh/a10jqpsj","slide":2,"name":"任意多边形 17","text":"  研究背景与意义","textPreview":"研究背景与意义","textChars":9,"textLines":1,"bbox":[443.2,252.42,504.99,69.8]}
+{"kind":"textbox","id":"sh/x4r21kru","slide":2,"name":"任意多边形 18","text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[337.86,249.49,129.05,76.21]}
+{"kind":"textbox","id":"sh/q5wjelsz","slide":2,"name":"任意多边形 22","text":"  研究思路与内容","textPreview":"研究思路与内容","textChars":9,"textLines":1,"bbox":[443.2,340.97,504.99,69.99]}
+{"kind":"textbox","id":"sh/ove9o7yd","slide":2,"name":"任意多边形 23","text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[337.86,338.22,129.05,76.03]}
+{"kind":"textbox","id":"sh/9wnqhczy","slide":2,"name":"任意多边形 24","text":"  实验结果与分析","textPreview":"实验结果与分析","textChars":9,"textLines":1,"bbox":[443.2,430.74,504.99,69.99]}
+{"kind":"textbox","id":"sh/mtwrmxg7","slide":2,"name":"任意多边形 25","text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[337.86,427.81,129.05,76.21]}
+{"kind":"notes","id":"nt/hwbqtkby","slide":2,"text":""}
+{"kind":"slide","id":"sl/ofy9wn61","slide":3,"title":"传统无人机导航技术无法在GNSS信号衰退时实现可靠导航控制","textShapes":5}
+{"kind":"textbox","id":"sh/obq90bml","slide":3,"name":"文本框 5","text":"传统无人机导航技术无法在GNSS信号衰退时实现可靠导航控制","textPreview":"传统无人机导航技术无法在GNSS信号衰退时实现可靠导航控制","textChars":29,"textLines":1,"bbox":[235.61,641.77,808.78,38.78]}
+{"kind":"shape","id":"sh/e10f2twf","slide":3,"name":"矩形 19","bbox":[38.67,100.25,1213.33,61]}
+{"kind":"textbox","id":"sh/d0jax03i","slide":3,"name":"文本框 2","text":"一、研究背景与意义","textPreview":"一、研究背景与意义","textChars":9,"textLines":1,"bbox":[38.67,4,620.83,75.13]}
+{"kind":"textbox","id":"sh/cza94vmx","slide":3,"name":"文本框 1","text":"传统无人机导航技术依赖GNSS/惯导组合导航技术和预设航线的策略，在较为开阔的环境下可实现连续、稳定、低延迟的导航控制，但非常依赖稳定连续的GNSS信号。","textPreview":"传统无人机导航技术依赖GNSS/惯导组合导航技术和预设航线的策略，在较为开阔的环境下可实现连续、稳定、低延迟的导航控制，但非常依赖稳定连续的GNSS信号。","textChars":77,"textLines":1,"bbox":[23.6,476.77,616.4,160.29]}
+{"kind":"textbox","id":"sh/943mhgre","slide":3,"name":"矩形 11","text":"现有技术的概况","textPreview":"现有技术的概况","textChars":7,"textLines":1,"bbox":[52.83,111.25,1213.33,61]}
+{"kind":"textbox","id":"sh/x8nml0ra","slide":3,"name":"文本框 15","text":"当前多数方案尝试引入视觉语言大模型（VLM），以替代GNSS完成安全、自主的导航任务。这一场景下的导航目标是由自然语言给出，例如“前方橘白色条纹遮阳伞附近”、“河对岸的餐厅门口附近”或“前方艺术雕塑附近”。","textPreview":"当前多数方案尝试引入视觉语言大模型（VLM），以替代GNSS完成安全、自主的导航任务。这一场景下的导航目标是由自然语言给出，例如“前方橘白色条纹遮阳伞附近”、“河对岸的餐厅门口附近”或“前方艺术雕塑附近”。","textChars":103,"textLines":1,"bbox":[640.83,473.42,616.4,160.29]}
+{"kind":"image","id":"im/o32dw321","slide":3,"name":"图片 4","bbox":[38.67,173.94,572.83,298.13]}
+{"kind":"image","id":"im/n2tc3y1g","slide":3,"name":"图片 12","bbox":[668.5,141.75,509.78,311.06]}
+{"kind":"notes","id":"nt/ofy9wn61","slide":3,"text":""}
+{"kind":"slide","id":"sl/jyx0ra1s","slide":4,"title":"‘语义过载’导致幻觉，用于无人机导航的多模态大模型需要幻觉抑制","textShapes":4}
+{"kind":"textbox","id":"sh/doj29oba","slide":4,"name":"文本框 5","text":"‘语义过载’导致幻觉，用于无人机导航的多模态大模型需要幻觉抑制","textPreview":"‘语义过载’导致幻觉，用于无人机导航的多模态大模型需要幻觉抑制","textChars":31,"textLines":1,"bbox":[233.12,663.1,800.13,38.78]}
+{"kind":"textbox","id":"sh/p0batw72","slide":4,"name":"矩形 19","text":"多模态大模型的幻觉","textPreview":"多模态大模型的幻觉","textChars":9,"textLines":1,"bbox":[33.33,79.13,1213.33,61]}
+{"kind":"textbox","id":"sh/0ba143al","slide":4,"name":"文本框 2","text":"一、研究背景与意义","textPreview":"一、研究背景与意义","textChars":9,"textLines":1,"bbox":[38.67,4,620.83,75.13]}
+{"kind":"textbox","id":"sh/1cj2d8b6","slide":4,"name":"文本框 1","text":"在低空城市环境中，画面包含建筑、树木、道路、遮阳伞等高密度视觉干扰，而导航目标通常只占一部分像素区域。大模型由于缺乏外部先验引导，注意力容易被任务无关的显著区域分散，导致输出的方向决策出现严重抖动、循环绕飞或早停等严重的“幻觉”行为。","textPreview":"在低空城市环境中，画面包含建筑、树木、道路、遮阳伞等高密度视觉干扰，而导航目标通常只占一部分像素区域。大模型由于缺乏外部先验引导，注意力容易被任务无关的显著区域分散，导致输出的方向决策出现严重抖动、循环绕飞或早停等严重的“幻觉”行为。","textChars":117,"textLines":1,"bbox":[103.42,503.67,1066.08,137.2]}
+{"kind":"image","id":"im/n2187e1o","slide":4,"name":"图片 8","bbox":[839.67,176.83,387.15,290.14]}
+{"kind":"image","id":"im/83apgj29","slide":4,"name":"图片 4","bbox":[53.18,140.13,746.86,369.9]}
+{"kind":"notes","id":"nt/jyx0ra1s","slide":4,"text":""}
+{"kind":"slide","id":"sl/i107q5of","slide":5,"title":"二、研究思路与内容","textShapes":4}
+{"kind":"textbox","id":"sh/dgbulwnm","slide":5,"name":"文本框 1","text":"二、研究思路与内容","textPreview":"二、研究思路与内容","textChars":9,"textLines":1,"bbox":[38.67,4,620.83,78.11]}
+{"kind":"textbox","id":"sh/cf2tcr61","slide":5,"name":"矩形 2","text":"CLIQ-Nav——整体架构","textPreview":"CLIQ-Nav——整体架构","textChars":14,"textLines":1,"bbox":[28.86,99.09,1222.29,61]}
+{"kind":"textbox","id":"sh/n6dcr65o","slide":5,"name":"文本框 7","text":"1、城市低空GNSS衰退下基于历史航迹的加权航向预测，解决无人机在GNSS信号丢失后丧失绝对定位参考、无法判断目标方位的问题；\n\n2、基于CLIP的语义区域提示与大模型幻觉抑制，解决多模态大模型在整图端到端决策时因'语义过载'产生方向误判、循环绕飞等幻觉行为的问题；\n\n3、“动作+幅度”的无人机动作集合，解决大模型自由文本输出无法直接、可靠地转换为飞控系统确定性控制指令的跨模态映射问题；","textPreview":"1、城市低空GNSS衰退下基于历史航迹的加权航向预测，解决无人机在GNSS信号丢失后丧失绝对定位参考、无法判断目标方位的问题； |  | 2、基于CLIP的语义区域提示与大模型幻觉抑制，解决多模态大模型在整图端到端决策时因'语义过载'产生方向误判、循环绕飞等幻觉行为的问题；...","textChars":195,"textLines":5,"bbox":[754.16,131.77,491.76,364.79]}
+{"kind":"textbox","id":"sh/m5kbi1oj","slide":5,"name":"文本框 8","text":"搭建了一套基于仿真的面向城市场景的低空无人机零样本视觉语言导航","textPreview":"搭建了一套基于仿真的面向城市场景的低空无人机零样本视觉语言导航","textChars":31,"textLines":1,"bbox":[90.27,655.24,1022.08,38.78]}
+{"kind":"image","id":"im/rqdw7qls","slide":5,"name":"图片 5","bbox":[18.9,186.07,730.03,391.18]}
+{"kind":"notes","id":"nt/i107q5of","slide":5,"text":""}
+{"kind":"slide","id":"sl/x8f69ofe","slide":6,"title":"二、研究思路与内容","textShapes":4}
+{"kind":"textbox","id":"sh/yhg7epsj","slide":6,"name":"文本框 1","text":"二、研究思路与内容","textPreview":"二、研究思路与内容","textChars":9,"textLines":1,"bbox":[38.67,4,620.83,78.11]}
+{"kind":"textbox","id":"sh/zi98nu94","slide":6,"name":"矩形 2","text":"CLIQ-Nav——幻觉抑制","textPreview":"CLIQ-Nav——幻觉抑制","textChars":14,"textLines":1,"bbox":[28.86,99.09,1222.29,61]}
+{"kind":"textbox","id":"sh/oryp8fah","slide":6,"name":"文本框 7","text":"CLIP模型分别计算每个图像块与目标文本之间的图文相似度，选取得分最高的图像块，并将其方位转化为语言提示，例如“导航目标有很大的可能性在你的前方偏右”。该提示不直接替代大模型决策，而是作为视觉注意力先验，帮助大模型把推理重点集中在最可能包含目标的局部区域。具体如下：\n \n","textPreview":"CLIP模型分别计算每个图像块与目标文本之间的图文相似度，选取得分最高的图像块，并将其方位转化为语言提示，例如“导航目标有很大的可能性在你的前方偏右”。该提示不直接替代大模型决策，而是作为视觉注意力先验，帮助大模型把推理重点集中在最可能包含目标的局部区域。具体如下： |   |","textChars":136,"textLines":3,"bbox":[728.74,146.38,480.06,364.79]}
+{"kind":"textbox","id":"sh/pc76hkr2","slide":6,"name":"文本框 8","text":"将大模型的视觉注意力从全图收缩至目标高概率区域，从信息结构源头削弱“语义过载”进而抑制幻觉。","textPreview":"将大模型的视觉注意力从全图收缩至目标高概率区域，从信息结构源头削弱“语义过载”进而抑制幻觉。","textChars":46,"textLines":1,"bbox":[128.96,641,1022.08,35.54]}
+{"kind":"image","id":"im/6xcbq9cz","slide":6,"name":"图片 4","bbox":[24.04,231.71,709.52,279.46]}
+{"kind":"notes","id":"nt/x8f69ofe","slide":6,"text":""}
+{"kind":"slide","id":"sl/gnmp4jqx","slide":7,"title":"三、实验结果与分析","textShapes":5}
+{"kind":"textbox","id":"sh/cb2tkvap","slide":7,"name":"文本框 1","text":"三、实验结果与分析","textPreview":"三、实验结果与分析","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,78.11]}
+{"kind":"textbox","id":"sh/dcbud0ra","slide":7,"name":"Rectangle 1","text":"实验相关设置","textPreview":"实验相关设置","textChars":6,"textLines":1,"bbox":[21,103.76,1194.35,48.47]}
+{"kind":"textbox","id":"sh/xcz2l03q","slide":7,"name":"文本框 11","text":"在AirSim仿真平台中构建了一套覆盖14条典型低空城市航路的标准化评测基准，环境复杂度从简单到高难度梯度分布，起步距离15m至60m，起飞高度1m至18m。评测采用SR（成功率）、NE（导航误差）、SPL（路径加权成功率）、OR（Oracle成功率）、TL（轨迹长度）五项互补指标进行多维度诊断分析。通过“有/无CLIP”配对消融实验，可精确量化CLIP语义区域提示对各多模态大模型的幻觉抑制贡献。","textPreview":"在AirSim仿真平台中构建了一套覆盖14条典型低空城市航路的标准化评测基准，环境复杂度从简单到高难度梯度分布，起步距离15m至60m，起飞高度1m至18m。评测采用SR（成功率）、NE（导航误差）、SPL（路径加权成功率）、OR（Oracle成功率）、TL（轨迹长度）五项...","textChars":200,"textLines":1,"bbox":[633.44,155.61,588.32,240.46]}
+{"kind":"textbox","id":"sh/n6x0fqlo","slide":7,"name":"文本框 13","text":"在仿真环境中构建了一个基于14条航路的评测基准","textPreview":"在仿真环境中构建了一个基于14条航路的评测基准","textChars":23,"textLines":1,"bbox":[671.42,564.39,532.43,35.54]}
+{"kind":"textbox","id":"sh/eh4jil4r","slide":7,"name":"文本框 18","text":"共三个视图：前视图、前视深度图、俯视图","textPreview":"共三个视图：前视图、前视深度图、俯视图","textChars":19,"textLines":1,"bbox":[365.43,472.23,255.58,67.86]}
+{"kind":"image","id":"im/hcbmpone","slide":7,"name":"图片 6","bbox":[346.43,168.06,293.57,220.18]}
+{"kind":"image","id":"im/gb25wj6t","slide":7,"name":"图片 12","bbox":[48.8,168.06,293.57,220.18]}
+{"kind":"image","id":"im/vat4ne5o","slide":7,"name":"图片 16","bbox":[48.8,396.07,293.57,220.18]}
+{"kind":"notes","id":"nt/gnmp4jqx","slide":7,"text":""}
+{"kind":"slide","id":"sl/fu1gfa1s","slide":8,"title":"三、实验结果与分析","textShapes":4}
+{"kind":"textbox","id":"sh/18byd4zy","slide":8,"name":"文本框 1","text":"三、实验结果与分析","textPreview":"三、实验结果与分析","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,78.11]}
+{"kind":"textbox","id":"sh/g72x4zyd","slide":8,"name":"Rectangle 1","text":"实验相关设置","textPreview":"实验相关设置","textChars":6,"textLines":1,"bbox":[21,103.76,1194.35,48.47]}
+{"kind":"textbox","id":"sh/m5gvmhwn","slide":8,"name":"文本框 11","text":"在AirSim仿真平台中构建了一套覆盖14条典型低空城市航路的标准化评测基准，环境复杂度从简单到高难度梯度分布，起步距离15m至60m，起飞高度1m至18m。评测采用SR（成功率）、NE（导航误差）、SPL（路径加权成功率）、OR（Oracle成功率）、TL（轨迹长度）五项互补指标进行多维度诊断分析。通过“有/无CLIP”配对消融实验，可精确量化CLIP语义区域提示对各多模态大模型的幻觉抑制贡献。","textPreview":"在AirSim仿真平台中构建了一套覆盖14条典型低空城市航路的标准化评测基准，环境复杂度从简单到高难度梯度分布，起步距离15m至60m，起飞高度1m至18m。评测采用SR（成功率）、NE（导航误差）、SPL（路径加权成功率）、OR（Oracle成功率）、TL（轨迹长度）五项...","textChars":200,"textLines":1,"bbox":[633.44,155.61,588.32,240.46]}
+{"kind":"textbox","id":"sh/0jydkreh","slide":8,"name":"文本框 13","text":"在仿真环境中构建了一个基于14条航路的评测基准","textPreview":"在仿真环境中构建了一个基于14条航路的评测基准","textChars":23,"textLines":1,"bbox":[373.78,598.47,532.43,35.54]}
+{"kind":"image","id":"im/ep47m9kn","slide":8,"name":"图片 4","bbox":[0,155.61,1280,395.95]}
+{"kind":"notes","id":"nt/fu1gfa1s","slide":8,"text":""}
+{"kind":"slide","id":"sl/udsvah03","slide":9,"title":"三、实验结果与分析","textShapes":4}
+{"kind":"textbox","id":"sh/1cfmhgne","slide":9,"name":"文本框 1","text":"三、实验结果与分析","textPreview":"三、实验结果与分析","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,78.11]}
+{"kind":"textbox","id":"sh/0b65obm9","slide":9,"name":"Rectangle 1","text":"各组别实验","textPreview":"各组别实验","textChars":5,"textLines":1,"bbox":[15.32,92.09,1194.35,48.47]}
+{"kind":"textbox","id":"sh/ml8j6p8n","slide":9,"name":"文本框 22","text":"实验证明各配置中效果最好的为qwen3.5-35b+clip","textPreview":"实验证明各配置中效果最好的为qwen3.5-35b+clip","textChars":30,"textLines":1,"bbox":[234.04,653.99,756.92,35.54]}
+{"kind":"textbox","id":"sh/98ji147e","slide":9,"name":"文本框 19","text":"为了确定最适合我们导航任务的Qwen配置，我们评估了七种配置，涵盖三个模型代际和两种CLIP空间锚定条件。\n在两种模型规模下，加入CLIP的配置均显著优于未加入CLIP的对应版本。\n能力越强的MLLM虽然具有更丰富的视觉理解能力，但在处理无约束广域图像时也更容易出现注意力分散。因此越大的模型通过clip空间锚定获得的收益就越大。(CLIQ-NAV : qwen3.5-35b+clip)\n","textPreview":"为了确定最适合我们导航任务的Qwen配置，我们评估了七种配置，涵盖三个模型代际和两种CLIP空间锚定条件。 | 在两种模型规模下，加入CLIP的配置均显著优于未加入CLIP的对应版本。 | 能力越强的MLLM虽然具有更丰富的视觉理解能力，但在处理无约束广域图像时也更容易出现...","textChars":195,"textLines":4,"bbox":[940.65,153.13,306.77,139.17]}
+{"kind":"image","id":"im/aho72lwb","slide":9,"name":"图片 4","bbox":[15.32,140.56,925.33,483.48]}
+{"kind":"notes","id":"nt/udsvah03","slide":9,"text":""}
+{"kind":"slide","id":"sl/m90b6t0r","slide":10,"title":"三、实验结果与分析","textShapes":4}
+{"kind":"textbox","id":"sh/xc3mho32","slide":10,"name":"文本框 1","text":"三、实验结果与分析","textPreview":"三、实验结果与分析","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,78.11]}
+{"kind":"textbox","id":"sh/cbu58j2h","slide":10,"name":"Rectangle 1","text":"各组别实验","textPreview":"各组别实验","textChars":5,"textLines":1,"bbox":[15.32,92.09,1194.35,48.47]}
+{"kind":"textbox","id":"sh/atwbelcn","slide":10,"name":"文本框 22","text":"消融实验证明CLIP的引入有效地抑制了模型的幻觉，提高了导航的效率","textPreview":"消融实验证明CLIP的引入有效地抑制了模型的幻觉，提高了导航的效率","textChars":33,"textLines":1,"bbox":[234.04,653.99,756.92,35.54]}
+{"kind":"textbox","id":"sh/xwnupgvy","slide":10,"name":"文本框 19","text":"实验数据表明，CLIP语义提示的引入使35B模型的成功率从42.9%提升至80.7%（+88%），路径效率SPL从37.3%提升至68.7%（+84%），导航误差从15.94m降至9.81m（-38.5%），而轨迹长度反而更短（41.75m vs 44.01m），充分证明CLIP的空间提示使模型决策更精准、更高效，有效的抑制了模型的幻觉。","textPreview":"实验数据表明，CLIP语义提示的引入使35B模型的成功率从42.9%提升至80.7%（+88%），路径效率SPL从37.3%提升至68.7%（+84%），导航误差从15.94m降至9.81m（-38.5%），而轨迹长度反而更短（41.75m vs 44.01m），充分证明C...","textChars":170,"textLines":1,"bbox":[940.65,153.13,306.77,139.17]}
+{"kind":"image","id":"im/u5obql8f","slide":10,"name":"图片 5","bbox":[52.58,140.56,861.99,505.33]}
+{"kind":"notes","id":"nt/m90b6t0r","slide":10,"text":""}
+{"kind":"slide","id":"sl/jetc3ut0","slide":11,"title":"三、实验结果与分析","textShapes":4}
+{"kind":"textbox","id":"sh/xcryxg7y","slide":11,"name":"文本框 1","text":"三、实验结果与分析","textPreview":"三、实验结果与分析","textChars":9,"textLines":1,"bbox":[37.71,1.41,635.12,78.11]}
+{"kind":"textbox","id":"sh/wbih4b6d","slide":11,"name":"Rectangle 1","text":"各组别实验","textPreview":"各组别实验","textChars":5,"textLines":1,"bbox":[15.32,92.09,1194.35,48.47]}
+{"kind":"textbox","id":"sh/65wzelo7","slide":11,"name":"文本框 22","text":"CLIQ-NAV在本任务上的表现超过了现有的方法","textPreview":"CLIQ-NAV在本任务上的表现超过了现有的方法","textChars":24,"textLines":1,"bbox":[234.04,653.99,756.92,35.54]}
+{"kind":"textbox","id":"sh/tsnip0ny","slide":11,"name":"文本框 19","text":"我们将CLIQ-NAV与三种近期提出的、代表不同导航范式的方法进行了对比。CLIQ-NAV取得了80.7%的SR，分别以超过48个百分点的优势优于CityNavAgent（32.1%，基于拓扑记忆的层次化规划）、AerialVLA（17.9%，端到端VLA）和FineCog-Nav（2.9%，模块化认知推理）。SPL优势同样显著（68.7%对比16.0%–31.4%）。","textPreview":"我们将CLIQ-NAV与三种近期提出的、代表不同导航范式的方法进行了对比。CLIQ-NAV取得了80.7%的SR，分别以超过48个百分点的优势优于CityNavAgent（32.1%，基于拓扑记忆的层次化规划）、AerialVLA（17.9%，端到端VLA）和FineCog...","textChars":186,"textLines":1,"bbox":[940.65,153.13,306.77,139.17]}
+{"kind":"image","id":"im/6hkrqp43","slide":11,"name":"图片 4","bbox":[32.58,140.56,906.9,480.24]}
+{"kind":"notes","id":"nt/jetc3ut0","slide":11,"text":""}
+{"kind":"slide","id":"sl/8f2psfyx","slide":12,"title":"感谢各位聆听！","textShapes":1}
+{"kind":"shape","id":"sh/0f2lgnmp","slide":12,"name":"矩形 2","bbox":[0,171.33,1280,269.46]}
+{"kind":"textbox","id":"sh/q903ad4n","slide":12,"name":"文本框 14","text":"感谢各位聆听！\n敬请批评指正！","textPreview":"感谢各位聆听！ | 敬请批评指正！","textChars":15,"textLines":2,"bbox":[181.73,204.35,916.57,203.47]}
+{"kind":"image","id":"im/83at8zyl","slide":12,"name":"图片 13","bbox":[0,171.33,1280,268.18]}
+{"kind":"notes","id":"nt/8f2psfyx","slide":12,"text":""}

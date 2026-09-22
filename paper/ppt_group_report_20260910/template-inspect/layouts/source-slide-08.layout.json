@@ -1,0 +1,730 @@
+{
+  "schema": "openai.presentation.layout/v4",
+  "unit": "px",
+  "slide": {
+    "aid": "sl/fu1gfa1s",
+    "id": "fu1gfa1s",
+    "slide": 8,
+    "layoutId": "/ppt/slideLayouts/slideLayout2.xml",
+    "layoutName": "空白",
+    "layoutType": "blank",
+    "masterLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+    "frame": {
+      "left": 0,
+      "top": 0,
+      "width": 1280,
+      "height": 720
+    }
+  },
+  "theme": {
+    "colorSchemeName": "凸显",
+    "colors": {
+      "accent1": "#FE8637",
+      "accent2": "#7598D9",
+      "accent3": "#B32C16",
+      "accent4": "#F5CD2D",
+      "accent5": "#AEBAD5",
+      "accent6": "#777C84",
+      "dk1": "#000000",
+      "lt1": "#FFFFFF",
+      "dk2": "#575F6D",
+      "lt2": "#FFF39D",
+      "hlink": "#D2611C",
+      "folHlink": "#3B435B"
+    },
+    "fontScheme": {
+      "name": "纸张",
+      "majorFont": {
+        "latinTypeface": "Constantia"
+      },
+      "minorFont": {
+        "latinTypeface": "Constantia"
+      }
+    },
+    "typefaces": [
+      "+mn-ea",
+      "Constantia",
+      "微软雅黑"
+    ]
+  },
+  "inheritedLayers": [
+    {
+      "scope": "layout",
+      "id": "/ppt/slideLayouts/slideLayout2.xml",
+      "name": "空白",
+      "type": "blank",
+      "parentLayoutId": "/ppt/slideMasters/slideMaster1.xml",
+      "elements": [
+        {
+          "order": 1,
+          "kind": "shape",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/3",
+          "id": "3",
+          "name": "直接连接符 2",
+          "bbox": [
+            0,
+            84.52,
+            1280,
+            1.61
+          ],
+          "geometry": "line",
+          "resolvedTextStyle": {
+            "anchor": 1,
+            "vertical": 1,
+            "verticalAlignment": "top",
+            "wrap": "square",
+            "insets": {
+              "top": 4.8,
+              "right": 9.6,
+              "bottom": 4.8,
+              "left": 9.6
+            }
+          },
+          "lineWidth": 4.33
+        },
+        {
+          "order": 2,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/4",
+          "id": "4",
+          "name": "图片 3",
+          "bbox": [
+            1180.36,
+            4.84,
+            87.58,
+            75.66
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.02734,
+            "top": 0.05571,
+            "right": 0.72733,
+            "bottom": 0.07404
+          },
+          "asset": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image3.png",
+            "contentType": "image/png",
+            "byteLength": 16601
+          }
+        },
+        {
+          "order": 3,
+          "kind": "image",
+          "scope": "layout",
+          "aid": "template/layout//ppt/slideLayouts/slideLayout2.xml/5",
+          "id": "5",
+          "name": "图片 1",
+          "bbox": [
+            1093.85,
+            13.4,
+            73.48,
+            70.32
+          ],
+          "contentType": "image/png",
+          "imageCrop": {
+            "left": 0.16887,
+            "top": 0.12347,
+            "right": 0.07013,
+            "bottom": 0.01495
+          },
+          "asset": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          },
+          "fillImage": {
+            "assetId": "/ppt/media/image4.png",
+            "contentType": "image/png",
+            "byteLength": 9850
+          }
+        }
+      ]
+    },
+    {
+      "scope": "master",
+      "id": "/ppt/slideMasters/slideMaster1.xml",
+      "type": "master",
+      "elements": []
+    }
+  ],
+  "elements": [
+    {
+      "order": 1,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/18byd4zy",
+      "id": "2",
+      "name": "文本框 1",
+      "bbox": [
+        37.71,
+        1.41,
+        635.12,
+        78.11
+      ],
+      "geometry": "rect",
+      "text": "三、实验结果与分析",
+      "textPreview": "三、实验结果与分析",
+      "resolvedFontSize": 42.67,
+      "resolvedTextStyle": {
+        "fontSize": 42.67,
+        "typeface": "微软雅黑",
+        "color": "tx1",
+        "bold": true,
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "三、实验结果与分析"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "三、实验结果与分析",
+          "runs": [
+            {
+              "index": 1,
+              "text": "三、实验结果与分析"
+            }
+          ],
+          "marginLeft": 0,
+          "lineSpacingPercent": 150000
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/g72x4zyd",
+      "id": "3",
+      "name": "Rectangle 1",
+      "bbox": [
+        21,
+        103.76,
+        1194.35,
+        48.47
+      ],
+      "geometry": "rect",
+      "text": "实验相关设置",
+      "textPreview": "实验相关设置",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "Ø实验相关设置"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "实验相关设置",
+          "runs": [
+            {
+              "index": 1,
+              "text": "实验相关设置",
+              "fontSize": 32,
+              "typeface": "微软雅黑",
+              "color": "#006282",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/m5gvmhwn",
+      "id": "12",
+      "name": "文本框 11",
+      "bbox": [
+        633.44,
+        155.61,
+        588.32,
+        240.46
+      ],
+      "geometry": "rect",
+      "text": "在AirSim仿真平台中构建了一套覆盖14条典型低空城市航路的标准化评测基准，环境复杂度从简单到高难度梯度分布，起步距离15m至60m，起飞高度1m至18m。评测采用SR（成功率）、NE（导航误差）、SPL（路径加权成功率）、OR（Oracle成功率）、TL（轨迹长度）五项互补指标进行多维度诊断分析。通过“有/无CLIP”配对消融实验，可精确量化CLIP语义区域提示对各多模态大模型的幻觉抑制贡献。",
+      "textPreview": "在AirSim仿真平台中构建了一套覆盖14条典型低空城市航路的标准化评测基准，环境复杂度从简单到高难度梯度分布，起步距离15m至60m，起飞高度1m至18m。评测采用SR（成功率）、NE（导航误差）、SPL（路径加权成功率）、OR（Oracle成功率）、TL（轨迹长度）五项...",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "anchor": 1,
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "tx1",
+        "alignment": "left",
+        "verticalAlignment": "top",
+        "wrap": "square",
+        "autoFit": "none",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 8,
+        "lines": [
+          {
+            "index": 1,
+            "text": "p在AirSim仿真平台中构建了一套覆盖14"
+          },
+          {
+            "index": 2,
+            "text": "条典型低空城市航路的标准化评测基准，环境复杂度从简"
+          },
+          {
+            "index": 3,
+            "text": "单到高难度梯度分布，起步距离15m至60m，起飞高度1m"
+          },
+          {
+            "index": 4,
+            "text": "至18m。评测采用SR（成功率）、NE（导航误差）、SPL"
+          },
+          {
+            "index": 5,
+            "text": "（路径加权成功率）、OR（Oracle成功率）、TL"
+          },
+          {
+            "index": 6,
+            "text": "（轨迹长度）五项互补指标进行多维度诊断分析。通过“"
+          },
+          {
+            "index": 7,
+            "text": "有/无CLIP”配对消融实验，可精确量化CLIP语义区域提示"
+          },
+          {
+            "index": 8,
+            "text": "对各多模态大模型的幻觉抑制贡献。"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "在AirSim仿真平台中构建了一套覆盖14条典型低空城市航路的标准化评测基准，环境复杂度从简单到高难度梯度分布，起步距离15m至60m，起飞高度1m至18m。评测采用SR（成功率）、NE（导航误差）、SPL（路径加权成功率）、OR（Oracle成功率）、TL（轨迹长度）五项互补指标进行多维度诊断分析。通过“有/无CLIP”配对消融实验，可精确量化CLIP语义区域提示对各多模态大模型的幻觉抑制贡献。",
+          "lineSpacingPercent": 150000,
+          "resolvedTextStyle": {
+            "alignment": "justify"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "在",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "AirSim",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "仿真平台中构建了一套覆盖",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 4,
+              "text": "14",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 5,
+              "text": "条典型低空城市航路的标准化评测基准，环境复杂度从简单到高难度梯度分布，起步距离",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 6,
+              "text": "15m",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 7,
+              "text": "至",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 8,
+              "text": "60m",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 9,
+              "text": "，起飞高度",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 10,
+              "text": "1m",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 11,
+              "text": "至",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 12,
+              "text": "18m",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 13,
+              "text": "。评测采用",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 14,
+              "text": "SR",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 15,
+              "text": "（成功率）、",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 16,
+              "text": "NE",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 17,
+              "text": "（导航误差）、",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 18,
+              "text": "SPL",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 19,
+              "text": "（路径加权成功率）、",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 20,
+              "text": "OR",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 21,
+              "text": "（",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 22,
+              "text": "Oracle",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 23,
+              "text": "成功率）、",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 24,
+              "text": "TL",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 25,
+              "text": "（轨迹长度）五项互补指标进行多维度诊断分析。通过",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 26,
+              "text": "“",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 27,
+              "text": "有",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 28,
+              "text": "/",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 29,
+              "text": "无",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 30,
+              "text": "CLIP”",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 31,
+              "text": "配对消融实验",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 32,
+              "text": "，可精确量化",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 33,
+              "text": "CLIP",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 34,
+              "text": "语义区域提示",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 35,
+              "text": "对各多模态大模型的",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            },
+            {
+              "index": 36,
+              "text": "幻觉抑制",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "color": "#FF0000",
+              "bold": true
+            },
+            {
+              "index": 37,
+              "text": "贡献。",
+              "fontSize": 21.33,
+              "typeface": "+mn-ea",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "kind": "shape",
+      "scope": "slide",
+      "aid": "sh/0jydkreh",
+      "id": "14",
+      "name": "文本框 13",
+      "bbox": [
+        373.78,
+        598.47,
+        532.43,
+        35.54
+      ],
+      "geometry": "rect",
+      "text": "在仿真环境中构建了一个基于14条航路的评测基准",
+      "textPreview": "在仿真环境中构建了一个基于14条航路的评测基准",
+      "resolvedFontSize": 18.67,
+      "resolvedTextStyle": {
+        "fontSize": 18.67,
+        "typeface": "Constantia",
+        "color": "lt1",
+        "alignment": "left",
+        "wrap": "square",
+        "autoFit": "resizeShapeToFitText",
+        "insets": {
+          "top": 4.8,
+          "right": 9.6,
+          "bottom": 4.8,
+          "left": 9.6
+        }
+      },
+      "textLayout": {
+        "lineCount": 1,
+        "lines": [
+          {
+            "index": 1,
+            "text": "在仿真环境中构建了一个基于14条航路的评测基准"
+          }
+        ]
+      },
+      "paragraphs": [
+        {
+          "index": 1,
+          "text": "在仿真环境中构建了一个基于14条航路的评测基准",
+          "resolvedTextStyle": {
+            "alignment": "center"
+          },
+          "runs": [
+            {
+              "index": 1,
+              "text": "在仿真环境中构建了一个基于",
+              "fontSize": 21.33,
+              "typeface": "微软雅黑",
+              "bold": true
+            },
+            {
+              "index": 2,
+              "text": "14",
+              "fontSize": 21.33,
+              "typeface": "微软雅黑",
+              "bold": true
+            },
+            {
+              "index": 3,
+              "text": "条航路的评测基准",
+              "fontSize": 21.33,
+              "typeface": "微软雅黑",
+              "bold": true
+            }
+          ],
+          "marginLeft": 0
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "kind": "image",
+      "scope": "slide",
+      "aid": "im/ep47m9kn",
+      "id": "15",
+      "name": "图片 4",
+      "bbox": [
+        0,
+        155.61,
+        1280,
+        395.95
+      ],
+      "contentType": "image/png",
+      "asset": {
+        "assetId": "/ppt/media/image17.png",
+        "contentType": "image/png",
+        "byteLength": 4006841
+      },
+      "fillImage": {
+        "assetId": "/ppt/media/image17.png",
+        "contentType": "image/png",
+        "byteLength": 4006841
+      }
+    }
+  ],
+  "composeRuns": []
+}
