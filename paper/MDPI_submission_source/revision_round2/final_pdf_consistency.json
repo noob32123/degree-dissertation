@@ -1,0 +1,79 @@
+{
+  "pdf_pages": {
+    "manuscript_clean": 26,
+    "manuscript_marked": 26,
+    "cover_letter": 6,
+    "response_reviewer1": 2,
+    "response_reviewer2": 3,
+    "response_reviewer3": 2
+  },
+  "quotes": [
+    {
+      "reviewer": 1,
+      "comment": 1,
+      "page": 1,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 1,
+      "comment": 2,
+      "page": 11,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 1,
+      "comment": 3,
+      "page": 21,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 1,
+      "comment": 4,
+      "page": 20,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 1,
+      "comment": 5,
+      "page": 23,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 2,
+      "comment": 1,
+      "page": 3,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 2,
+      "comment": 2,
+      "page": 21,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 2,
+      "comment": 3,
+      "page": 11,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 2,
+      "comment": 4,
+      "page": 13,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 3,
+      "comment": 1,
+      "page": 21,
+      "verbatim_pdf_match": true
+    },
+    {
+      "reviewer": 3,
+      "comment": 2,
+      "page": 6,
+      "verbatim_pdf_match": true
+    }
+  ],
+  "status": "passed"
+}

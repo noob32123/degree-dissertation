@@ -1,0 +1,10 @@
+% Resolved against the final manuscript; citations and labels are shared by all letters.
+\makeatletter
+\def\responsecite#1{[\def\responseseparator{}\@for\responsekey:=#1\do{\responseseparator\csname responsecite@\responsekey\endcsname\def\responseseparator{,}}]}
+\expandafter\def\csname responsecite@nasa2026avionics\endcsname{26}
+\expandafter\def\csname responsecite@nasa2026ground\endcsname{27}
+\expandafter\def\csname responsecite@ccsds122\endcsname{28}
+\def\responseref#1{\csname responseref@#1\endcsname}
+\expandafter\def\csname responseref@tab:parameters\endcsname{3}
+\makeatother
+\AtBeginDocument{\let\cite\responsecite\let\ref\responseref}

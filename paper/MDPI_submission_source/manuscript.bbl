@@ -1,0 +1,237 @@
+\begin{thebibliography}{999}
+
+\bibitem[Pang et~al.(2022)Pang, Zhang, Wang, Wei, and Chen]{9925218}
+Pang, Y.; Zhang, Y.; Wang, Y.; Wei, X.; Chen, B.
+\newblock SOCNet: A Lightweight and Fine-Grained Object Recognition Network for
+  Satellite On-Orbit Computing.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing} {\bf 2022},
+  {\em 60},~1--13.
+\newblock Art. no. 5632913, {\url{https://doi.org/10.1109/TGRS.2022.3216215}}.
+
+\bibitem[Pang et~al.(2023)Pang, Zhang, Kong, Wang, Chen, and Cao]{10107454}
+Pang, Y.; Zhang, Y.; Kong, Q.; Wang, Y.; Chen, B.; Cao, X.
+\newblock SOCDet: A Lightweight and Accurate Oriented Object Detection Network
+  for Satellite On-Orbit Computing.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing} {\bf 2023},
+  {\em 61},~1--15.
+\newblock Art. no. 5608115, {\url{https://doi.org/10.1109/TGRS.2023.3269642}}.
+
+\bibitem[Pang et~al.(2024{\natexlab{a}})Pang, Zhang, Wang, Wei, and
+  Chen]{10378728}
+Pang, Y.; Zhang, Y.; Wang, Y.; Wei, X.; Chen, B.
+\newblock Exploring Model Compression Limits and Laws: A Pyramid Knowledge
+  Distillation Framework for Satellite-on-Orbit Object Recognition.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing} {\bf 2024},
+  {\em 62},~1--13.
+\newblock Art. no. 5603313, {\url{https://doi.org/10.1109/TGRS.2023.3348470}}.
+
+\bibitem[Pang et~al.(2024{\natexlab{b}})Pang, Yao, Luo, Dong, Kong, and
+  Chen]{10440355}
+Pang, Y.; Yao, L.; Luo, Y.; Dong, C.; Kong, Q.; Chen, B.
+\newblock RepSViT: An Efficient Vision Transformer Based on Spiking Neural
+  Networks for Object Recognition in Satellite On-Orbit Remote Sensing Images.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing} {\bf 2024},
+  {\em 62},~1--16.
+\newblock Art. no. 5610916, {\url{https://doi.org/10.1109/TGRS.2024.3367709}}.
+
+\bibitem[Zhang et~al.(2024)Zhang, Ye, Zhu, Liu, Guo, and Yan]{10423050}
+Zhang, Y.; Ye, M.; Zhu, G.; Liu, Y.; Guo, P.; Yan, J.
+\newblock FFCA-YOLO for Small Object Detection in Remote Sensing Images.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing} {\bf 2024},
+  {\em 62},~1--15.
+\newblock Art. no. 5611215, {\url{https://doi.org/10.1109/TGRS.2024.3363057}}.
+
+\bibitem[Casalicchio and Magliarisi(2024)]{RN8}
+Casalicchio, E.; Magliarisi, D.
+\newblock Decentralized Task Scheduling in Satellite Edge Computing.
+\newblock In Proceedings of the 2024 9th International Conference on Fog and
+  Mobile Edge Computing (FMEC). IEEE,  2024, pp. 154--161.
+\newblock {\url{https://doi.org/10.1109/FMEC62297.2024.10710288}}.
+
+\bibitem[Kim et~al.(2020)Kim, Ahn, Choi, and Cho]{RN10}
+Kim, J.; Ahn, J.; Choi, H.L.; Cho, D.H.
+\newblock Task scheduling of agile satellites with transition time and
+  stereoscopic imaging constraints.
+\newblock {\em Journal of Aerospace Information Systems} {\bf 2020}, {\em
+  17},~285--293.
+\newblock {\url{https://doi.org/10.2514/1.I010775}}.
+
+\bibitem[Liu et~al.(2024)Liu, Lai, Wu, Li, Zhang, Li, Li, and Liu]{RN20}
+Liu, W.; Lai, Z.; Wu, Q.; Li, H.; Zhang, Q.; Li, Z.; Li, Y.; Liu, J.
+\newblock In-Orbit Processing or Not? Sunlight-Aware Task Scheduling for
+  Energy-Efficient Space Edge Computing Networks.
+\newblock In Proceedings of the IEEE INFOCOM 2024-IEEE Conference on Computer
+  Communications. IEEE,  2024, pp. 881--890.
+\newblock {\url{https://doi.org/10.1109/INFOCOM52122.2024.10621268}}.
+
+\bibitem[Jiang et~al.(2023)Jiang, Wang, Kong, Zhang, and Chen]{RN22}
+Jiang, Q.; Wang, H.; Kong, Q.; Zhang, Y.; Chen, B.
+\newblock On-orbit remote sensing image processing complex task scheduling
+  model based on heterogeneous multiprocessor.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing} {\bf 2023},
+  {\em 61},~1--18.
+\newblock Art. no. 1001718, {\url{https://doi.org/10.1109/TGRS.2023.3327279}}.
+
+\bibitem[Jiang et~al.(2025)Jiang, Zheng, Zhou, Liu, Kong, Zhang, and
+  Chen]{RN23}
+Jiang, Q.; Zheng, L.; Zhou, Y.; Liu, H.; Kong, Q.; Zhang, Y.; Chen, B.
+\newblock Efficient On-Orbit Remote Sensing Imagery Processing via Satellite
+  Edge Computing Resource Scheduling Optimization.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing} {\bf 2025},
+  {\em 63},~1--19.
+\newblock Art. no. 1000519, {\url{https://doi.org/10.1109/TGRS.2025.3528015}}.
+
+\bibitem[Shen et~al.(2025)Shen, Lu, Li, Chen, Li, Wang, and Yao]{RN27}
+Shen, X.; Lu, Z.; Li, L.; Chen, Y.; Li, X.; Wang, J.; Yao, W.
+\newblock Multistrip Stitching Imaging Mission Planning Method for {SAR}
+  Satellite Regional Mapping Considering Onboard Energy Consumption.
+\newblock {\em IEEE Transactions on Geoscience and Remote Sensing} {\bf 2025},
+  {\em 63},~1--13.
+\newblock {\url{https://doi.org/10.1109/TGRS.2024.3513483}}.
+
+\bibitem[Yao et~al.(2025)Yao, Shen, Zhang, Lu, Wang, Song, and Li]{RN28}
+Yao, W.; Shen, X.; Zhang, G.; Lu, Z.; Wang, J.; Song, Y.; Li, Z.
+\newblock A spiking neural network based proximal policy optimization method
+  for multi-point imaging mission scheduling of earth observation satellite.
+\newblock {\em Swarm and Evolutionary Computation} {\bf 2025}, {\em
+  94},~101867.
+\newblock {\url{https://doi.org/10.1016/j.swevo.2025.101867}}.
+
+\bibitem[Mnih et~al.(2015)Mnih, Kavukcuoglu, Silver, Rusu, Veness, Bellemare,
+  Graves, Riedmiller, Fidjeland, Ostrovski, Petersen, Beattie, Sadik,
+  Antonoglou, King, Kumaran, Wierstra, Legg, and Hassabis]{mnih2015human}
+Mnih, V.; Kavukcuoglu, K.; Silver, D.; Rusu, A.A.; Veness, J.; Bellemare, M.G.;
+  Graves, A.; Riedmiller, M.; Fidjeland, A.K.; Ostrovski, G.;  et~al.
+\newblock Human-level control through deep reinforcement learning.
+\newblock {\em Nature} {\bf 2015}, {\em 518},~529--533.
+\newblock {\url{https://doi.org/10.1038/nature14236}}.
+
+\bibitem[Watkins and Dayan(1992)]{watkins1992q}
+Watkins, C.J.C.H.; Dayan, P.
+\newblock Q-learning.
+\newblock {\em Machine Learning} {\bf 1992}, {\em 8},~279--292.
+\newblock {\url{https://doi.org/10.1007/BF00992698}}.
+
+\bibitem[Chen et~al.(2019)Chen, Reinelt, Dai, and Spitz]{chen2019milp}
+Chen, X.; Reinelt, G.; Dai, G.; Spitz, A.
+\newblock A mixed integer linear programming model for multi-satellite
+  scheduling.
+\newblock {\em European Journal of Operational Research} {\bf 2019}, {\em
+  275},~694--707.
+\newblock {\url{https://doi.org/10.1016/j.ejor.2018.11.058}}.
+
+\bibitem[Peng et~al.(2020)Peng, Song, Xing, Gunawan, and
+  Vansteenwegen]{peng2020exact}
+Peng, G.; Song, G.; Xing, L.; Gunawan, A.; Vansteenwegen, P.
+\newblock An Exact Algorithm for Agile Earth Observation Satellite Scheduling
+  with Time-Dependent Profits.
+\newblock {\em Computers \& Operations Research} {\bf 2020}, {\em 120},~104946.
+\newblock {\url{https://doi.org/10.1016/j.cor.2020.104946}}.
+
+\bibitem[Schulman et~al.(2017)Schulman, Wolski, Dhariwal, Radford, and
+  Klimov]{schulman2017ppo}
+Schulman, J.; Wolski, F.; Dhariwal, P.; Radford, A.; Klimov, O.
+\newblock Proximal Policy Optimization Algorithms.
+\newblock {\em arXiv preprint arXiv:1707.06347} {\bf 2017}.
+\newblock {\url{https://doi.org/10.48550/arXiv.1707.06347}}.
+
+\bibitem[Haarnoja et~al.(2018)Haarnoja, Zhou, Abbeel, and
+  Levine]{haarnoja2018sac}
+Haarnoja, T.; Zhou, A.; Abbeel, P.; Levine, S.
+\newblock Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement
+  Learning with a Stochastic Actor.
+\newblock In Proceedings of the Proceedings of the 35th International
+  Conference on Machine Learning. PMLR,  2018, Vol.~80, {\em Proceedings of
+  Machine Learning Research}, pp. 1861--1870.
+
+\bibitem[Sutton(1991)]{sutton1991dyna}
+Sutton, R.S.
+\newblock Dyna, an integrated architecture for learning, planning, and
+  reacting.
+\newblock {\em ACM SIGART Bulletin} {\bf 1991}, {\em 2},~160--163.
+\newblock {\url{https://doi.org/10.1145/122344.122377}}.
+
+\bibitem[Gu et~al.(2016)Gu, Lillicrap, Sutskever, and Levine]{gu2016continuous}
+Gu, S.; Lillicrap, T.; Sutskever, I.; Levine, S.
+\newblock Continuous Deep Q-Learning with Model-Based Acceleration.
+\newblock In Proceedings of the Proceedings of the 33rd International
+  Conference on Machine Learning,  2016, Vol.~48, {\em Proceedings of Machine
+  Learning Research}, pp. 2829--2838.
+
+\bibitem[Forney et~al.(2017)Forney, Pearl, and
+  Bareinboim]{forney2017counterfactual}
+Forney, A.; Pearl, J.; Bareinboim, E.
+\newblock Counterfactual Data-Fusion for Online Reinforcement Learners.
+\newblock In Proceedings of the Proceedings of the 34th International
+  Conference on Machine Learning,  2017, Vol.~70, {\em Proceedings of Machine
+  Learning Research}, pp. 1156--1164.
+
+\bibitem[Armengol~Urp{\'i} et~al.(2024)Armengol~Urp{\'i}, Bagatella,
+  Vlastelica, and Martius]{armengol2024caiac}
+Armengol~Urp{\'i}, N.; Bagatella, M.; Vlastelica, M.; Martius, G.
+\newblock Causal Action Influence Aware Counterfactual Data Augmentation.
+\newblock In Proceedings of the Proceedings of the 41st International
+  Conference on Machine Learning,  2024, Vol. 235, {\em Proceedings of Machine
+  Learning Research}, pp. 1709--1729.
+
+\bibitem[Mesnard et~al.(2021)Mesnard, Weber, Viola, Thakoor, Saade,
+  Harutyunyan, Dabney, Stepleton, Heess, Guez, Moulines, Hutter, Buesing, and
+  Munos]{mesnard2021counterfactual}
+Mesnard, T.; Weber, T.; Viola, F.; Thakoor, S.; Saade, A.; Harutyunyan, A.;
+  Dabney, W.; Stepleton, T.S.; Heess, N.; Guez, A.;  et~al.
+\newblock Counterfactual Credit Assignment in Model-Free Reinforcement
+  Learning.
+\newblock In Proceedings of the Proceedings of the 38th International
+  Conference on Machine Learning,  2021, Vol. 139, {\em Proceedings of Machine
+  Learning Research}, pp. 7654--7664.
+
+\bibitem[Kaya et~al.(2026)Kaya, Ghasemi, and Hashemi]{kaya2026joint}
+Kaya, E.C.; Ghasemi, M.; Hashemi, A.
+\newblock Joint MDPs and Reinforcement Learning in Coupled-Dynamics
+  Environments.
+\newblock In Proceedings of the Proceedings of the 42nd Conference on
+  Uncertainty in Artificial Intelligence,  2026, Vol. 337, {\em Proceedings of
+  Machine Learning Research}, pp. 2877--2893.
+
+\bibitem[Bellemare et~al.(2016)Bellemare, Ostrovski, Guez, Thomas, and
+  Munos]{bellemare2016gap}
+Bellemare, M.G.; Ostrovski, G.; Guez, A.; Thomas, P.S.; Munos, R.
+\newblock Increasing the Action Gap: New Operators for Reinforcement Learning.
+\newblock In Proceedings of the Proceedings of the Thirtieth AAAI Conference on
+  Artificial Intelligence,  2016, Vol.~30, pp. 1476--1483.
+\newblock {\url{https://doi.org/10.1609/aaai.v30i1.10303}}.
+
+\bibitem[{NASA Small Spacecraft Systems Virtual
+  Institute}(2026{\natexlab{a}})]{nasa2026avionics}
+{NASA Small Spacecraft Systems Virtual Institute}.
+\newblock State-of-the-Art of Small Spacecraft Technology: Small Spacecraft
+  Avionics.
+\newblock
+  \url{https://www.nasa.gov/smallsat-institute/sst-soa/small-spacecraft-avionics/},
+   2026.
+\newblock Accessed 26 August 2026.
+
+\bibitem[{NASA Small Spacecraft Systems Virtual
+  Institute}(2026{\natexlab{b}})]{nasa2026ground}
+{NASA Small Spacecraft Systems Virtual Institute}.
+\newblock State-of-the-Art of Small Spacecraft Technology: Ground Data Systems
+  and Mission Operations.
+\newblock
+  \url{https://www.nasa.gov/smallsat-institute/sst-soa/ground-data-systems-and-mission-operations/},
+   2026.
+\newblock Accessed 26 August 2026.
+
+\bibitem[{Consultative Committee for Space Data Systems}(2017)]{ccsds122}
+{Consultative Committee for Space Data Systems}.
+\newblock Image Data Compression.
+\newblock Technical Report CCSDS 122.0-B-2, CCSDS,  2017.
+
+\bibitem[van Hasselt et~al.(2016)van Hasselt, Guez, and
+  Silver]{vanhasselt2016double}
+van Hasselt, H.; Guez, A.; Silver, D.
+\newblock Deep Reinforcement Learning with Double Q-Learning.
+\newblock In Proceedings of the Proceedings of the AAAI Conference on
+  Artificial Intelligence,  2016, Vol.~30, pp. 2094--2100.
+\newblock {\url{https://doi.org/10.1609/aaai.v30i1.10295}}.
+
+\end{thebibliography}

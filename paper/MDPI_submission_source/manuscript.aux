@@ -1,0 +1,224 @@
+\relax 
+\providecommand*\new@tpo@label[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand*\HyPL@Entry[1]{}
+\bibstyle{Definitions/mdpi}
+\HyPL@Entry{0<</S/D>>}
+\newmarginnote{note.1.1}{{1}{10945661sp}}
+\citation{9925218,10107454,10378728,10440355,10423050}
+\citation{RN8,RN10,RN20,RN22,RN23,RN27,RN28}
+\citation{mnih2015human,watkins1992q}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Family-level evidence for deep Q-network (DQN) methods relative to four-step model-predictive control (MPC-4) in the synthetic benchmark with soft constraints. (a) The evaluation uses 20 paired model-seed blocks, each averaging 20 shared held-out traces. (b) Cells report the mean episode-cost difference between each DQN objective and MPC-4; negative values favor DQN. (c) Circles and lines show the largest, least-favorable mean difference within each scope and its 95\% joint-bootstrap interval. Open triangles show simultaneous 95\% upper bounds. A single 10,000-resample seed-block bootstrap preserves correlation among the 30 contrasts. Exact two-sided sign tests are Holm-adjusted across all comparisons, which satisfy the prespecified support rule.\relax }}{2}{figure.caption.1}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:graphical}{{1}{2}{Family-level evidence for deep Q-network (DQN) methods relative to four-step model-predictive control (MPC-4) in the synthetic benchmark with soft constraints. (a) The evaluation uses 20 paired model-seed blocks, each averaging 20 shared held-out traces. (b) Cells report the mean episode-cost difference between each DQN objective and MPC-4; negative values favor DQN. (c) Circles and lines show the largest, least-favorable mean difference within each scope and its 95\% joint-bootstrap interval. Open triangles show simultaneous 95\% upper bounds. A single 10,000-resample seed-block bootstrap preserves correlation among the 30 contrasts. Exact two-sided sign tests are Holm-adjusted across all comparisons, which satisfy the prespecified support rule.\relax }{figure.caption.1}{}}
+\newlabel{fig:graphical@cref}{{[figure][1][]1}{[1][1][]2}}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{2}{section.1}\protected@file@percent }
+\citation{RN8,RN10,RN20,RN22,RN23,RN27,RN28}
+\citation{chen2019milp}
+\citation{peng2020exact}
+\citation{schulman2017ppo}
+\citation{haarnoja2018sac}
+\citation{sutton1991dyna}
+\citation{gu2016continuous}
+\citation{forney2017counterfactual,armengol2024caiac}
+\citation{mesnard2021counterfactual}
+\citation{kaya2026joint}
+\citation{bellemare2016gap}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Related Work and Study Positioning}{3}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Satellite-ground scheduling}{3}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Model use and full-action learning}{3}{subsection.2.2}\protected@file@percent }
+\citation{sutton1991dyna,gu2016continuous}
+\citation{armengol2024caiac}
+\citation{mesnard2021counterfactual}
+\citation{kaya2026joint}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Positioning of training-time modeled-action supervision used by four deep Q-network (DQN) objectives. ``All actions'' means that one update can use modeled outcomes for every discrete action at the sampled state. Standard DQN and Double DQN provide factual-only family controls.\relax }}{4}{table.caption.2}\protected@file@percent }
+\newlabel{tab:closest_methods}{{1}{4}{Positioning of training-time modeled-action supervision used by four deep Q-network (DQN) objectives. ``All actions'' means that one update can use modeled outcomes for every discrete action at the sampled state. Standard DQN and Double DQN provide factual-only family controls.\relax }{table.caption.2}{}}
+\newlabel{tab:closest_methods@cref}{{[table][1][]1}{[1][4][]4}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Materials and Methods}{4}{section.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}System Model and Immediate-Cost Quantification}{4}{subsection.3.1}\protected@file@percent }
+\newlabel{sec:system}{{3.1}{4}{System Model and Immediate-Cost Quantification}{subsection.3.1}{}}
+\newlabel{sec:system@cref}{{[subsection][1][3]3.1}{[1][4][]4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Three satellite-ground processing pathways. Each arriving task is executed onboard, transferred for ground execution, or preprocessed collaboratively before ground completion. The analytical transition model returns the immediate cost and the post-action heat, energy, queue occupancy, compute utilization, bandwidth, and remaining contact.\relax }}{5}{figure.caption.3}\protected@file@percent }
+\newlabel{fig:system}{{2}{5}{Three satellite-ground processing pathways. Each arriving task is executed onboard, transferred for ground execution, or preprocessed collaboratively before ground completion. The analytical transition model returns the immediate cost and the post-action heat, energy, queue occupancy, compute utilization, bandwidth, and remaining contact.\relax }{figure.caption.3}{}}
+\newlabel{fig:system@cref}{{[figure][2][]2}{[1][4][]5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Implemented immediate-cost model}{5}{subsubsection.3.1.1}\protected@file@percent }
+\newlabel{eq:latencies}{{3}{5}{Implemented immediate-cost model}{equation.3.3}{}}
+\newlabel{eq:latencies@cref}{{[equation][3][]3}{[1][5][]5}}
+\newlabel{eq:implemented_costs}{{4}{5}{Implemented immediate-cost model}{equation.3.4}{}}
+\newlabel{eq:implemented_costs@cref}{{[equation][4][]4}{[1][5][]5}}
+\citation{nasa2026avionics,nasa2026ground}
+\citation{ccsds122}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Implemented 15-dimensional task descriptor dictionary. The complete 24-dimensional observation adds normalized time, the sine and cosine of link phase, and six resource coordinates: $h$, $e$, $q$, compute utilization $u$, bandwidth $b$, and contact duration $\tau $.\relax }}{6}{table.caption.4}\protected@file@percent }
+\newlabel{tab:state_dictionary}{{2}{6}{Implemented 15-dimensional task descriptor dictionary. The complete 24-dimensional observation adds normalized time, the sine and cosine of link phase, and six resource coordinates: $h$, $e$, $q$, compute utilization $u$, bandwidth $b$, and contact duration $\tau $.\relax }{table.caption.4}{}}
+\newlabel{tab:state_dictionary@cref}{{[table][2][]2}{[1][5][]6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Internally consistent task and communication generator}{6}{subsubsection.3.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Modeled engineering primitives and provenance of the current simulator. Values define a transparent synthetic envelope; they are not presented as a fitted flight distribution.\relax }}{7}{table.caption.5}\protected@file@percent }
+\newlabel{tab:parameters}{{3}{7}{Modeled engineering primitives and provenance of the current simulator. Values define a transparent synthetic envelope; they are not presented as a fitted flight distribution.\relax }{table.caption.5}{}}
+\newlabel{tab:parameters@cref}{{[table][3][]3}{[1][6][]7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Internal-consistency audit of the synthetic generator. (a) A legibility sample of 2,000 of 20,000 tasks; color encodes heat derived from compute energy. (b) Correlations computed from all 20,000 tasks. No fitted flight distribution is implied.\relax }}{7}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:physical}{{3}{7}{Internal-consistency audit of the synthetic generator. (a) A legibility sample of 2,000 of 20,000 tasks; color encodes heat derived from compute energy. (b) Correlations computed from all 20,000 tasks. No fitted flight distribution is implied.\relax }{figure.caption.6}{}}
+\newlabel{fig:physical@cref}{{[figure][3][]3}{[1][7][]7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Complete stochastic generator and action-load specification}{7}{subsubsection.3.1.3}\protected@file@percent }
+\newlabel{sec:complete_simulator}{{3.1.3}{7}{Complete stochastic generator and action-load specification}{subsubsection.3.1.3}{}}
+\newlabel{sec:complete_simulator@cref}{{[subsubsection][3][3,1]3.1.3}{[1][7][]7}}
+\newlabel{eq:primitive_generator}{{7}{7}{Complete stochastic generator and action-load specification}{equation.3.7}{}}
+\newlabel{eq:primitive_generator@cref}{{[equation][7][]7}{[1][7][]7}}
+\newlabel{eq:primitive_ratios}{{8}{7}{Complete stochastic generator and action-load specification}{equation.3.8}{}}
+\newlabel{eq:primitive_ratios@cref}{{[equation][8][]8}{[1][7][]7}}
+\newlabel{eq:link_trace}{{9}{8}{Complete stochastic generator and action-load specification}{equation.3.9}{}}
+\newlabel{eq:link_trace@cref}{{[equation][9][]9}{[1][8][]8}}
+\newlabel{eq:action_loads}{{10}{8}{Complete stochastic generator and action-load specification}{equation.3.10}{}}
+\newlabel{eq:action_loads@cref}{{[equation][10][]10}{[1][8][]8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Sequential Scheduling Formulation}{8}{subsection.3.2}\protected@file@percent }
+\newlabel{sec:mdp}{{3.2}{8}{Sequential Scheduling Formulation}{subsection.3.2}{}}
+\newlabel{sec:mdp@cref}{{[subsection][2][3]3.2}{[1][8][]8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}State and transition}{8}{subsubsection.3.2.1}\protected@file@percent }
+\newlabel{eq:transition}{{12}{9}{State and transition}{equation.3.12}{}}
+\newlabel{eq:transition@cref}{{[equation][12][]12}{[1][8][]9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Reward and standard DQN backbone}{9}{subsubsection.3.2.2}\protected@file@percent }
+\newlabel{eq:reward}{{13}{9}{Reward and standard DQN backbone}{equation.3.13}{}}
+\newlabel{eq:reward@cref}{{[equation][13][]13}{[1][9][]9}}
+\newlabel{eq:factual}{{14}{9}{Reward and standard DQN backbone}{equation.3.14}{}}
+\newlabel{eq:factual@cref}{{[equation][14][]14}{[1][9][]9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}DQN Objective Family and Full-Action Supervision}{9}{subsection.3.3}\protected@file@percent }
+\newlabel{sec:method}{{3.3}{9}{DQN Objective Family and Full-Action Supervision}{subsection.3.3}{}}
+\newlabel{sec:method@cref}{{[subsection][3][3]3.3}{[1][9][]9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.1}Side-effect-free full-action preview}{9}{subsubsection.3.3.1}\protected@file@percent }
+\citation{vanhasselt2016double}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.2}All-action counterfactual Bellman targets}{10}{subsubsection.3.3.2}\protected@file@percent }
+\newlabel{eq:cf_target}{{18}{10}{All-action counterfactual Bellman targets}{equation.3.18}{}}
+\newlabel{eq:cf_target@cref}{{[equation][18][]18}{[1][10][]10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.3.3}Centered advantage distillation}{10}{subsubsection.3.3.3}\protected@file@percent }
+\newlabel{eq:center}{{19}{10}{Centered advantage distillation}{equation.3.19}{}}
+\newlabel{eq:center@cref}{{[equation][19][]19}{[1][10][]10}}
+\newlabel{eq:cbad}{{20}{10}{Centered advantage distillation}{equation.3.20}{}}
+\newlabel{eq:cbad@cref}{{[equation][20][]20}{[1][10][]10}}
+\newlabel{alg:cbad}{{\caption@xref {alg:cbad}{ on input line 384}}{10}{Centered advantage distillation}{Item.8}{}}
+\newlabel{alg:cbad@cref}{{[subsubsection][3][3,3]3.3.3}{[1][10][]10}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Experimental Design and Settings}{11}{subsection.3.4}\protected@file@percent }
+\newlabel{sec:experiments}{{3.4}{11}{Experimental Design and Settings}{subsection.3.4}{}}
+\newlabel{sec:experiments@cref}{{[subsection][4][3]3.4}{[1][10][]11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}Design principles}{11}{subsubsection.3.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}Training configuration}{11}{subsubsection.3.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3}Seven evaluation regimes}{12}{subsubsection.3.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4}Planning comparator, outcomes, and inference}{12}{subsubsection.3.4.4}\protected@file@percent }
+\newlabel{eq:episode_cost}{{21}{13}{Planning comparator, outcomes, and inference}{equation.3.21}{}}
+\newlabel{eq:episode_cost@cref}{{[equation][21][]21}{[1][13][]13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.5}Prespecified sensitivity and training diagnostics}{14}{subsubsection.3.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.6}Second-round sensitivity and matched decision-time experiments}{14}{subsubsection.3.4.6}\protected@file@percent }
+\newlabel{sec:revision_experiments}{{3.4.6}{14}{Second-round sensitivity and matched decision-time experiments}{subsubsection.3.4.6}{}}
+\newlabel{sec:revision_experiments@cref}{{[subsubsection][6][3,4]3.4.6}{[1][14][]14}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.7}Preview-model misspecification test}{14}{subsubsection.3.4.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.8}Reproducible result entry point}{14}{subsubsection.3.4.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{15}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{15}{Results}{section.4}{}}
+\newlabel{sec:results@cref}{{[section][4][]4}{[1][15][]15}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Direct paired inference supports a DQN-family advantage under full coupling}{15}{subsection.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Episode total cost under the internally consistent synthetic generator. For learned policies, standard deviation (SD) is calculated across 20 independently trained model-seed blocks after within-seed trace averaging. For deterministic non-learned policies, SD is calculated across 20 disjoint trace namespaces and does not represent training variability. These quantities describe different sources of variation and are not directly comparable as inferential uncertainty. All learned policies were trained only at nominal $c=1$; static and reduced-coupling rows are transfers without retraining. MPC-4 is exact only for its stated four-step perfect-forecast objective. Lower values are better.\relax }}{15}{table.caption.8}\protected@file@percent }
+\newlabel{tab:main}{{4}{15}{Episode total cost under the internally consistent synthetic generator. For learned policies, standard deviation (SD) is calculated across 20 independently trained model-seed blocks after within-seed trace averaging. For deterministic non-learned policies, SD is calculated across 20 disjoint trace namespaces and does not represent training variability. These quantities describe different sources of variation and are not directly comparable as inferential uncertainty. All learned policies were trained only at nominal $c=1$; static and reduced-coupling rows are transfers without retraining. MPC-4 is exact only for its stated four-step perfect-forecast objective. Lower values are better.\relax }{table.caption.8}{}}
+\newlabel{tab:main@cref}{{[table][4][]4}{[1][15][]15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Performance across seven regimes under internally consistent synthetic task generation. For learned policies, error bars show SD across 20 model-seed blocks after within-seed trace averaging. Deterministic comparators show variation across trace namespaces, so their error bars are descriptive and not inferentially interchangeable with those of learned methods. All learned models were trained at nominal $c=1$; the $c<1$ rows are transfers without retraining. The ordinate differs among panels, so panel heights should not be compared directly.\relax }}{16}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:seven}{{4}{16}{Performance across seven regimes under internally consistent synthetic task generation. For learned policies, error bars show SD across 20 model-seed blocks after within-seed trace averaging. Deterministic comparators show variation across trace namespaces, so their error bars are descriptive and not inferentially interchangeable with those of learned methods. All learned models were trained at nominal $c=1$; the $c<1$ rows are transfers without retraining. The ordinate differs among panels, so panel heights should not be compared directly.\relax }{figure.caption.9}{}}
+\newlabel{fig:seven@cref}{{[figure][4][]4}{[1][15][]16}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Direct joint inference for the DQN family relative to MPC-4. Differences are DQN minus MPC-4, so negative values favor DQN. Within each regime, the table reports the largest, least-favorable mean among six DQN-objective contrasts; the final row takes the maximum across all 30 objective--regime cells. Intervals are percentile intervals for the corresponding maximum from 10,000 joint bootstrap resamples. Simultaneous one-sided 95\% upper bounds use the maximum centered bootstrap deviation. The independent unit is the model-seed block ($n=20$), after averaging 20 shared held-out traces within each block.\relax }}{16}{table.caption.10}\protected@file@percent }
+\newlabel{tab:dqn_vs_mpc_family}{{5}{16}{Direct joint inference for the DQN family relative to MPC-4. Differences are DQN minus MPC-4, so negative values favor DQN. Within each regime, the table reports the largest, least-favorable mean among six DQN-objective contrasts; the final row takes the maximum across all 30 objective--regime cells. Intervals are percentile intervals for the corresponding maximum from 10,000 joint bootstrap resamples. Simultaneous one-sided 95\% upper bounds use the maximum centered bootstrap deviation. The independent unit is the model-seed block ($n=20$), after averaging 20 shared held-out traces within each block.\relax }{table.caption.10}{}}
+\newlabel{tab:dqn_vs_mpc_family@cref}{{[table][5][]5}{[1][16][]16}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Target design produces smaller, scenario-dependent differences within the DQN family}{17}{subsection.4.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Episode total cost across six DQN objectives in the five fully coupled regimes. Values are mean $\pm $ SD across 20 independently trained model-seed blocks after within-seed averaging of 20 shared held-out traces. Lower values are better, and the leading objective varies across regimes.\relax }}{17}{table.caption.11}\protected@file@percent }
+\newlabel{tab:dqn_family}{{6}{17}{Episode total cost across six DQN objectives in the five fully coupled regimes. Values are mean $\pm $ SD across 20 independently trained model-seed blocks after within-seed averaging of 20 shared held-out traces. Lower values are better, and the leading objective varies across regimes.\relax }{table.caption.11}{}}
+\newlabel{tab:dqn_family@cref}{{[table][6][]6}{[1][16][]17}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces DQN-family performance across fully coupled regimes. Points show model-seed means and error bars show $\pm $1 SD across 20 independently trained model seeds. The figure shows overlapping distributions and scenario-dependent ordering across objectives.\relax }}{17}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:dqn_family}{{5}{17}{DQN-family performance across fully coupled regimes. Points show model-seed means and error bars show $\pm $1 SD across 20 independently trained model seeds. The figure shows overlapping distributions and scenario-dependent ordering across objectives.\relax }{figure.caption.12}{}}
+\newlabel{fig:dqn_family@cref}{{[figure][5][]5}{[1][17][]17}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Nominal fixed-coefficient component and backbone comparisons. All models use 20 prespecified model-seed blocks, identical real-interaction budgets, and the same held-out traces. Full-action Q and immediate advantage receive the same three modeled action outcomes as the centered full-action variant. The shared $\lambda =0.3$ was calibrated for the centered objective and not tuned separately for the other auxiliary losses, so these rows do not isolate centering or bootstrapping. Holm adjustment covers the five fully coupled regimes separately for each displayed contrast. ``Supported'' requires a favorable mean, a paired interval below zero, and Holm $p<0.05$.\relax }}{17}{table.caption.13}\protected@file@percent }
+\newlabel{tab:extended_ablation}{{7}{17}{Nominal fixed-coefficient component and backbone comparisons. All models use 20 prespecified model-seed blocks, identical real-interaction budgets, and the same held-out traces. Full-action Q and immediate advantage receive the same three modeled action outcomes as the centered full-action variant. The shared $\lambda =0.3$ was calibrated for the centered objective and not tuned separately for the other auxiliary losses, so these rows do not isolate centering or bootstrapping. Holm adjustment covers the five fully coupled regimes separately for each displayed contrast. ``Supported'' requires a favorable mean, a paired interval below zero, and Holm $p<0.05$.\relax }{table.caption.13}{}}
+\newlabel{tab:extended_ablation@cref}{{[table][7][]7}{[1][17][]17}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Paired inference for centered full-action minus standard DQN across the five fully coupled regimes. Negative differences favor centered full-action supervision. Each comparison uses 20 model-seed blocks after averaging 20 shared held-out traces. Holm adjustment covers the five prespecified regimes, and LOO denotes the leave-one-seed-out mean range.\relax }}{18}{table.caption.14}\protected@file@percent }
+\newlabel{tab:primary_inference}{{8}{18}{Paired inference for centered full-action minus standard DQN across the five fully coupled regimes. Negative differences favor centered full-action supervision. Each comparison uses 20 model-seed blocks after averaging 20 shared held-out traces. Holm adjustment covers the five prespecified regimes, and LOO denotes the leave-one-seed-out mean range.\relax }{table.caption.14}{}}
+\newlabel{tab:primary_inference@cref}{{[table][8][]8}{[1][17][]18}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Training information and computation accounting. Wall time is mean $\pm $ SD across 20 models. ``Modeled action outcomes'' counts analytical action evaluations used by the learning objective. Information and computational budgets additionally reflect these modeled action outcomes.\relax }}{18}{table.caption.15}\protected@file@percent }
+\newlabel{tab:training_accounting}{{9}{18}{Training information and computation accounting. Wall time is mean $\pm $ SD across 20 models. ``Modeled action outcomes'' counts analytical action evaluations used by the learning objective. Information and computational budgets additionally reflect these modeled action outcomes.\relax }{table.caption.15}{}}
+\newlabel{tab:training_accounting@cref}{{[table][9][]9}{[1][18][]18}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}The DQN family remains below deeper exact planning in nominal cost}{18}{subsection.4.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Nominal receding-horizon planning over 400 unique held-out traces. Each planner has perfect knowledge of the next $H$ tasks and exogenous link states and exactly enumerates $3^H$ sequences before every action. Runtime was measured on the same workstation and includes only planner action selection after environment construction. The separate matched latency comparison, including DQN inference, is reported in Table\nobreakspace  {}\ref  {tab:revision_runtime}.\relax }}{18}{table.caption.16}\protected@file@percent }
+\newlabel{tab:planner_depth}{{10}{18}{Nominal receding-horizon planning over 400 unique held-out traces. Each planner has perfect knowledge of the next $H$ tasks and exogenous link states and exactly enumerates $3^H$ sequences before every action. Runtime was measured on the same workstation and includes only planner action selection after environment construction. The separate matched latency comparison, including DQN inference, is reported in Table~\ref {tab:revision_runtime}.\relax }{table.caption.16}{}}
+\newlabel{tab:planner_depth@cref}{{[table][10][]10}{[1][18][]18}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Engineering outcome decomposition for standard DQN relative to MPC-4. Standard DQN is shown as a conventional representative of the six-objective family. Delta columns report standard DQN minus MPC-4; negative values denote lower use or cost. Low-energy steps are soft-threshold exposure counts for decisions with remaining energy below 0.18.\relax }}{19}{table.caption.17}\protected@file@percent }
+\newlabel{tab:engineering}{{11}{19}{Engineering outcome decomposition for standard DQN relative to MPC-4. Standard DQN is shown as a conventional representative of the six-objective family. Delta columns report standard DQN minus MPC-4; negative values denote lower use or cost. Low-energy steps are soft-threshold exposure counts for decisions with remaining energy below 0.18.\relax }{table.caption.17}{}}
+\newlabel{tab:engineering@cref}{{[table][11][]11}{[1][18][]19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}DQN-family training diagnostics show empirical stabilization}{19}{subsection.4.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Training diagnostics for all six DQN objectives. Lines are means across 20 model seeds after a causal 25-episode moving average; shaded regions are $\pm $1 SD. Curves describe optimization on the training distribution and are not treated as independent test observations.\relax }}{19}{figure.caption.18}\protected@file@percent }
+\newlabel{fig:training}{{6}{19}{Training diagnostics for all six DQN objectives. Lines are means across 20 model seeds after a causal 25-episode moving average; shaded regions are $\pm $1 SD. Curves describe optimization on the training distribution and are not treated as independent test observations.\relax }{figure.caption.18}{}}
+\newlabel{fig:training@cref}{{[figure][6][]6}{[1][19][]19}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Discount-factor and training-length sensitivity}{19}{subsection.4.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Nominal sensitivity of all six DQN objectives. (a) Discount-factor sensitivity after 600 training episodes. (b) Held-out episode cost at 300, 600, and 900 training episodes with epsilon decay fixed at 13,440 interactions. Points show means across 20 model-seed blocks after averaging 20 shared traces; bars show 95\% seed-block bootstrap intervals.\relax }}{20}{figure.caption.19}\protected@file@percent }
+\newlabel{fig:revision_sensitivity}{{7}{20}{Nominal sensitivity of all six DQN objectives. (a) Discount-factor sensitivity after 600 training episodes. (b) Held-out episode cost at 300, 600, and 900 training episodes with epsilon decay fixed at 13,440 interactions. Points show means across 20 model-seed blocks after averaging 20 shared traces; bars show 95\% seed-block bootstrap intervals.\relax }{figure.caption.19}{}}
+\newlabel{fig:revision_sensitivity@cref}{{[figure][7][]7}{[1][20][]20}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Greedy rollout and matched decision time}{20}{subsection.4.6}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Nominal greedy-rollout and matched CPU decision-time comparison. DQN rows use the current state only; MPC-4 and greedy rollout receive perfect next-task and link-state previews.\relax }}{21}{table.caption.20}\protected@file@percent }
+\newlabel{tab:revision_runtime}{{12}{21}{Nominal greedy-rollout and matched CPU decision-time comparison. DQN rows use the current state only; MPC-4 and greedy rollout receive perfect next-task and link-state previews.\relax }{table.caption.20}{}}
+\newlabel{tab:revision_runtime@cref}{{[table][12][]12}{[1][20][]21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Sensitivity of the within-family comparison to parameter changes}{21}{subsection.4.7}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Prespecified parameter sensitivity for centered full-action minus standard DQN. Negative differences favor the centered full-action variant; $n=20$ independent paired model seeds in each profile. Holm adjustment covers the eight displayed profiles.\relax }}{21}{table.caption.21}\protected@file@percent }
+\newlabel{tab:sensitivity}{{13}{21}{Prespecified parameter sensitivity for centered full-action minus standard DQN. Negative differences favor the centered full-action variant; $n=20$ independent paired model seeds in each profile. Holm adjustment covers the eight displayed profiles.\relax }{table.caption.21}{}}
+\newlabel{tab:sensitivity@cref}{{[table][13][]13}{[1][21][]21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Parameter sensitivity and planning boundary. (a) Mean paired differences between centered full-action and standard DQN with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.\relax }}{21}{figure.caption.22}\protected@file@percent }
+\newlabel{fig:sensitivity}{{8}{21}{Parameter sensitivity and planning boundary. (a) Mean paired differences between centered full-action and standard DQN with 95\% paired bootstrap intervals. (b) Immediate, four-step rolling, and learned scheduling across coupling and stress regimes.\relax }{figure.caption.22}{}}
+\newlabel{fig:sensitivity@cref}{{[figure][8][]8}{[1][21][]21}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.8}Preview-scale perturbations bound one model-assisted variant}{22}{subsection.4.8}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Effect of training-time preview misspecification. Differences are relative to the same standard DQN models evaluated in the factual simulator. Scaling applies only to the centered full-action variant's training-time preview cost and action-induced resource changes.\relax }}{22}{table.caption.23}\protected@file@percent }
+\newlabel{tab:preview_mismatch}{{14}{22}{Effect of training-time preview misspecification. Differences are relative to the same standard DQN models evaluated in the factual simulator. Scaling applies only to the centered full-action variant's training-time preview cost and action-induced resource changes.\relax }{table.caption.23}{}}
+\newlabel{tab:preview_mismatch@cref}{{[table][14][]14}{[1][22][]22}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{22}{section.5}\protected@file@percent }
+\citation{sutton1991dyna,gu2016continuous,bellemare2016gap}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Scope and limitations}{23}{subsection.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Future work}{23}{subsection.5.2}\protected@file@percent }
+\bibdata{ref}
+\bibcite{9925218}{{1}{2022}{{Pang et~al.}}{{Pang, Zhang, Wang, Wei, and Chen}}}
+\bibcite{10107454}{{2}{2023}{{Pang et~al.}}{{Pang, Zhang, Kong, Wang, Chen, and Cao}}}
+\bibcite{10378728}{{3}{2024{}}{{Pang et~al.}}{{Pang, Zhang, Wang, Wei, and Chen}}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusions}{24}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}References}{24}{section.7}\protected@file@percent }
+\bibcite{10440355}{{4}{2024{}}{{Pang et~al.}}{{Pang, Yao, Luo, Dong, Kong, and Chen}}}
+\bibcite{10423050}{{5}{2024}{{Zhang et~al.}}{{Zhang, Ye, Zhu, Liu, Guo, and Yan}}}
+\bibcite{RN8}{{6}{2024}{{Casalicchio and Magliarisi}}{{}}}
+\bibcite{RN10}{{7}{2020}{{Kim et~al.}}{{Kim, Ahn, Choi, and Cho}}}
+\bibcite{RN20}{{8}{2024}{{Liu et~al.}}{{Liu, Lai, Wu, Li, Zhang, Li, Li, and Liu}}}
+\bibcite{RN22}{{9}{2023}{{Jiang et~al.}}{{Jiang, Wang, Kong, Zhang, and Chen}}}
+\bibcite{RN23}{{10}{2025}{{Jiang et~al.}}{{Jiang, Zheng, Zhou, Liu, Kong, Zhang, and Chen}}}
+\bibcite{RN27}{{11}{2025}{{Shen et~al.}}{{Shen, Lu, Li, Chen, Li, Wang, and Yao}}}
+\bibcite{RN28}{{12}{2025}{{Yao et~al.}}{{Yao, Shen, Zhang, Lu, Wang, Song, and Li}}}
+\bibcite{mnih2015human}{{13}{2015}{{Mnih et~al.}}{{Mnih, Kavukcuoglu, Silver, Rusu, Veness, Bellemare, Graves, Riedmiller, Fidjeland, Ostrovski, Petersen, Beattie, Sadik, Antonoglou, King, Kumaran, Wierstra, Legg, and Hassabis}}}
+\bibcite{watkins1992q}{{14}{1992}{{Watkins and Dayan}}{{}}}
+\bibcite{chen2019milp}{{15}{2019}{{Chen et~al.}}{{Chen, Reinelt, Dai, and Spitz}}}
+\bibcite{peng2020exact}{{16}{2020}{{Peng et~al.}}{{Peng, Song, Xing, Gunawan, and Vansteenwegen}}}
+\bibcite{schulman2017ppo}{{17}{2017}{{Schulman et~al.}}{{Schulman, Wolski, Dhariwal, Radford, and Klimov}}}
+\bibcite{haarnoja2018sac}{{18}{2018}{{Haarnoja et~al.}}{{Haarnoja, Zhou, Abbeel, and Levine}}}
+\bibcite{sutton1991dyna}{{19}{1991}{{Sutton}}{{}}}
+\bibcite{gu2016continuous}{{20}{2016}{{Gu et~al.}}{{Gu, Lillicrap, Sutskever, and Levine}}}
+\bibcite{forney2017counterfactual}{{21}{2017}{{Forney et~al.}}{{Forney, Pearl, and Bareinboim}}}
+\bibcite{armengol2024caiac}{{22}{2024}{{Armengol~Urp{\'i} et~al.}}{{Armengol~Urp{\'i}, Bagatella, Vlastelica, and Martius}}}
+\bibcite{mesnard2021counterfactual}{{23}{2021}{{Mesnard et~al.}}{{Mesnard, Weber, Viola, Thakoor, Saade, Harutyunyan, Dabney, Stepleton, Heess, Guez, Moulines, Hutter, Buesing, and Munos}}}
+\bibcite{kaya2026joint}{{24}{2026}{{Kaya et~al.}}{{Kaya, Ghasemi, and Hashemi}}}
+\bibcite{bellemare2016gap}{{25}{2016}{{Bellemare et~al.}}{{Bellemare, Ostrovski, Guez, Thomas, and Munos}}}
+\bibcite{nasa2026avionics}{{26}{2026{}}{{NASA Small Spacecraft Systems Virtual Institute}}{{}}}
+\bibcite{nasa2026ground}{{27}{2026{}}{{NASA Small Spacecraft Systems Virtual Institute}}{{}}}
+\bibcite{ccsds122}{{28}{2017}{{Consultative Committee for Space Data Systems}}{{}}}
+\bibcite{vanhasselt2016double}{{29}{2016}{{van Hasselt et~al.}}{{van Hasselt, Guez, and Silver}}}
+\newlabel{LastPage}{{}{26}{}{page.26}{}}
+\xdef\lastpage@lastpage{26}
+\xdef\lastpage@lastpageHy{26}
+\gdef \@abspage@last{26}
